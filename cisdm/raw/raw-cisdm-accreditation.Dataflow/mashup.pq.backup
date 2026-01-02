@@ -1,0 +1,280 @@
+[StagingDefinition = [Kind = "FastCopy"]]
+section Section1;
+
+// ===== CONFIGURATION PARAMETERS =====
+// These parameters control which data is loaded
+shared SchoolYear = "2526 CIS" meta [Description = "School year folder name (e.g., '2526 CIS' for 2025-2026)"];
+shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
+shared LakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea" meta [Description = "Lakehouse ID containing source files"];
+
+// ===== SHARED HELPER FUNCTIONS =====
+// Reusable navigation function to get to the Accreditation folder
+shared GetAccreditationFolder = () => 
+  let
+    ConnectToLakehouse = Lakehouse.Contents(null),
+    NavigateToWorkspace = ConnectToLakehouse{[workspaceId = WorkspaceId]}[Data],
+    NavigateToLakehouse = NavigateToWorkspace{[lakehouseId = LakehouseId]}[Data],
+    NavigateToFilesFolder = NavigateToLakehouse{[Id = "Files", ItemKind = "Folder"]}[Data],
+    NavigateToSchoolYearFolder = NavigateToFilesFolder{[Name = SchoolYear]}[Content],
+    NavigateToAccreditationFolder = NavigateToSchoolYearFolder{[Name = "Accreditation"]}[Content]
+  in
+    NavigateToAccreditationFolder;
+
+// Function to get the most recent file from a folder
+shared GetLatestFile = (folderContents as table) => 
+  let
+    ExpandFileAttributes = Table.ExpandRecordColumn(folderContents, "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
+    RemoveHiddenFiles = Table.SelectRows(ExpandFileAttributes, each [Attributes]?[Hidden]? <> true),
+    FindMostRecentFile = Table.SelectRows(RemoveHiddenFiles, let latest = List.Max(RemoveHiddenFiles[Date modified]) in each [Date modified] = latest)
+  in
+    FindMostRecentFile;
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "Accreditation_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared student_drilldown = let
+  // STEP 1: Connect to the source files in the lakehouse
+  GetAccreditationFiles = GetAccreditationFolder(),
+  FindMostRecentAccreditationFile = GetLatestFile(GetAccreditationFiles),
+  
+  // STEP 2: Load and combine data from the Excel file
+  LoadExcelFromEachFile = Table.AddColumn(FindMostRecentAccreditationFile, "Transform file", each #"Transform file"([Content])),
+  KeepOnlyMostRecentData = Table.SelectRows(LoadExcelFromEachFile, let latest = List.Max(LoadExcelFromEachFile[Date modified]) in each [Date modified] = latest),
+  ExtractDataColumnsOnly = Table.SelectColumns(KeepOnlyMostRecentData, {"Transform file"}),
+  ExpandAllDataColumns = Table.ExpandTableColumn(ExtractDataColumnsOnly, "Transform file", Table.ColumnNames(#"Transform file"(#"Sample file"))),
+  
+  // STEP 3: Clean up the raw Excel data structure
+  SetInitialColumnTypes = Table.TransformColumnTypes(ExpandAllDataColumns, {{"Column1", type text}, {"Column2", type text}, {"Column4", type text}, {"Column6", type text}, {"Column8", type text}, {"Column9", type text}, {"Column10", type text}, {"Column11", type text}, {"Column12", type text}, {"Column13", type text}, {"Column14", type text}, {"Column15", type text}, {"Column16", type text}, {"Column21", type text}, {"Column22", type text}, {"Column23", type text}, {"Column24", type text}, {"Column31", type text}, {"Column38", type text}, {"Column39", type text}}),
+  RemoveExcelHeaderRow = Table.Skip(SetInitialColumnTypes, 1),
+  UseFirstRowAsColumnNames = Table.PromoteHeaders(RemoveExcelHeaderRow, [PromoteAllScalars = true]),rue]),
+  
+  // STEP 4: Convert columns to proper data types for analysis
+  ConvertNumericAndDateColumns = Table.TransformColumnTypes(UseFirstRowAsColumnNames, {{"Site ID", Int64.Type}, {"NCES ID", Int64.Type}, {"# of Grading Periods", Int64.Type}, {"Student ID", Int64.Type}, {"Student System ID", Int64.Type}, {"Enrollment Begin Date", type date}, {"Consent Begin Date", type date}, {"Consent End Date", type date}, {"# of Times Support Plan Was Adjusted", Int64.Type}, {"# of Tier II/III Supports", Int64.Type}, {"# of Tier II/III #(lf)Support Hours", type number}, {"# of Basic Needs/Resources entries (Tier II/III)", Int64.Type}, {"# of Formal Check-Ins", Int64.Type}, {"Months Enrolled #(lf)(30-day periods) #(lf)Rounded Down", Int64.Type}, {"# Goal Areas", Int64.Type}, {"# ABCS Metrics Assigned", Int64.Type}, {"# Non-ABCS Metrics Assigned", Int64.Type}, {"# Progress Entries", Int64.Type}, {"Expected Progress Entries for the Year", Int64.Type}, {"# of Metrics with Goal Achievement entered", Int64.Type}}),
+  
+  // STEP 5: Standardize column names to database-friendly format
+  RenameSchoolColumn = Table.RenameColumns(ConvertNumericAndDateColumns, {{"School", "school_name"}}),
+  RemoveUnneededIdentifierColumns = Table.RemoveColumns(RenameSchoolColumn, {"Site ID", "Organization", "NCES ID", "# of Grading Periods"}),g Periods"}),
+  ConvertStudentIdsToText = Table.TransformColumnTypes(RemoveUnneededIdentifierColumns, {{"Student ID", type text}, {"Student System ID", type text}}),
+  RenameStudentAndDemographicColumns = Table.RenameColumns(ConvertStudentIdsToText, {{"Student ID", "sidno"}, {"Student System ID", "client_id"}, {"Student Name", "client_full_name"}, {"Race/Ethnicity", "race"}, {"Sex/Gender", "client_gender"}, {"Ethnicity", "ethnicity"}, {"Case Managed Status", "status"}, {"Case Management Intensity Level", "case_management_intensity"}, {"Grade Level", "grade"}, {"Case Manager", "case)manager"}, {"Current Enrollment Status", "enrollment_status"}, {"Enrollment Begin Date", "entry_start_date"}, {"Enrollment Exit Date", "entry_exit_date"}, {"Consent Begin Date", "consent_begin_date"}, {"Consent End Date", "consent_end_date"}, {"Parental Consent Dates Entered #(lf)and Tier II/III Supports #(lf)Within Consent Dates?", "consent_compliant"}}),
+  RemoveDuplicateConsentColumn = Table.RemoveColumns(RenameStudentAndDemographicColumns, {"Parental Consent Dates Entered #(lf)and Tier 1/Basic Needs Supports #(lf)Within Consent Dates?"}),
+  RenameServiceAndMetricColumns = Table.RenameColumns(RemoveDuplicateConsentColumn, {{"Student Needs Assessment Entered?", "needs_entered"}, {"Student Support Plan Entered?", "support_plan_entered"}, {"# of Times Support Plan Was Adjusted", "number_adjusted"}, {"# of Tier II/III Supports", "num_II_III_contacts"}, {"# of Tier II/III #(lf)Support Hours", "num_II_III_hours"}, {"# of Basic Needs/Resources entries (Tier II/III)", "num_basic_entries"}, {"# of Formal Check-Ins", "num_formal_checkins"}, {"Months Enrolled #(lf)(30-day periods) #(lf)Rounded Down", "months_enrolled"}, {"On Track for Monthly Check-Ins?", "checkins_on_track"}, {"# Goal Areas", "goal_areas"}, {"# ABCS Metrics Assigned", "abcs_metrics_assigned"}, {"# Non-ABCS Metrics Assigned", "non_abcs_metrics_assigned"}, {"# Progress Entries", "num_progress_entries"}, {"Expected Progress Entries for the Year", "expected_progress_entries"}, {"# of Metrics with Goal Achievement entered", "num_of_metrics_with_goal_achieve"}, {"Goal Achievement Entered for ALL assigned goals?", "goal_for_all"}, {"EOY Status Entered", "eoy_status_entered"}}),
+  
+  // STEP 6: Clean missing data indicators and apply business rules
+  ReplaceMissingExitDates = Table.ReplaceValue(RenameServiceAndMetricColumns, "-", null, Replacer.ReplaceValue, {"entry_exit_date"}),
+  ConvertExitDateColumn = Table.TransformColumnTypes(ReplaceMissingExitDates, {{"entry_exit_date", type date}}),
+  AddCISIdentifierToClientId = Table.TransformColumns(ConvertExitDateColumn, {{"client_id", each _ & "-CIS", type text}}),
+  FixColumnNameTypos = Table.RenameColumns(AddCISIdentifierToClientId, {{"sidno", "sasid"}, {"case)manager", "case_manager"}}),
+  
+  // STEP 7: Sort by most recent consent dates for data quality
+  SortByMostRecentConsent = Table.Sort(FixColumnNameTypos, {{"consent_begin_date", Order.Descending}}),
+  
+  // STEP 8: Add data quality validation
+  AddRowCountForValidation = Table.RowCount(SortByMostRecentConsent),
+  FinalStudentDrilldownData = if AddRowCountForValidation = 0 then error "ERROR: No student records found in the source file. Please verify the file exists and contains data." else SortByMostRecentConsentding}}),
+  
+  // STEP 8: Add data quality validation
+  AddRowCountForValidation = Table.RowCount(SortByMostRecentConsent),
+  FinalStudentDrilldownData = if AddRowCountForValidation = 0 then error "ERROR: No student records found in the source file. Please verify the file exists and contains data." else SortByMostRecentConsent
+in
+  FinalStudentDrilldownData;
+shared #"Sample file" = let
+  // Get sample file for defining data structure
+  GetAccreditationFiles = GetAccreditationFolder(),
+  ExpandFileAttributes = Table.ExpandRecordColumn(GetAccreditationFiles, "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
+  RemoveHiddenFiles = Table.SelectRows(ExpandFileAttributes, each [Attributes]?[Hidden]? <> true),
+  GetFirstFileContent = RemoveHiddenFiles{0}[Content]
+in
+  GetFirstFileContent;
+shared Parameter = let
+  Parameter = #"Sample file" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type binary, BinaryIdentifier = #"Sample file"]
+in
+  Parameter;
+shared #"Transform Sample file" = let
+  Source = Excel.Workbook(Parameter, null, true),
+  Navigation = Source{[Item = "Accreditation Student Drilldown", Kind = "Sheet"]}[Data]
+in
+  Navigation;
+[FunctionQueryBinding = "{""exemplarFormulaName"":""Transform Sample file""}"]
+shared #"Transform file" = (Parameter as binary) => let
+  Source = Excel.Workbook(Parameter, null, true),
+  Navigation = Source{[Item = "Accreditation Student Drilldown", Kind = "Sheet"]}[Data]
+in
+  Navigation;
+shared Accreditation_DataDestination = let
+  // Define destination table in lakehouse for student drilldown data
+  ConnectToLakehouse = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
+  NavigateToWorkspace = ConnectToLakehouse{[workspaceId = WorkspaceId]}[Data],
+  NavigateToLakehouse = NavigateToWorkspace{[lakehouseId = LakehouseId]}[Data],
+  GetDestinationTable = NavigateToLakehouse{[Id = "raw_cisdm_accred_drilldown", ItemKind = "Table"]}?[Data]?
+in
+  GetDestinationTable;
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "tier1_accred_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared tier1_accred = let
+  // STEP 1: Connect to the source files in the lakehouse
+  GetAccreditationFiles = GetAccreditationFolder(),
+  ExpandFileAttributes = Table.ExpandRecordColumn(GetAccreditationFiles, "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
+  RemoveHiddenFiles = Table.SelectRows(ExpandFileAttributes, each [Attributes]?[Hidden]? <> true),
+  
+  // STEP 2: Load data from the most recent Excel file
+  LoadExcelFromEachFile = Table.AddColumn(RemoveHiddenFiles, "Transform file (2)", each #"Transform file (2)"([Content])),
+  KeepOnlyMostRecentData = Table.SelectRows(LoadExcelFromEachFile, let latest = List.Max(LoadExcelFromEachFile[Date modified]) in each [Date modified] = latest),
+  ExtractDataColumnsOnly = Table.SelectColumns(KeepOnlyMostRecentData, {"Transform file (2)"}),
+  ExpandAllDataColumns = Table.ExpandTableColumn(ExtractDataColumnsOnly, "Transform file (2)", Table.ColumnNames(#"Transform file (2)"(#"Sample file (2)"))),
+  
+  // STEP 3: Clean up the raw Excel data structure
+  SetInitialColumnTypes = Table.TransformColumnTypes(ExpandAllDataColumns, {{"Column1", type text}, {"Column2", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}, {"Column7", type text}, {"Column8", type text}}),
+  RemoveExcelHeaderRow = Table.Skip(SetInitialColumnTypes, 1),
+  UseFirstRowAsColumnNames = Table.PromoteHeaders(RemoveExcelHeaderRow, [PromoteAllScalars = true]),
+  
+  // STEP 4: Convert columns to proper data types
+  ConvertNumericColumns = Table.TransformColumnTypes(UseFirstRowAsColumnNames, {{"Site ID", Int64.Type}, {"NCES ID", Int64.Type}, {"Total School Enrollment", Int64.Type}, {"# of Basic Needs #(lf)Entries (whole-school)", Int64.Type}, {"Basic Needs - #(lf)Total Students Served (duplicated)", Int64.Type}, {"Basic Needs - #(lf)Min Served #(lf)(by any one resource)", Int64.Type}, {"Basic Needs - #(lf)Max Served #(lf)(by any one resource)", Int64.Type}, {"# of Tier I #(lf)Supports", Int64.Type}, {"Tier I - #(lf)Total Students Served#(lf) (duplicated)", Int64.Type}, {"Tier I - #(lf)Min Served #(lf)(at any one support)", Int64.Type}, {"Tier I - #(lf)Max Served #(lf)(at any one support)", Int64.Type}, {"# of Tier I and #(lf)Basic Needs/Resources#(lf) combined", Int64.Type}}),
+  
+  // STEP 5: Remove rows and columns that don't contain data
+  RemoveCompletelyBlankRows = Table.SelectRows(ConvertNumericColumns, each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+  RemoveUnneededIdentifierColumns = Table.RemoveColumns(RemoveCompletelyBlankRows, {"NCES ID", "Site ID", "Organization", "School District"}),
+  
+  // STEP 6: Standardize column names to database-friendly format
+  RenameSchoolColumn = Table.RenameColumns(RemoveUnneededIdentifierColumns, {{"School", "school_name"}, {"School Model ", "School Model"}}),
+  RemoveUnusedSchoolModelColumn = Table.RemoveColumns(RenameSchoolColumn, {"School Model"}),
+  RenameSchoolTypeColumn = Table.RenameColumns(RemoveUnusedSchoolModelColumn, {{"School Type", "school_type"}}),
+  RemoveSchoolStatusColumn = Table.RemoveColumns(RenameSchoolTypeColumn, {"School Status"}),
+  RenameAllMetricColumns = Table.RenameColumns(RemoveSchoolStatusColumn, {{"Total School Enrollment", "school_enrollment"}, {"# of Basic Needs #(lf)Entries (whole-school)", "num_school_basic_needs"}, {"Basic Needs - #(lf)Total Students Served (duplicated)", "total_served_dupe"}, {"Basic Needs- #(lf)Avg Served", "avg_served"}, {"Basic Needs - #(lf)Min Served #(lf)(by any one resource)", "min_served"}, {"Basic Needs - #(lf)Max Served #(lf)(by any one resource)", "max_served"}, {"# of Tier I #(lf)Supports", "num_tier1_supports"}, {"Tier I - #(lf)Total Students Served#(lf) (duplicated)", "total_students_dupe"}, {"Tier I - #(lf)Avg Served", "tier1_avg_served"}, {"Tier I - #(lf)Min Served #(lf)(at any one support)", "tier1_min_served"}, {"Tier I - #(lf)Max Served #(lf)(at any one support)", "tier1_max_served"}, {"# of Tier I and #(lf)Basic Needs/Resources#(lf) combined", "num_tier1_and_needs"}}),
+  
+  // STEP 7: Clean missing data - replace dashes with zeros for averaging calculations
+  ReplaceMissingBasicNeedsAvg = Table.ReplaceValue(RenameAllMetricColumns, "-", 0, Replacer.ReplaceValue, {"avg_served"}),
+  ReplaceMissingTier1Avg = Table.ReplaceValue(ReplaceMissingBasicNeedsAvg, "-", 0, Replacer.ReplaceValue, {"tier1_avg_served"}),
+  ConvertAverageColumnsToNumeric = Table.TransformColumnTypes(ReplaceMissingTier1Avg, {{"avg_served", type number}, {"tier1_avg_served", type number}}),
+  
+  // STEP 8: Add data quality validation
+  AddRowCountForValidation = Table.RowCount(ConvertAverageColumnsToNumeric),
+  FinalTier1Data = if AddRowCountForValidation = 0 then error "ERROR: No Tier 1 records found in the source file. Please verify the file exists and contains data." else ConvertAverageColumnsToNumeric
+in
+  FinalTier1Data;
+shared #"Sample file (2)" = let
+  // Get sample file for Tier 1 data structure definition
+  GetAccreditationFiles = GetAccreditationFolder(),
+  ExpandFileAttributes = Table.ExpandRecordColumn(GetAccreditationFiles, "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
+  RemoveHiddenFiles = Table.SelectRows(ExpandFileAttributes, each [Attributes]?[Hidden]? <> true),
+  GetFirstFileContent = RemoveHiddenFiles{0}[Content]
+in
+  GetFirstFileContent;
+shared #"Parameter (2)" = let
+  #"Parameter (2)" = #"Sample file (2)" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type binary, BinaryIdentifier = #"Sample file (2)"]
+in
+  #"Parameter (2)";
+shared #"Transform Sample file (2)" = let
+  Source = Excel.Workbook(#"Parameter (2)", null, true),
+  Navigation = Source{[Item = "Accreditation Tier I", Kind = "Sheet"]}[Data]
+in
+  Navigation;
+[FunctionQueryBinding = "{""exemplarFormulaName"":""Transform Sample file (2)""}"]
+shared #"Transform file (2)" = (#"Parameter (2)" as binary) => let
+  Source = Excel.Workbook(#"Parameter (2)", null, true),
+  Navigation = Source{[Item = "Accreditation Tier I", Kind = "Sheet"]}[Data]
+in
+  Navigation;
+shared tier1_accred_DataDestination = let
+  // Define destination table in lakehouse for Tier 1 accreditation data
+  ConnectToLakehouse = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
+  NavigateToWorkspace = ConnectToLakehouse{[workspaceId = WorkspaceId]}[Data],
+  NavigateToLakehouse = NavigateToWorkspace{[lakehouseId = LakehouseId]}[Data],
+  GetDestinationTable = NavigateToLakehouse{[Id = "raw_tier1_accred", ItemKind = "Table"]}?[Data]?
+in
+  GetDestinationTable;
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw_cisdm_accred_case_manage_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared raw_cisdm_accred_case_manage = let
+  // STEP 1: Connect to the source files and get the most recent file
+  GetAccreditationFiles = GetAccreditationFolder(),
+  FindMostRecentFile = Table.SelectRows(GetAccreditationFiles, let latest = List.Max(GetAccreditationFiles[Date modified]) in each [Date modified] = latest),
+  ExtractFileContent = FindMostRecentFile{0}[Content],
+  
+  // STEP 2: Load Excel workbook and navigate to Case Management sheet (5th sheet)
+  LoadExcelWorkbook = Excel.Workbook(ExtractFileContent, null, true),
+  SelectCaseManagementSheet = LoadExcelWorkbook{4}[Data],
+  
+  // STEP 3: Clean up Excel formatting - remove header and footer rows
+  RemoveExcelHeaderRow = Table.Skip(SelectCaseManagementSheet, 1),
+  RemoveExcelFooterRow = Table.RemoveLastN(RemoveExcelHeaderRow, 1),
+  UseFirstRowAsColumnNames = Table.PromoteHeaders(RemoveExcelFooterRow, [PromoteAllScalars = true]),
+  #"Renamed columns" = Table.RenameColumns(#"Promoted headers", {{"Organization", "org"}, {"School", "school_name"}, {"Site ID", "site_id"}, {"NCES ID", "nces_id"}, {"School Model", "school_model"}, {"School District", "district"}, {"School Type", "school_type"}, {"School Status", "school_status"}, {"Total School Enrollment", "total_school_enrollment"}, {"# of Grading Periods", "num_of_grading_periods"}, {"Total Case #(lf)Managed Students", "total_case_managed_students"}, {"# of CM Students #(lf)Enrolled With #(lf)Support Plans", "num_of_students_with_support_plan"}, {"% of CM Students #(lf)with Support Plans", "%of_students_w_support_plan"}, {"# of CM Students #(lf)with Tier II/III Supports", "num_of_students_w_tier1_2"}, {"# of CM Students #(lf)with Tier II/III Supports #(lf)and Support Plan", "num_w_tier2&3_w_support_plan"}, {"Saturation Rate ", "saturation_rate"}, {"# of Enrolled Students #(lf)Receiving Tier II/III Supports #(lf)outside of Parent Consent Dates", "num_of_enrolled_with_outdated_consent"}, {"# of Enrolled Students With#(lf) Tier I/Basic Needs  Supports Tracked outside of Parent Consent Dates", "num_tracked_outside_consent_dates"}, {"# of Enrolled Students with #(lf)Basic Needs/Resources #(lf)entered (Tier II/III)", "num_w_basic_needs_entered"}, {"# of CM Students with #(lf)at least one Formal Check-In ", "num_w_>1_formal_checkin"}, {"% of CM Students with #(lf)at least one Formal Check-In ", "%_w_1+_formal_checkin"}, {"% of CM Students with #(lf)On Track Monthly #(lf)Check-Ins", "%_on_track_monthly_checkins"}}),
+  #"Removed errors" = Table.RemoveRowsWithErrors(#"Renamed columns", {"% of CM Students with Adjusted Support Plans"}),
+  ConvertPercentageColumns = Table.TransformColumnTypes(RemoveRowsWithPercentageErrors, {{"%_w_1+_formal_checkin", Percentage.Type}, {"%_on_track_monthly_checkins", Percentage.Type}, {"% of CM Students with Adjusted Support Plans", Percentage.Type}}),
+  
+  // STEP 7: Rename progress and goal achievement columns
+  RenameProgressColumns = Table.RenameColumns(ConvertPercentageColumns, {{"# of CM Students with #(lf)at least one Progress Entry #(lf)ABCS goals", "num_w_1+_progress_entry"}, {"% of CM Students with#(lf) at least one Progress Entry #(lf)ABCS goals", "%_w_1+_progress_entry"}, {"# of CM Students with #(lf)Goal Achievement for all #(lf)ABCS goals (metrics)", "num_w_goal_achieve"}, {"% of CM Students with #(lf)Goal Achievement Entered #(lf)for all ABCS goals (metrics)", "#_w_goal_achieve"}}),
+  
+  // STEP 8: Remove Non-ABCS goal columns (not tracked for this report)
+  RemoveNonABCSColumns = Table.RemoveColumns(RenameProgressColumns, {"# of CM Students with #(lf)Goal Achievement Entered for all #(lf)Non-ABCS goals (metrics)", "% of CM Students with #(lf)Goal Achievement Entered for all#(lf) Non-ABCS goals (metrics)"}),
+  
+  // STEP 9: Convert EOY status and exit columns to proper types
+  ConvertEOYColumns = Table.TransformColumnTypes(RemoveNonABCSColumns, {{"% of CM Students with#(lf) EOY Status Entered", Percentage.Type}, {"# of CM Students#(lf) Currently Exited", Int64.Type}}),
+  
+  // STEP 10: Fix column name typo (should be percentage, not number)
+  FixGoalAchievementColumnName = Table.RenameColumns(ConvertEOYColumns, {{"#_w_goal_achieve", "%_w_goal_achieve"}}),
+  
+  // STEP 11: Convert all columns to final data types with comprehensive type definition
+  SetAllFinalColumnTypes = Table.TransformColumnTypes(FixGoalAchievementColumnName, {{"%_w_goal_achieve", Percentage.Type}, {"# of CM Students with#(lf) EOY Status Entered", Int64.Type}, {"num_w_goal_achieve", Int64.Type}, {"%_w_1+_progress_entry", Percentage.Type}, {"num_w_1+_progress_entry", Int64.Type}, {"num_w_>1_formal_checkin", Int64.Type}, {"num_w_basic_needs_entered", Int64.Type}, {"num_tracked_outside_consent_dates", Int64.Type}, {"num_of_enrolled_with_outdated_consent", Int64.Type}, {"saturation_rate", Percentage.Type}, {"num_w_tier2&3_w_support_plan", Int64.Type}, {"num_of_students_w_tier1_2", Int64.Type}, {"%of_students_w_support_plan", Percentage.Type}, {"num_of_students_with_support_plan", Int64.Type}, {"total_case_managed_students", Int64.Type}, {"num_of_grading_periods", Int64.Type}, {"total_school_enrollment", Int64.Type}, {"school_status", type text}, {"school_type", type text}, {"district", type text}, {"school_model", type text}, {"nces_id", type text}, {"site_id", type text}, {"school_name", type text}, {"org", type text}}),
+  
+  // STEP 12: Rename final EOY columns for consistency
+  RenameFinalEOYColumns = Table.RenameColumns(SetAllFinalColumnTypes, {{"# of CM Students with#(lf) EOY Status Entered", "num_w_eoy_entered"}, {"% of CM Students with#(lf) EOY Status Entered", "%_w_eoy_entered"}, {"# of CM Students#(lf) Currently Exited", "num_students_exited"}}),
+  
+  // STEP 13: Add data quality validation
+  AddRowCountForValidation = Table.RowCount(RenameFinalEOYColumns),
+  FinalCaseManagementData = if AddRowCountForValidation = 0 then error "ERROR: No case management records found in the source file. Please verify the file exists and contains data." else RenameFinalEOYColumns
+in
+  FinalCaseManagementData;
+shared raw_cisdm_accred_case_manage_DataDestination = let
+  // Define destination table in lakehouse for case management accreditation data
+  ConnectToLakehouse = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
+  NavigateToWorkspace = ConnectToLakehouse{[workspaceId = WorkspaceId]}[Data],
+  NavigateToLakehouse = NavigateToWorkspace{[lakehouseId = LakehouseId]}[Data],
+  GetDestinationTable = NavigateToLakehouse{[Id = "raw_cisdm_accred_case_manage", ItemKind = "Table"]}?[Data]?
+in
+  GetDestinationTable;
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw_cisdm_accred_site_coord_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared raw_cisdm_accred_site_coord = let
+  // STEP 1: Connect to the source files and get the most recent file
+  GetAccreditationFiles = GetAccreditationFolder(),
+  FindMostRecentFile = Table.SelectRows(GetAccreditationFiles, let latest = List.Max(GetAccreditationFiles[Date modified]) in each [Date modified] = latest),
+  ExtractFileContent = FindMostRecentFile{0}[Content],
+  
+  // STEP 2: Load Excel workbook and navigate to Site Coordinator sheet (3rd sheet)
+  LoadExcelWorkbook = Excel.Workbook(ExtractFileContent, null, true),
+  SelectSiteCoordinatorSheet = LoadExcelWorkbook{2}[Data],
+  
+  // STEP 3: Clean up Excel formatting - remove header and footer rows
+  RemoveExcelHeaderRow = Table.Skip(SelectSiteCoordinatorSheet, 1),
+  RemoveExcelFooterRow = Table.RemoveLastN(RemoveExcelHeaderRow, 1),
+  UseFirstRowAsColumnNames = Table.PromoteHeaders(RemoveExcelFooterRow, [PromoteAllScalars = true]),]),
+  
+  // STEP 4: Standardize column names to database-friendly format
+  RenameAllColumns = Table.RenameColumns(UseFirstRowAsColumnNames, {{"Organization", "org"}, {"School", "school_name"}, {"Site ID", "site_id"}, {"NCES ID", "nces_id"}, {"School Model", "school_model"}, {"School District", "district"}, {"School Type", "school_type"}, {"School Status", "school_status"}, {"Signed School #(lf)Agreement?", "signed_agreement"}, {"Total School Staff Assigned#(lf) Hours at School", "total_staff_at_school"}, {"School Needs Assessment Complete", "needs_assess_complete"}, {"School Support #(lf)Plan Complete", "support_plan_complete"}, {"Total School Enrollment", "total_enrollment"}, {"# of Grading Periods", "num_of_grading_periods"}, {"# of Times Reporting #(lf)to School Support #(lf)Team Documented", "num_of_times_reporting_school_support"}, {"# of Times Reporting #(lf)to School Leadership#(lf) Documented", "num_of_time_leadership"}, {"# of Times Reporting #(lf)to Organization Documented", "num_of_times_organization"}, {"# of Times Adjustments #(lf)Made to School #(lf)Support Plan", "num_adjustments_to_plan"}, {"# of School #(lf)Goals (Metrics)", "num_school_goals"}, {"# of School #(lf)Progress Entries", "num_progress_entries"}, {"# of Progress Entries #(lf)expected for the year", "num_expected_progress_entries"}, {"# of Goal #(lf)Achievement Entries #(lf)(across all metrics)", "num_goal_achievement"}}),
+  
+  // STEP 5: Convert all columns to proper data types
+  ConvertAllColumnTypes = Table.TransformColumnTypes(RenameAllColumns, {{"num_goal_achievement", Int64.Type}, {"num_expected_progress_entries", Int64.Type}, {"num_progress_entries", Int64.Type}, {"num_school_goals", Int64.Type}, {"num_adjustments_to_plan", Int64.Type}, {"num_of_times_organization", Int64.Type}, {"num_of_time_leadership", Int64.Type}, {"num_of_times_reporting_school_support", Int64.Type}, {"num_of_grading_periods", Int64.Type}, {"total_enrollment", Int64.Type}, {"support_plan_complete", type text}, {"needs_assess_complete", type text}, {"total_staff_at_school", type number}, {"signed_agreement", type text}, {"school_status", type text}, {"school_type", type text}, {"district", type text}, {"school_model", type text}, {"nces_id", type text}, {"site_id", type text}, {"school_name", type text}, {"org", type text}}),
+  
+  // STEP 6: Filter to only include active schools for reporting
+  KeepOnlyActiveSchools = Table.SelectRows(ConvertAllColumnTypes, each ([school_status] = "Active")),
+  
+  // STEP 7: Add calculated fields for compliance tracking - School Support Team reporting (meets requirement if >= 4 times)
+  AddSchoolSupportComplianceFlag = Table.AddColumn(KeepOnlyActiveSchools, "support_good", each if [num_of_times_reporting_school_support] >= 4 then 1 else ""),
+  
+  // STEP 8: Add calculated fields for compliance tracking - Leadership reporting (meets requirement if >= 4 times)
+  AddLeadershipComplianceFlag = Table.AddColumn(AddSchoolSupportComplianceFlag, "leadership_good", each if [num_of_time_leadership] >= 4 then 1 else ""),
+  
+  // STEP 9: Add record counter for aggregation purposes
+  AddRecordCounter = Table.TransformColumnTypes(Table.AddColumn(AddLeadershipComplianceFlag, "counter", each 1), {{"counter", Int64.Type}}),
+  
+  // STEP 10: Convert compliance flags to integers for counting
+  ConvertComplianceFlagsToIntegers = Table.TransformColumnTypes(AddRecordCounter, {{"leadership_good", Int64.Type}, {"support_good", Int64.Type}}),
+  
+  // STEP 11: Add data quality validation
+  AddRowCountForValidation = Table.RowCount(ConvertComplianceFlagsToIntegers),
+  FinalSiteCoordinatorData = if AddRowCountForValidation = 0 then error "ERROR: No active site coordinator records found in the source file. Please verify the file exists and contains data." else ConvertComplianceFlagsToIntegers
+in
+  FinalSiteCoordinatorData;
+shared raw_cisdm_accred_site_coord_DataDestination = let
+  // Define destination table in lakehouse for site coordinator accreditation data
+  ConnectToLakehouse = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  NavigateToWorkspace = ConnectToLakehouse{[workspaceId = WorkspaceId]}[Data],
+  NavigateToLakehouse = NavigateToWorkspace{[lakehouseId = LakehouseId]}[Data],
+  GetDestinationTable = NavigateToLakehouse{[Id = "raw_cisdm_accred_site_coord", ItemKind = "Table"]}?[Data]?
+in
+  GetDestinationTable;

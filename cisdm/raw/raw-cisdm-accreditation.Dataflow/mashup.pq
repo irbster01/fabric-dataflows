@@ -24,48 +24,51 @@ shared GetAccreditationFolder = () =>
 
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "Accreditation_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared student_drilldown = let
-  Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "Files", ItemKind = "Folder"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Name = "2526 CIS"]}[Content],
-  #"Navigation 4" = #"Navigation 3"{[Name = "Accreditation"]}[Content],
-  #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
-  #"Filtered hidden files" = Table.SelectRows(#"Expanded Attributes", each [Attributes]?[Hidden]? <> true),
-  #"Filtered rows 1" = Table.SelectRows(#"Filtered hidden files", let latest = List.Max(#"Filtered hidden files"[Date modified]) in each [Date modified] = latest),
-  #"Invoke custom function" = Table.AddColumn(#"Filtered rows 1", "Transform file", each #"Transform file"([Content])),
-  #"Filtered rows" = Table.SelectRows(#"Invoke custom function", let latest = List.Max(#"Invoke custom function"[Date modified]) in each [Date modified] = latest),
-  #"Removed other columns" = Table.SelectColumns(#"Filtered rows", {"Transform file"}),
-  #"Expanded table column" = Table.ExpandTableColumn(#"Removed other columns", "Transform file", Table.ColumnNames(#"Transform file"(#"Sample file"))),
-  #"Changed column type" = Table.TransformColumnTypes(#"Expanded table column", {{"Column1", type text}, {"Column2", type text}, {"Column4", type text}, {"Column6", type text}, {"Column8", type text}, {"Column9", type text}, {"Column10", type text}, {"Column11", type text}, {"Column12", type text}, {"Column13", type text}, {"Column14", type text}, {"Column15", type text}, {"Column16", type text}, {"Column21", type text}, {"Column22", type text}, {"Column23", type text}, {"Column24", type text}, {"Column31", type text}, {"Column38", type text}, {"Column39", type text}}),
-  #"Removed top rows" = Table.Skip(#"Changed column type", 1),
-  #"Promoted headers" = Table.PromoteHeaders(#"Removed top rows", [PromoteAllScalars = true]),
-  #"Changed column type 1" = Table.TransformColumnTypes(#"Promoted headers", {{"Site ID", Int64.Type}, {"NCES ID", Int64.Type}, {"# of Grading Periods", Int64.Type}, {"Student ID", Int64.Type}, {"Student System ID", Int64.Type}, {"Enrollment Begin Date", type date}, {"Consent Begin Date", type date}, {"Consent End Date", type date}, {"# of Times Support Plan Was Adjusted", Int64.Type}, {"# of Tier II/III Supports", Int64.Type}, {"# of Tier II/III #(lf)Support Hours", type number}, {"# of Basic Needs/Resources entries (Tier II/III)", Int64.Type}, {"# of Formal Check-Ins", Int64.Type}, {"Months Enrolled #(lf)(30-day periods) #(lf)Rounded Down", Int64.Type}, {"# Goal Areas", Int64.Type}, {"# ABCS Metrics Assigned", Int64.Type}, {"# Non-ABCS Metrics Assigned", Int64.Type}, {"# Progress Entries", Int64.Type}, {"Expected Progress Entries for the Year", Int64.Type}, {"# of Metrics with Goal Achievement entered", Int64.Type}}),
-  #"Renamed columns" = Table.RenameColumns(#"Changed column type 1", {{"School", "school_name"}}),
-  #"Removed columns" = Table.RemoveColumns(#"Renamed columns", {"Site ID", "Organization", "NCES ID", "# of Grading Periods"}),
-  #"Changed column type 2" = Table.TransformColumnTypes(#"Removed columns", {{"Student ID", type text}, {"Student System ID", type text}}),
-  #"Renamed columns 1" = Table.RenameColumns(#"Changed column type 2", {{"Student ID", "sidno"}, {"Student System ID", "client_id"}, {"Student Name", "client_full_name"}, {"Race/Ethnicity", "race"}, {"Sex/Gender", "client_gender"}, {"Ethnicity", "ethnicity"}, {"Case Managed Status", "status"}, {"Case Management Intensity Level", "case_management_intensity"}, {"Grade Level", "grade"}, {"Case Manager", "case)manager"}, {"Current Enrollment Status", "enrollment_status"}, {"Enrollment Begin Date", "entry_start_date"}, {"Enrollment Exit Date", "entry_exit_date"}, {"Consent Begin Date", "consent_begin_date"}, {"Consent End Date", "consent_end_date"}, {"Parental Consent Dates Entered #(lf)and Tier II/III Supports #(lf)Within Consent Dates?", "consent_compliant"}}),
-  #"Removed columns 1" = Table.RemoveColumns(#"Renamed columns 1", {"Parental Consent Dates Entered #(lf)and Tier 1/Basic Needs Supports #(lf)Within Consent Dates?"}),
-  #"Renamed columns 2" = Table.RenameColumns(#"Removed columns 1", {{"Student Needs Assessment Entered?", "needs_entered"}, {"Student Support Plan Entered?", "support_plan_entered"}, {"# of Times Support Plan Was Adjusted", "number_adjusted"}, {"# of Tier II/III Supports", "num_II_III_contacts"}, {"# of Tier II/III #(lf)Support Hours", "num_II_III_hours"}, {"# of Basic Needs/Resources entries (Tier II/III)", "num_basic_entries"}, {"# of Formal Check-Ins", "num_formal_checkins"}, {"Months Enrolled #(lf)(30-day periods) #(lf)Rounded Down", "months_enrolled"}, {"On Track for Monthly Check-Ins?", "checkins_on_track"}, {"# Goal Areas", "goal_areas"}, {"# ABCS Metrics Assigned", "abcs_metrics_assigned"}, {"# Non-ABCS Metrics Assigned", "non_abcs_metrics_assigned"}, {"# Progress Entries", "num_progress_entries"}, {"Expected Progress Entries for the Year", "expected_progress_entries"}, {"# of Metrics with Goal Achievement entered", "num_of_metrics_with_goal_achieve"}, {"Goal Achievement Entered for ALL assigned goals?", "goal_for_all"}, {"EOY Status Entered", "eoy_status_entered"}}),
-  #"Replaced value" = Table.ReplaceValue(#"Renamed columns 2", "-", null, Replacer.ReplaceValue, {"entry_exit_date"}),
-  #"Changed column type 3" = Table.TransformColumnTypes(#"Replaced value", {{"entry_exit_date", type date}}),
-  #"Added suffix" = Table.TransformColumns(#"Changed column type 3", {{"client_id", each _ & "-CIS", type text}}),
-  #"Renamed columns 3" = Table.RenameColumns(#"Added suffix", {{"sidno", "sasid"}, {"case)manager", "case_manager"}}),
-  #"Sorted rows" = Table.Sort(#"Renamed columns 3", {{"consent_begin_date", Order.Descending}})
+  // Connect to source files
+  SourceFolder = GetAccreditationFolder(),
+  ExpandFileInfo = Table.ExpandRecordColumn(SourceFolder, "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
+  RemoveHiddenFiles = Table.SelectRows(ExpandFileInfo, each [Attributes]?[Hidden]? <> true),
+  KeepLatestFileOnly = Table.SelectRows(RemoveHiddenFiles, let latest = List.Max(RemoveHiddenFiles[Date modified]) in each [Date modified] = latest),
+  
+  // Load Excel data
+  LoadExcelFiles = Table.AddColumn(KeepLatestFileOnly, "Transform file", each #"Transform file"([Content])),
+  KeepLatestData = Table.SelectRows(LoadExcelFiles, let latest = List.Max(LoadExcelFiles[Date modified]) in each [Date modified] = latest),
+  KeepDataOnly = Table.SelectColumns(KeepLatestData, {"Transform file"}),
+  ExpandDataColumns = Table.ExpandTableColumn(KeepDataOnly, "Transform file", Table.ColumnNames(#"Transform file"(#"Sample file"))),
+  
+  // Clean Excel structure
+  SetTextTypes = Table.TransformColumnTypes(ExpandDataColumns, {{"Column1", type text}, {"Column2", type text}, {"Column4", type text}, {"Column6", type text}, {"Column8", type text}, {"Column9", type text}, {"Column10", type text}, {"Column11", type text}, {"Column12", type text}, {"Column13", type text}, {"Column14", type text}, {"Column15", type text}, {"Column16", type text}, {"Column21", type text}, {"Column22", type text}, {"Column23", type text}, {"Column24", type text}, {"Column31", type text}, {"Column38", type text}, {"Column39", type text}}),
+  RemoveExcelHeader = Table.Skip(SetTextTypes, 1),
+  PromoteHeaders = Table.PromoteHeaders(RemoveExcelHeader, [PromoteAllScalars = true]),
+  
+  // Set numeric and date types
+  ConvertNumericDates = Table.TransformColumnTypes(PromoteHeaders, {{"Site ID", Int64.Type}, {"NCES ID", Int64.Type}, {"# of Grading Periods", Int64.Type}, {"Student ID", Int64.Type}, {"Student System ID", Int64.Type}, {"Enrollment Begin Date", type date}, {"Consent Begin Date", type date}, {"Consent End Date", type date}, {"# of Times Support Plan Was Adjusted", Int64.Type}, {"# of Tier II/III Supports", Int64.Type}, {"# of Tier II/III #(lf)Support Hours", type number}, {"# of Basic Needs/Resources entries (Tier II/III)", Int64.Type}, {"# of Formal Check-Ins", Int64.Type}, {"Months Enrolled #(lf)(30-day periods) #(lf)Rounded Down", Int64.Type}, {"# Goal Areas", Int64.Type}, {"# ABCS Metrics Assigned", Int64.Type}, {"# Non-ABCS Metrics Assigned", Int64.Type}, {"# Progress Entries", Int64.Type}, {"Expected Progress Entries for the Year", Int64.Type}, {"# of Metrics with Goal Achievement entered", Int64.Type}}),
+  
+  // Rename to standard column names
+  RenameSchool = Table.RenameColumns(ConvertNumericDates, {{"School", "school_name"}}),
+  RemoveUnusedIDs = Table.RemoveColumns(RenameSchool, {"Site ID", "Organization", "NCES ID", "# of Grading Periods"}),
+  ConvertIDsToText = Table.TransformColumnTypes(RemoveUnusedIDs, {{"Student ID", type text}, {"Student System ID", type text}}),
+  RenameStudentInfo = Table.RenameColumns(ConvertIDsToText, {{"Student ID", "sidno"}, {"Student System ID", "client_id"}, {"Student Name", "client_full_name"}, {"Race/Ethnicity", "race"}, {"Sex/Gender", "client_gender"}, {"Ethnicity", "ethnicity"}, {"Case Managed Status", "status"}, {"Case Management Intensity Level", "case_management_intensity"}, {"Grade Level", "grade"}, {"Case Manager", "case)manager"}, {"Current Enrollment Status", "enrollment_status"}, {"Enrollment Begin Date", "entry_start_date"}, {"Enrollment Exit Date", "entry_exit_date"}, {"Consent Begin Date", "consent_begin_date"}, {"Consent End Date", "consent_end_date"}, {"Parental Consent Dates Entered #(lf)and Tier II/III Supports #(lf)Within Consent Dates?", "consent_compliant"}}),
+  RemoveDuplicateConsent = Table.RemoveColumns(RenameStudentInfo, {"Parental Consent Dates Entered #(lf)and Tier 1/Basic Needs Supports #(lf)Within Consent Dates?"}),
+  RenameServiceMetrics = Table.RenameColumns(RemoveDuplicateConsent, {{"Student Needs Assessment Entered?", "needs_entered"}, {"Student Support Plan Entered?", "support_plan_entered"}, {"# of Times Support Plan Was Adjusted", "number_adjusted"}, {"# of Tier II/III Supports", "num_II_III_contacts"}, {"# of Tier II/III #(lf)Support Hours", "num_II_III_hours"}, {"# of Basic Needs/Resources entries (Tier II/III)", "num_basic_entries"}, {"# of Formal Check-Ins", "num_formal_checkins"}, {"Months Enrolled #(lf)(30-day periods) #(lf)Rounded Down", "months_enrolled"}, {"On Track for Monthly Check-Ins?", "checkins_on_track"}, {"# Goal Areas", "goal_areas"}, {"# ABCS Metrics Assigned", "abcs_metrics_assigned"}, {"# Non-ABCS Metrics Assigned", "non_abcs_metrics_assigned"}, {"# Progress Entries", "num_progress_entries"}, {"Expected Progress Entries for the Year", "expected_progress_entries"}, {"# of Metrics with Goal Achievement entered", "num_of_metrics_with_goal_achieve"}, {"Goal Achievement Entered for ALL assigned goals?", "goal_for_all"}, {"EOY Status Entered", "eoy_status_entered"}}),
+  
+  // Clean missing data
+  ReplaceMissingExitDate = Table.ReplaceValue(RenameServiceMetrics, "-", null, Replacer.ReplaceValue, {"entry_exit_date"}),
+  ConvertExitDate = Table.TransformColumnTypes(ReplaceMissingExitDate, {{"entry_exit_date", type date}}),
+  
+  // Apply business rules
+  AddCISIdentifier = Table.TransformColumns(ConvertExitDate, {{"client_id", each _ & "-CIS", type text}}),
+  FixColumnNames = Table.RenameColumns(AddCISIdentifier, {{"sidno", "sasid"}, {"case)manager", "case_manager"}}),
+  SortByRecentConsent = Table.Sort(FixColumnNames, {{"consent_begin_date", Order.Descending}})
 in
-  #"Sorted rows";
+  SortByRecentConsent;
 shared #"Sample file" = let
-  Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "Files", ItemKind = "Folder"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Name = "2526 CIS"]}[Content],
-  #"Navigation 4" = #"Navigation 3"{[Name = "Accreditation"]}[Content],
-  #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
-  #"Filtered hidden files" = Table.SelectRows(#"Expanded Attributes", each [Attributes]?[Hidden]? <> true),
-  #"Navigation 5" = #"Filtered hidden files"{0}[Content]
+  SourceFolder = GetAccreditationFolder(),
+  ExpandFileInfo = Table.ExpandRecordColumn(SourceFolder, "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
+  RemoveHiddenFiles = Table.SelectRows(ExpandFileInfo, each [Attributes]?[Hidden]? <> true),
+  GetFirstFile = RemoveHiddenFiles{0}[Content]
 in
-  #"Navigation 5";
+  GetFirstFile;
 shared Parameter = let
   Parameter = #"Sample file" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type binary, BinaryIdentifier = #"Sample file"]
 in
@@ -82,12 +85,12 @@ shared #"Transform file" = (Parameter as binary) => let
 in
   Navigation;
 shared Accreditation_DataDestination = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "raw_cisdm_accred_drilldown", ItemKind = "Table"]}?[Data]?
+  ConnectToLakehouse = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
+  NavigateToWorkspace = ConnectToLakehouse{[workspaceId = WorkspaceId]}[Data],
+  NavigateToLakehouse = NavigateToWorkspace{[lakehouseId = LakehouseId]}[Data],
+  GetDestinationTable = NavigateToLakehouse{[Id = "raw_cisdm_accred_drilldown", ItemKind = "Table"]}?[Data]?
 in
-  TableNavigation;
+  GetDestinationTable;
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "tier1_accred_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared tier1_accred = let
   Source = Lakehouse.Contents(null),

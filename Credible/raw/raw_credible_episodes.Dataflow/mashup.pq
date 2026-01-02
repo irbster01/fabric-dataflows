@@ -1,13 +1,8 @@
 [DefaultOutputDestinationSettings = [DestinationDefinition = [Kind = "Reference", QueryName = "DefaultDestination", IsNewTarget = true], UpdateMethod = [Kind = "Append"], DestinationTypeSettings = [Kind = "Table"]], StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-
-// ===== CONFIGURATION PARAMETERS =====
 shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
 shared LakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a" meta [Description = "Lakehouse ID"];
 shared CredibleApiUrl = "https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rMeUMv-ZFdO!IBc3hAanPCg__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=" meta [Description = "Credible API endpoint URL"];
-
-// ===== DATA QUERIES =====
-
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw_credible_episodes_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared raw_credible_episodes = let
   Source = Xml.Tables(Web.Contents("https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rMeUMv-ZFdO!IBc3hAanPCg__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=")),
@@ -50,9 +45,7 @@ shared raw_credible_episodes = let
   #"Sorted rows" = Table.Sort(#"Renamed columns", {{"fep_first_contact", Order.Descending}})
 in
   #"Sorted rows";
-
 shared DefaultDestination = Fabric.Warehouse([CreateNavigationProperties = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[warehouseId = "bd5204a3-3830-4fef-9c81-e233ba283b8e"]}[Data];
-
 shared raw_credible_episodes_DataDestination = let
   Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

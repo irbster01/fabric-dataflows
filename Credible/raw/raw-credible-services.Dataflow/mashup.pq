@@ -2,6 +2,7 @@
 section Section1;
 
 // ===== CONFIGURATION PARAMETERS =====
+// Dataflow last updated: 2026-01-02
 shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
 shared LakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a" meta [Description = "Lakehouse ID"];
 shared CredibleServicesApiUrl = "https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rfRvTPNU2S5FtAXPwjqgHzA__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=" meta [Description = "Credible Services API endpoint"];

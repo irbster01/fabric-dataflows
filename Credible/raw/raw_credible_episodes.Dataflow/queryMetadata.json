@@ -5,6 +5,18 @@
   "queryGroups": [],
   "documentLocale": "en-US",
   "queriesMetadata": {
+    "WorkspaceId": {
+      "queryId": "9fea1429-42f6-44ab-a323-f56e10e2746d",
+      "queryName": "WorkspaceId"
+    },
+    "LakehouseId": {
+      "queryId": "d00fd87a-15ea-4610-a9da-862e0a8ee284",
+      "queryName": "LakehouseId"
+    },
+    "CredibleApiUrl": {
+      "queryId": "ae9beba1-ed69-4904-9b19-9e7087778192",
+      "queryName": "CredibleApiUrl"
+    },
     "raw_credible_episodes": {
       "queryId": "495faeba-bd4b-421f-9382-51b3ecc89b74",
       "queryName": "raw_credible_episodes",
@@ -13,16 +25,6 @@
     "DefaultDestination": {
       "queryId": "68d21445-6b63-4933-b986-9a195070332a",
       "queryName": "DefaultDestination",
-      "isHidden": true,
-      "loadEnabled": false
-    },
-    "raw_credible_episodes-warehouse": {
-      "queryId": "373200e8-5c92-4892-a700-4e455fb30e60",
-      "queryName": "raw_credible_episodes-warehouse"
-    },
-    "raw_credible_episodes-warehouse_DataDestination": {
-      "queryId": "3a14a492-a57e-4738-8137-962cec7fcb2c",
-      "queryName": "raw_credible_episodes-warehouse_DataDestination",
       "isHidden": true,
       "loadEnabled": false
     },

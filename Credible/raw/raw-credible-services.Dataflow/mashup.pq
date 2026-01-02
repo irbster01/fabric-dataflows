@@ -1,14 +1,9 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-
-// ===== CONFIGURATION PARAMETERS =====
 shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
 shared LakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a" meta [Description = "Lakehouse ID"];
 shared CredibleServicesApiUrl = "https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rfRvTPNU2S5FtAXPwjqgHzA__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=" meta [Description = "Credible Services API endpoint"];
 shared CredibleOutreachApiUrl = "https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2r1OkQYY7dl3jpHEC3CGjVlQ__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=" meta [Description = "Credible Outreach API endpoint"];
-
-// ===== DATA QUERIES =====
-
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw-credible-services_DataDestination", IsNewTarget = false], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared #"raw-credible-services" = let
   Source = Xml.Tables(Web.Contents("https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rfRvTPNU2S5FtAXPwjqgHzA__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=")),
@@ -33,7 +28,6 @@ shared #"raw-credible-services" = let
   #"Sorted rows" = Table.Sort(#"Renamed columns", {{"service_date", Order.Descending}}) // Sort by service date, most recent first
 in
   #"Sorted rows";
-
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "API - Outreach_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared #"API - Outreach" = let
   Source = Xml.Tables(Web.Contents("https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2r1OkQYY7dl3jpHEC3CGjVlQ__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3="), null, 65001),
@@ -60,7 +54,6 @@ shared #"API - Outreach_DataDestination" = let
   TableNavigation = Navigation_2{[Id = "raw_credible_outreach", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
-
 shared #"raw-credible-services_DataDestination" = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

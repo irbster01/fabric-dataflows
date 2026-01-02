@@ -5,15 +5,25 @@
   "queryGroups": [],
   "documentLocale": "en-US",
   "queriesMetadata": {
+    "WorkspaceId": {
+      "queryId": "1cde8756-dbb4-43c4-8b77-ca0d310fb034",
+      "queryName": "WorkspaceId"
+    },
+    "LakehouseId": {
+      "queryId": "ec1e1216-d1b2-4ef0-b0b2-ca744f745eba",
+      "queryName": "LakehouseId"
+    },
+    "CredibleServicesApiUrl": {
+      "queryId": "a6d18b88-de5d-4bda-82ea-700ab46b7ab8",
+      "queryName": "CredibleServicesApiUrl"
+    },
+    "CredibleOutreachApiUrl": {
+      "queryId": "dd959588-7d3b-45df-8e27-0fe37d87a213",
+      "queryName": "CredibleOutreachApiUrl"
+    },
     "raw-credible-services": {
       "queryId": "54a3f14a-5abb-4020-9a6f-94d2609d6c45",
       "queryName": "raw-credible-services",
-      "loadEnabled": false
-    },
-    "NavigationQuery": {
-      "queryId": "c5f0ce05-2632-4b8e-934c-fe6cbe760fc8",
-      "queryName": "NavigationQuery",
-      "isHidden": true,
       "loadEnabled": false
     },
     "API - Outreach": {
@@ -25,16 +35,6 @@
       "queryId": "0e784d59-1fac-44cc-bc68-02e0750d652d",
       "queryName": "API - Outreach_DataDestination",
       "isHidden": true,
-      "loadEnabled": false
-    },
-    "RangeStart": {
-      "queryId": "e24f9e44-efd4-4872-97b8-e26175e30af5",
-      "queryName": "RangeStart",
-      "loadEnabled": false
-    },
-    "RangeEnd": {
-      "queryId": "fcf32bfd-36eb-4861-b248-3ca271689c96",
-      "queryName": "RangeEnd",
       "loadEnabled": false
     },
     "raw-credible-services_DataDestination": {

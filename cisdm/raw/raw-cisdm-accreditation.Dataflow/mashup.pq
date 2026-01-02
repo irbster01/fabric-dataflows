@@ -1,5 +1,27 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
+
+// ===== CONFIGURATION PARAMETERS =====
+// Change these values to point to different data sources or school years
+shared SchoolYear = "2526 CIS" meta [Description = "School year folder (e.g., '2526 CIS' for 2025-2026)"];
+shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
+shared LakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea" meta [Description = "Lakehouse ID"];
+
+// ===== SHARED HELPER FUNCTIONS =====
+// Reusable function to navigate to the Accreditation folder
+shared GetAccreditationFolder = () => 
+  let
+    ConnectToLakehouse = Lakehouse.Contents(null),
+    NavigateToWorkspace = ConnectToLakehouse{[workspaceId = WorkspaceId]}[Data],
+    NavigateToLakehouse = NavigateToWorkspace{[lakehouseId = LakehouseId]}[Data],
+    NavigateToFilesFolder = NavigateToLakehouse{[Id = "Files", ItemKind = "Folder"]}[Data],
+    NavigateToSchoolYearFolder = NavigateToFilesFolder{[Name = SchoolYear]}[Content],
+    NavigateToAccreditationFolder = NavigateToSchoolYearFolder{[Name = "Accreditation"]}[Content]
+  in
+    NavigateToAccreditationFolder;
+
+// ===== DATA QUERIES =====
+
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "Accreditation_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared student_drilldown = let
   Source = Lakehouse.Contents(null),

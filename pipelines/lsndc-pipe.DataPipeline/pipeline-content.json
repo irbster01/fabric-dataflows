@@ -35,7 +35,14 @@
           "secureOutput": false
         },
         "name": "pipe-lsndc-entries",
-        "dependsOn": []
+        "dependsOn": [
+          {
+            "activity": "Wait1_copy3",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
       },
       {
         "type": "RefreshDataflow",
@@ -55,9 +62,9 @@
         "name": "pipe-lsndc-services",
         "dependsOn": [
           {
-            "activity": "pipe-lsndc-entries",
+            "activity": "Wait1_copy5",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -80,15 +87,9 @@
         "name": "trans-lsndc-clients",
         "dependsOn": [
           {
-            "activity": "pipe-lsndc-entries",
+            "activity": "Wait1",
             "dependencyConditions": [
-              "Succeeded"
-            ]
-          },
-          {
-            "activity": "pipe-lsndc-clients",
-            "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -111,9 +112,9 @@
         "name": "active clients",
         "dependsOn": [
           {
-            "activity": "trans-lsndc-clients",
+            "activity": "Wait1_copy6",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -136,9 +137,9 @@
         "name": "raw_ssvf_tfa",
         "dependsOn": [
           {
-            "activity": "pipe-lsndc-services",
+            "activity": "Wait1_copy1",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -161,9 +162,9 @@
         "name": "ssvf_workflow_list",
         "dependsOn": [
           {
-            "activity": "raw_ssvf_tfa",
+            "activity": "Wait1_copy4",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -184,7 +185,119 @@
           "secureOutput": false
         },
         "name": "ssvf_extension",
-        "dependsOn": []
+        "dependsOn": [
+          {
+            "activity": "Wait1_copy2",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 20
+        },
+        "name": "Wait1",
+        "dependsOn": [
+          {
+            "activity": "pipe-lsndc-entries",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 20
+        },
+        "name": "Wait1_copy1",
+        "dependsOn": [
+          {
+            "activity": "trans-lsndc-clients",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 20
+        },
+        "name": "Wait1_copy2",
+        "dependsOn": [
+          {
+            "activity": "ssvf_workflow_list",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 20
+        },
+        "name": "Wait1_copy3",
+        "dependsOn": [
+          {
+            "activity": "pipe-lsndc-clients",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 20
+        },
+        "name": "Wait1_copy4",
+        "dependsOn": [
+          {
+            "activity": "raw_ssvf_tfa",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 20
+        },
+        "name": "Wait1_copy5",
+        "dependsOn": [
+          {
+            "activity": "ssvf_extension",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 20
+        },
+        "name": "Wait1_copy6",
+        "dependsOn": [
+          {
+            "activity": "pipe-lsndc-services",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
       }
     ]
   }

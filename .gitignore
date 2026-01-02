@@ -1,0 +1,10 @@
+# Local scratch folder
+scratch/
+
+# Backup files
+*.backup
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db

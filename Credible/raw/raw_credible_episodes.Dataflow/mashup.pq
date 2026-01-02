@@ -1,105 +1,61 @@
 [DefaultOutputDestinationSettings = [DestinationDefinition = [Kind = "Reference", QueryName = "DefaultDestination", IsNewTarget = true], UpdateMethod = [Kind = "Append"], DestinationTypeSettings = [Kind = "Table"]], StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
+
+// ===== CONFIGURATION PARAMETERS =====
+shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
+shared LakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a" meta [Description = "Lakehouse ID"];
+shared CredibleApiUrl = "https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rMeUMv-ZFdO!IBc3hAanPCg__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=" meta [Description = "Credible API endpoint URL"];
+
+// ===== DATA QUERIES =====
+
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw_credible_episodes_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared raw_credible_episodes = let
-  Source = Xml.Tables(Web.Contents("https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rMeUMv-ZFdO!IBc3hAanPCg__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=")),
-  Navigation = Source{1}[Table],
-  #"Expanded Table" = Table.ExpandTableColumn(Navigation, "Table", {"Name", "Table"}, {"Name.1", "Table.1"}),
-  #"Expanded Table.1" = Table.ExpandTableColumn(#"Expanded Table", "Table.1", {"Name", "Table"}, {"Name.2", "Table"}),
-  #"Expanded Table 2" = Table.ExpandTableColumn(#"Expanded Table.1", "Table", {"Name", "Table"}, {"Name.3", "Table.1"}),
-  #"Expanded Table.1 2" = Table.ExpandTableColumn(#"Expanded Table 2", "Table.1", {"episode_id", "client_id", "episode_status", "assessment_date1", "admission_date", "program_id1", "program_id", "assessment_date", "date_updated", "date_created", "length_of_stay", "urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata", "discharge_date", "discharge_date1", "discharge_outcome", "discharge_location", "date_closed_auto", "referral_date", "referred_by", "referred_source", "fep_first_contact"}, {"episode_id", "client_id", "episode_status", "assessment_date1", "admission_date", "program_id1", "program_id", "assessment_date", "date_updated", "date_created", "length_of_stay", "urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata", "discharge_date", "discharge_date1", "discharge_outcome", "discharge_location", "date_closed_auto", "referral_date", "referred_by", "referred_source", "fep_first_contact"}),
-  #"Removed columns" = Table.RemoveColumns(#"Expanded Table.1 2", {"Name", "Name.1", "Name.2", "Name.3"}),
-  #"Renamed columns" = Table.RenameColumns(#"Removed columns", {{"client_id", "Client ID"}, {"episode_status", "Episode Status"}, {"program_id", "Program ID"}, {"date_updated", "Date Episode Updated"}, {"date_created", "Date Episode Created"}}),
-  #"Extracted text range" = Table.TransformColumns(#"Renamed columns", {{"Date Episode Updated", each Text.Middle(Text.From(_), 0, 10), type text}}),
-  #"Extracted text range 1" = Table.TransformColumns(#"Extracted text range", {{"Date Episode Created", each Text.Middle(Text.From(_), 0, 10), type text}}),
-  #"Changed column type" = Table.TransformColumnTypes(#"Extracted text range 1", {{"Date Episode Updated", type date}, {"Date Episode Created", type date}}),
-  #"Renamed columns 1" = Table.RenameColumns(#"Changed column type", {{"length_of_stay", "Length of Stay"}}),
-  #"Removed columns 1" = Table.RemoveColumns(#"Renamed columns 1", {"urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata"}),
-  #"Renamed columns 2" = Table.RenameColumns(#"Removed columns 1", {{"discharge_outcome", "Discharge Outcome"}, {"discharge_date", "Discharge Date"}, {"discharge_location", "Discharge Location"}, {"date_closed_auto", "Date Auto Closed"}, {"referral_date", "Referral Date"}, {"referred_by", "Referred By"}, {"referred_source", "Referred Source"}, {"episode_id", "Episode ID"}, {"assessment_date1", "Assessment Date"}, {"admission_date", "Admission Date"}}),
-  #"Extracted text range 2" = Table.TransformColumns(#"Renamed columns 2", {{"Assessment Date", each Text.Middle(Text.From(_), 0, 10), type text}}),
-  #"Changed column type 1" = Table.TransformColumnTypes(#"Extracted text range 2", {{"Assessment Date", type date}}),
-  #"Extracted text range 3" = Table.TransformColumns(#"Changed column type 1", {{"Admission Date", each Text.Middle(Text.From(_), 0, 10), type text}}),
-  #"Changed column type 2" = Table.TransformColumnTypes(#"Extracted text range 3", {{"Admission Date", type date}}),
-  #"Extracted text range 4" = Table.TransformColumns(#"Changed column type 2", {{"Discharge Date", each Text.Middle(Text.From(_), 0, 10), type text}}),
-  #"Changed column type 3" = Table.TransformColumnTypes(#"Extracted text range 4", {{"Discharge Date", type date}}),
-  #"Transform columns" = Table.TransformColumnTypes(#"Changed column type 3", {{"Episode ID", type text}, {"Client ID", type text}, {"Episode Status", type text}, {"program_id1", type text}, {"Program ID", type text}, {"assessment_date", type text}, {"Length of Stay", type text}, {"discharge_date1", type text}, {"Discharge Outcome", type text}, {"Discharge Location", type text}, {"Date Auto Closed", type text}, {"Referral Date", type text}, {"Referred By", type text}, {"Referred Source", type text}}),
-  #"Replace errors" = Table.ReplaceErrorValues(#"Transform columns", {{"Episode ID", null}, {"Client ID", null}, {"Episode Status", null}, {"program_id1", null}, {"Program ID", null}, {"assessment_date", null}, {"Length of Stay", null}, {"discharge_date1", null}, {"Discharge Outcome", null}, {"Discharge Location", null}, {"Date Auto Closed", null}, {"Referral Date", null}, {"Referred By", null}, {"Referred Source", null}}),
-  #"Sorted rows" = Table.Sort(#"Replace errors", {{"fep_first_contact", Order.Descending}}),
-  #"Extracted text before delimiter" = Table.TransformColumns(#"Sorted rows", {{"fep_first_contact", each Text.BeforeDelimiter(Text.From(_), "T", 0), type text}}),
-  #"Changed column type 4" = Table.TransformColumnTypes(#"Extracted text before delimiter", {{"fep_first_contact", type date}}),
-  #"Extracted text before delimiter 1" = Table.TransformColumns(#"Changed column type 4", {{"Referral Date", each Text.BeforeDelimiter(_, "T", 0), type text}}),
-  #"Changed column type 5" = Table.TransformColumnTypes(#"Extracted text before delimiter 1", {{"Referral Date", type date}}),
-  #"Replaced value" = Table.ReplaceValue(#"Changed column type 5", "14", "Epicenter", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 1" = Table.ReplaceValue(#"Replaced value", "16", "CHRP", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 2" = Table.ReplaceValue(#"Replaced value 1", "6", "Adult Bundle", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 3" = Table.ReplaceValue(#"Replaced value 2", "13", "6401", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 4" = Table.ReplaceValue(#"Replaced value 3", "10", "Supervision", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 5" = Table.ReplaceValue(#"Replaced value 4", "15", "IBHH", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 6" = Table.ReplaceValue(#"Replaced value 5", "12", "6021", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 7" = Table.ReplaceValue(#"Replaced value 6", "9", "6024", Replacer.ReplaceValue, {"Program ID"}),
-  #"Filtered rows" = Table.SelectRows(#"Replaced value 7", each ([Program ID] <> "17")),
-  #"Renamed columns 3" = Table.RenameColumns(#"Filtered rows", {{"Episode ID", "entry_id"}, {"Client ID", "client_id"}, {"Episode Status", "entry_status"}}),
-  #"Removed columns 2" = Table.RemoveColumns(#"Renamed columns 3", {"program_id1", "assessment_date"}),
-  #"Renamed columns 4" = Table.RenameColumns(#"Removed columns 2", {{"Date Episode Updated", "date_entry_created"}, {"Program ID", "program"}, {"Admission Date", "admission_date"}, {"Assessment Date", "assessment_date"}, {"Date Episode Created", "date_entry_updated"}, {"Length of Stay", "length_of_stay"}, {"Discharge Date", "discharge_date"}}),
-  #"Removed columns 3" = Table.RemoveColumns(#"Renamed columns 4", {"discharge_date1"}),
-  #"Renamed columns 5" = Table.RenameColumns(#"Removed columns 3", {{"Discharge Outcome", "discaharge_outcome"}, {"Discharge Location", "discharge_location"}, {"Date Auto Closed", "date_autoClosed"}}),
-  #"Extracted text range 5" = Table.TransformColumns(#"Renamed columns 5", {{"date_autoClosed", each Text.Middle(_, 0, 10), type text}}),
-  #"Changed column type 6" = Table.TransformColumnTypes(#"Extracted text range 5", {{"date_autoClosed", type date}}),
-  #"Renamed columns 6" = Table.RenameColumns(#"Changed column type 6", {{"Referred Source", "ref_source"}, {"Referral Date", "ref_date"}, {"Referred By", "_ref_by"}})
+  Source = Xml.Tables(Web.Contents(CredibleApiUrl)), // Connect to Credible API and parse XML response
+  Navigation = Source{1}[Table], // Navigate to main data table in XML structure
+  #"Expanded Table" = Table.ExpandTableColumn(Navigation, "Table", {"Name", "Table"}, {"Name.1", "Table.1"}), // Expand first level of nested tables
+  #"Expanded Table.1" = Table.ExpandTableColumn(#"Expanded Table", "Table.1", {"Name", "Table"}, {"Name.2", "Table"}), // Expand second level of nested tables
+  #"Expanded Table 2" = Table.ExpandTableColumn(#"Expanded Table.1", "Table", {"Name", "Table"}, {"Name.3", "Table.1"}), // Expand third level of nested tables
+  #"Expanded Table.1 2" = Table.ExpandTableColumn(#"Expanded Table 2", "Table.1", {"episode_id", "client_id", "episode_status", "assessment_date1", "admission_date", "program_id1", "program_id", "assessment_date", "date_updated", "date_created", "length_of_stay", "urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata", "discharge_date", "discharge_date1", "discharge_outcome", "discharge_location", "date_closed_auto", "referral_date", "referred_by", "referred_source", "fep_first_contact"}, {"episode_id", "client_id", "episode_status", "assessment_date1", "admission_date", "program_id1", "program_id", "assessment_date", "date_updated", "date_created", "length_of_stay", "urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata", "discharge_date", "discharge_date1", "discharge_outcome", "discharge_location", "date_closed_auto", "referral_date", "referred_by", "referred_source", "fep_first_contact"}), // Expand episode data columns from XML
+  #"Removed columns" = Table.RemoveColumns(#"Expanded Table.1 2", {"Name", "Name.1", "Name.2", "Name.3"}), // Remove XML navigation columns
+  #"Removed columns 1" = Table.RemoveColumns(#"Removed columns", {"urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata"}), // Remove XML schema metadata columns
+  #"Removed columns 2" = Table.RemoveColumns(#"Removed columns 1", {"program_id1", "assessment_date", "discharge_date1"}), // Remove duplicate/unused date and program ID columns
+  #"Changed column type" = Table.TransformColumnTypes(#"Removed columns 2", {{"episode_id", type text}, {"client_id", type text}, {"episode_status", type text}, {"program_id", type text}, {"length_of_stay", type text}, {"discharge_outcome", type text}, {"discharge_location", type text}, {"referred_by", type text}, {"referred_source", type text}}), // Convert episode fields to text type
+  #"Extracted text range" = Table.TransformColumns(#"Changed column type", {{"date_updated", each Text.Middle(Text.From(_), 0, 10), type text}}), // Extract date portion from date_updated timestamp
+  #"Changed column type 1" = Table.TransformColumnTypes(#"Extracted text range", {{"date_updated", type date}}), // Convert date_updated to date type
+  #"Extracted text range 1" = Table.TransformColumns(#"Changed column type 1", {{"date_created", each Text.Middle(Text.From(_), 0, 10), type text}}), // Extract date portion from date_created timestamp
+  #"Changed column type 2" = Table.TransformColumnTypes(#"Extracted text range 1", {{"date_created", type date}}), // Convert date_created to date type
+  #"Extracted text range 2" = Table.TransformColumns(#"Changed column type 2", {{"assessment_date1", each Text.Middle(Text.From(_), 0, 10), type text}}), // Extract date portion from assessment_date1 timestamp
+  #"Changed column type 3" = Table.TransformColumnTypes(#"Extracted text range 2", {{"assessment_date1", type date}}), // Convert assessment_date1 to date type
+  #"Extracted text range 3" = Table.TransformColumns(#"Changed column type 3", {{"admission_date", each Text.Middle(Text.From(_), 0, 10), type text}}), // Extract date portion from admission_date timestamp
+  #"Changed column type 4" = Table.TransformColumnTypes(#"Extracted text range 3", {{"admission_date", type date}}), // Convert admission_date to date type
+  #"Extracted text range 4" = Table.TransformColumns(#"Changed column type 4", {{"discharge_date", each Text.Middle(Text.From(_), 0, 10), type text}}), // Extract date portion from discharge_date timestamp
+  #"Changed column type 5" = Table.TransformColumnTypes(#"Extracted text range 4", {{"discharge_date", type date}}), // Convert discharge_date to date type
+  #"Extracted text before delimiter" = Table.TransformColumns(#"Changed column type 5", {{"fep_first_contact", each Text.BeforeDelimiter(Text.From(_), "T", 0), type text}}), // Extract date from FEP first contact ISO timestamp (before T delimiter)
+  #"Changed column type 6" = Table.TransformColumnTypes(#"Extracted text before delimiter", {{"fep_first_contact", type date}}), // Convert fep_first_contact to date type
+  #"Extracted text before delimiter 1" = Table.TransformColumns(#"Changed column type 6", {{"date_closed_auto", each Text.BeforeDelimiter(Text.From(_), "T", 0), type text}}), // Extract date from auto-close ISO timestamp (before T delimiter)
+  #"Changed column type 7" = Table.TransformColumnTypes(#"Extracted text before delimiter 1", {{"date_closed_auto", type date}}), // Convert date_closed_auto to date type
+  #"Extracted text before delimiter 2" = Table.TransformColumns(#"Changed column type 7", {{"referral_date", each Text.BeforeDelimiter(Text.From(_), "T", 0), type text}}), // Extract date from referral ISO timestamp (before T delimiter)
+  #"Changed column type 8" = Table.TransformColumnTypes(#"Extracted text before delimiter 2", {{"referral_date", type date}}), // Convert referral_date to date type
+  #"Replace errors" = Table.ReplaceErrorValues(#"Changed column type 8", {{"episode_id", null}, {"client_id", null}, {"episode_status", null}, {"program_id", null}, {"length_of_stay", null}, {"discharge_outcome", null}, {"discharge_location", null}, {"date_closed_auto", null}, {"referral_date", null}, {"referred_by", null}, {"referred_source", null}}), // Replace any parsing errors with null values
+  #"Replaced value" = Table.ReplaceValue(#"Replace errors", "14", "Epicenter", Replacer.ReplaceValue, {"program_id"}), // Map program ID 14 to Epicenter
+  #"Replaced value 1" = Table.ReplaceValue(#"Replaced value", "16", "CHRP", Replacer.ReplaceValue, {"program_id"}), // Map program ID 16 to CHRP
+  #"Replaced value 2" = Table.ReplaceValue(#"Replaced value 1", "6", "Adult Bundle", Replacer.ReplaceValue, {"program_id"}), // Map program ID 6 to Adult Bundle
+  #"Replaced value 3" = Table.ReplaceValue(#"Replaced value 2", "13", "6401", Replacer.ReplaceValue, {"program_id"}), // Map program ID 13 to 6401
+  #"Replaced value 4" = Table.ReplaceValue(#"Replaced value 3", "10", "Supervision", Replacer.ReplaceValue, {"program_id"}), // Map program ID 10 to Supervision
+  #"Replaced value 5" = Table.ReplaceValue(#"Replaced value 4", "15", "IBHH", Replacer.ReplaceValue, {"program_id"}), // Map program ID 15 to IBHH
+  #"Replaced value 6" = Table.ReplaceValue(#"Replaced value 5", "12", "6021", Replacer.ReplaceValue, {"program_id"}), // Map program ID 12 to 6021
+  #"Replaced value 7" = Table.ReplaceValue(#"Replaced value 6", "9", "6024", Replacer.ReplaceValue, {"program_id"}), // Map program ID 9 to 6024
+  #"Filtered rows" = Table.SelectRows(#"Replaced value 7", each ([program_id] <> "17")), // Exclude program ID 17 from results
+  #"Renamed columns" = Table.RenameColumns(#"Filtered rows", {{"episode_id", "entry_id"}, {"client_id", "client_id"}, {"episode_status", "entry_status"}, {"date_updated", "date_entry_updated"}, {"date_created", "date_entry_created"}, {"program_id", "program"}, {"admission_date", "admission_date"}, {"assessment_date1", "assessment_date"}, {"length_of_stay", "length_of_stay"}, {"discharge_date", "discharge_date"}, {"discharge_outcome", "discharge_outcome"}, {"discharge_location", "discharge_location"}, {"date_closed_auto", "date_auto_closed"}, {"referral_date", "ref_date"}, {"referred_by", "ref_by"}, {"referred_source", "ref_source"}, {"fep_first_contact", "fep_first_contact"}}), // Rename columns to standard field names
+  #"Sorted rows" = Table.Sort(#"Renamed columns", {{"fep_first_contact", Order.Descending}}) // Sort by FEP first contact date, most recent first
 in
-  #"Renamed columns 6";
-shared DefaultDestination = Fabric.Warehouse([CreateNavigationProperties = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[warehouseId = "bd5204a3-3830-4fef-9c81-e233ba283b8e"]}[Data];
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw_credible_episodes-warehouse_DataDestination", IsNewTarget = true], Settings = [Kind = "Manual", AllowCreation = true, ColumnSettings = [Mappings = {[SourceColumnName = "Episode ID", DestinationColumnName = "Episode ID"], [SourceColumnName = "Client ID", DestinationColumnName = "Client ID"], [SourceColumnName = "Episode Status", DestinationColumnName = "Episode Status"], [SourceColumnName = "Assessment Date", DestinationColumnName = "Assessment Date"], [SourceColumnName = "Admission Date", DestinationColumnName = "Admission Date"], [SourceColumnName = "program_id1", DestinationColumnName = "program_id1"], [SourceColumnName = "Program ID", DestinationColumnName = "Program ID"], [SourceColumnName = "assessment_date", DestinationColumnName = "assessment_date"], [SourceColumnName = "Date Episode Updated", DestinationColumnName = "Date Episode Updated"], [SourceColumnName = "Date Episode Created", DestinationColumnName = "Date Episode Created"], [SourceColumnName = "Length of Stay", DestinationColumnName = "Length of Stay"], [SourceColumnName = "Discharge Date", DestinationColumnName = "Discharge Date"], [SourceColumnName = "discharge_date1", DestinationColumnName = "discharge_date1"], [SourceColumnName = "Discharge Outcome", DestinationColumnName = "Discharge Outcome"], [SourceColumnName = "Discharge Location", DestinationColumnName = "Discharge Location"], [SourceColumnName = "Date Auto Closed", DestinationColumnName = "Date Auto Closed"], [SourceColumnName = "Referral Date", DestinationColumnName = "Referral Date"], [SourceColumnName = "Referred By", DestinationColumnName = "Referred By"], [SourceColumnName = "Referred Source", DestinationColumnName = "Referred Source"], [SourceColumnName = "fep_first_contact", DestinationColumnName = "fep_first_contact"]}], DynamicSchema = false, UpdateMethod = [Kind = "Append"], TypeSettings = [Kind = "Table"]]]}]
-shared #"raw_credible_episodes-warehouse" = let
-  Source = Xml.Tables(Web.Contents("https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rMeUMv-ZFdO!IBc3hAanPCg__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=")),
-  Navigation = Source{1}[Table],
-  #"Expanded Table" = Table.ExpandTableColumn(Navigation, "Table", {"Name", "Table"}, {"Name.1", "Table.1"}),
-  #"Expanded Table.1" = Table.ExpandTableColumn(#"Expanded Table", "Table.1", {"Name", "Table"}, {"Name.2", "Table"}),
-  #"Expanded Table 2" = Table.ExpandTableColumn(#"Expanded Table.1", "Table", {"Name", "Table"}, {"Name.3", "Table.1"}),
-  #"Expanded Table.1 2" = Table.ExpandTableColumn(#"Expanded Table 2", "Table.1", {"episode_id", "client_id", "episode_status", "assessment_date1", "admission_date", "program_id1", "program_id", "assessment_date", "date_updated", "date_created", "length_of_stay", "urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata", "discharge_date", "discharge_date1", "discharge_outcome", "discharge_location", "date_closed_auto", "referral_date", "referred_by", "referred_source", "fep_first_contact"}, {"episode_id", "client_id", "episode_status", "assessment_date1", "admission_date", "program_id1", "program_id", "assessment_date", "date_updated", "date_created", "length_of_stay", "urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata", "discharge_date", "discharge_date1", "discharge_outcome", "discharge_location", "date_closed_auto", "referral_date", "referred_by", "referred_source", "fep_first_contact"}),
-  #"Removed columns" = Table.RemoveColumns(#"Expanded Table.1 2", {"Name", "Name.1", "Name.2", "Name.3"}),
-  #"Renamed columns" = Table.RenameColumns(#"Removed columns", {{"client_id", "Client ID"}, {"episode_status", "Episode Status"}, {"program_id", "Program ID"}, {"date_updated", "Date Episode Updated"}, {"date_created", "Date Episode Created"}}),
-  #"Extracted text range" = Table.TransformColumns(#"Renamed columns", {{"Date Episode Updated", each Text.Middle(Text.From(_), 0, 10), type text}}),
-  #"Extracted text range 1" = Table.TransformColumns(#"Extracted text range", {{"Date Episode Created", each Text.Middle(Text.From(_), 0, 10), type text}}),
-  #"Changed column type" = Table.TransformColumnTypes(#"Extracted text range 1", {{"Date Episode Updated", type date}, {"Date Episode Created", type date}}),
-  #"Renamed columns 1" = Table.RenameColumns(#"Changed column type", {{"length_of_stay", "Length of Stay"}}),
-  #"Removed columns 1" = Table.RemoveColumns(#"Renamed columns 1", {"urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata"}),
-  #"Renamed columns 2" = Table.RenameColumns(#"Removed columns 1", {{"discharge_outcome", "Discharge Outcome"}, {"discharge_date", "Discharge Date"}, {"discharge_location", "Discharge Location"}, {"date_closed_auto", "Date Auto Closed"}, {"referral_date", "Referral Date"}, {"referred_by", "Referred By"}, {"referred_source", "Referred Source"}, {"episode_id", "Episode ID"}, {"assessment_date1", "Assessment Date"}, {"admission_date", "Admission Date"}}),
-  #"Extracted text range 2" = Table.TransformColumns(#"Renamed columns 2", {{"Assessment Date", each Text.Middle(Text.From(_), 0, 10), type text}}),
-  #"Changed column type 1" = Table.TransformColumnTypes(#"Extracted text range 2", {{"Assessment Date", type date}}),
-  #"Extracted text range 3" = Table.TransformColumns(#"Changed column type 1", {{"Admission Date", each Text.Middle(Text.From(_), 0, 10), type text}}),
-  #"Changed column type 2" = Table.TransformColumnTypes(#"Extracted text range 3", {{"Admission Date", type date}}),
-  #"Extracted text range 4" = Table.TransformColumns(#"Changed column type 2", {{"Discharge Date", each Text.Middle(Text.From(_), 0, 10), type text}}),
-  #"Changed column type 3" = Table.TransformColumnTypes(#"Extracted text range 4", {{"Discharge Date", type date}}),
-  #"Transform columns" = Table.TransformColumnTypes(#"Changed column type 3", {{"Episode ID", type text}, {"Client ID", type text}, {"Episode Status", type text}, {"program_id1", type text}, {"Program ID", type text}, {"assessment_date", type text}, {"Length of Stay", type text}, {"discharge_date1", type text}, {"Discharge Outcome", type text}, {"Discharge Location", type text}, {"Date Auto Closed", type text}, {"Referral Date", type text}, {"Referred By", type text}, {"Referred Source", type text}}),
-  #"Replace errors" = Table.ReplaceErrorValues(#"Transform columns", {{"Episode ID", null}, {"Client ID", null}, {"Episode Status", null}, {"program_id1", null}, {"Program ID", null}, {"assessment_date", null}, {"Length of Stay", null}, {"discharge_date1", null}, {"Discharge Outcome", null}, {"Discharge Location", null}, {"Date Auto Closed", null}, {"Referral Date", null}, {"Referred By", null}, {"Referred Source", null}}),
-  #"Sorted rows" = Table.Sort(#"Replace errors", {{"fep_first_contact", Order.Descending}}),
-  #"Extracted text before delimiter" = Table.TransformColumns(#"Sorted rows", {{"fep_first_contact", each Text.BeforeDelimiter(Text.From(_), "T", 0), type text}}),
-  #"Changed column type 4" = Table.TransformColumnTypes(#"Extracted text before delimiter", {{"fep_first_contact", type date}}),
-  #"Extracted text before delimiter 1" = Table.TransformColumns(#"Changed column type 4", {{"Referral Date", each Text.BeforeDelimiter(_, "T", 0), type text}}),
-  #"Changed column type 5" = Table.TransformColumnTypes(#"Extracted text before delimiter 1", {{"Referral Date", type date}}),
-  #"Replaced value" = Table.ReplaceValue(#"Changed column type 5", "14", "Epicenter", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 1" = Table.ReplaceValue(#"Replaced value", "16", "CHRP", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 2" = Table.ReplaceValue(#"Replaced value 1", "6", "Adult Bundle", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 3" = Table.ReplaceValue(#"Replaced value 2", "13", "6401", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 4" = Table.ReplaceValue(#"Replaced value 3", "10", "Supervision", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 5" = Table.ReplaceValue(#"Replaced value 4", "15", "IBHH", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 6" = Table.ReplaceValue(#"Replaced value 5", "12", "6021", Replacer.ReplaceValue, {"Program ID"}),
-  #"Replaced value 7" = Table.ReplaceValue(#"Replaced value 6", "9", "6024", Replacer.ReplaceValue, {"Program ID"}),
-  #"Filtered rows" = Table.SelectRows(#"Replaced value 7", each ([Program ID] <> "17"))
-in
-  #"Filtered rows";
-shared #"raw_credible_episodes-warehouse_DataDestination" = let
-  Pattern = Fabric.Warehouse([HierarchicalNavigation = null, CreateNavigationProperties = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[warehouseId = "e4d2de35-5f5d-457f-8e5b-43f758299057"]}[Data],
-  TableNavigation = Navigation_2{[Item = "raw_credible_episodes", Schema = "dbo"]}?[Data]?
-in
-  TableNavigation;
+  #"Sorted rows";
+shared DefaultDestination = Fabric.Warehouse([CreateNavigationProperties = false]){[workspaceId = WorkspaceId]}[Data]{[warehouseId = "bd5204a3-3830-4fef-9c81-e233ba283b8e"]}[Data];
+
 shared raw_credible_episodes_DataDestination = let
   Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a"]}[Data],
+  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
   TableNavigation = Navigation_2{[Id = "raw_credible_episodes", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;

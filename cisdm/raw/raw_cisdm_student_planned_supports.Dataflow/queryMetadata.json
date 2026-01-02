@@ -1,0 +1,27 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_cisdm_student_planned_supports",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "planned_supports": {
+      "queryId": "8a18266d-e360-4faa-9b0a-310b7742ebd1",
+      "queryName": "planned_supports",
+      "loadEnabled": false
+    },
+    "planned_supports_DataDestination": {
+      "queryId": "8b8c2756-99ce-4f8c-aa14-dd078c003111",
+      "queryName": "planned_supports_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

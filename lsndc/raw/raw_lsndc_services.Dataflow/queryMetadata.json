@@ -1,0 +1,71 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_sp_services",
+  "queryGroups": [
+    {
+      "id": "4e031892-5e19-4277-b4cd-b8779ba09e13",
+      "name": "Transform file from lsndc_services"
+    },
+    {
+      "id": "f89fc3ec-2798-48c4-ac15-87e7974a71d3",
+      "name": "Helper queries",
+      "parentId": "4e031892-5e19-4277-b4cd-b8779ba09e13"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "lsndc_services": {
+      "queryId": "a31ae228-9750-49ac-9e64-a97dbf91435b",
+      "queryName": "lsndc_services",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "1f90f63b-f7f9-44e1-a781-588434bfbcac",
+      "queryName": "Sample file",
+      "queryGroupId": "f89fc3ec-2798-48c4-ac15-87e7974a71d3",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "e2c0960e-7a38-4816-9371-85a4488d402e",
+      "queryName": "Parameter",
+      "queryGroupId": "f89fc3ec-2798-48c4-ac15-87e7974a71d3",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "f843334a-d3aa-4f5a-83b4-2a1851e20957",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "4e031892-5e19-4277-b4cd-b8779ba09e13",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "436500a1-35ab-44bb-8e91-ff623ab193ee",
+      "queryName": "Transform file",
+      "queryGroupId": "f89fc3ec-2798-48c4-ac15-87e7974a71d3",
+      "loadEnabled": false
+    },
+    "lsndc_services_DataDestination": {
+      "queryId": "4ebd1194-7ef1-4dbc-b24d-d4b609d72caa",
+      "queryName": "lsndc_services_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://voanorthlaorg-my.sharepoint.com/personal/russell_irby_voanorthla_org/",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"6d4485f6-b0ce-4b75-bf52-daf02e08cf44\"}"
+    },
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"678f10d1-b794-4318-8152-4c973a8dc9fa\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

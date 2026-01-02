@@ -1,0 +1,472 @@
+relationship ba7ad4c0-464a-4038-bd35-df33c69f3009
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Billing'.'Signature Date'
+	toColumn: LocalDateTable_86a44453-2436-419e-95ff-1cbac7226070.Date
+
+relationship 870d28a7-72f9-439d-946e-7da784c1ab47
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Billing'.'Approval Date'
+	toColumn: LocalDateTable_18025442-63cf-4b7c-abd7-2f87061d0429.Date
+
+relationship c738cf59-8d15-404d-9e0d-4bc870099bde
+	fromColumn: 'API - Billing'.'Employee ID'
+	toColumn: 'API - Employees'.'Employee ID'
+
+relationship 17382067-9756-4b93-93fa-d9b91ed2e22c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.Date
+	toColumn: LocalDateTable_2d536e35-8448-41fb-9464-59f4f0144da5.Date
+
+relationship 055aa313-75d6-4be2-a105-40d20862455c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'Fiscal Hierarchy'
+	toColumn: LocalDateTable_19f042c9-56db-4130-ab2c-6f9e37b75881.Date
+
+relationship 9827de02-d18d-479a-80ce-2d51a399473c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'pay start date'
+	toColumn: LocalDateTable_09c02d24-bb55-4fcf-8d06-06028eb24b46.Date
+
+relationship 47db1b53-b75f-4878-b509-0fb484adc4b9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'start text'
+	toColumn: LocalDateTable_a592159d-f49a-4af3-aeea-e29e7b8f38fa.Date
+
+relationship 606c30b6-77df-4cde-a7eb-f6966d578587
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'end text'
+	toColumn: LocalDateTable_fe56dada-9e37-4f14-ac3d-bcaf2f6f6c8b.Date
+
+relationship bba037b1-9e3f-4333-b878-da72ec15bd4d
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Period.Index
+	toColumn: Date.Index
+
+relationship de2d9865-e9ba-4b83-b57c-59e5e1d03a8a
+	fromColumn: 'API - Billing'.'Service Date'
+	toColumn: Date.Date
+
+relationship 970f9dc9-2db3-4733-aaaa-8c375c9f85b2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'Cal Month'
+	toColumn: LocalDateTable_447bf720-1e2a-42b3-acbf-cc6df1c641ce.Date
+
+relationship cc0c42cf-4aa7-457c-bcce-30f1b48f0733
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Clients (Updated)'.'Client Status Date'
+	toColumn: LocalDateTable_53faf00d-04bd-4d2a-a5e5-77c8f365f7b6.Date
+
+relationship 5b323467-172d-4133-8288-8ce160ac2218
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Clients (Updated)'.'Date Created'
+	toColumn: LocalDateTable_eca4a2c7-d2fb-4024-bc7b-5f6ff535f698.Date
+
+relationship c4a777c8-b647-41c5-abc2-d4fb97d5f0ee
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Clients (Updated)'.'Date Updated'
+	toColumn: LocalDateTable_7a7675e9-fad5-4e72-8712-e3420c6bb630.Date
+
+relationship 37da72f5-df14-436c-a9f4-e0ef372f9ae8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Clients (Updated)'.DOB
+	toColumn: LocalDateTable_f76f6354-f76d-4634-b84f-9ff40cf9d314.Date
+
+relationship e0052761-6ce2-49ba-98ad-8c3254609046
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Clients (Updated)'.'Admission Date'
+	toColumn: LocalDateTable_e369ced4-e94b-4c33-bbe8-9283e620fbfe.Date
+
+relationship 9e04cf85-2c2e-4612-a3db-9cd530ad6b56
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Clients (Updated)'.'Date Diagnosis Updated'
+	toColumn: LocalDateTable_1cc3c757-caac-4edd-9710-7776718f11d4.Date
+
+relationship b78e1a09-777e-4feb-adb8-3b725f58b503
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Clients (Updated)'.'Discharge Date'
+	toColumn: LocalDateTable_17694ffb-4f8b-483c-895b-1121bb304dd6.Date
+
+relationship 6ba41319-215c-4770-b8cd-f5b2d6ee8304
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'API - Billing'.'Client ID'
+	toColumn: 'API - Clients (Updated)'.'Client ID'
+
+relationship 75a009a3-47e2-428c-bb84-c1827d650d33
+	fromColumn: 'API - Employees'.'Program ID'
+	toColumn: 'API - Programs'.'Program ID'
+
+relationship 2ce78745-e82b-4669-91df-b7d697b66219
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Refresh Date/Time'.'Last Refresh'
+	toColumn: LocalDateTable_62cdafe7-7c6b-4b86-8fb0-222e9682da7d.Date
+
+relationship 37e399d3-26fb-4f86-a39f-37920ac658bb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Refresh Date/Time'.Date
+	toColumn: LocalDateTable_ab74330e-e0aa-46cc-846d-29bac2674606.Date
+
+relationship dec6397f-7e69-46e0-8db7-15a193307889
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Episodes'.'Assessment Date'
+	toColumn: LocalDateTable_cae19707-4293-4cf5-a37a-fa06b10aa9a3.Date
+
+relationship ca30c23d-a272-4b0d-b537-f9766757e40c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Episodes'.'Admission Date'
+	toColumn: LocalDateTable_240cb31d-5974-4e63-9d3e-3d0d4c7ca761.Date
+
+relationship e8da491e-d338-450a-a861-d10af72c5e41
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Episodes'.'Date Episode Updated'
+	toColumn: LocalDateTable_e5dda634-a016-42d5-af3c-b9fda3543dc8.Date
+
+relationship eb9248d0-f098-4da6-98a9-b0ef1f9a412c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Episodes'.'Date Episode Created'
+	toColumn: LocalDateTable_a2d8d4a7-bfc8-4b14-afbf-9a5c2006ff1a.Date
+
+relationship 810f9808-f7e0-4301-92a9-3014baadbf00
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Episodes'.'Discharge Date'
+	toColumn: LocalDateTable_90cf9dec-3bc0-4bc5-95fb-f0825808cdee.Date
+
+relationship 7b561e93-5687-4ed9-8947-1d4630bba2bb
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'API - Episodes'.'Client ID'
+	toColumn: 'API - Clients (Updated)'.'Client ID'
+
+relationship b69543bd-e100-4673-907e-6335881b4830
+	fromColumn: 'API - Employee Caseload'.'Client ID'
+	toColumn: 'API - Clients (Updated)'.'Client ID'
+
+relationship b229005c-5603-4b8a-98e2-f6e162df3829
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'API - Employee Caseload'.'Employee ID'
+	toColumn: 'API - Employees'.'Employee ID'
+
+relationship 5ea8419e-b36b-44fa-8a4b-360f4c087f9e
+	fromColumn: 'API - Client Insurance ID'.'Client ID'
+	toColumn: 'API - Clients (Updated)'.'Client ID'
+
+relationship 0b3b06ae-3637-4111-8980-e88afd71530f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Billing'.timein
+	toColumn: LocalDateTable_ab95b38f-69f2-447f-881b-41efb4600063.Date
+
+relationship 928d46cf-7f90-4f13-975c-71a30e76339b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Billing'.'timeout - Copy - Copy'
+	toColumn: LocalDateTable_5d06736c-436c-44e8-80bb-488cd30eb2ac.Date
+
+relationship 8358de95-e7a9-4ba9-871a-e31157b1c334
+	fromColumn: '6021 Clinician Specific Goals'.'Employee ID'
+	toColumn: 'API - Employees'.'Employee ID'
+
+relationship 613562ca-908d-4a95-a238-b5ba92028e05
+	fromColumn: '6021 Clinician Specific Goals'.'Cal Month'
+	toColumn: Date.Date
+
+relationship c8e1656d-01a3-4da3-bc38-9a5cc0fac231
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Claims'.'Date Batched'
+	toColumn: LocalDateTable_add8af26-fec7-48cd-aaf7-99217bfd2178.Date
+
+relationship e1fa1292-b9a4-4e88-a7ff-998ff5c3d4df
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Claims'.'EOB Date'
+	toColumn: LocalDateTable_2806fbdf-3d55-4c8f-8229-46a58d729f33.Date
+
+relationship 8529d16c-eafc-4aa3-baf1-d7cc957f2f22
+	isActive: false
+	fromColumn: 'API - Claims'.'Payer ID'
+	toColumn: 'API - Ins Data'.'Payer ID'
+
+relationship 5f940d0c-eac8-4349-ac02-2cd6bacbc923
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'API - Claims'.clientvisit_id
+	toColumn: 'API - Billing'.'Service ID'
+
+relationship b001cade-3d3f-40f8-a8ae-0b8d4b6dbd53
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Billing'.'Signature Date/Time'
+	toColumn: LocalDateTable_b4a7c0d4-be4a-4273-9707-a5d64870c9b3.Date
+
+relationship 64ebaa63-ed42-405e-8bed-4c100b044328
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Billing'.'Timeout Date/Time'
+	toColumn: LocalDateTable_d4d7b997-747f-49d4-8150-856b7ef9ad59.Date
+
+relationship 9b3f74f0-44f2-4f48-8719-2aa9070548fb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Clients (Updated)'.last_svc_date
+	toColumn: LocalDateTable_828952b5-95d1-45ff-806f-fbfbe919d1f6.Date
+
+relationship dc1d3d87-10fc-4cc1-81e4-7a2a600599da
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Episodes'.fep_first_contact
+	toColumn: LocalDateTable_a2161b4b-fcce-4ff1-936b-00cd1e8b652c.Date
+
+relationship a9ccef4e-5ee4-402f-8c7c-8f74b9066897
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Episodes'.'Referral Date'
+	toColumn: LocalDateTable_5b4f0f76-e593-4060-82f3-a9ca9d929942.Date
+
+relationship c1a40297-7fe9-418a-ab12-ef18e1e078e2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Clients (Updated)'.'Profile Auth End Date'
+	toColumn: LocalDateTable_6d1bbfb2-b196-4514-b93e-ae1fa46ab35a.Date
+
+relationship b7eb3d86-0f8e-286a-826d-3661ecb6de63
+	isActive: false
+	fromColumn: 'API - Episodes'.'Program ID'
+	toColumn: 'API - Programs'.'Program ID'
+
+relationship af258431-902e-4bf8-a129-cb4bf1c13984
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'New Paycor Format'.timein
+	toColumn: LocalDateTable_06194af7-283f-4a61-99ed-f5d63a2ef60e.Date
+
+relationship f3b0f5e8-7929-430b-ba4c-4c4b2072da6b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'New Paycor Format'.timeout
+	toColumn: LocalDateTable_c83aa62c-58f5-420b-b639-092879ee977c.Date
+
+relationship 34d45b8b-3979-2adc-88b7-f170a1bd8d58
+	fromColumn: 'New Paycor Format'.'API - Employees.Employee ID'
+	toColumn: 'API - Employees'.'Employee ID'
+
+relationship 574b8496-325b-53a4-9e72-6f52736ef06b
+	fromColumn: 'New Paycor Format'.Date
+	toColumn: Date.Date
+
+relationship 343d794f-cf29-113e-74da-4b3becb1621f
+	fromColumn: 'API - Clients (Updated)'.race_omb
+	toColumn: 'API - Lookup Dict'.'Lookup ID'
+
+relationship a959d024-a208-412c-b9dd-043cdddf1abc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Clients (Updated)'.Today
+	toColumn: LocalDateTable_c314844c-6a39-4d06-b05c-51b81706b649.Date
+
+relationship 3b44921e-0134-a24d-1856-468e4b9c9ec2
+	fromColumn: '2018 - 2020 SP BH Services'.'Service Start Date'
+	toColumn: Date.Date
+
+relationship AutoDetected_46a10a8f-7613-44e6-899c-cd1e615cc46a
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'API - Visit Ins'.'Service ID'
+	toColumn: 'API - Billing'.'Service ID'
+
+relationship AutoDetected_78ab96b6-456c-4a86-aa45-658c1467db09
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'API - Visit Ins'.'Payer ID'
+	toColumn: 'API - Ins Data'.'Payer ID'
+
+relationship AutoDetected_7fb44da3-3b5b-4faa-8b73-85b286f03b39
+	isActive: false
+	fromColumn: 'API - IBHH Service Summary'.client_id
+	toColumn: 'API - Clients (Updated)'.'Client ID'
+
+relationship AutoDetected_008f6408-bf6b-40b5-a48a-2a395f62b3f7
+	isActive: false
+	fromColumn: 'API - IBHH Service Summary'.program_id
+	toColumn: 'API - Programs'.'Program ID'
+
+relationship 48322af7-7acc-f1cd-a6dd-db26537cba75
+	isActive: false
+	fromColumn: 'API - IBHH Service Summary'.rev_timein
+	toColumn: Date.Date
+
+relationship AutoDetected_add3bde6-db60-45c3-8073-4d021e556756
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'API - IBHH Service Summary'.'Service ID'
+	toColumn: 'API - Billing'.'Service ID'
+
+relationship cd812b75-fe86-4551-9809-309f5913e132
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'MAX Assess Date'.'Last Assess'
+	toColumn: LocalDateTable_7b67db6d-6987-4d0d-bc4a-972d7337ff33.Date
+
+relationship AutoDetected_0feee258-c91b-42ee-9a3a-bdb9d285d242
+	fromColumn: 'MAX Assess Date'.'Client ID'
+	toColumn: 'API - Clients (Updated)'.'Client ID'
+
+relationship 8e19d804-8b2d-4396-bc0b-6d517b1e1af9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'MAX Assess Date'.'Custom.1'
+	toColumn: LocalDateTable_98cec5fc-4ca3-4ef5-bb96-e4f2247cbf68.Date
+
+relationship 876e8984-054b-44f0-9621-adb226d5462f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assess and Ref Appended'.'Last Assess'
+	toColumn: LocalDateTable_04bdee20-f29a-4f76-8aed-8dc219438a86.Date
+
+relationship 2b5df747-200a-4512-8366-26944ff7afd6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assess and Ref Appended'.'Profile Auth End Date'
+	toColumn: LocalDateTable_5acd2cdc-7407-423e-b797-624bc5f41599.Date
+
+relationship 0cfd1faf-ece9-4930-923e-6d0d1e15ad80
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assess and Ref Appended'.Today
+	toColumn: LocalDateTable_c89f53ed-0714-46bb-a756-4990d84e30a1.Date
+
+relationship 9fbffd75-d349-42bd-abb1-9d07b93accc8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assessor Needed'.'Last Assess'
+	toColumn: LocalDateTable_c9c1407f-cb3b-4fa3-8308-9d22ac0ef54e.Date
+
+relationship 1804635c-70e2-4c5b-9602-839e791bd7ec
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assessor Needed'.'Profile Auth End Date'
+	toColumn: LocalDateTable_0183bd54-6526-4564-ae0a-2de1af3364ba.Date
+
+relationship 3cbf4204-b063-43e3-8ea0-e79ce3a41186
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assessor Needed'.Today
+	toColumn: LocalDateTable_36f049fd-8545-4cf4-b334-96f08a1f2728.Date
+
+relationship 7588cf7f-6d5b-44e8-be86-dd321fb039cf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Auths Due'.'Last Assess'
+	toColumn: LocalDateTable_dd67c1a2-c3af-490a-990d-375da3450143.Date
+
+relationship 1db38bd1-5981-4150-a88b-2a848fe817c8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Auths Due'.'Profile Auth End Date'
+	toColumn: LocalDateTable_1b1806d3-f6b2-40aa-99ba-8587e7658a77.Date
+
+relationship 7cc2d2d6-03f5-405e-be10-be1af2ad0f36
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Auths Due'.Today
+	toColumn: LocalDateTable_e4bb9b05-b56d-45cd-b1e5-b73e9cac9f34.Date
+
+relationship 97bc465d-1980-438e-afbd-ee6e0853edea
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Pending Completion'.'Last Assess'
+	toColumn: LocalDateTable_250aa813-2f97-4887-bb29-efb13e97fdde.Date
+
+relationship 8564a865-f470-4f94-9a5c-5b094b5c506f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Pending Completion'.'Profile Auth End Date'
+	toColumn: LocalDateTable_24ebe6b7-234f-4534-98a0-5d619ee6d47c.Date
+
+relationship f9e4af5f-a8a1-49db-824b-05318b47299d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Pending Completion'.Today
+	toColumn: LocalDateTable_4cf13359-9f77-4d79-a7a5-a25f51d2beee.Date
+
+relationship AutoDetected_2884bcd4-c6cb-4fd2-9516-91a40de9f1ce
+	fromColumn: 'Assess and Ref Appended'.'Client ID'
+	toColumn: 'API - Clients (Updated)'.'Client ID'
+
+relationship AutoDetected_f7284b4e-4efc-4b6d-8cbc-10b87ad97302
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Auths Due'.'Client ID'
+	toColumn: 'API - Clients (Updated)'.'Client ID'
+
+relationship fcd872c9-ce83-411a-b2d5-479c5e523891
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assess and Ref Appended (2)'.DateClientEnteredProgram(i
+	toColumn: LocalDateTable_579f783a-7cc5-4944-9736-6c7ff72bc4a5.Date
+
+relationship 583fd53e-fcd5-4a32-bec8-bba983025443
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assess and Ref Appended (2)'.ReferralDate
+	toColumn: LocalDateTable_a6b5cf85-c207-46de-a9b0-ff44d13e69e3.Date
+
+relationship 0523ef6d-5fae-477c-90ac-04d0bdd35fcf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assess and Ref Appended (2)'.Today
+	toColumn: LocalDateTable_af236330-8467-4a13-b059-12db3937c847.Date
+
+relationship 778e4ec0-10bc-42dc-98a1-8ebff7c8c96f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assess and Ref Appended (2)'.'Last Assess'
+	toColumn: LocalDateTable_0bd80961-ae41-427b-b9fa-cef479662dc1.Date
+
+relationship 6233aa14-e2f9-433e-b699-db49611cbc41
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assess and Ref Appended (2)'.'Profile Auth End Date'
+	toColumn: LocalDateTable_d2094439-426a-463f-90a2-6b1840da67c4.Date
+
+relationship AutoDetected_61e935cd-e58b-4463-af62-5dd70c25161e
+	fromColumn: 'Assess and Ref Appended (2)'.'Client ID'
+	toColumn: 'API - Clients (Updated)'.'Client ID'
+
+relationship AutoDetected_95fb1edb-2057-445e-b47b-69577374628e
+	fromColumn: 'Assess and Ref Appended (2)'.Program
+	toColumn: 'API - Programs'.'Program ID'
+
+relationship a6f447da-c42c-4f4f-9021-5a0e35313a62
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'Start of Month'
+	toColumn: LocalDateTable_ba0dfc72-68f5-49a1-b1b4-667d31fe9e3a.Date
+
+relationship 86ecfc97-1bcc-44f5-a4d8-ee2f9f48e73f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assess and Ref Appended'.DateClientEnteredProgram(i
+	toColumn: LocalDateTable_03a841c9-5b1e-427f-882b-7596ec90d1d2.Date
+
+relationship 73322a06-633f-4835-ab92-89bf8bd5fab7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assess and Ref Appended'.ReferralDate
+	toColumn: LocalDateTable_04ccbbcf-802d-4087-aa99-0658cce1d4a1.Date
+
+relationship 090c9c4e-ee94-489e-b7c4-c285f995d16f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assessor Needed'.DateClientEnteredProgram(i
+	toColumn: LocalDateTable_b82fa7f0-bcfa-49de-8a96-38acd77fe6ba.Date
+
+relationship f8fc7224-6cec-4690-aeeb-ff088b7f4fe8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Assessor Needed'.ReferralDate
+	toColumn: LocalDateTable_176c0125-225f-434b-ba3a-6328091651ef.Date
+
+relationship e058bcef-9afe-4ca1-8f62-61238073391c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Auths Due'.DateClientEnteredProgram(i
+	toColumn: LocalDateTable_7e127cb8-bc90-4cde-8c37-c50561fa2e03.Date
+
+relationship b8e3f120-cfdc-4d56-92e0-d17d6c66cff2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Auths Due'.ReferralDate
+	toColumn: LocalDateTable_02986383-ef0c-4fbb-bb43-9c23d5253d02.Date
+
+relationship 02921078-99db-46ea-ac00-af8d63cd25a8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Pending Completion'.DateClientEnteredProgram(i
+	toColumn: LocalDateTable_0f515855-9b67-46fd-8328-707bf6081840.Date
+
+relationship 07c081df-6c37-4bac-8f97-beb8efb7f6a5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Pending Completion'.ReferralDate
+	toColumn: LocalDateTable_8635802f-07ac-4a0c-a875-9fd72aa7416e.Date
+
+relationship 2a53b40b-8552-4013-bca5-8760becbed1e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Employees'.Custom
+	toColumn: LocalDateTable_cac8b401-38e4-4b23-8ca4-5e522daf8609.Date
+
+relationship 6f9ff73c-c88c-4833-88e5-b8fb2737920d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Employees'.license_expire
+	toColumn: LocalDateTable_07bb3da8-af2e-4e7b-bfcd-1638c7c1f088.Date
+
+relationship e2a0d16f-4791-4a5d-8780-74d3735211fb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Employees'.dob
+	toColumn: LocalDateTable_983b2fc7-a779-41d6-a1ef-f3d71746a6a2.Date
+
+relationship 3a6f8e4a-72c1-25e6-13de-2113dda7518c
+	fromColumn: division-bundle-counter.Month
+	toColumn: Date.Date
+
+relationship 082512ba-a485-4ce6-8bd6-8d3f41d8342a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'API - Episodes'.'Date Auto Closed'
+	toColumn: LocalDateTable_865954e6-f9ee-4572-a19e-9b677d0240a2.Date
+

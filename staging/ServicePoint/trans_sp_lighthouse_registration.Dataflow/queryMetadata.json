@@ -1,0 +1,57 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "trans_sp_lighthouse_registration",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_lighthouse_registration": {
+      "queryId": "8a4d2835-cb51-4bfb-80d0-49c274243091",
+      "queryName": "raw_lighthouse_registration"
+    },
+    "sp_entry_table": {
+      "queryId": "f4208c60-a7dc-4a16-a206-8d91c39b642b",
+      "queryName": "sp_entry_table"
+    },
+    "SP Clients": {
+      "queryId": "de84549e-8715-418b-9018-428d1677e070",
+      "queryName": "SP Clients"
+    },
+    "clients": {
+      "queryId": "820322e4-2147-4721-976c-b44f3a4f2671",
+      "queryName": "clients"
+    },
+    "silver caddo_census": {
+      "queryId": "442e2b18-2c97-4a73-9862-25e8b379c860",
+      "queryName": "silver caddo_census"
+    },
+    "sp_entry_table_DataDestination": {
+      "queryId": "7edc7bb3-4bf9-487d-b0dd-3de89586bce1",
+      "queryName": "sp_entry_table_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "sp_entry_table (2)": {
+      "queryId": "163fcf3b-4513-4a52-85d2-98e586b017ba",
+      "queryName": "sp_entry_table (2)"
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"678f10d1-b794-4318-8152-4c973a8dc9fa\"}"
+    },
+    {
+      "path": "nzrmcoc5w6tebmq3bkxbdeohga-pptkz72kh6xe7ddoxtqo5fhs64.datamart.fabric.microsoft.com",
+      "kind": "PowerBIDatamarts",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"caa28efc-adf2-48f6-961b-1aee371499d6\"}"
+    },
+    {
+      "path": "https://voanorthlaorg-my.sharepoint.com/personal/russell_irby_voanorthla_org/",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"69e67e54-371d-40bd-bc4d-69b7888c8230\"}"
+    }
+  ],
+  "fastCombine": true
+}

@@ -1,0 +1,169 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "cisdm_progress_monitoring_trans",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_cisdm_progress_monitoring": {
+      "queryId": "0683fc5e-c6d4-4249-9d3a-336f02043d94",
+      "queryName": "raw_cisdm_progress_monitoring"
+    },
+    "cis_prog_count_bySchool": {
+      "queryId": "b350d1fc-8bcb-48c5-acfc-b6d2fe9354bc",
+      "queryName": "cis_prog_count_bySchool"
+    },
+    "cis_positive_progress": {
+      "queryId": "2ebcb65f-43c5-477a-8e9f-f8076c65fbe5",
+      "queryName": "cis_positive_progress"
+    },
+    "positive_prog_withRaw_%": {
+      "queryId": "532ed448-cfba-469c-8541-df63be5658bc",
+      "queryName": "positive_prog_withRaw_%",
+      "loadEnabled": false
+    },
+    "cis_attendance": {
+      "queryId": "ae05b50e-dd39-42d3-8071-0bde207a79bc",
+      "queryName": "cis_attendance"
+    },
+    "cis_attendance_count": {
+      "queryId": "d77b3348-ce6f-401d-a6fe-7a073963ca27",
+      "queryName": "cis_attendance_count"
+    },
+    "cis_attendance_positie_count": {
+      "queryId": "8a80490a-cb39-4d81-a787-37dcd5afb8f6",
+      "queryName": "cis_attendance_positie_count"
+    },
+    "attendance_pos_wRaw_%": {
+      "queryId": "675b3b02-8bb0-4735-99b8-3b75e4fbf842",
+      "queryName": "attendance_pos_wRaw_%",
+      "loadEnabled": false
+    },
+    "cis_behavior": {
+      "queryId": "3af79961-b977-47e4-bc78-3eba5bda4c52",
+      "queryName": "cis_behavior"
+    },
+    "cis_behavior_positive_count": {
+      "queryId": "4236112e-251d-4cab-b6d4-bbe3fe1cc05a",
+      "queryName": "cis_behavior_positive_count",
+      "loadEnabled": false
+    },
+    "cis_academics": {
+      "queryId": "1cce844d-6bdb-4998-bf54-3ef232773756",
+      "queryName": "cis_academics"
+    },
+    "cis_academics_positive_count": {
+      "queryId": "e2f87db0-6136-45fb-9b29-23c047dadcf6",
+      "queryName": "cis_academics_positive_count",
+      "loadEnabled": false
+    },
+    "positive_prog_withRaw_%_DataDestination": {
+      "queryId": "76d109b4-b4a9-410e-a005-9fba86366131",
+      "queryName": "positive_prog_withRaw_%_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "attendance_pos_wRaw_%_DataDestination": {
+      "queryId": "64a09769-04d4-42ff-92e4-a02a565c0fd3",
+      "queryName": "attendance_pos_wRaw_%_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_behavior_positive_count_DataDestination": {
+      "queryId": "3e60b15f-d551-4535-bfac-ce53d57fc65e",
+      "queryName": "cis_behavior_positive_count_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_academics_positive_count_DataDestination": {
+      "queryId": "f701162e-3bb8-4182-b76d-49ce5d8a2933",
+      "queryName": "cis_academics_positive_count_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_org_all_goals_count": {
+      "queryId": "7ca32edb-4c0e-4a7c-afd9-1ad578ca4908",
+      "queryName": "cis_org_all_goals_count",
+      "loadEnabled": false
+    },
+    "cis_org_attendance_count": {
+      "queryId": "1a8a0dcd-b426-42fa-8f37-72865b4b24eb",
+      "queryName": "cis_org_attendance_count",
+      "loadEnabled": false
+    },
+    "cis_org_behavior_count": {
+      "queryId": "9535ca07-5202-4d1f-9e5f-84fb3aac337e",
+      "queryName": "cis_org_behavior_count",
+      "loadEnabled": false
+    },
+    "cis_org_academics_count": {
+      "queryId": "4c408931-d3c1-41be-ad8f-92159957c03b",
+      "queryName": "cis_org_academics_count",
+      "loadEnabled": false
+    },
+    "cis_org_attendance_count_DataDestination": {
+      "queryId": "6a9d73b5-8f86-435e-bc1a-8df765250717",
+      "queryName": "cis_org_attendance_count_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_org_behavior_count_DataDestination": {
+      "queryId": "f9e0ed7b-577d-43a0-b34b-2008c70b6abd",
+      "queryName": "cis_org_behavior_count_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_org_academics_count_DataDestination": {
+      "queryId": "e5eb2729-7f58-4db1-8d65-7d0ee2e9bfb0",
+      "queryName": "cis_org_academics_count_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_academics_goal_clients": {
+      "queryId": "b762e6cb-2d2f-4576-a8ef-0c6b78ccb16d",
+      "queryName": "cis_academics_goal_clients",
+      "loadEnabled": false
+    },
+    "cis_attendance_goal_clients": {
+      "queryId": "6147b15b-e71d-4c0d-929d-b1e5f6a9f3e7",
+      "queryName": "cis_attendance_goal_clients",
+      "loadEnabled": false
+    },
+    "cis_behavior_goal_clients": {
+      "queryId": "5dec186a-315f-489a-b3db-14ca17f3227f",
+      "queryName": "cis_behavior_goal_clients",
+      "loadEnabled": false
+    },
+    "cis_behavior_goal_clients_DataDestination": {
+      "queryId": "4cb320ce-e437-416f-bc67-6f698862851d",
+      "queryName": "cis_behavior_goal_clients_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_attendance_goal_clients_DataDestination": {
+      "queryId": "799da14b-aa0e-487a-a30f-9766f491fcf4",
+      "queryName": "cis_attendance_goal_clients_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_academics_goal_clients_DataDestination": {
+      "queryId": "08e580dc-ba0c-48f8-a4ea-9def851adbfa",
+      "queryName": "cis_academics_goal_clients_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_org_all_goals_count_DataDestination": {
+      "queryId": "46ae8b1e-c337-46ad-b85f-d9f1c854e8db",
+      "queryName": "cis_org_all_goals_count_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

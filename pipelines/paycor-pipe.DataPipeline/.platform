@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "paycor-pipe",
+    "description": ""
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4c83ad9b-aa43-ad5a-441b-d8af64f3cad1"
+  }
+}

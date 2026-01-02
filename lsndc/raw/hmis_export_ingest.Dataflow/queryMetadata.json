@@ -1,0 +1,762 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "hmis_export_ingest",
+  "queryGroups": [
+    {
+      "id": "3ad3723e-0247-4f00-9941-54ab57868b6a",
+      "name": "Transform file from Affiliation"
+    },
+    {
+      "id": "2003f2a1-9042-4560-a143-88240da2e8a4",
+      "name": "Helper queries",
+      "parentId": "3ad3723e-0247-4f00-9941-54ab57868b6a"
+    },
+    {
+      "id": "f7abb0cb-276d-4a6c-b945-780f6052f1cd",
+      "name": "Transform file from Client",
+      "order": 1
+    },
+    {
+      "id": "da96d866-0c44-4225-8d1d-eb65bc055d40",
+      "name": "Helper queries (2)",
+      "parentId": "f7abb0cb-276d-4a6c-b945-780f6052f1cd"
+    },
+    {
+      "id": "530232f8-797e-4d84-97bc-51670bf71c7f",
+      "name": "Transform file from Enrollment",
+      "order": 2
+    },
+    {
+      "id": "a370f823-799d-47bd-b767-1ee2c8cebafa",
+      "name": "Helper queries (3)",
+      "parentId": "530232f8-797e-4d84-97bc-51670bf71c7f"
+    },
+    {
+      "id": "fd0da74e-cb57-40ce-af05-be224db43d0f",
+      "name": "Transform file from Assessment",
+      "order": 3
+    },
+    {
+      "id": "e1721185-4a5e-46f4-b485-473d6c2c576c",
+      "name": "Helper queries (4)",
+      "parentId": "fd0da74e-cb57-40ce-af05-be224db43d0f"
+    },
+    {
+      "id": "754b6769-90d1-4a0f-b365-79fb90374770",
+      "name": "Transform file from AssessmentQuestions",
+      "order": 4
+    },
+    {
+      "id": "05c92d84-f34d-47ee-94f8-6e91c552e7df",
+      "name": "Helper queries (5)",
+      "parentId": "754b6769-90d1-4a0f-b365-79fb90374770"
+    },
+    {
+      "id": "15050370-eef8-42a4-9a50-47c72cc33f7e",
+      "name": "Transform file from AssessmentResults",
+      "order": 5
+    },
+    {
+      "id": "12fa62c7-5a97-44cf-bf83-38fb88bb7562",
+      "name": "Helper queries (6)",
+      "parentId": "15050370-eef8-42a4-9a50-47c72cc33f7e"
+    },
+    {
+      "id": "d94346d5-cabc-4fa5-9715-e318c7eed5c5",
+      "name": "Transform file from CEParticipation",
+      "order": 6
+    },
+    {
+      "id": "96c623ae-7c60-4cb3-acf1-0bd61a4c0837",
+      "name": "Helper queries (7)",
+      "parentId": "d94346d5-cabc-4fa5-9715-e318c7eed5c5"
+    },
+    {
+      "id": "beb1f8d3-f47d-41c6-ac0b-ef2a2520c973",
+      "name": "Transform file from Services",
+      "order": 7
+    },
+    {
+      "id": "f473c071-bc2f-4b33-92f2-19c6c7db7a64",
+      "name": "Helper queries (8)",
+      "parentId": "beb1f8d3-f47d-41c6-ac0b-ef2a2520c973"
+    },
+    {
+      "id": "548e9a05-c477-4940-aa3d-c30969b4333d",
+      "name": "Transform file from User",
+      "order": 8
+    },
+    {
+      "id": "ea2320b2-dab2-4db8-8622-2838d7fab682",
+      "name": "Helper queries (9)",
+      "parentId": "548e9a05-c477-4940-aa3d-c30969b4333d"
+    },
+    {
+      "id": "347d5cfa-e372-4082-820d-8181b0919a49",
+      "name": "Transform file from YouthEducationStatus",
+      "order": 9
+    },
+    {
+      "id": "4de421bd-f36e-4260-82a2-7582ca28f55b",
+      "name": "Helper queries (10)",
+      "parentId": "347d5cfa-e372-4082-820d-8181b0919a49"
+    },
+    {
+      "id": "f79f5219-14f5-4c42-8985-5025dac06dd4",
+      "name": "Transform file from ProjectCoC",
+      "order": 10
+    },
+    {
+      "id": "2164598b-7f50-434a-844f-0cfe72ca8f9c",
+      "name": "Helper queries (11)",
+      "parentId": "f79f5219-14f5-4c42-8985-5025dac06dd4"
+    },
+    {
+      "id": "7e4b1272-a46d-4527-87c1-5fdad1823986",
+      "name": "Transform file from Project",
+      "order": 11
+    },
+    {
+      "id": "a5a0b670-a195-4d48-bf9e-34e87f8fa7e4",
+      "name": "Helper queries (12)",
+      "parentId": "7e4b1272-a46d-4527-87c1-5fdad1823986"
+    },
+    {
+      "id": "6d765a8d-98df-4309-a650-a1bdf24808b9",
+      "name": "Transform file from Organization",
+      "order": 12
+    },
+    {
+      "id": "f5ae660b-9747-42fd-a342-aa9cdf1a76c1",
+      "name": "Helper queries (13)",
+      "parentId": "6d765a8d-98df-4309-a650-a1bdf24808b9"
+    },
+    {
+      "id": "96d0144d-3ab8-475d-839e-542985b6baa2",
+      "name": "Transform file from Inventory",
+      "order": 13
+    },
+    {
+      "id": "593e920c-84b6-4d36-813d-580399006ed1",
+      "name": "Helper queries (14)",
+      "parentId": "96d0144d-3ab8-475d-839e-542985b6baa2"
+    },
+    {
+      "id": "1ec455bd-933f-4455-8acf-f1a77a92ca8a",
+      "name": "Transform file from IncomeBenefits",
+      "order": 14
+    },
+    {
+      "id": "1ddfdf06-43ed-4e33-99fa-320b2a546b76",
+      "name": "Helper queries (15)",
+      "parentId": "1ec455bd-933f-4455-8acf-f1a77a92ca8a"
+    },
+    {
+      "id": "1752f850-7055-4f5e-a970-71629ce07789",
+      "name": "Transform file from HMISParticipation",
+      "order": 15
+    },
+    {
+      "id": "8de85cc7-1cb7-4b49-b65b-fb2ec54c973c",
+      "name": "Helper queries (16)",
+      "parentId": "1752f850-7055-4f5e-a970-71629ce07789"
+    },
+    {
+      "id": "e7f7dc8e-12da-47bb-a537-7cf7d25dfb3d",
+      "name": "Transform file from HealthAndDV",
+      "order": 16
+    },
+    {
+      "id": "ead8d1e9-b579-4756-a853-de04fe2a2684",
+      "name": "Helper queries (17)",
+      "parentId": "e7f7dc8e-12da-47bb-a537-7cf7d25dfb3d"
+    },
+    {
+      "id": "37f408aa-cabf-4bde-9454-8d2b430fed37",
+      "name": "Transform file from Funder",
+      "order": 17
+    },
+    {
+      "id": "0b92bb09-2630-4ce0-84e4-d4fb80fbe822",
+      "name": "Helper queries (18)",
+      "parentId": "37f408aa-cabf-4bde-9454-8d2b430fed37"
+    },
+    {
+      "id": "36261597-84f4-44fb-9a05-8727352a38ad",
+      "name": "Transform file from Export",
+      "order": 18
+    },
+    {
+      "id": "1ee7155a-3a13-4441-89a1-c4916e6fb88f",
+      "name": "Helper queries (19)",
+      "parentId": "36261597-84f4-44fb-9a05-8727352a38ad"
+    },
+    {
+      "id": "bc61f315-c1ef-43fd-abc5-c985ed8b789b",
+      "name": "Transform file from Exit",
+      "order": 19
+    },
+    {
+      "id": "8920279d-0926-4b16-9a82-f3c1db2b92d6",
+      "name": "Helper queries (20)",
+      "parentId": "bc61f315-c1ef-43fd-abc5-c985ed8b789b"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "Client": {
+      "queryId": "ef2ad09a-aa79-41cd-8051-bbeb1a85ded1",
+      "queryName": "Client",
+      "loadEnabled": false
+    },
+    "Disabilities": {
+      "queryId": "fc31574d-05af-4354-a6b0-de8ace78a06c",
+      "queryName": "Disabilities",
+      "loadEnabled": false
+    },
+    "EmploymentEducation": {
+      "queryId": "9e76c57f-3f9c-4248-b72c-8b5ec0d25066",
+      "queryName": "EmploymentEducation",
+      "loadEnabled": false
+    },
+    "Enrollment": {
+      "queryId": "8f75dc4c-615d-41d7-8482-e2f121365b4f",
+      "queryName": "Enrollment",
+      "loadEnabled": false
+    },
+    "Exit": {
+      "queryId": "5c71a096-814e-489e-9ff8-c5e7218d133b",
+      "queryName": "Exit",
+      "loadEnabled": false
+    },
+    "Export": {
+      "queryId": "22961e4e-1ec0-4f53-b404-9e14a1eb14a0",
+      "queryName": "Export",
+      "loadEnabled": false
+    },
+    "Funder": {
+      "queryId": "f28456bf-eccc-4f8b-83f4-e27673a6257f",
+      "queryName": "Funder",
+      "loadEnabled": false
+    },
+    "HealthAndDV": {
+      "queryId": "e6693e43-7708-4aee-a9c7-46e04e94cf22",
+      "queryName": "HealthAndDV",
+      "loadEnabled": false
+    },
+    "IncomeBenefits": {
+      "queryId": "52a2302a-5c95-4b6c-abb9-2a47ffef5d1b",
+      "queryName": "IncomeBenefits",
+      "loadEnabled": false
+    },
+    "Project": {
+      "queryId": "cc7f38ab-b374-4b02-b70a-ca4b654d5b4f",
+      "queryName": "Project",
+      "loadEnabled": false
+    },
+    "ProjectCoC": {
+      "queryId": "9b817943-7b6b-41d9-b99d-26754ea4ea11",
+      "queryName": "ProjectCoC",
+      "loadEnabled": false
+    },
+    "Services": {
+      "queryId": "1c178be9-5bc3-4677-934c-93af8785df6d",
+      "queryName": "Services",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "2733fa19-4792-4d34-817e-605b22fa5d6f",
+      "queryName": "Sample file",
+      "queryGroupId": "2003f2a1-9042-4560-a143-88240da2e8a4",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "8ed8816d-2e60-4876-9b2a-2755ea620ee8",
+      "queryName": "Parameter",
+      "queryGroupId": "2003f2a1-9042-4560-a143-88240da2e8a4",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "4587f2fa-2283-4c78-bf8c-9099738995e8",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "3ad3723e-0247-4f00-9941-54ab57868b6a",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "0430fb37-ea8c-4243-b2b1-514d48a6b844",
+      "queryName": "Transform file",
+      "queryGroupId": "2003f2a1-9042-4560-a143-88240da2e8a4",
+      "loadEnabled": false
+    },
+    "Sample file (2)": {
+      "queryId": "0e0f440a-3a24-4c73-b26e-503430d49f54",
+      "queryName": "Sample file (2)",
+      "queryGroupId": "da96d866-0c44-4225-8d1d-eb65bc055d40",
+      "loadEnabled": false
+    },
+    "Parameter (2)": {
+      "queryId": "2c7336b1-f6ff-457a-972c-4de61287f330",
+      "queryName": "Parameter (2)",
+      "queryGroupId": "da96d866-0c44-4225-8d1d-eb65bc055d40",
+      "loadEnabled": false
+    },
+    "Transform Sample file (2)": {
+      "queryId": "6d4e3309-7fee-4c06-9325-71abada06cd9",
+      "queryName": "Transform Sample file (2)",
+      "queryGroupId": "f7abb0cb-276d-4a6c-b945-780f6052f1cd",
+      "loadEnabled": false
+    },
+    "Transform file (2)": {
+      "queryId": "9e325034-268f-44e0-9eab-cfb3a6920f61",
+      "queryName": "Transform file (2)",
+      "queryGroupId": "da96d866-0c44-4225-8d1d-eb65bc055d40",
+      "loadEnabled": false
+    },
+    "Sample file (3)": {
+      "queryId": "acbb235e-9dc0-4879-bb8e-9e9cea9f037b",
+      "queryName": "Sample file (3)",
+      "queryGroupId": "a370f823-799d-47bd-b767-1ee2c8cebafa",
+      "loadEnabled": false
+    },
+    "Parameter (3)": {
+      "queryId": "661a1d39-9614-43b7-b141-7a9d873fbe0b",
+      "queryName": "Parameter (3)",
+      "queryGroupId": "a370f823-799d-47bd-b767-1ee2c8cebafa",
+      "loadEnabled": false
+    },
+    "Transform Sample file (3)": {
+      "queryId": "ddb8b150-d8ce-4ee3-95ae-4e9ce515dda7",
+      "queryName": "Transform Sample file (3)",
+      "queryGroupId": "530232f8-797e-4d84-97bc-51670bf71c7f",
+      "loadEnabled": false
+    },
+    "Transform file (3)": {
+      "queryId": "7725d3f1-5e31-4af8-9f85-730e496503a9",
+      "queryName": "Transform file (3)",
+      "queryGroupId": "a370f823-799d-47bd-b767-1ee2c8cebafa",
+      "loadEnabled": false
+    },
+    "Sample file (4)": {
+      "queryId": "c219b0f4-2ac3-449a-8d29-de5fbe330589",
+      "queryName": "Sample file (4)",
+      "queryGroupId": "e1721185-4a5e-46f4-b485-473d6c2c576c",
+      "loadEnabled": false
+    },
+    "Parameter (4)": {
+      "queryId": "161225a2-9658-4049-af69-00076f46b385",
+      "queryName": "Parameter (4)",
+      "queryGroupId": "e1721185-4a5e-46f4-b485-473d6c2c576c",
+      "loadEnabled": false
+    },
+    "Transform Sample file (4)": {
+      "queryId": "61b8dc9a-bbad-4624-a5d4-0c818e47c1d0",
+      "queryName": "Transform Sample file (4)",
+      "queryGroupId": "fd0da74e-cb57-40ce-af05-be224db43d0f",
+      "loadEnabled": false
+    },
+    "Transform file (4)": {
+      "queryId": "96f35380-9e31-4803-a667-4d0cb9ba1c23",
+      "queryName": "Transform file (4)",
+      "queryGroupId": "e1721185-4a5e-46f4-b485-473d6c2c576c",
+      "loadEnabled": false
+    },
+    "Sample file (5)": {
+      "queryId": "ab95f4e5-c8e7-4557-8a94-89c8c8f4b561",
+      "queryName": "Sample file (5)",
+      "queryGroupId": "05c92d84-f34d-47ee-94f8-6e91c552e7df",
+      "loadEnabled": false
+    },
+    "Parameter (5)": {
+      "queryId": "97eb742c-c6c6-405e-87f3-92f835abfe05",
+      "queryName": "Parameter (5)",
+      "queryGroupId": "05c92d84-f34d-47ee-94f8-6e91c552e7df",
+      "loadEnabled": false
+    },
+    "Transform Sample file (5)": {
+      "queryId": "40ca571f-d9c3-4af6-8b8e-ffc630db7806",
+      "queryName": "Transform Sample file (5)",
+      "queryGroupId": "754b6769-90d1-4a0f-b365-79fb90374770",
+      "loadEnabled": false
+    },
+    "Transform file (5)": {
+      "queryId": "d7a6e9bb-a508-4d01-97f1-d1e753102dee",
+      "queryName": "Transform file (5)",
+      "queryGroupId": "05c92d84-f34d-47ee-94f8-6e91c552e7df",
+      "loadEnabled": false
+    },
+    "Sample file (6)": {
+      "queryId": "77c9948b-75d5-48d3-b1ae-8771dc4463c0",
+      "queryName": "Sample file (6)",
+      "queryGroupId": "12fa62c7-5a97-44cf-bf83-38fb88bb7562",
+      "loadEnabled": false
+    },
+    "Parameter (6)": {
+      "queryId": "9ae5ff31-f3d0-47e5-b5c8-50df20e230b0",
+      "queryName": "Parameter (6)",
+      "queryGroupId": "12fa62c7-5a97-44cf-bf83-38fb88bb7562",
+      "loadEnabled": false
+    },
+    "Transform Sample file (6)": {
+      "queryId": "1b456a32-68df-4d57-9cb7-f1317347da85",
+      "queryName": "Transform Sample file (6)",
+      "queryGroupId": "15050370-eef8-42a4-9a50-47c72cc33f7e",
+      "loadEnabled": false
+    },
+    "Transform file (6)": {
+      "queryId": "a94ef356-8875-45a5-9d44-6c49d3e07bdb",
+      "queryName": "Transform file (6)",
+      "queryGroupId": "12fa62c7-5a97-44cf-bf83-38fb88bb7562",
+      "loadEnabled": false
+    },
+    "Sample file (7)": {
+      "queryId": "9e2f26eb-84c7-45d2-98af-8d76506b3e7e",
+      "queryName": "Sample file (7)",
+      "queryGroupId": "96c623ae-7c60-4cb3-acf1-0bd61a4c0837",
+      "loadEnabled": false
+    },
+    "Parameter (7)": {
+      "queryId": "de3daf5f-e2e2-480c-9cfd-62c3589453f4",
+      "queryName": "Parameter (7)",
+      "queryGroupId": "96c623ae-7c60-4cb3-acf1-0bd61a4c0837",
+      "loadEnabled": false
+    },
+    "Transform Sample file (7)": {
+      "queryId": "28f6f622-16bc-4bd4-8451-ff44985b98cb",
+      "queryName": "Transform Sample file (7)",
+      "queryGroupId": "d94346d5-cabc-4fa5-9715-e318c7eed5c5",
+      "loadEnabled": false
+    },
+    "Transform file (7)": {
+      "queryId": "33606af8-a888-4e9d-8d17-4468640d49d8",
+      "queryName": "Transform file (7)",
+      "queryGroupId": "96c623ae-7c60-4cb3-acf1-0bd61a4c0837",
+      "loadEnabled": false
+    },
+    "Sample file (8)": {
+      "queryId": "58d9f309-6cef-449b-a126-1ae4f1511a73",
+      "queryName": "Sample file (8)",
+      "queryGroupId": "f473c071-bc2f-4b33-92f2-19c6c7db7a64",
+      "loadEnabled": false
+    },
+    "Parameter (8)": {
+      "queryId": "1188a630-7c98-4568-be41-076bff80a546",
+      "queryName": "Parameter (8)",
+      "queryGroupId": "f473c071-bc2f-4b33-92f2-19c6c7db7a64",
+      "loadEnabled": false
+    },
+    "Transform Sample file (8)": {
+      "queryId": "cc78977e-fd56-41b0-95d6-7d9e4927e964",
+      "queryName": "Transform Sample file (8)",
+      "queryGroupId": "beb1f8d3-f47d-41c6-ac0b-ef2a2520c973",
+      "loadEnabled": false
+    },
+    "Transform file (8)": {
+      "queryId": "b6f53c52-3b54-43a4-8623-b7ad8242f674",
+      "queryName": "Transform file (8)",
+      "queryGroupId": "f473c071-bc2f-4b33-92f2-19c6c7db7a64",
+      "loadEnabled": false
+    },
+    "Sample file (9)": {
+      "queryId": "7578c0c3-bd79-4524-906c-3996d774d73b",
+      "queryName": "Sample file (9)",
+      "queryGroupId": "ea2320b2-dab2-4db8-8622-2838d7fab682",
+      "loadEnabled": false
+    },
+    "Parameter (9)": {
+      "queryId": "f4c3de8d-ac1c-4db5-b5b7-9856fc675e70",
+      "queryName": "Parameter (9)",
+      "queryGroupId": "ea2320b2-dab2-4db8-8622-2838d7fab682",
+      "loadEnabled": false
+    },
+    "Transform Sample file (9)": {
+      "queryId": "3d428bb0-8d19-47c5-90ee-435006115a61",
+      "queryName": "Transform Sample file (9)",
+      "queryGroupId": "548e9a05-c477-4940-aa3d-c30969b4333d",
+      "loadEnabled": false
+    },
+    "Transform file (9)": {
+      "queryId": "ef3d5095-230f-4f48-904e-542e1719d661",
+      "queryName": "Transform file (9)",
+      "queryGroupId": "ea2320b2-dab2-4db8-8622-2838d7fab682",
+      "loadEnabled": false
+    },
+    "Sample file (10)": {
+      "queryId": "b7b05cb5-066e-417e-9d50-39278362dd93",
+      "queryName": "Sample file (10)",
+      "queryGroupId": "4de421bd-f36e-4260-82a2-7582ca28f55b",
+      "loadEnabled": false
+    },
+    "Parameter (10)": {
+      "queryId": "3f0ad15b-990a-439d-8654-7669ee998874",
+      "queryName": "Parameter (10)",
+      "queryGroupId": "4de421bd-f36e-4260-82a2-7582ca28f55b",
+      "loadEnabled": false
+    },
+    "Transform Sample file (10)": {
+      "queryId": "29cbbe07-5f88-45f8-925d-67177fea26c7",
+      "queryName": "Transform Sample file (10)",
+      "queryGroupId": "347d5cfa-e372-4082-820d-8181b0919a49",
+      "loadEnabled": false
+    },
+    "Transform file (10)": {
+      "queryId": "63b14344-84b7-48bd-8529-a133b6892e6d",
+      "queryName": "Transform file (10)",
+      "queryGroupId": "4de421bd-f36e-4260-82a2-7582ca28f55b",
+      "loadEnabled": false
+    },
+    "Sample file (11)": {
+      "queryId": "d2daa4a1-03bb-4d77-bbc0-b96847d73081",
+      "queryName": "Sample file (11)",
+      "queryGroupId": "2164598b-7f50-434a-844f-0cfe72ca8f9c",
+      "loadEnabled": false
+    },
+    "Parameter (11)": {
+      "queryId": "74bc46ea-7dae-4a75-8679-5e87d594cfc5",
+      "queryName": "Parameter (11)",
+      "queryGroupId": "2164598b-7f50-434a-844f-0cfe72ca8f9c",
+      "loadEnabled": false
+    },
+    "Transform Sample file (11)": {
+      "queryId": "4c3e2555-90e9-4424-996f-0c2a1ff1f2ba",
+      "queryName": "Transform Sample file (11)",
+      "queryGroupId": "f79f5219-14f5-4c42-8985-5025dac06dd4",
+      "loadEnabled": false
+    },
+    "Transform file (11)": {
+      "queryId": "949304ef-f296-4f51-8895-9d64ef4054b2",
+      "queryName": "Transform file (11)",
+      "queryGroupId": "2164598b-7f50-434a-844f-0cfe72ca8f9c",
+      "loadEnabled": false
+    },
+    "Sample file (12)": {
+      "queryId": "cd9842b0-1fc6-452c-915d-f6ca4fe4869b",
+      "queryName": "Sample file (12)",
+      "queryGroupId": "a5a0b670-a195-4d48-bf9e-34e87f8fa7e4",
+      "loadEnabled": false
+    },
+    "Parameter (12)": {
+      "queryId": "d8f95697-1e8a-4e64-ba0d-3cf3cf2abd3a",
+      "queryName": "Parameter (12)",
+      "queryGroupId": "a5a0b670-a195-4d48-bf9e-34e87f8fa7e4",
+      "loadEnabled": false
+    },
+    "Transform Sample file (12)": {
+      "queryId": "ab1e4cc5-c5fb-4566-ad29-1bb9d5ff814d",
+      "queryName": "Transform Sample file (12)",
+      "queryGroupId": "7e4b1272-a46d-4527-87c1-5fdad1823986",
+      "loadEnabled": false
+    },
+    "Transform file (12)": {
+      "queryId": "09d287e2-453b-4fff-a318-96e1f5187c74",
+      "queryName": "Transform file (12)",
+      "queryGroupId": "a5a0b670-a195-4d48-bf9e-34e87f8fa7e4",
+      "loadEnabled": false
+    },
+    "Sample file (13)": {
+      "queryId": "f63b268a-994d-451e-9e58-a9493cc374ae",
+      "queryName": "Sample file (13)",
+      "queryGroupId": "f5ae660b-9747-42fd-a342-aa9cdf1a76c1",
+      "loadEnabled": false
+    },
+    "Parameter (13)": {
+      "queryId": "b9d6b5fc-6123-4ba3-82ff-65c708690cf7",
+      "queryName": "Parameter (13)",
+      "queryGroupId": "f5ae660b-9747-42fd-a342-aa9cdf1a76c1",
+      "loadEnabled": false
+    },
+    "Transform Sample file (13)": {
+      "queryId": "9efdf631-e13b-4561-ba0f-765eff652d1c",
+      "queryName": "Transform Sample file (13)",
+      "queryGroupId": "6d765a8d-98df-4309-a650-a1bdf24808b9",
+      "loadEnabled": false
+    },
+    "Transform file (13)": {
+      "queryId": "f99c0ef9-2b97-413c-bcc7-a65c63964131",
+      "queryName": "Transform file (13)",
+      "queryGroupId": "f5ae660b-9747-42fd-a342-aa9cdf1a76c1",
+      "loadEnabled": false
+    },
+    "Sample file (14)": {
+      "queryId": "40ac08df-d165-4801-91cc-1675747bd782",
+      "queryName": "Sample file (14)",
+      "queryGroupId": "593e920c-84b6-4d36-813d-580399006ed1",
+      "loadEnabled": false
+    },
+    "Parameter (14)": {
+      "queryId": "0ca34b6c-9de3-4bc5-bfe9-91b683b3bd41",
+      "queryName": "Parameter (14)",
+      "queryGroupId": "593e920c-84b6-4d36-813d-580399006ed1",
+      "loadEnabled": false
+    },
+    "Transform Sample file (14)": {
+      "queryId": "88129353-aa38-4a22-9044-426cf41ae324",
+      "queryName": "Transform Sample file (14)",
+      "queryGroupId": "96d0144d-3ab8-475d-839e-542985b6baa2",
+      "loadEnabled": false
+    },
+    "Transform file (14)": {
+      "queryId": "43485d3b-21c5-4e7a-88f7-36a465ca1e24",
+      "queryName": "Transform file (14)",
+      "queryGroupId": "593e920c-84b6-4d36-813d-580399006ed1",
+      "loadEnabled": false
+    },
+    "Sample file (15)": {
+      "queryId": "d3138cb3-0bda-4d0b-b944-3bc53889ca1d",
+      "queryName": "Sample file (15)",
+      "queryGroupId": "1ddfdf06-43ed-4e33-99fa-320b2a546b76",
+      "loadEnabled": false
+    },
+    "Parameter (15)": {
+      "queryId": "3329a34c-9801-4bca-bd48-7fa203088372",
+      "queryName": "Parameter (15)",
+      "queryGroupId": "1ddfdf06-43ed-4e33-99fa-320b2a546b76",
+      "loadEnabled": false
+    },
+    "Transform Sample file (15)": {
+      "queryId": "a4da2123-af99-4532-9f87-2dc64234db56",
+      "queryName": "Transform Sample file (15)",
+      "queryGroupId": "1ec455bd-933f-4455-8acf-f1a77a92ca8a",
+      "loadEnabled": false
+    },
+    "Transform file (15)": {
+      "queryId": "30d0f8cd-3e00-4182-8cd2-7ebe4e829f5a",
+      "queryName": "Transform file (15)",
+      "queryGroupId": "1ddfdf06-43ed-4e33-99fa-320b2a546b76",
+      "loadEnabled": false
+    },
+    "Sample file (16)": {
+      "queryId": "7df90517-96ea-49e4-8a08-f8f6556cb359",
+      "queryName": "Sample file (16)",
+      "queryGroupId": "8de85cc7-1cb7-4b49-b65b-fb2ec54c973c",
+      "loadEnabled": false
+    },
+    "Parameter (16)": {
+      "queryId": "aeec6c43-a380-492b-92f9-b8488f1169c6",
+      "queryName": "Parameter (16)",
+      "queryGroupId": "8de85cc7-1cb7-4b49-b65b-fb2ec54c973c",
+      "loadEnabled": false
+    },
+    "Transform Sample file (16)": {
+      "queryId": "5b057d98-0710-45d4-831c-19b0d2d0bcd7",
+      "queryName": "Transform Sample file (16)",
+      "queryGroupId": "1752f850-7055-4f5e-a970-71629ce07789",
+      "loadEnabled": false
+    },
+    "Transform file (16)": {
+      "queryId": "3dab3866-b6be-4f67-9712-5008b396d0be",
+      "queryName": "Transform file (16)",
+      "queryGroupId": "8de85cc7-1cb7-4b49-b65b-fb2ec54c973c",
+      "loadEnabled": false
+    },
+    "Sample file (17)": {
+      "queryId": "4d98bd2b-4a73-42b2-9b7b-8e34412caff4",
+      "queryName": "Sample file (17)",
+      "queryGroupId": "ead8d1e9-b579-4756-a853-de04fe2a2684",
+      "loadEnabled": false
+    },
+    "Parameter (17)": {
+      "queryId": "72d47e21-7b82-40a2-af49-967d74f8736a",
+      "queryName": "Parameter (17)",
+      "queryGroupId": "ead8d1e9-b579-4756-a853-de04fe2a2684",
+      "loadEnabled": false
+    },
+    "Transform Sample file (17)": {
+      "queryId": "4459a53c-d45a-4b2e-a44d-72cc9db49780",
+      "queryName": "Transform Sample file (17)",
+      "queryGroupId": "e7f7dc8e-12da-47bb-a537-7cf7d25dfb3d",
+      "loadEnabled": false
+    },
+    "Transform file (17)": {
+      "queryId": "d9e0b42d-b433-4181-b871-7b206466e93b",
+      "queryName": "Transform file (17)",
+      "queryGroupId": "ead8d1e9-b579-4756-a853-de04fe2a2684",
+      "loadEnabled": false
+    },
+    "Sample file (18)": {
+      "queryId": "34d9fcd8-3e61-4ff3-8b1a-1dde4f5b4570",
+      "queryName": "Sample file (18)",
+      "queryGroupId": "0b92bb09-2630-4ce0-84e4-d4fb80fbe822",
+      "loadEnabled": false
+    },
+    "Parameter (18)": {
+      "queryId": "f52bc454-f8d0-432a-a3fd-2e8003d09fa7",
+      "queryName": "Parameter (18)",
+      "queryGroupId": "0b92bb09-2630-4ce0-84e4-d4fb80fbe822",
+      "loadEnabled": false
+    },
+    "Transform Sample file (18)": {
+      "queryId": "6cec5ed7-b3f6-46c8-9dd1-3b971bb5c125",
+      "queryName": "Transform Sample file (18)",
+      "queryGroupId": "37f408aa-cabf-4bde-9454-8d2b430fed37",
+      "loadEnabled": false
+    },
+    "Transform file (18)": {
+      "queryId": "efc9e6d9-258d-4357-9103-0e2b9eac6a3b",
+      "queryName": "Transform file (18)",
+      "queryGroupId": "0b92bb09-2630-4ce0-84e4-d4fb80fbe822",
+      "loadEnabled": false
+    },
+    "Sample file (19)": {
+      "queryId": "3af1995b-8e8f-4490-a1b4-079db93788f4",
+      "queryName": "Sample file (19)",
+      "queryGroupId": "1ee7155a-3a13-4441-89a1-c4916e6fb88f",
+      "loadEnabled": false
+    },
+    "Parameter (19)": {
+      "queryId": "c2bf84e5-3e62-46c9-ac30-183b9f376df3",
+      "queryName": "Parameter (19)",
+      "queryGroupId": "1ee7155a-3a13-4441-89a1-c4916e6fb88f",
+      "loadEnabled": false
+    },
+    "Transform Sample file (19)": {
+      "queryId": "b16bacf3-f33b-4c8a-90c6-8903b004edbe",
+      "queryName": "Transform Sample file (19)",
+      "queryGroupId": "36261597-84f4-44fb-9a05-8727352a38ad",
+      "loadEnabled": false
+    },
+    "Transform file (19)": {
+      "queryId": "ff194cea-717c-4bda-b2c4-74d9d6db9c45",
+      "queryName": "Transform file (19)",
+      "queryGroupId": "1ee7155a-3a13-4441-89a1-c4916e6fb88f",
+      "loadEnabled": false
+    },
+    "Sample file (20)": {
+      "queryId": "3e0377cf-914d-460f-b191-fdec9ca4db16",
+      "queryName": "Sample file (20)",
+      "queryGroupId": "8920279d-0926-4b16-9a82-f3c1db2b92d6",
+      "loadEnabled": false
+    },
+    "Parameter (20)": {
+      "queryId": "d7d5a37c-c028-449f-bf6d-5711d0934336",
+      "queryName": "Parameter (20)",
+      "queryGroupId": "8920279d-0926-4b16-9a82-f3c1db2b92d6",
+      "loadEnabled": false
+    },
+    "Transform Sample file (20)": {
+      "queryId": "ed493c0b-9806-4727-ac4a-093713c1bb6b",
+      "queryName": "Transform Sample file (20)",
+      "queryGroupId": "bc61f315-c1ef-43fd-abc5-c985ed8b789b",
+      "loadEnabled": false
+    },
+    "Transform file (20)": {
+      "queryId": "3d891e3d-b840-47cd-850b-9240cacc8c75",
+      "queryName": "Transform file (20)",
+      "queryGroupId": "8920279d-0926-4b16-9a82-f3c1db2b92d6",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "cc127afa-f3e7-4939-9eb0-1129295e0781",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

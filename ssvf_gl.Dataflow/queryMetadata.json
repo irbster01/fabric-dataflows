@@ -1,0 +1,27 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "ssvf_gl",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw-netsuite-gl-ssvf": {
+      "queryId": "31df8284-a4cc-4c8c-b726-980d4fc979af",
+      "queryName": "raw-netsuite-gl-ssvf",
+      "loadEnabled": false
+    },
+    "raw-netsuite-gl-ssvf_DataDestination": {
+      "queryId": "44694159-f754-4307-b23a-22c79b1c2c96",
+      "queryName": "raw-netsuite-gl-ssvf_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

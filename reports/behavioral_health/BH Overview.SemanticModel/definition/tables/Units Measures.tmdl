@@ -1,0 +1,105 @@
+table 'Units Measures'
+	lineageTag: 5750bf36-7f13-4eda-b70a-0534f459b053
+
+	measure 'Total Units MTD' = TOTALMTD('Units Measures'[Unit Sum],'Date'[Date])
+		lineageTag: 5637c47a-e796-4361-8ebe-23e0fe8d39a6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Unit MTD Last Year' = CALCULATE('Units Measures'[Unit Sum],SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: 0
+		lineageTag: 9e8fe65d-93cb-4aa1-9e79-eb0e78b94c80
+
+	measure 'Total Units MTD % difference from Total Unit MTD Last Year' =
+			
+			VAR __BASELINE_VALUE = [Total Unit MTD Last Year]
+			VAR __VALUE_TO_COMPARE = [Total Units MTD]
+			RETURN
+				IF(
+					NOT ISBLANK(__VALUE_TO_COMPARE),
+					DIVIDE(__VALUE_TO_COMPARE - __BASELINE_VALUE, __BASELINE_VALUE)
+				)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0bd9f811-09fc-4102-966e-c7bbf822dc38
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MathematicalPercentageDifference"
+				}
+
+		changedProperty = FormatString
+
+	measure 'Unit Sum' = SUM('API - Billing'[Units])
+		formatString: 0
+		lineageTag: 96374fd2-4eb2-4a1d-b712-b617f08a5d5f
+
+	measure 'Units YTD' =
+			
+			TOTALYTD('Units Measures'[Unit Sum], 'Date'[Date], "6-30")
+		formatString: 0
+		lineageTag: 761bd278-e604-464a-a3ae-7b9bf6328ab9
+
+	measure 'Units YTD LY' = CALCULATE('Units Measures'[Units YTD], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: 0
+		lineageTag: 238a12d3-1717-4584-af76-1dfbc830e3a5
+
+	measure 'Unit tgt per clin' = 400
+		formatString: 0
+		lineageTag: 4729af7b-31cb-49ab-bd81-c3a2f5fc5a43
+
+	measure Bundles =
+			CALCULATE(
+			    DISTINCTCOUNT(
+			        'API - Billing'[Service ID]),
+			        FILTER('API - Billing',
+			        'API - Billing'[Service Type]="BUN: ARST" || 'API - Billing'[Service Type]="BUN: ARST-G" || 'API - Billing'[Service Type]="BUN: Case Management" || 'API - Billing'[Service Type]="BUN: IST"),
+			        FILTER('API - Billing',
+			        'API - Billing'[Primary Flag]="true"),
+			        FILTER('API - Billing',
+			        'API - Billing'[non_billable]="false"),
+			        FILTER('API - Billing',
+			        'API - Billing'[Adjusted Rate]=900)
+			)
+		formatString: 0
+		lineageTag: 6018bc99-3642-4a64-a005-297ceaa38c84
+
+	measure 'bundle clients' =
+			CALCULATE(
+			    DISTINCTCOUNT(
+			        'API - Episodes'[Client ID]),
+			        FILTER('API - Episodes',
+			        'API - Episodes'[Episode Status]="Enrolled"),
+			        FILTER('API - Episodes',
+			        'API - Episodes'[Program ID]="Adult Bundle")
+			)
+		formatString: 0
+		lineageTag: 0188f15f-9099-472e-84e9-db157ddfcbba
+
+	measure 'bundle ratio' = DIVIDE([bundle clients], [Bundles])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 3974fd20-365a-473d-b829-403796fe4689
+
+	measure '6026_Core Svc Counter' =
+			CALCULATE(
+			    DISTINCTCOUNT('API - Billing'[Service ID]),
+			    FILTER('API - IBHH Service Summary', 'API - IBHH Service Summary'[which_type_of_core_service_was_582371]<>BLANK())
+			)
+		formatString: 0
+		lineageTag: 93e2a430-921d-407e-8f5e-7958d691c2ef
+
+	column Value
+		formatString: 0
+		lineageTag: 5869bd34-7a9c-4e43-aaed-a161eaa6a691
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Units Measures' = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = c33fb4c3725f4ff1ae8c7b3304ab385f
+

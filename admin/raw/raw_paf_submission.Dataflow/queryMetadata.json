@@ -1,0 +1,100 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_paf_submission",
+  "queryGroups": [
+    {
+      "id": "35326986-601a-4d65-9861-370cdbd21fbc",
+      "name": "Transform file from raw_data"
+    },
+    {
+      "id": "ecb58916-8a61-44f9-96fe-d8b2a23ed58f",
+      "name": "Helper queries",
+      "parentId": "35326986-601a-4d65-9861-370cdbd21fbc"
+    },
+    {
+      "id": "c2f3e766-20fd-4987-8bbf-ad6ad5d4f904",
+      "name": "Transform file from raw_data (2)",
+      "order": 1
+    },
+    {
+      "id": "11aefedc-4d4c-437d-bd65-5f1c4a031169",
+      "name": "Helper queries (2)",
+      "parentId": "c2f3e766-20fd-4987-8bbf-ad6ad5d4f904"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_paf_submissions": {
+      "queryId": "9a349efc-a46b-4a86-941f-8b8bcf359d91",
+      "queryName": "raw_paf_submissions",
+      "loadEnabled": false
+    },
+    "raw_po_submissions": {
+      "queryId": "a7580841-013c-469d-9e51-7099bc87b5dd",
+      "queryName": "raw_po_submissions",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "515f24d0-c815-43c6-9890-fc86839ed25f",
+      "queryName": "Sample file",
+      "queryGroupId": "ecb58916-8a61-44f9-96fe-d8b2a23ed58f",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "894a7a53-7786-480c-a102-9fa36dec118d",
+      "queryName": "Parameter",
+      "queryGroupId": "ecb58916-8a61-44f9-96fe-d8b2a23ed58f",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "8d3bc5a0-975b-41cc-b2d4-5d0cd5c4827b",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "35326986-601a-4d65-9861-370cdbd21fbc",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "0e869b90-abc7-4ad0-949f-696ec4428ccc",
+      "queryName": "Transform file",
+      "queryGroupId": "ecb58916-8a61-44f9-96fe-d8b2a23ed58f",
+      "loadEnabled": false
+    },
+    "Sample file (2)": {
+      "queryId": "7f6f0c5f-2367-4511-9c5b-c22e063a7f70",
+      "queryName": "Sample file (2)",
+      "queryGroupId": "11aefedc-4d4c-437d-bd65-5f1c4a031169",
+      "loadEnabled": false
+    },
+    "Parameter (2)": {
+      "queryId": "7dd7656c-1ff7-4f1a-9fb3-4a462e712255",
+      "queryName": "Parameter (2)",
+      "queryGroupId": "11aefedc-4d4c-437d-bd65-5f1c4a031169",
+      "loadEnabled": false
+    },
+    "Transform Sample file (2)": {
+      "queryId": "846d932a-7728-41a2-b1fb-7ebbdd273ec4",
+      "queryName": "Transform Sample file (2)",
+      "queryGroupId": "c2f3e766-20fd-4987-8bbf-ad6ad5d4f904",
+      "loadEnabled": false
+    },
+    "Transform file (2)": {
+      "queryId": "d8c1e6e9-6d52-4b99-93bb-2018be75acd5",
+      "queryName": "Transform file (2)",
+      "queryGroupId": "11aefedc-4d4c-437d-bd65-5f1c4a031169",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "ce71dc65-a2dc-46f3-ae21-8f0885032bf9",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

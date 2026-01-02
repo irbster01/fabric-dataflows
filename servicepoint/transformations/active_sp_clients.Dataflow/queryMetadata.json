@@ -1,0 +1,93 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "active_sp_clients",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "active_sp_entries": {
+      "queryId": "c08af9fc-ba2e-4efd-bb8a-a8506599a172",
+      "queryName": "active_sp_entries",
+      "loadEnabled": false
+    },
+    "active_now_clients": {
+      "queryId": "e784f899-b62f-4874-bb5b-ca173ecfe0af",
+      "queryName": "active_now_clients",
+      "loadEnabled": false
+    },
+    "active_lh_school_clients": {
+      "queryId": "bd3fa6d0-5eae-4f81-94a0-a8da6fbbf34d",
+      "queryName": "active_lh_school_clients",
+      "loadEnabled": false
+    },
+    "active_lh_comm_clients": {
+      "queryId": "b9088ea4-e3fd-4122-880e-adf85efa7c76",
+      "queryName": "active_lh_comm_clients",
+      "loadEnabled": false
+    },
+    "active_choice_clients": {
+      "queryId": "c2b4f685-67db-476a-9364-b10f9cb92dc5",
+      "queryName": "active_choice_clients",
+      "loadEnabled": false
+    },
+    "active_greenwood_clients": {
+      "queryId": "c92db1a3-d5ce-43b9-bf04-5c98b273fa77",
+      "queryName": "active_greenwood_clients",
+      "loadEnabled": false
+    },
+    "active_corbitt_clients": {
+      "queryId": "fd800c47-ebbf-461e-9de3-ab434ed7758f",
+      "queryName": "active_corbitt_clients",
+      "loadEnabled": false
+    },
+    "active_independence_clients": {
+      "queryId": "f7bd6fe0-7489-40ef-82f6-27fde2de1f67",
+      "queryName": "active_independence_clients",
+      "loadEnabled": false
+    },
+    "active_southPointe_clients": {
+      "queryId": "b7cac446-4f11-46ca-84a6-1f09e950221e",
+      "queryName": "active_southPointe_clients",
+      "loadEnabled": false
+    },
+    "active_newHaven_clients": {
+      "queryId": "953b1cd6-766e-4792-8e23-ab6708abdd1d",
+      "queryName": "active_newHaven_clients",
+      "loadEnabled": false
+    },
+    "active_indMead_clients": {
+      "queryId": "b82f2117-bce5-4b03-81e6-a3b774b214f4",
+      "queryName": "active_indMead_clients",
+      "loadEnabled": false
+    },
+    "active_pineHaven": {
+      "queryId": "8bc376e0-97f4-45b9-b943-33336cc2a230",
+      "queryName": "active_pineHaven",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "f79e3f8c-aab3-460a-9bae-f9abb6105b68",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "2526_lh_clients": {
+      "queryId": "b347daf7-3451-4030-b464-ff5531c26791",
+      "queryName": "2526_lh_clients",
+      "loadEnabled": false
+    },
+    "2526_lh_clients_DataDestination": {
+      "queryId": "205dabe2-1169-44d0-91f5-d59de586de83",
+      "queryName": "2526_lh_clients_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

@@ -1,0 +1,2166 @@
+{
+  "name": "{{Dataset_Name}}",
+  "compatibilityLevel": 1604,
+  "model": {
+    "name": "{{Dataset_Name}}",
+    "culture": "en-US",
+    "collation": "Latin1_General_100_BIN2_UTF8",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "raw_lighthouse_registration",
+        "sourceLineageTag": "[dbo].[raw_lighthouse_registration]",
+        "columns": [
+          {
+            "name": "Client ID",
+            "dataType": "string",
+            "sourceColumn": "Client ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Address",
+            "dataType": "string",
+            "sourceColumn": "Address",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Address",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Bus number:",
+            "dataType": "string",
+            "sourceColumn": "Bus number:",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Bus number:",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "VOANLA - Zip Code",
+            "dataType": "int64",
+            "sourceColumn": "VOANLA - Zip Code",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "VOANLA - Zip Code",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Cell Phone",
+            "dataType": "string",
+            "sourceColumn": "Cell Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Cell Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "City",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Does child ride the bus?",
+            "dataType": "string",
+            "sourceColumn": "Does child ride the bus?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Does child ride the bus?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Does your child receive behavioral health services?",
+            "dataType": "string",
+            "sourceColumn": "Does your child receive behavioral health services?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Does your child receive behavioral health services?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Education Release Effective for School Year:",
+            "dataType": "string",
+            "sourceColumn": "Education Release Effective for School Year:",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Education Release Effective for School Year:",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Education Release on file?",
+            "dataType": "string",
+            "sourceColumn": "Education Release on file?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Education Release on file?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Email Address",
+            "dataType": "string",
+            "sourceColumn": "Email Address",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Email Address",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Food Stamps",
+            "dataType": "string",
+            "sourceColumn": "Food Stamps",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Food Stamps",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Household Type",
+            "dataType": "string",
+            "sourceColumn": "Household Type",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Household Type",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "If yes_ please list the provider",
+            "dataType": "string",
+            "sourceColumn": "If yes_ please list the provider",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "If yes_ please list the provider",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Is student enrolled in CIS?",
+            "dataType": "string",
+            "sourceColumn": "Is student enrolled in CIS?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Is student enrolled in CIS?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "JCAMPUS signed permission on file?",
+            "dataType": "string",
+            "sourceColumn": "JCAMPUS signed permission on file?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "JCAMPUS signed permission on file?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "JCAMPUS/School Loop Password:",
+            "dataType": "string",
+            "sourceColumn": "JCAMPUS/School Loop Password:",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "JCAMPUS/School Loop Password:",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "JCAMPUS/School Loop Username:",
+            "dataType": "string",
+            "sourceColumn": "JCAMPUS/School Loop Username:",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "JCAMPUS/School Loop Username:",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Media Release Effective for School Year:",
+            "dataType": "string",
+            "sourceColumn": "Media Release Effective for School Year:",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Media Release Effective for School Year:",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Media Release on file?",
+            "dataType": "string",
+            "sourceColumn": "Media Release on file?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Media Release on file?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Name Of Teacher/Homeroom Teacher",
+            "dataType": "string",
+            "sourceColumn": "Name Of Teacher/Homeroom Teacher",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Name Of Teacher/Homeroom Teacher",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Program Contract Effective for School Year:",
+            "dataType": "string",
+            "sourceColumn": "Program Contract Effective for School Year:",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Program Contract Effective for School Year:",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Program Contract Signed and On File?",
+            "dataType": "string",
+            "sourceColumn": "Program Contract Signed and On File?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Program Contract Signed and On File?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "School Year",
+            "dataType": "string",
+            "sourceColumn": "School Year",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "School Year",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ServicePoint Release of Information on File?",
+            "dataType": "string",
+            "sourceColumn": "ServicePoint Release of Information on File?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "ServicePoint Release of Information on File?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "State",
+            "dataType": "string",
+            "sourceColumn": "State",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "State",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Student ID#",
+            "dataType": "string",
+            "sourceColumn": "Student ID#",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Student ID#",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Summer Session",
+            "dataType": "string",
+            "sourceColumn": "Summer Session",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Summer Session",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Total number of Persons Living at the Address",
+            "dataType": "int64",
+            "sourceColumn": "Total number of Persons Living at the Address",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "Total number of Persons Living at the Address",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Allergy/Medical Condition?",
+            "dataType": "string",
+            "sourceColumn": "Allergy/Medical Condition?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Allergy/Medical Condition?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Application Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Application Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Application Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Contact #1 Name",
+            "dataType": "string",
+            "sourceColumn": "Contact #1 Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Contact #1 Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Contact #1 Phone",
+            "dataType": "string",
+            "sourceColumn": "Contact #1 Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Contact #1 Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Contact #2 Name",
+            "dataType": "string",
+            "sourceColumn": "Contact #2 Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Contact #2 Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Contact #2 Phone",
+            "dataType": "string",
+            "sourceColumn": "Contact #2 Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Contact #2 Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Clinic or Doctor's Name",
+            "dataType": "string",
+            "sourceColumn": "Clinic or Doctor's Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Clinic or Doctor's Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Doctor's Phone",
+            "dataType": "string",
+            "sourceColumn": "Doctor's Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Doctor's Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Does your child have an Individual Education Plan _IEP_?",
+            "dataType": "string",
+            "sourceColumn": "Does your child have an Individual Education Plan _IEP_?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Does your child have an Individual Education Plan _IEP_?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Drop-off location:",
+            "dataType": "string",
+            "sourceColumn": "Drop-off location:",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Drop-off location:",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "If yes_ pickup location:",
+            "dataType": "string",
+            "sourceColumn": "If yes_ pickup location:",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "If yes_ pickup location:",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Current Grade Level",
+            "dataType": "string",
+            "sourceColumn": "Current Grade Level",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Current Grade Level",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Has your child been placed in special education by the school system?",
+            "dataType": "string",
+            "sourceColumn": "Has your child been placed in special education by the school system?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Has your child been placed in special education by the school system?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Home Phone",
+            "dataType": "string",
+            "sourceColumn": "Home Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Home Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "If yes_ please explain:",
+            "dataType": "string",
+            "sourceColumn": "If yes_ please explain:",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "If yes_ please explain:",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "If yes_ please list:",
+            "dataType": "string",
+            "sourceColumn": "If yes_ please list:",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "If yes_ please list:",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Lighthouse Location Enrolling",
+            "dataType": "string",
+            "sourceColumn": "Lighthouse Location Enrolling",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Lighthouse Location Enrolling",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Medication at site during program hours?",
+            "dataType": "string",
+            "sourceColumn": "Medication at site during program hours?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Medication at site during program hours?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Parent/Guardian Name",
+            "dataType": "string",
+            "sourceColumn": "Parent/Guardian Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Parent/Guardian Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Place of Employment",
+            "dataType": "string",
+            "sourceColumn": "Place of Employment",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Place of Employment",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "School District",
+            "dataType": "string",
+            "sourceColumn": "School District",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "School District",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "School Name",
+            "dataType": "string",
+            "sourceColumn": "School Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "School Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "School Phone Number",
+            "dataType": "string",
+            "sourceColumn": "School Phone Number",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "School Phone Number",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Social Security",
+            "dataType": "string",
+            "sourceColumn": "Social Security",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Social Security",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "SSI",
+            "dataType": "string",
+            "sourceColumn": "SSI",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "SSI",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Total Annual Income",
+            "dataType": "string",
+            "sourceColumn": "Total Annual Income",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Total Annual Income",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Van Information",
+            "dataType": "string",
+            "sourceColumn": "Van Information",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Van Information",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Welfare _TANF_",
+            "dataType": "string",
+            "sourceColumn": "Welfare _TANF_",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Welfare _TANF_",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Does the child need to be picked up in a VOA van before Camp Glow?",
+            "dataType": "string",
+            "sourceColumn": "Does the child need to be picked up in a VOA van before Camp Glow?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Does the child need to be picked up in a VOA van before Camp Glow?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Relationship to Child",
+            "dataType": "string",
+            "sourceColumn": "Relationship to Child",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Relationship to Child",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "WIOA?",
+            "dataType": "string",
+            "sourceColumn": "WIOA?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "WIOA?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Will this provider want to visit during the program?",
+            "dataType": "string",
+            "sourceColumn": "Will this provider want to visit during the program?",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Will this provider want to visit during the program?",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Work Phone",
+            "dataType": "string",
+            "sourceColumn": "Work Phone",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Work Phone",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "raw_lighthouse_registration",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "silver.choice_entries",
+        "sourceLineageTag": "[dbo].[silver.choice_entries]",
+        "columns": [
+          {
+            "name": "Client ID",
+            "dataType": "string",
+            "sourceColumn": "Client ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Entry Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Entry Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Exit ID",
+            "dataType": "string",
+            "sourceColumn": "Entry Exit ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Entry Exit ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Exit Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Exit Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Exit Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider",
+            "dataType": "string",
+            "sourceColumn": "Provider",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "silver.choice_entries",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "silver.choice_services",
+        "sourceLineageTag": "[dbo].[silver.choice_services]",
+        "columns": [
+          {
+            "name": "Last Name",
+            "dataType": "string",
+            "sourceColumn": "Last Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Last Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "First Name",
+            "dataType": "string",
+            "sourceColumn": "First Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "First Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Client ID",
+            "dataType": "string",
+            "sourceColumn": "Client ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Service Start Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Service Start Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Service Start Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider Specific Service",
+            "dataType": "string",
+            "sourceColumn": "Provider Specific Service",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider Specific Service",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Number of Units",
+            "dataType": "double",
+            "sourceColumn": "Number of Units",
+            "sourceProviderType": "float",
+            "sourceLineageTag": "Number of Units",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "User Creating",
+            "dataType": "string",
+            "sourceColumn": "User Creating",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "User Creating",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider Creating",
+            "dataType": "string",
+            "sourceColumn": "Provider Creating",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider Creating",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Service ID",
+            "dataType": "string",
+            "sourceColumn": "Service ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Service ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "silver.choice_services",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "silver.gaps_entries",
+        "sourceLineageTag": "[dbo].[silver.gaps_entries]",
+        "columns": [
+          {
+            "name": "Client ID",
+            "dataType": "string",
+            "sourceColumn": "Client ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Entry Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Entry Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Exit ID",
+            "dataType": "string",
+            "sourceColumn": "Entry Exit ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Entry Exit ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Exit Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Exit Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Exit Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider",
+            "dataType": "string",
+            "sourceColumn": "Provider",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "silver.gaps_entries",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "silver.levelUp_entries",
+        "sourceLineageTag": "[dbo].[silver.levelUp_entries]",
+        "columns": [
+          {
+            "name": "Client ID",
+            "dataType": "string",
+            "sourceColumn": "Client ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Entry Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Entry Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Exit ID",
+            "dataType": "string",
+            "sourceColumn": "Entry Exit ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Entry Exit ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Exit Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Exit Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Exit Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider",
+            "dataType": "string",
+            "sourceColumn": "Provider",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "silver.levelUp_entries",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "silver.lighthouse_entries",
+        "sourceLineageTag": "[dbo].[silver.lighthouse_entries]",
+        "columns": [
+          {
+            "name": "Client ID",
+            "dataType": "string",
+            "sourceColumn": "Client ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Entry Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Entry Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Exit ID",
+            "dataType": "string",
+            "sourceColumn": "Entry Exit ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Entry Exit ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Exit Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Exit Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Exit Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider",
+            "dataType": "string",
+            "sourceColumn": "Provider",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "silver.lighthouse_entries",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "silver.lighthouse_services",
+        "sourceLineageTag": "[dbo].[silver.lighthouse_services]",
+        "columns": [
+          {
+            "name": "Last Name",
+            "dataType": "string",
+            "sourceColumn": "Last Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Last Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "First Name",
+            "dataType": "string",
+            "sourceColumn": "First Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "First Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Client ID",
+            "dataType": "string",
+            "sourceColumn": "Client ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Service Start Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Service Start Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Service Start Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider Specific Service",
+            "dataType": "string",
+            "sourceColumn": "Provider Specific Service",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider Specific Service",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Number of Units",
+            "dataType": "double",
+            "sourceColumn": "Number of Units",
+            "sourceProviderType": "float",
+            "sourceLineageTag": "Number of Units",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "User Creating",
+            "dataType": "string",
+            "sourceColumn": "User Creating",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "User Creating",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider Creating",
+            "dataType": "string",
+            "sourceColumn": "Provider Creating",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider Creating",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Service ID",
+            "dataType": "string",
+            "sourceColumn": "Service ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Service ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "silver.lighthouse_services",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "silver.now_entries",
+        "sourceLineageTag": "[dbo].[silver.now_entries]",
+        "columns": [
+          {
+            "name": "Client ID",
+            "dataType": "string",
+            "sourceColumn": "Client ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Entry Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Entry Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Exit ID",
+            "dataType": "string",
+            "sourceColumn": "Entry Exit ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Entry Exit ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Exit Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Exit Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Exit Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider",
+            "dataType": "string",
+            "sourceColumn": "Provider",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "silver.now_entries",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "silver.sc_entries",
+        "sourceLineageTag": "[dbo].[silver.sc_entries]",
+        "columns": [
+          {
+            "name": "Client ID",
+            "dataType": "string",
+            "sourceColumn": "Client ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Entry Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Entry Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Exit ID",
+            "dataType": "string",
+            "sourceColumn": "Entry Exit ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Entry Exit ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Exit Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Exit Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Exit Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider",
+            "dataType": "string",
+            "sourceColumn": "Provider",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "silver.sc_entries",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "silver.shoc_entries",
+        "sourceLineageTag": "[dbo].[silver.shoc_entries]",
+        "columns": [
+          {
+            "name": "Client ID",
+            "dataType": "string",
+            "sourceColumn": "Client ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Entry Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Entry Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Exit ID",
+            "dataType": "string",
+            "sourceColumn": "Entry Exit ID",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Entry Exit ID",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Exit Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Exit Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Exit Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider",
+            "dataType": "string",
+            "sourceColumn": "Provider",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "silver.shoc_entries",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "sp_entry_table",
+        "sourceLineageTag": "[dbo].[sp_entry_table]",
+        "columns": [
+          {
+            "name": "Client ID",
+            "dataType": "int64",
+            "sourceColumn": "Client ID",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Entry Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Entry Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Entry Exit ID",
+            "dataType": "int64",
+            "sourceColumn": "Entry Exit ID",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "Entry Exit ID",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Exit Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Exit Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Exit Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider",
+            "dataType": "string",
+            "sourceColumn": "Provider",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "sp_entry_table",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "sp_services_table",
+        "sourceLineageTag": "[dbo].[sp_services_table]",
+        "columns": [
+          {
+            "name": "Last Name",
+            "dataType": "string",
+            "sourceColumn": "Last Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Last Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "First Name",
+            "dataType": "string",
+            "sourceColumn": "First Name",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "First Name",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Client ID",
+            "dataType": "int64",
+            "sourceColumn": "Client ID",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "Client ID",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Service Start Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Service Start Date",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "Service Start Date",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider Specific Service",
+            "dataType": "string",
+            "sourceColumn": "Provider Specific Service",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider Specific Service",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Number of Units",
+            "dataType": "double",
+            "sourceColumn": "Number of Units",
+            "sourceProviderType": "float",
+            "sourceLineageTag": "Number of Units",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "User Creating",
+            "dataType": "string",
+            "sourceColumn": "User Creating",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "User Creating",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Provider Creating",
+            "dataType": "string",
+            "sourceColumn": "Provider Creating",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "Provider Creating",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Service ID",
+            "dataType": "int64",
+            "sourceColumn": "Service ID",
+            "formatString": "0",
+            "sourceProviderType": "bigint",
+            "sourceLineageTag": "Service ID",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "{{Partition_Name}}",
+            "mode": "directLake",
+            "source": {
+              "type": "entity",
+              "entityName": "sp_services_table",
+              "expressionSource": "DatabaseQuery",
+              "schemaName": "dbo"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "IsTableInBiModel",
+            "value": "False"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "name": "DatabaseQuery",
+        "kind": "m",
+        "expression": "let\n    database = {{TDS_Endpoint}}\nin\n    database\n"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "SourceLineageTagType",
+        "value": "DatabaseFullyQualifiedName"
+      }
+    ]
+  }
+}

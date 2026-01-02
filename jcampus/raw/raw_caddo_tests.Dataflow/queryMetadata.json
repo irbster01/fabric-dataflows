@@ -1,0 +1,27 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_caddo_tests",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "caddo_tests": {
+      "queryId": "9fb45c7d-12e5-469b-8b9c-370d9e846741",
+      "queryName": "caddo_tests",
+      "loadEnabled": false
+    },
+    "caddo_tests_DataDestination": {
+      "queryId": "59efedc3-a13c-4e4e-b2e0-59f566acb847",
+      "queryName": "caddo_tests_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

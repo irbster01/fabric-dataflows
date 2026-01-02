@@ -1,0 +1,15 @@
+[
+  {
+    "name": "active_choice_with_intake",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/active_choice_with_intake",
+        "itemId": "babe9910-3fd2-abf5-4f97-c0bc529f0d5c",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "Lakehouse"
+      }
+    }
+  }
+]

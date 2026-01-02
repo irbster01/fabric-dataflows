@@ -1,0 +1,152 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "arkansas_xml_export",
+  "queryGroups": [
+    {
+      "id": "ecb0de0d-3a53-4016-8bbb-23fc47cf4d4e",
+      "name": "Transform file from hmis_export"
+    },
+    {
+      "id": "220deb0f-9c82-47ca-91b1-27a6af5141d0",
+      "name": "Helper queries",
+      "parentId": "ecb0de0d-3a53-4016-8bbb-23fc47cf4d4e"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "hmis_export_flat": {
+      "queryId": "5476d876-d59d-4c78-888c-d50894dbf0db",
+      "queryName": "hmis_export_flat",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "fdf61d75-847c-45a2-abf4-d6381100886a",
+      "queryName": "Sample file",
+      "queryGroupId": "220deb0f-9c82-47ca-91b1-27a6af5141d0",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "7ab84627-d0d2-4032-915c-34fa9f0642e8",
+      "queryName": "Parameter",
+      "queryGroupId": "220deb0f-9c82-47ca-91b1-27a6af5141d0",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "17625236-0f31-419f-96c2-f357376494c5",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "ecb0de0d-3a53-4016-8bbb-23fc47cf4d4e",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "c0264fa3-4a3f-4df2-9906-1e3a5870d298",
+      "queryName": "Transform file",
+      "queryGroupId": "220deb0f-9c82-47ca-91b1-27a6af5141d0",
+      "loadEnabled": false
+    },
+    "fxUnfurlRecord": {
+      "queryId": "89f2a142-9b39-48b2-9342-1a93ff6dfc0d",
+      "queryName": "fxUnfurlRecord",
+      "loadEnabled": false
+    },
+    "bronze_hmis_providers": {
+      "queryId": "be00d84d-63a6-423b-9335-33edcd4ac259",
+      "queryName": "bronze_hmis_providers",
+      "loadEnabled": false
+    },
+    "bronze_hmis_provider_service_units": {
+      "queryId": "9f70204e-ebf7-44d0-9d03-1c75f1ce2647",
+      "queryName": "bronze_hmis_provider_service_units",
+      "loadEnabled": false
+    },
+    "bronze_hmis_bed_unit_inventory": {
+      "queryId": "4fb2072f-5c1f-46ea-a62b-8f76969f3cab",
+      "queryName": "bronze_hmis_bed_unit_inventory",
+      "loadEnabled": false
+    },
+    "bronze_hmis_clients": {
+      "queryId": "f9a626b8-91dd-4359-b3f8-e5cc344f8122",
+      "queryName": "bronze_hmis_clients",
+      "loadEnabled": false
+    },
+    "bronze_hmis_households": {
+      "queryId": "6b8ca374-9745-4a78-8d27-400da9087b7b",
+      "queryName": "bronze_hmis_households",
+      "loadEnabled": false
+    },
+    "bronze_hmis_case_managers": {
+      "queryId": "de3a803e-f582-42f1-b389-366b895630aa",
+      "queryName": "bronze_hmis_case_managers",
+      "loadEnabled": false
+    },
+    "bronze_hmis_goals": {
+      "queryId": "f2a03449-9c4e-4fcf-a591-f46900d0155b",
+      "queryName": "bronze_hmis_goals",
+      "loadEnabled": false
+    },
+    "bronze_hmis_action_steps": {
+      "queryId": "dc243221-5c3a-44f6-9a95-e1ece513e3d8",
+      "queryName": "bronze_hmis_action_steps",
+      "loadEnabled": false
+    },
+    "bronze_hmis_case_notes": {
+      "queryId": "f38e9993-90c9-4f22-8695-24f4eb895113",
+      "queryName": "bronze_hmis_case_notes",
+      "loadEnabled": false
+    },
+    "bronze_hmis_infractions": {
+      "queryId": "9bdde9fe-a28e-4cd8-a5ab-297cad1aeb9a",
+      "queryName": "bronze_hmis_infractions",
+      "loadEnabled": false
+    },
+    "bronze_hmis_release_of_info": {
+      "queryId": "160ce583-4c37-4518-8ed3-9a7032e5e604",
+      "queryName": "bronze_hmis_release_of_info",
+      "loadEnabled": false
+    },
+    "bronze_hmis_need_service_groups": {
+      "queryId": "67095dff-f894-4695-80ee-e443ab7b671b",
+      "queryName": "bronze_hmis_need_service_groups",
+      "loadEnabled": false
+    },
+    "bronze_hmis_needs": {
+      "queryId": "55430570-5488-452d-89d8-75184a7d12d6",
+      "queryName": "bronze_hmis_needs",
+      "loadEnabled": false
+    },
+    "bronze_hmis_services": {
+      "queryId": "1a3fc0f9-12aa-4c98-b9ed-33520f632d8c",
+      "queryName": "bronze_hmis_services",
+      "loadEnabled": false
+    },
+    "bronze_hmis_need_service_group_funds": {
+      "queryId": "3cee7e74-db83-420f-98c1-3d49223f9da5",
+      "queryName": "bronze_hmis_need_service_group_funds",
+      "loadEnabled": false
+    },
+    "bronze_hmis_entry_exits": {
+      "queryId": "2e8dd747-a0ed-4b88-b705-67741d601826",
+      "queryName": "bronze_hmis_entry_exits",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "2baed3fb-a093-4101-90c0-4f4a0365d7c3",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "bronze_hmis_clients_DataDestination": {
+      "queryId": "359e2bcc-3d3f-43a6-ad84-51d2fb079cff",
+      "queryName": "bronze_hmis_clients_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

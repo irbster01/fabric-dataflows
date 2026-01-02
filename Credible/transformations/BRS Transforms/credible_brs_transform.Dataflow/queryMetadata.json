@@ -1,0 +1,84 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "credible_brs_transform",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_credible_brs": {
+      "queryId": "240850ac-e550-4f69-b1d4-fa8e22d8807d",
+      "queryName": "raw_credible_brs"
+    },
+    "raw_credible_brs_cross": {
+      "queryId": "badeeb55-ec28-472e-a30b-95b822886514",
+      "queryName": "raw_credible_brs_cross"
+    },
+    "raw_credible_lookup_dict": {
+      "queryId": "b28308f4-9575-4a24-81c4-fc9bdf18421c",
+      "queryName": "raw_credible_lookup_dict"
+    },
+    "brs_w_balance": {
+      "queryId": "bbe07db0-e684-45d8-8183-429fabb6f858",
+      "queryName": "brs_w_balance",
+      "loadEnabled": false
+    },
+    "brs_balance_by_prog": {
+      "queryId": "cbb3efa2-9229-4945-939a-980c66b9d555",
+      "queryName": "brs_balance_by_prog",
+      "loadEnabled": false
+    },
+    "brs_balance_by_brsStatus": {
+      "queryId": "0dbf2b57-4c9c-4014-a531-2839b3face34",
+      "queryName": "brs_balance_by_brsStatus",
+      "loadEnabled": false
+    },
+    "brs_balance_by_bucket": {
+      "queryId": "b0a2db4b-55d6-48d9-a1a9-7d5ff6fd869c",
+      "queryName": "brs_balance_by_bucket",
+      "loadEnabled": false
+    },
+    "brs_balance_by_servType": {
+      "queryId": "8724a603-5717-49f7-b7cf-2e7a482fa56c",
+      "queryName": "brs_balance_by_servType",
+      "loadEnabled": false
+    },
+    "brs_balance_by_servStatus": {
+      "queryId": "5e0ddf68-4411-4c04-9f59-3552ccf77bda",
+      "queryName": "brs_balance_by_servStatus",
+      "loadEnabled": false
+    },
+    "brs_balance_by_Payer": {
+      "queryId": "d39e0152-e768-488d-a866-5979052f2801",
+      "queryName": "brs_balance_by_Payer",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "e186a20f-4e8d-49dd-8ab7-d391bc575462",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "brs_count_bucket": {
+      "queryId": "ebdb74b1-93f2-4b1f-aac9-849bf053bab3",
+      "queryName": "brs_count_bucket",
+      "loadEnabled": false
+    },
+    "brs_count_brsStatus": {
+      "queryId": "b69f6118-d577-4f9f-bcc1-00b6761e856c",
+      "queryName": "brs_count_brsStatus",
+      "loadEnabled": false
+    },
+    "brs_count_servType": {
+      "queryId": "04dbd50b-5fdc-471f-8c01-beb4b1e559a2",
+      "queryName": "brs_count_servType",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+table 'Revenue YTD Measures'
+	lineageTag: f80356ca-785c-4f82-8c84-95121616e70a
+
+	measure 'Revenue YTD' =
+			
+			TOTALYTD('Revenue Measures'[Revenue], 'Date'[Date], "6-30")
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f5909abb-50b7-4a6b-9316-9f7e18c6cc39
+
+	measure 'Revenue YTD Last Year' = CALCULATE('Revenue YTD Measures'[Revenue YTD],SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 8d09cc69-b9f0-4618-afab-0aaeffbc3be3
+
+	column Value
+		formatString: 0
+		lineageTag: fde20817-65d5-4268-a05d-f0006934c4a6
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Revenue YTD Measures' = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = 5089c5296ba54478864c518e92dbc2e8
+

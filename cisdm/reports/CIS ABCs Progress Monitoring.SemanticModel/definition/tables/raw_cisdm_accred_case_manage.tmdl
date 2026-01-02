@@ -1,0 +1,284 @@
+table raw_cisdm_accred_case_manage
+	lineageTag: c6f58204-2fc6-47a7-b527-bbe2a9e94d97
+
+	column org
+		dataType: string
+		lineageTag: 6238c0b4-b15d-44e1-a419-51777b95c367
+		summarizeBy: none
+		sourceColumn: org
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_name
+		dataType: string
+		lineageTag: 08efb2db-f9ca-4253-b71d-9c7f1c92a354
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_id
+		dataType: string
+		lineageTag: fa45ba9b-195c-4146-aa16-6f30500d2532
+		summarizeBy: none
+		sourceColumn: site_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column nces_id
+		dataType: string
+		lineageTag: a76b872d-a29a-4076-838f-75951cf61942
+		summarizeBy: none
+		sourceColumn: nces_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_model
+		dataType: string
+		lineageTag: 2d9a39d1-6762-4af5-a7ce-2dfba4e387b0
+		summarizeBy: none
+		sourceColumn: school_model
+
+		annotation SummarizationSetBy = Automatic
+
+	column district
+		dataType: string
+		lineageTag: efecc1b0-6e84-44c8-b61c-73a161faf6a7
+		summarizeBy: none
+		sourceColumn: district
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_type
+		dataType: string
+		lineageTag: dff6f114-e135-444a-a8d1-2baac8b25367
+		summarizeBy: none
+		sourceColumn: school_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_status
+		dataType: string
+		lineageTag: 0d33c76b-0b1d-41ea-a499-de3b74029257
+		summarizeBy: none
+		sourceColumn: school_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_school_enrollment
+		dataType: int64
+		formatString: 0
+		lineageTag: e4df12bb-cf4a-4a95-af00-5d26e2a35671
+		summarizeBy: sum
+		sourceColumn: total_school_enrollment
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_of_grading_periods
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b988bf0-918c-440d-a886-77bc6237bd49
+		summarizeBy: sum
+		sourceColumn: num_of_grading_periods
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_case_managed_students
+		dataType: int64
+		formatString: 0
+		lineageTag: d63213dc-d859-4212-b71a-7f12b389de14
+		summarizeBy: sum
+		sourceColumn: total_case_managed_students
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_of_students_with_support_plan
+		dataType: int64
+		formatString: 0
+		lineageTag: 56e1feba-6c72-41c4-bd12-79ce53ee6ba2
+		summarizeBy: sum
+		sourceColumn: num_of_students_with_support_plan
+
+		annotation SummarizationSetBy = Automatic
+
+	column %of_students_w_support_plan
+		dataType: double
+		lineageTag: bc757246-c36d-4f11-9bfc-1050f01c015d
+		summarizeBy: sum
+		sourceColumn: %of_students_w_support_plan
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column num_of_students_w_tier1_2
+		dataType: int64
+		formatString: 0
+		lineageTag: 6e498ab3-b16d-4bc2-a33e-f1a4d4050bb4
+		summarizeBy: sum
+		sourceColumn: num_of_students_w_tier1_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_w_tier2&3_w_support_plan
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d6fe6d3-0803-4e8f-8267-a260d7754fa3
+		summarizeBy: sum
+		sourceColumn: num_w_tier2&3_w_support_plan
+
+		annotation SummarizationSetBy = Automatic
+
+	column saturation_rate
+		dataType: double
+		lineageTag: b01efa3d-baec-4ba0-9410-81b88cd794b5
+		summarizeBy: sum
+		sourceColumn: saturation_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column num_of_enrolled_with_outdated_consent
+		dataType: int64
+		formatString: 0
+		lineageTag: e76f9379-1436-4109-959d-822774c1673e
+		summarizeBy: sum
+		sourceColumn: num_of_enrolled_with_outdated_consent
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_tracked_outside_consent_dates
+		dataType: int64
+		formatString: 0
+		lineageTag: ed062263-6dc3-41c7-80fb-15ff8973d2cb
+		summarizeBy: sum
+		sourceColumn: num_tracked_outside_consent_dates
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_w_basic_needs_entered
+		dataType: int64
+		formatString: 0
+		lineageTag: 97a1fec5-4883-4ca5-8fbf-22f0ce258318
+		summarizeBy: sum
+		sourceColumn: num_w_basic_needs_entered
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_w_>1_formal_checkin
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c90d8d5-aa15-4de5-8540-ad7845abba95
+		summarizeBy: sum
+		sourceColumn: num_w_>1_formal_checkin
+
+		annotation SummarizationSetBy = Automatic
+
+	column %_w_1+_formal_checkin
+		dataType: double
+		lineageTag: a740a276-601b-41af-ae64-061cdc4708e1
+		summarizeBy: sum
+		sourceColumn: %_w_1+_formal_checkin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column %_on_track_monthly_checkins
+		dataType: double
+		lineageTag: 6c6cf6a1-4e38-4893-8f7e-ed99c9fb611e
+		summarizeBy: sum
+		sourceColumn: %_on_track_monthly_checkins
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '% of CM Students with Adjusted Support Plans'
+		dataType: double
+		lineageTag: 480ad3f9-f971-4af9-9709-da82072b1d3d
+		summarizeBy: sum
+		sourceColumn: % of CM Students with Adjusted Support Plans
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column num_w_1+_progress_entry
+		dataType: int64
+		formatString: 0
+		lineageTag: 0275fe55-17a6-4c46-b1a6-66b799b790d9
+		summarizeBy: sum
+		sourceColumn: num_w_1+_progress_entry
+
+		annotation SummarizationSetBy = Automatic
+
+	column %_w_1+_progress_entry
+		dataType: double
+		lineageTag: 77758643-a2ca-4d98-9700-5fd03ec1e893
+		summarizeBy: sum
+		sourceColumn: %_w_1+_progress_entry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column num_w_goal_achieve
+		dataType: int64
+		formatString: 0
+		lineageTag: c04a253b-76bc-49d0-9677-d29e59cbd37d
+		summarizeBy: sum
+		sourceColumn: num_w_goal_achieve
+
+		annotation SummarizationSetBy = Automatic
+
+	column %_w_goal_achieve
+		dataType: double
+		lineageTag: 64798f8f-5800-45ee-a53a-7964364184c5
+		summarizeBy: sum
+		sourceColumn: %_w_goal_achieve
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column num_w_eoy_entered
+		dataType: int64
+		formatString: 0
+		lineageTag: e9fdbfdb-130e-48f5-b17c-44a65dd45c13
+		summarizeBy: sum
+		sourceColumn: num_w_eoy_entered
+
+		annotation SummarizationSetBy = Automatic
+
+	column %_w_eoy_entered
+		dataType: double
+		lineageTag: 3072fc6e-a0eb-4e5b-a78d-6a4ef17534fc
+		summarizeBy: sum
+		sourceColumn: %_w_eoy_entered
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column num_students_exited
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f543b84-af39-4d6b-bbec-13fb5af99121
+		summarizeBy: sum
+		sourceColumn: num_students_exited
+
+		annotation SummarizationSetBy = Automatic
+
+	partition raw_cisdm_accred_case_manage = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    dbo_raw_cisdm_accred_case_manage = Source{[Schema="dbo",Item="raw_cisdm_accred_case_manage"]}[Data]
+				in
+				    dbo_raw_cisdm_accred_case_manage
+
+	annotation PBI_ResultType = Table
+

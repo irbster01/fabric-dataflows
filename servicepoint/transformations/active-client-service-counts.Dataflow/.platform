@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "active-client-service-counts",
+    "description": "ServicePoint - this takes the enrolled clients and counts how many services they have. There are some tables to keep track of clients with no services at all."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7b9d2701-593c-b983-4428-e62bec86b879"
+  }
+}

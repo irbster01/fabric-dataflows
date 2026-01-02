@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "MirroredDatabase",
+    "displayName": "voanla-ops-db"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "66a2999a-47a9-ad17-45c4-0bd42e0c3ced"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "caddo-census"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "197b35d8-c386-8f87-4f84-11a986e77843"
+  }
+}

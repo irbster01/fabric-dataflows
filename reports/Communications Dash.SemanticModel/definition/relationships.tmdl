@@ -1,0 +1,14 @@
+relationship 3656c19f-6e1f-4f21-8cdd-ccb9060dcbed
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.Date
+	toColumn: LocalDateTable_d6297fe6-f6ce-4ee5-ae08-ea568c100701.Date
+
+relationship 4439a92c-f7bb-e13d-8fb1-94996a5f4f86
+	fromColumn: cred_sp_lsndc_services_merged.service_date
+	toColumn: Date.Date
+
+relationship b6dd806a-75a9-4399-bf06-7e1a21426eaf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cred_sp_lsndc_services_merged.dob
+	toColumn: LocalDateTable_5e8ce4ea-b809-41aa-be2d-504f7f86eb27.Date
+

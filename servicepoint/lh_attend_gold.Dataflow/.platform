@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "lh_attend_gold"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1ea74a21-fce7-9bed-4fb5-30a147eb59ff"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_credible_eligibility"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "62d6ab7f-38d9-a18a-4eb2-28761e035ad8"
+  }
+}

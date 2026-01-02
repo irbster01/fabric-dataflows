@@ -1,0 +1,54 @@
+table 'Aggregated Academic Goals'
+	lineageTag: 90252f32-3579-4a38-ba68-91ca36515022
+
+	column org_controller
+		dataType: string
+		lineageTag: 9c7db813-ef06-4f0e-ab13-cb96965567ff
+		summarizeBy: none
+		sourceColumn: org_controller
+
+		annotation SummarizationSetBy = Automatic
+
+	column positive_progress
+		dataType: double
+		lineageTag: 605015e0-11ba-43c3-aa80-fbfb8f679f5c
+		summarizeBy: sum
+		sourceColumn: positive_progress
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column all_monitored
+		dataType: double
+		lineageTag: 5db94731-3ef4-4b74-8c6a-28566c8ee593
+		summarizeBy: sum
+		sourceColumn: all_monitored
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column positive_percentage
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: c893d96c-e2c0-4393-b18d-a0364484b499
+		summarizeBy: sum
+		sourceColumn: positive_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Aggregated Academic Goals' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_cis_org_academics_count = Source{[Schema="cis",Item="cis_org_academics_count"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(cis_cis_org_academics_count,{{"positive_percentage", Percentage.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

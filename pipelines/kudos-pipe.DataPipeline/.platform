@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "kudos-pipe"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f4780638-85b0-aaf2-4c14-5e6c50123da7"
+  }
+}

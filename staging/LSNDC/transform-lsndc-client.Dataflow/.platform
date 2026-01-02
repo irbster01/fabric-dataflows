@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "transform-lsndc-client"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "99582cbc-e7f8-aa40-48f9-8d6b9edd6502"
+  }
+}

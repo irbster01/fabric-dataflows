@@ -1,0 +1,29 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Risk Management Tracker","Date"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table 'Risk Management Tracker'
+ref table DateTableTemplate_bbadb094-0d99-40bc-9e9c-8856038ea39c
+ref table LocalDateTable_0e09fe42-f6eb-4a8c-b3f5-17f1e72f9d86
+ref table LocalDateTable_0f3f72e9-d79e-4c31-9d62-cb760891dab2
+ref table LocalDateTable_0f567314-0103-4035-b2f1-ee13a87fd0f4
+ref table LocalDateTable_181c7aa1-ff13-440b-8a6b-bbd63f3a307f
+ref table LocalDateTable_3605a162-fea8-4a01-9762-73551bf87da2
+ref table Date
+ref table LocalDateTable_46723891-6da5-4a61-9e66-b950f08aa9b0
+ref table LocalDateTable_ddc38ec8-3276-4075-b625-1f39437e8e93
+ref table LocalDateTable_5342d232-b23f-435c-8d99-fe1bc6849878
+ref table LocalDateTable_cf90f57a-127b-4aaa-941e-4bd3cf549cdd
+ref table LocalDateTable_82deffe6-00d7-4241-aa76-aa554cad81ec
+ref table LocalDateTable_14eb4bd3-5f6d-4618-a22c-4a7d27d6d8b9
+
+ref cultureInfo en-US
+

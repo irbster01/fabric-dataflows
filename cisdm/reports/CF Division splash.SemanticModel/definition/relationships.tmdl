@@ -1,0 +1,395 @@
+relationship AutoDetected_f71178bf-c04e-4502-8d50-8bab38d5c718
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Aggregated Attendance Goals'.org_controller
+	toColumn: 'Aggregated Behavior Goals'.org_controller
+
+relationship AutoDetected_8c1702ce-4683-42d6-b9b6-5a9c7bdc0fe7
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'cis cis_org_all_goals_count'.org_controller
+	toColumn: 'Aggregated Behavior Goals'.org_controller
+
+relationship AutoDetected_90b5b8af-907e-4293-b9d2-55d9b5dbc62d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Aggregated Attendance Goals'.org_controller
+	toColumn: 'Aggregated Academic Goals'.org_controller
+
+relationship AutoDetected_79394ca7-2b71-4936-accd-83ea34d31939
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'cis cis_org_all_goals_count'.org_controller
+	toColumn: 'Aggregated Academic Goals'.org_controller
+
+relationship AutoDetected_44f5f583-3a87-4175-b544-bce5e20986e2
+	fromColumn: 'cis cis_behavior_positive_count'.positive_percentage
+	toColumn: 'cis cis_academics_positive_count'.positive_percentage
+
+relationship AutoDetected_38e09bbe-fa79-4b7a-8cfd-7c23889ead93
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'cis cis_dibels'.sasid
+	toColumn: 'cis cis_client_list'.sasid
+
+relationship AutoDetected_3742b4f8-63a2-440e-88ff-c53c34c47652
+	fromColumn: 'cis cis_dibels'.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_5783bf40-0e29-4b47-a9a0-ac2fc1e8ed44
+	isActive: false
+	fromColumn: 'cis cis_client_list'.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_ec25ec4c-29cf-4aea-a4ce-00f8a7bccdd8
+	fromColumn: 'cis cis_dibels'.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship AutoDetected_09cc7839-ba41-4ba5-a6fb-f3fb8788db9a
+	isActive: false
+	fromColumn: 'cis cis_client_list'.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship AutoDetected_9c13ba1a-5370-4c84-9efe-65b3989214cd
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'All Goals - Any Progress by School'.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_6c23e3f7-1074-46d5-915e-c87ae80aa1a5
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'All Goals - Any Progress by School'.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship AutoDetected_487378eb-9c54-4678-b1b4-655f006c7994
+	fromColumn: 'All Goals - Positive Progress'.positive_percentage
+	toColumn: 'cis cis_academics_positive_count'.positive_percentage
+
+relationship 15ac2c99-f4ca-46bd-8258-97139c4fd7cc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cis_academics_goal_clients.baseline_date
+	toColumn: LocalDateTable_3ee59b59-7b0f-449d-a0c7-77889065155d.Date
+
+relationship 1eb5b8c2-4503-48ee-8660-e0e66a98129c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cis_academics_goal_clients.target_set_date
+	toColumn: LocalDateTable_51c0ac74-1bc6-45a5-bcd4-84eb2e1e5f9b.Date
+
+relationship 909870ee-e574-43e9-bd3a-77b983d61213
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cis_academics_goal_clients.review_date
+	toColumn: LocalDateTable_8ada483f-98a9-4cfb-bd37-88c9c66e2be9.Date
+
+relationship 53853052-2037-4f0b-8476-fbcc4f66b6b1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cis_academics_goal_clients.entry_date
+	toColumn: LocalDateTable_b6bcd101-3cfd-4361-8e82-e5f04bb4c721.Date
+
+relationship 26b0c064-0a5a-4f11-b3d1-f7bf17ed1df9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cis_academics_goal_clients.exit_date
+	toColumn: LocalDateTable_75344f5e-aac4-4e41-8f23-3c33b9148e60.Date
+
+relationship 1c53d425-1b2a-4455-9e84-b5398ab8fe8c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'ProgMon - Attendance Detail'.baseline_date
+	toColumn: LocalDateTable_38c986f2-252a-48c0-b744-84bd2273f22d.Date
+
+relationship 71214e10-0d9e-4c49-9eb1-98f68b50135c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'ProgMon - Attendance Detail'.target_set_date
+	toColumn: LocalDateTable_569c32c1-9567-43e0-bf93-32e28db75b0f.Date
+
+relationship b523166b-44d2-4f4a-9b21-6bd5e0c2bc91
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'ProgMon - Attendance Detail'.review_date
+	toColumn: LocalDateTable_f6725728-78dd-4b87-a4f2-36c207e85b6c.Date
+
+relationship ef2ab912-e7e7-4bdd-aaf5-f386c379b953
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'ProgMon - Attendance Detail'.entry_date
+	toColumn: LocalDateTable_d87dcb2d-63e2-4434-9c30-e3c109b4401b.Date
+
+relationship b6ef5d9b-81ea-4f2a-942f-16c13c94da01
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'ProgMon - Attendance Detail'.exit_date
+	toColumn: LocalDateTable_597a7e3c-f157-4082-a7c7-6e91939d3d43.Date
+
+relationship 1a7943d7-7b71-42b9-8f4d-095bf2e4017e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cis_behavior_goal_clients.baseline_date
+	toColumn: LocalDateTable_4a6dd238-7bad-4bcf-ad58-3d0310919039.Date
+
+relationship aa33e352-825c-4b55-891b-772c4ce8e58f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cis_behavior_goal_clients.target_set_date
+	toColumn: LocalDateTable_06c81a66-3c8c-4d9e-87d0-340ad398921e.Date
+
+relationship 750756eb-0f7e-4d78-80b3-46c1b3e46533
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cis_behavior_goal_clients.review_date
+	toColumn: LocalDateTable_e4263b0b-37a5-4da2-8710-61a1624176c2.Date
+
+relationship a7bde6ed-ab24-4e82-9deb-5916c42b7e69
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cis_behavior_goal_clients.entry_date
+	toColumn: LocalDateTable_08e00fc9-a553-42cd-9a97-f0a3e0e87c25.Date
+
+relationship 6825b1f7-dc8c-445b-819c-ebdda4486008
+	joinOnDateBehavior: datePartOnly
+	fromColumn: cis_behavior_goal_clients.exit_date
+	toColumn: LocalDateTable_e009049c-06ab-4bf9-91e0-11c9b141f68a.Date
+
+relationship AutoDetected_df8c8393-8d1e-467e-bc71-da41a449f029
+	fromColumn: cis_academics_goal_clients.sasid
+	toColumn: 'cis cis_client_list'.sasid
+
+relationship AutoDetected_ddeb3f44-70be-4639-a593-6a317b231d38
+	fromColumn: 'ProgMon - Attendance Detail'.sasid
+	toColumn: 'cis cis_client_list'.sasid
+
+relationship AutoDetected_f4d9078c-6530-47c8-a321-20fba7b24e26
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: cis_behavior_goal_clients.sasid
+	toColumn: 'cis cis_client_list'.sasid
+
+relationship AutoDetected_d8ff7bb1-be78-4cbc-83ee-acbde35596cc
+	isActive: false
+	fromColumn: cis_academics_goal_clients.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_98c57163-ccd9-4346-9d8e-23a1f52e6cf8
+	isActive: false
+	fromColumn: 'ProgMon - Attendance Detail'.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_e21555c8-954d-4afb-9a05-c99f8aa11d52
+	isActive: false
+	fromColumn: cis_behavior_goal_clients.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_a1cc158f-a332-49a9-b80f-9295bcf4af7c
+	isActive: false
+	fromColumn: cis_academics_goal_clients.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship AutoDetected_d1a0249b-0144-40a1-bcc8-a0b3568fe010
+	isActive: false
+	fromColumn: 'ProgMon - Attendance Detail'.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship AutoDetected_cc280951-da69-4ebf-b15f-2a1e2c1d8b4a
+	isActive: false
+	fromColumn: cis_behavior_goal_clients.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship AutoDetected_22d36d35-aade-42d2-b0e9-7a3e2b7fe01d
+	isActive: false
+	fromColumn: cis_behavior_goal_clients.school_name
+	toColumn: 'cis cis_behavior_positive_count'.school_name
+
+relationship AutoDetected_305a3141-1c07-46a1-9f38-31be823a6dd6
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: raw_cisdm_accred_case_manage.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_467b6d20-3b7d-4972-aeaf-2efc01e272d9
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: raw_cisdm_accred_case_manage.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship 6b7168f3-defb-4cd7-8690-e1eb43458e75
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'cis planned_support_detail'.entry_date
+	toColumn: LocalDateTable_f1ee05ad-51ba-41d6-b824-fef1404d67b2.Date
+
+relationship 44a4578f-bab2-44aa-a4b7-632c66dbd7c8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'cis planned_support_detail'.exit_date
+	toColumn: LocalDateTable_477a5801-96de-4b65-928b-5206170f4df6.Date
+
+relationship e605872e-a719-4194-9e71-013bdbdc3319
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'cis planned_support_detail'.created_date
+	toColumn: LocalDateTable_6f82ad38-1e9a-4613-a457-6d2482bf46fc.Date
+
+relationship 90762dd8-2292-45a2-b5f6-a9cc8af4d3cb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'cis planned_support_detail'.last_mod_date
+	toColumn: LocalDateTable_2f6a0df0-bcd3-4f3e-9883-9a04db063811.Date
+
+relationship AutoDetected_69bbad23-03b6-4c89-bb50-9b30068a5b34
+	fromColumn: 'cis planned_support_detail'.sasid
+	toColumn: 'cis cis_client_list'.sasid
+
+relationship AutoDetected_fd3dcad2-5115-4ac7-829b-968684c9d01f
+	isActive: false
+	fromColumn: 'cis planned_support_detail'.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_84963130-6375-453f-b0fd-35c1ccdfbd3b
+	isActive: false
+	fromColumn: 'cis planned_support_detail'.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship AutoDetected_f20221c1-b8d1-4acf-b82a-8bfabc4f0e4f
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'cis leadership_support_counter'.org
+	toColumn: 'Quarterly Supports'.org
+
+relationship AutoDetected_07069c92-afc0-4c90-9bc6-7161d475cd5b
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'cis leadership_support_counter'.org
+	toColumn: 'cis aggregated_all_planned_supports'.org
+
+relationship AutoDetected_96731920-c310-4d23-a7b8-1e44fa0bae44
+	fromColumn: 'Grades - Client Grade Breakdown'.sasid
+	toColumn: 'cis cis_client_list'.sasid
+
+relationship AutoDetected_9af62ec6-5c24-4949-b59e-7470bc8ee343
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'cis cis_active_client_gpa'.sasid
+	toColumn: 'cis cis_client_list'.sasid
+
+relationship AutoDetected_2b2f2030-a3e0-4745-905c-29b822d01287
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'cis cis_dibels'.client_id
+	toColumn: 'cis cis_active_client_gpa'.client_id
+
+relationship AutoDetected_5972d1ff-2f4c-4dc9-8832-bfc57f2311de
+	isActive: false
+	fromColumn: cis_academics_goal_clients.client_id
+	toColumn: 'cis cis_active_client_gpa'.client_id
+
+relationship AutoDetected_8ec3f2df-0688-4821-95a7-7691afe449bf
+	isActive: false
+	fromColumn: 'ProgMon - Attendance Detail'.client_id
+	toColumn: 'cis cis_active_client_gpa'.client_id
+
+relationship AutoDetected_21b836d5-c299-459d-ac55-bc44ac7eee18
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: cis_behavior_goal_clients.client_id
+	toColumn: 'cis cis_active_client_gpa'.client_id
+
+relationship AutoDetected_79605e02-77e4-4dfe-b072-ea38e306f86f
+	isActive: false
+	fromColumn: 'cis planned_support_detail'.client_id
+	toColumn: 'cis cis_active_client_gpa'.client_id
+
+relationship AutoDetected_bfee62ca-c62a-442c-aa7f-88aa848b5e73
+	isActive: false
+	fromColumn: 'Grades - Client Grade Breakdown'.client_id
+	toColumn: 'cis cis_active_client_gpa'.client_id
+
+relationship AutoDetected_0e352d8e-4571-4714-8fed-edac7764706e
+	isActive: false
+	fromColumn: 'Grades - Client Grade Breakdown'.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_066bf10b-354b-40e9-917b-7e0dfe868685
+	isActive: false
+	fromColumn: 'Grades - Client Grade Breakdown'.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship AutoDetected_47878ffc-43f0-4f2c-adca-0f7eff09478d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Attendance JCampus - Active CIS Clients'.sasid
+	toColumn: 'cis cis_client_list'.sasid
+
+relationship AutoDetected_4ed96bb2-ae64-4f7b-b42e-4712f1cd44dc
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'cis cis_active_client_referrals'.sasid
+	toColumn: 'cis cis_client_list'.sasid
+
+relationship AutoDetected_bca0797c-1d66-42b8-835a-6b006081798e
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Attendance JCampus - Active CIS Clients'.client_id
+	toColumn: 'cis cis_active_client_gpa'.client_id
+
+relationship AutoDetected_334170fc-48a8-4e6c-80f1-0c71106d0e31
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'cis cis_active_client_referrals'.client_id
+	toColumn: 'cis cis_active_client_gpa'.client_id
+
+relationship AutoDetected_7fdb0d54-c717-43fe-8109-6750c2c945c4
+	isActive: false
+	fromColumn: 'Attendance JCampus - Active CIS Clients'.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_44d8e8ef-976b-4e44-bbd9-a97ec20416a8
+	isActive: false
+	fromColumn: 'cis cis_active_client_referrals'.school_name
+	toColumn: 'cis cis_academics_positive_count'.school_name
+
+relationship AutoDetected_de509c1d-4608-49de-ab1a-d27319ec9b59
+	isActive: false
+	fromColumn: 'Attendance JCampus - Active CIS Clients'.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship AutoDetected_6f6a2925-05ac-4a9c-b78a-23ff088f663b
+	isActive: false
+	fromColumn: 'cis cis_active_client_referrals'.school_name
+	toColumn: 'Attendance - Positive Progress by School'.school_name
+
+relationship AutoDetected_682eeb24-44cf-4933-89e0-cbbdafd9340f
+	isActive: false
+	fromColumn: 'ProgMon - Attendance Detail'.client_full_name
+	toColumn: 'Attendance JCampus - Active CIS Clients'.client_full_name
+
+relationship AutoDetected_b53d2ae5-8209-47a9-b71c-d36e987d58e0
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: cis_behavior_goal_clients.client_full_name
+	toColumn: 'Attendance JCampus - Active CIS Clients'.client_full_name
+
+relationship AutoDetected_06fc079f-0a01-4062-a570-d1c6706075d2
+	isActive: false
+	fromColumn: 'cis planned_support_detail'.client_full_name
+	toColumn: 'Attendance JCampus - Active CIS Clients'.client_full_name
+
+relationship AutoDetected_59fc87b1-89ab-4e28-96fe-c4a93ddd6984
+	isActive: false
+	fromColumn: 'Grades - Client Grade Breakdown'.client_full_name
+	toColumn: 'Attendance JCampus - Active CIS Clients'.client_full_name
+
+relationship AutoDetected_544223c5-21ab-45d8-9a52-b0bd32726e78
+	isActive: false
+	fromColumn: 'cis cis_active_client_referrals'.client_full_name
+	toColumn: 'Attendance JCampus - Active CIS Clients'.client_full_name
+
+relationship AutoDetected_29b0194e-e537-406c-9907-cb408dddd15d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Aggregated Any Goals'.positive_progress
+	toColumn: 'cis cis_org_all_goals_count'.positive_progress
+
+relationship AutoDetected_4c8cedd2-f752-44a2-9c0a-9d4b972706d7
+	fromColumn: 'All Goals - Any Progress by School'.goal
+	toColumn: 'Aggregated Any Goals'.goal
+
+relationship 94a4afe7-303b-47e9-b4fd-1c42289e0c3b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: v_client_month_rollups.service_month
+	toColumn: LocalDateTable_63ec162a-0ad1-40d2-8d7c-dd9052965fbf.Date
+

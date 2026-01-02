@@ -1,0 +1,46 @@
+table 'cis cis_client_list'
+	lineageTag: 4a5bcc45-18d7-438a-8e26-aa9b62daec90
+
+	column sasid
+		dataType: string
+		lineageTag: 2ab3dd34-22fd-4253-890e-0d999e3b7ab4
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: 64b2944d-ca9f-4095-9e8c-5eac740c07f3
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_full_name
+		dataType: string
+		lineageTag: 142a962a-95c2-49cd-90f8-28e3da8b220f
+		summarizeBy: none
+		sourceColumn: client_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_name
+		dataType: string
+		lineageTag: 887d5bd2-26e4-408c-ae7b-e5ea758b6efb
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'cis cis_client_list' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_cis_client_list = Source{[Schema="cis",Item="cis_client_list"]}[Data]
+				in
+				    cis_cis_client_list
+
+	annotation PBI_ResultType = Table
+

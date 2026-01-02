@@ -1,0 +1,104 @@
+table '2018 - 2020 SP BH Services'
+	lineageTag: b602c681-efd1-43ae-ae1c-d89d913fd6f8
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: 0cb2d2ec-20e8-45ec-aeea-df26323ac59c
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Name'
+		dataType: string
+		lineageTag: 26b395dc-7352-4d8d-83aa-b64bb0298407
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2151eb12-a6f1-498e-9ead-8b8e251aa00d
+		summarizeBy: count
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Start Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: f582d546-f406-4526-a0a7-062fcbbdce91
+		summarizeBy: none
+		sourceColumn: Service Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Provider Specific Service'
+		dataType: string
+		lineageTag: 4eca6b06-5c1f-4521-908b-2c1ab78d9dbd
+		summarizeBy: none
+		sourceColumn: Provider Specific Service
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Number of Units'
+		dataType: int64
+		formatString: 0
+		lineageTag: f81c5457-da6a-4e69-b598-120e51e9fcb8
+		summarizeBy: sum
+		sourceColumn: Number of Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cost per Unit'
+		dataType: double
+		lineageTag: 9a7cb47f-dc69-4f81-87be-8105f19a4cf4
+		summarizeBy: sum
+		sourceColumn: Cost per Unit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Cost of Units'
+		dataType: double
+		lineageTag: 24ec6db5-c4e5-4a0d-aba3-1a05e4de66e4
+		summarizeBy: sum
+		sourceColumn: Total Cost of Units
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Provider Creating'
+		dataType: string
+		lineageTag: abe90950-090f-44e9-aafe-6d98b1d25d11
+		summarizeBy: none
+		sourceColumn: Provider Creating
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Creating'
+		dataType: string
+		lineageTag: 1a986db0-282e-428f-a9b8-e278552b3474
+		summarizeBy: none
+		sourceColumn: User Creating
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '2018 - 2020 SP BH Services' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"f0b466f8-23fa-4400-8bb0-f06ffa5e962d" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="f0b466f8-23fa-4400-8bb0-f06ffa5e962d"]}[Data],
+				    #"2018 - 2020 SP BH Services_" = #"f0b466f8-23fa-4400-8bb0-f06ffa5e962d"{[entity="2018 - 2020 SP BH Services",version=""]}[Data]
+				in
+				    #"2018 - 2020 SP BH Services_"
+

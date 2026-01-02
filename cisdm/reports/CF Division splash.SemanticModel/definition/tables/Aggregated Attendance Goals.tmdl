@@ -1,0 +1,55 @@
+table 'Aggregated Attendance Goals'
+	lineageTag: 604a860e-752e-4f43-8de2-87249bb043ab
+
+	column org_controller
+		dataType: string
+		lineageTag: 0d10dcf2-d937-4424-ab30-15b4981690c3
+		summarizeBy: none
+		sourceColumn: org_controller
+
+		annotation SummarizationSetBy = Automatic
+
+	column positive_progress
+		dataType: double
+		lineageTag: a2be1273-ba7c-4be4-9dd5-ad14b59a82d3
+		summarizeBy: sum
+		sourceColumn: positive_progress
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column all_monitored
+		dataType: double
+		lineageTag: ef0c9ddb-ab58-4f67-80e1-0f90f8a648b7
+		summarizeBy: sum
+		sourceColumn: all_monitored
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column positive_perc
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: a6db9803-67f3-4d0b-946d-59b74c6d62f8
+		summarizeBy: sum
+		sourceColumn: positive_perc
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Aggregated Attendance Goals' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_cis_org_attendance_count = Source{[Schema="cis",Item="cis_org_attendance_count"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(cis_cis_org_attendance_count,{{"Division", "positive_perc"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"positive_perc", Percentage.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

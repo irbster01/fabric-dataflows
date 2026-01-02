@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "lighthhouse_dates"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "37995a60-e73c-866b-4cc4-09559e617346"
+  }
+}

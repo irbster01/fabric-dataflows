@@ -1,0 +1,247 @@
+table 'Merged Service Counts'
+	lineageTag: bd68bf82-fd75-4825-bf44-405c20c582a1
+
+	column client_id
+		dataType: string
+		lineageTag: 9b55e0d8-949c-42bb-b0ec-6e3afa6f4c86
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column entry_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 563b2cde-e65f-4166-8e3e-a8939da149b9
+		summarizeBy: none
+		sourceColumn: entry_date
+
+		variation Variation
+			isDefault
+			relationship: 4a4f68bd-d59a-4d41-97ea-be440ada8c12
+			defaultHierarchy: LocalDateTable_c04e0428-bce5-4f47-9711-d0378d60e130.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column entry_id
+		dataType: string
+		lineageTag: 88b8dbda-ae37-445c-a457-0feb9563d291
+		summarizeBy: none
+		sourceColumn: entry_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column exit_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 59ba429b-583f-4d0f-8d46-335b129cc597
+		summarizeBy: none
+		sourceColumn: exit_date
+
+		variation Variation
+			isDefault
+			relationship: 995f71de-8e32-448a-ba33-f3e3316da8b9
+			defaultHierarchy: LocalDateTable_d564710f-2a8c-4e2a-b899-6061c869213f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column program
+		dataType: string
+		lineageTag: 4de6ff53-4228-4a40-a448-7fc711a1ac26
+		summarizeBy: none
+		sourceColumn: program
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_dates
+		dataType: string
+		lineageTag: 5a86db47-a698-4557-96ac-3e2fab254bc3
+		summarizeBy: none
+		sourceColumn: session_dates
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a37793f-5a78-4ec5-9e0c-3d6387e86cb8
+		summarizeBy: sum
+		sourceColumn: session_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_enrolled
+		dataType: int64
+		formatString: 0
+		lineageTag: 497d56a7-6212-4782-95d6-ead4b626ccc9
+		summarizeBy: sum
+		sourceColumn: days_enrolled
+
+		annotation SummarizationSetBy = Automatic
+
+	column start2
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0f931532-9da7-41ee-a724-198088816507
+		summarizeBy: none
+		sourceColumn: start2
+
+		variation Variation
+			isDefault
+			relationship: 9c4e374f-08e7-42fd-95e3-a504b6c112e9
+			defaultHierarchy: LocalDateTable_e947480c-1d92-45bf-95a5-5b9f75f6f19a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column dates_from_sept2
+		dataType: string
+		lineageTag: ed47c00d-e6a9-4352-96fe-f990755f77d3
+		summarizeBy: none
+		sourceColumn: dates_from_sept2
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_count_from_sept2
+		dataType: int64
+		formatString: 0
+		lineageTag: f0921aff-b414-4ffe-bfe5-6406fe287d81
+		summarizeBy: sum
+		sourceColumn: session_count_from_sept2
+
+		annotation SummarizationSetBy = Automatic
+
+	column start8
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ce8743a3-829d-4991-808f-97f8442c81b9
+		summarizeBy: none
+		sourceColumn: start8
+
+		variation Variation
+			isDefault
+			relationship: 62f098e8-280d-45ed-b634-ba0efd202798
+			defaultHierarchy: LocalDateTable_a8319330-e6f0-4534-926e-59ca8fa25b7f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column session_dates_from_sept8
+		dataType: string
+		lineageTag: c86f8fa8-eeb2-4294-8c93-889b26620f21
+		summarizeBy: none
+		sourceColumn: session_dates_from_sept8
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_count_from_sept8
+		dataType: int64
+		formatString: 0
+		lineageTag: 1fb791c3-923e-4ea3-adfb-d359dc0eb62d
+		summarizeBy: sum
+		sourceColumn: session_count_from_sept8
+
+		annotation SummarizationSetBy = Automatic
+
+	column start9
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b1948a5c-c62a-4434-8589-d52e38c6b838
+		summarizeBy: none
+		sourceColumn: start9
+
+		variation Variation
+			isDefault
+			relationship: cae336f1-c02b-4c0f-a491-6ae109931ae5
+			defaultHierarchy: LocalDateTable_d6714426-2910-4afb-ae27-69687b9a06b3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column session_dates_from_sept9
+		dataType: string
+		lineageTag: 160fb573-95dd-4ff4-85be-b09e6a52f188
+		summarizeBy: none
+		sourceColumn: session_dates_from_sept9
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_count_from_sept9
+		dataType: int64
+		formatString: 0
+		lineageTag: 0943185c-36c6-41d4-a45f-b17496dd463a
+		summarizeBy: sum
+		sourceColumn: session_count_from_sept9
+
+		annotation SummarizationSetBy = Automatic
+
+	column entry_month_name
+		dataType: string
+		lineageTag: 385a3160-1cbc-4c8d-9dfc-4d7659006435
+		summarizeBy: none
+		sourceColumn: entry_month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1st_9_count
+		dataType: double
+		formatString: 0
+		lineageTag: c6f1327b-a40f-4998-81e9-f1c2f3da9a95
+		summarizeBy: sum
+		sourceColumn: 1st_9_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column school
+		dataType: string
+		lineageTag: 4e6a6229-9246-4461-8594-09f40f519a6e
+		summarizeBy: none
+		sourceColumn: school
+
+		annotation SummarizationSetBy = Automatic
+
+	column Division
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2d3c8740-48f4-429e-a484-beaaafbc2903
+		summarizeBy: sum
+		sourceColumn: Division
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Merged Service Counts' = m
+		mode: import
+		source =
+				let
+				    Source = Table.NestedJoin(#"2526_lh_clients", {"client_id"}, raw_sp_services, {"client_id"}, "raw_sp_services", JoinKind.LeftOuter),
+				    #"Expanded raw_sp_services" = Table.ExpandTableColumn(Source, "raw_sp_services", {"1st_9_count"}, {"1st_9_count"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Expanded raw_sp_services", each true),
+				    #"Merged Queries" = Table.NestedJoin(#"Filtered Rows", {"client_id"}, v_client_month_rollups, {"client_id"}, "v_client_month_rollups", JoinKind.LeftOuter),
+				    #"Expanded v_client_month_rollups" = Table.ExpandTableColumn(#"Merged Queries", "v_client_month_rollups", {"silver_lighthouse Lighthouse Matched with JCampus.School Name", "lighthouse_location_enrolling"}, {"v_client_month_rollups.silver_lighthouse Lighthouse Matched with JCampus.School ", "v_client_month_rollups.lighthouse_location_enrolling"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded v_client_month_rollups",{{"v_client_month_rollups.silver_lighthouse Lighthouse Matched with JCampus.School ", "school_name"}, {"v_client_month_rollups.lighthouse_location_enrolling", "lighthouse_location"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns",null,0,Replacer.ReplaceValue,{"1st_9_count"}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Replaced Value", "school", each if [school_name] = null then [lighthouse_location] else if [lighthouse_location] = null then [school_name] else [school_name]),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Conditional Column",{"school_name", "lighthouse_location"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Removed Columns","School Site - Oak Park","Bethune/Oak Park",Replacer.ReplaceText,{"school"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","School Site - Creswell","Creswell Elementary",Replacer.ReplaceText,{"school"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","School Site - JS Clark","JS Clark",Replacer.ReplaceText,{"school"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","School Site - Atkins","Atkins Elementary",Replacer.ReplaceText,{"school"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4","School Site - Broadmoor","Broadmoor STEM",Replacer.ReplaceText,{"school"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","School Site - Booker T. Washington","Booker T Washington",Replacer.ReplaceText,{"school"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Replaced Value6", {"client_id"}),
+				    #"Inserted Division" = Table.AddColumn(#"Removed Duplicates", "Division", each [1st_9_count] / [session_count_from_sept9], type number),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Inserted Division",{{"Division", Percentage.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

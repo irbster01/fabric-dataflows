@@ -1,0 +1,325 @@
+table 'Maintenance Request and History'
+	lineageTag: 0584a362-8586-4fc2-9776-978551e8cd3a
+
+	measure 'Count Requested' = DISTINCTCOUNT('Maintenance Request and History'[ID])
+		formatString: 0
+		lineageTag: 2f9cc187-3e24-4fcb-938d-6ce571ee3d62
+
+	measure 'Avg Requests per day' = DIVIDE([Count Requested], NETWORKDAYS(MIN('Date'[Date]), MAX('Date'[Date])))
+		lineageTag: 894ccb99-cb4c-4932-874b-b42cf2aa4560
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ID
+		dataType: string
+		lineageTag: f8e28717-3423-4655-9ca9-67a988c345e3
+		summarizeBy: none
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 11d28946-37df-428f-b3ec-8227af807703
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column Modified
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9f9bd1a6-50ab-4d61-afa4-c8e9abd91974
+		summarizeBy: none
+		sourceColumn: Modified
+
+		variation Variation
+			isDefault
+			relationship: 2a14ac24-4ff6-44f1-9778-291fcd165b27
+			defaultHierarchy: LocalDateTable_b9340560-07e9-4e4c-9552-4eb6b09b8f12.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Created
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 848c38df-84b0-437c-9417-393ad5cc775c
+		summarizeBy: none
+		sourceColumn: Created
+
+		variation Variation
+			isDefault
+			relationship: f7242d51-0b22-48cf-9efc-ab8fd19fa70d
+			defaultHierarchy: LocalDateTable_1d317785-1285-4638-9c83-2870b7c5a0b9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuthorId
+		dataType: string
+		lineageTag: 96d87125-af9b-4d7e-9c41-f25a6960ed61
+		summarizeBy: none
+		sourceColumn: AuthorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column EditorId
+		dataType: string
+		lineageTag: 0bc2336f-8068-45e4-9f38-f0d76fff41e7
+		summarizeBy: none
+		sourceColumn: EditorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComplianceAssetId
+		dataType: string
+		lineageTag: e8cef4de-8b7d-44a7-8441-a12b35b876f1
+		summarizeBy: none
+		sourceColumn: ComplianceAssetId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Requester
+		dataType: string
+		lineageTag: 92cafad0-261c-4fcd-be61-1194e9fa1c5d
+		summarizeBy: none
+		sourceColumn: Requester
+
+		annotation SummarizationSetBy = Automatic
+
+	column Program
+		dataType: string
+		lineageTag: 32f848d6-21c8-4a20-83ca-767ca1132ec9
+		summarizeBy: none
+		sourceColumn: Program
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: dd24ab9f-bfab-4852-a9ab-e9eea5cdff91
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationDetail
+		dataType: string
+		lineageTag: a1fd4892-8a8e-4b40-9e2f-71271056e1b1
+		summarizeBy: none
+		sourceColumn: LocationDetail
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unit#
+		dataType: string
+		lineageTag: aa6fc368-2b12-4523-b10b-7a32afde9749
+		summarizeBy: none
+		sourceColumn: Unit#
+
+		annotation SummarizationSetBy = Automatic
+
+	column EntryNotes
+		dataType: string
+		lineageTag: 05ba8bc1-e580-4b4f-b293-6a8ba9489d12
+		summarizeBy: none
+		sourceColumn: EntryNotes
+
+		annotation SummarizationSetBy = Automatic
+
+	column RequestDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9d0f73a2-443b-4aaa-9dde-b6e3f2cffc85
+		summarizeBy: none
+		sourceColumn: RequestDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column RequestType:
+		dataType: string
+		lineageTag: 71e5b3d6-51bb-4ccf-a1f8-ac71be1106cd
+		summarizeBy: none
+		sourceColumn: RequestType:
+
+		annotation SummarizationSetBy = Automatic
+
+	column ServiceIssue
+		dataType: string
+		lineageTag: 6339fbb7-57f2-4f40-abb6-95816cfc128c
+		summarizeBy: none
+		sourceColumn: ServiceIssue
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateCompleted
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: afe8f67e-6f8b-470b-b903-64e08992fdb8
+		summarizeBy: none
+		sourceColumn: DateCompleted
+
+		variation Variation
+			isDefault
+			relationship: 0bb7e8a9-1817-4460-8b8f-565c8770f0a1
+			defaultHierarchy: LocalDateTable_ae00d982-dcb7-4159-9b35-90d293b186fb.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column PartsUsed?
+		dataType: string
+		lineageTag: 34fdd098-9fc2-4695-8fd8-2e9c7ca9ecc7
+		summarizeBy: none
+		sourceColumn: PartsUsed?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Request #'
+		dataType: string
+		lineageTag: cacb4a32-1eba-48d1-b344-39abf0f80f8a
+		summarizeBy: none
+		sourceColumn: Request #
+
+		annotation SummarizationSetBy = Automatic
+
+	column RequesterPhone
+		dataType: string
+		lineageTag: af5f2b42-1bbf-4ba2-a021-7dde0dd7eaca
+		summarizeBy: none
+		sourceColumn: RequesterPhone
+
+		annotation SummarizationSetBy = Automatic
+
+	column PropertyType
+		dataType: string
+		lineageTag: 9540f095-dd2f-4a6d-9288-81c7705b75df
+		summarizeBy: none
+		sourceColumn: PropertyType
+
+		annotation SummarizationSetBy = Automatic
+
+	column RepeatIssue?
+		dataType: string
+		lineageTag: f67705bf-f335-46fd-b923-21f7d54e8d78
+		summarizeBy: none
+		sourceColumn: RepeatIssue?
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 055556ba-a0e0-4bf6-a656-0dd655e93d06
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column ServiceType
+		dataType: string
+		lineageTag: 20157faa-07b9-43f3-b43f-0ede02844ab0
+		summarizeBy: none
+		sourceColumn: ServiceType
+
+		annotation SummarizationSetBy = Automatic
+
+	column TechnicianId
+		dataType: string
+		lineageTag: 1edbf522-2d83-4eb7-815e-ff2bd20c97ed
+		summarizeBy: none
+		sourceColumn: TechnicianId
+
+		annotation SummarizationSetBy = Automatic
+
+	column TicketStatus
+		dataType: string
+		lineageTag: b36bca83-a54f-4cf5-9e9d-f6164a5e6b85
+		summarizeBy: none
+		sourceColumn: TicketStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateApproved
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e06232c7-d287-4fd7-bb20-bf6d85e89750
+		summarizeBy: none
+		sourceColumn: DateApproved
+
+		variation Variation
+			isDefault
+			relationship: e43dfabe-1aa8-4928-b20b-fedd95ce1cce
+			defaultHierarchy: LocalDateTable_e9ad6c68-ebd2-4914-aedf-344173eb0b01.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Completed
+		dataType: string
+		lineageTag: e58b849b-d43c-4ce2-8536-1ca1b1edd3eb
+		summarizeBy: none
+		sourceColumn: Completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column Approved
+		dataType: string
+		lineageTag: ef8ce8c8-b6f6-4f3b-b0b1-fd1204a5c9a7
+		summarizeBy: none
+		sourceColumn: Approved
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tech Email'
+		dataType: string
+		lineageTag: 70288c91-efc5-4dd8-8ef9-0d55bf9038a6
+		summarizeBy: none
+		sourceColumn: Tech Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Location'
+		dataType: string
+		lineageTag: 7573bc89-7409-4080-beaa-264691f647b8
+		summarizeBy: none
+		sourceColumn: Full Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'date diff' = DATEDIFF('Maintenance Request and History'[RequestDate],'Maintenance Request and History'[DateCompleted],DAY)
+		formatString: 0
+		lineageTag: 103f9cc0-d42c-494b-b38f-44f0466339fd
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column '> 30 day count' = IF('Maintenance Request and History'[date diff]>30,1)
+		formatString: 0
+		lineageTag: 206d638f-726b-4773-9902-7fddabd6d064
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column '30 day count' = IF('Maintenance Request and History'[date diff]<31 && 'Maintenance Request and History'[date diff]>0,1)
+		formatString: 0
+		lineageTag: fd9e0756-18f1-446d-9632-14f23337fa77
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Maintenance Request and History' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"0f412879-576a-4d92-af9f-3948863782fa" = Workspaces{[workspaceId="0f412879-576a-4d92-af9f-3948863782fa"]}[Data],
+				    #"a074d378-8eea-43ce-b8a2-d19b1b9baf85" = #"0f412879-576a-4d92-af9f-3948863782fa"{[dataflowId="a074d378-8eea-43ce-b8a2-d19b1b9baf85"]}[Data],
+				    #"Maintenance Request and History_" = #"a074d378-8eea-43ce-b8a2-d19b1b9baf85"{[entity="Maintenance Request and History",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Maintenance Request and History_",{{"RequestDate", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,833 @@
+table 'API - Clients (Updated)'
+	lineageTag: e0ca1e95-8b00-4800-a2a2-9de3f0061831
+
+	column 'Client Name'
+		dataType: string
+		lineageTag: 05ce391c-e45e-4bc5-9c07-e2e7368ba3be
+		summarizeBy: none
+		sourceColumn: Client Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column programs
+		dataType: string
+		lineageTag: 427783bc-2ba4-44dd-bddf-4bed86c2ab0c
+		summarizeBy: none
+		sourceColumn: programs
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client ID'
+		dataType: string
+		lineageTag: c157d5bd-0444-4b54-a578-82c340ba52fe
+		summarizeBy: none
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column external_id
+		dataType: string
+		lineageTag: a037c79c-da1f-4fac-b175-398719b21cf0
+		summarizeBy: none
+		sourceColumn: external_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: a427609f-1b32-4544-9dff-b8684abc0570
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client Status Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 73e265f6-59ec-4477-b1ed-9f9c1d2e6517
+		summarizeBy: none
+		sourceColumn: Client Status Date
+
+		variation Variation
+			isDefault
+			relationship: cc0c42cf-4aa7-457c-bcce-30f1b48f0733
+			defaultHierarchy: LocalDateTable_53faf00d-04bd-4d2a-a5e5-77c8f365f7b6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Date Created'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4bce8302-375f-46b6-9d72-34c19f2a53b6
+		summarizeBy: none
+		sourceColumn: Date Created
+
+		variation Variation
+			isDefault
+			relationship: 5b323467-172d-4133-8288-8ce160ac2218
+			defaultHierarchy: LocalDateTable_eca4a2c7-d2fb-4024-bc7b-5f6ff535f698.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Date Updated'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c564c622-43f9-4b33-94af-45b82394c4cf
+		summarizeBy: none
+		sourceColumn: Date Updated
+
+		variation Variation
+			isDefault
+			relationship: c4a777c8-b647-41c5-abc2-d4fb97d5f0ee
+			defaultHierarchy: LocalDateTable_7a7675e9-fad5-4e72-8712-e3420c6bb630.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'First Name'
+		dataType: string
+		lineageTag: 638ec810-cc67-4de0-9332-abdfcdb3d70b
+		summarizeBy: none
+		sourceColumn: First Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Name'
+		dataType: string
+		lineageTag: e70c5aaf-9618-4f5d-a39e-5acd8fe44b4a
+		summarizeBy: none
+		sourceColumn: Last Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOB
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 054ccf36-c83d-43fa-b41a-6893bc1efa95
+		summarizeBy: none
+		sourceColumn: DOB
+
+		variation Variation
+			isDefault
+			relationship: 37da72f5-df14-436c-a9f4-e0ef372f9ae8
+			defaultHierarchy: LocalDateTable_f76f6354-f76d-4634-b84f-9ff40cf9d314.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: a3f9a8c6-6c0c-491a-a42c-50cc8e600541
+		summarizeBy: sum
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"API - Clients (Updated)","TableItemName":"Age (bins)","ObjectType":4},"LinkType":"UsedInGroup"},{"LinkTarget":{"TableName":"API - Clients (Updated)","TableItemName":"Age (groups)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column SSN
+		dataType: string
+		lineageTag: 7ec1acc8-9148-4cbe-9630-8f2fc65ebe07
+		summarizeBy: none
+		sourceColumn: SSN
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 3b6b157b-b4f1-4842-8619-5f9380e10cc2
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Zip
+		dataType: string
+		lineageTag: 06bef9dc-f594-4c4f-bcad-2c9912541325
+		summarizeBy: none
+		sourceColumn: Zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: fc527ae0-ddc5-4f82-98ad-f28547062036
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column county
+		dataType: string
+		lineageTag: 78630836-12c7-4114-b6a3-c4b9ead14d47
+		summarizeBy: none
+		sourceColumn: county
+
+		annotation SummarizationSetBy = Automatic
+
+	column preferred_language
+		dataType: string
+		lineageTag: 49deb2b5-c665-47fe-9a0a-33ffd977fcf3
+		summarizeBy: none
+		sourceColumn: preferred_language
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Admission Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 561242d7-30b7-48c8-9f0b-a68761e31048
+		summarizeBy: none
+		sourceColumn: Admission Date
+
+		variation Variation
+			isDefault
+			relationship: e0052761-6ce2-49ba-98ad-8c3254609046
+			defaultHierarchy: LocalDateTable_e369ced4-e94b-4c33-bbe8-9283e620fbfe.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Date Diagnosis Updated'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a9736d26-1dad-4743-8832-16405b9617b3
+		summarizeBy: none
+		sourceColumn: Date Diagnosis Updated
+
+		variation Variation
+			isDefault
+			relationship: 9e04cf85-2c2e-4612-a3db-9cd530ad6b56
+			defaultHierarchy: LocalDateTable_1cc3c757-caac-4edd-9710-7776718f11d4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Diagnosis 1'
+		dataType: string
+		lineageTag: 9000a1a8-f298-4083-a7d5-edd5e6f35d68
+		summarizeBy: none
+		sourceColumn: Diagnosis 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column race_omb
+		dataType: string
+		lineageTag: 27be5dcc-5393-4c94-aed6-b43e432aaa69
+		summarizeBy: none
+		sourceColumn: race_omb
+
+		annotation SummarizationSetBy = Automatic
+
+	column race_omb2
+		dataType: string
+		lineageTag: 5ef9b877-16dc-4d6d-8029-0b185f5a64af
+		summarizeBy: none
+		sourceColumn: race_omb2
+
+		annotation SummarizationSetBy = Automatic
+
+	column ethnicity_omb
+		dataType: string
+		lineageTag: 05053da9-eb2f-429f-a111-f81a0e93b2b9
+		summarizeBy: none
+		sourceColumn: ethnicity_omb
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client Type'
+		dataType: string
+		lineageTag: f1a84bec-9e76-44ca-9338-1c9840f058f1
+		summarizeBy: none
+		sourceColumn: Client Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column dd1
+		dataType: string
+		lineageTag: 9508b3da-72ac-4e3a-9dc5-3e4d6bc9248d
+		summarizeBy: none
+		sourceColumn: dd1
+
+		annotation SummarizationSetBy = Automatic
+
+	column show_pbm_medhistory
+		dataType: string
+		lineageTag: 09a9675a-4f43-450e-85b1-91b67100e3b7
+		summarizeBy: none
+		sourceColumn: show_pbm_medhistory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Diagnosis 2'
+		dataType: string
+		lineageTag: 35fe1e3c-ee56-44a0-84b9-3ac4ae51f9e2
+		summarizeBy: none
+		sourceColumn: Diagnosis 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Diagnosis 3'
+		dataType: string
+		lineageTag: 5e47b0e9-d8ea-482b-8737-9070c0c73c99
+		summarizeBy: none
+		sourceColumn: Diagnosis 3
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Case Manager Emp ID'
+		dataType: string
+		lineageTag: b80d586b-5246-4cf5-a47b-b20f4ecafae1
+		summarizeBy: none
+		sourceColumn: Case Manager Emp ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column dd6
+		dataType: string
+		lineageTag: cc9a7416-191c-4889-948a-2fa3bc602016
+		summarizeBy: none
+		sourceColumn: dd6
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discharge Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8784f698-16de-45d0-9708-503004f15c4a
+		summarizeBy: none
+		sourceColumn: Discharge Date
+
+		variation Variation
+			isDefault
+			relationship: b78e1a09-777e-4feb-adb8-3b725f58b503
+			defaultHierarchy: LocalDateTable_17694ffb-4f8b-483c-895b-1121bb304dd6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column dd4
+		dataType: string
+		lineageTag: 09be994e-30bc-4aa5-a4b0-b0f219b28867
+		summarizeBy: none
+		sourceColumn: dd4
+
+		annotation SummarizationSetBy = Automatic
+
+	column axis_1e
+		dataType: string
+		lineageTag: b570345c-9231-4a4e-858f-30ae2c7ca206
+		summarizeBy: none
+		sourceColumn: axis_1e
+
+		annotation SummarizationSetBy = Automatic
+
+	column axis_1f
+		dataType: string
+		lineageTag: e8a06dac-9782-4e19-9225-578aff25009d
+		summarizeBy: none
+		sourceColumn: axis_1f
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Flag'
+		dataType: string
+		lineageTag: 27348513-29f0-431c-af84-17eef4cea0d2
+		summarizeBy: none
+		sourceColumn: Employee Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column '6020 Flag'
+		dataType: string
+		lineageTag: 542cf451-f76a-4901-bf2c-4d3622fcc09b
+		summarizeBy: none
+		sourceColumn: 6020 Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'IBHH Flag'
+		dataType: string
+		lineageTag: b7849794-74d6-4da5-aacc-b41d97c45478
+		summarizeBy: none
+		sourceColumn: IBHH Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column '6021 Flag'
+		dataType: string
+		lineageTag: 887cc8a2-6580-47e1-baff-579d8de2e1f9
+		summarizeBy: none
+		sourceColumn: 6021 Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column '6401 Flag'
+		dataType: string
+		lineageTag: 015efc8b-2e3b-4790-af8c-a842353c9ac9
+		summarizeBy: none
+		sourceColumn: 6401 Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OfficeSvs Flag'
+		dataType: string
+		lineageTag: e4877a56-6c7b-4f00-ac77-cfd7ae2d6a69
+		summarizeBy: none
+		sourceColumn: OfficeSvs Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EpiCenter Flag'
+		dataType: string
+		lineageTag: 25b1d51b-5d86-4c8c-aa03-9fa364b0d166
+		summarizeBy: none
+		sourceColumn: EpiCenter Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column Phone
+		dataType: string
+		lineageTag: 506bef78-90c4-4b20-aa0f-11645f972b65
+		summarizeBy: none
+		sourceColumn: Phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column dd7
+		dataType: string
+		lineageTag: 4670f3b7-5d2a-49d9-8ce2-00b7644d7121
+		summarizeBy: none
+		sourceColumn: dd7
+
+		annotation SummarizationSetBy = Automatic
+
+	column mobile_phone
+		dataType: string
+		lineageTag: 2e4d5593-b72a-48f5-90bc-e8cb05cb5dbe
+		summarizeBy: none
+		sourceColumn: mobile_phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_email
+		dataType: string
+		lineageTag: 3b8a6970-98cb-4688-bbdf-6684b0ed4049
+		summarizeBy: none
+		sourceColumn: client_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Redzone
+		dataType: string
+		lineageTag: b297fd40-e98f-4563-b200-0fa996ee05bb
+		summarizeBy: none
+		sourceColumn: Redzone
+
+		annotation SummarizationSetBy = Automatic
+
+	column maritalstatus
+		dataType: string
+		lineageTag: 70bfbadf-b3cc-4b82-920e-a6f2cdc60d8c
+		summarizeBy: none
+		sourceColumn: maritalstatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column maritalstatupdate
+		dataType: string
+		lineageTag: 1d986fd2-5c81-4281-a785-00cdffdd630e
+		summarizeBy: none
+		sourceColumn: maritalstatupdate
+
+		annotation SummarizationSetBy = Automatic
+
+	column currentschool
+		dataType: string
+		lineageTag: 9ec8e220-7684-4688-8eb1-4f81325589ca
+		summarizeBy: none
+		sourceColumn: currentschool
+
+		annotation SummarizationSetBy = Automatic
+
+	column currentschoolupdate
+		dataType: string
+		lineageTag: ba27313a-e38d-4310-88fe-1ae67f0c28ee
+		summarizeBy: none
+		sourceColumn: currentschoolupdate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Text before delimiter'
+		dataType: string
+		lineageTag: e687412a-c110-44ac-977f-6a4733b8be82
+		summarizeBy: none
+		sourceColumn: Text before delimiter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DOB - Copy'
+		dataType: int64
+		formatString: 0
+		lineageTag: b132dd59-aba4-435d-a5d1-3e241fa3afd4
+		summarizeBy: sum
+		sourceColumn: DOB - Copy
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Int ID'
+		dataType: string
+		lineageTag: 24da8ef8-4f91-49e3-8447-cf41e946ca8f
+		summarizeBy: none
+		sourceColumn: Int ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column address1
+		dataType: string
+		lineageTag: 701928f4-19ec-4e06-86b5-c46cc19a9e44
+		summarizeBy: none
+		sourceColumn: address1
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 68c0ac07-83eb-4249-9e72-2fc43300e86f
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column address2
+		dataType: string
+		lineageTag: 245c780d-6595-48dc-b167-9184b1f09363
+		summarizeBy: none
+		sourceColumn: address2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Address'
+		dataType: string
+		lineageTag: e0eb47af-a0dc-4801-868d-acdd1982b3f4
+		summarizeBy: none
+		sourceColumn: Full Address
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_svc_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 88aadda7-ccaa-44d1-adb7-af74ed40667b
+		summarizeBy: none
+		sourceColumn: last_svc_date
+
+		variation Variation
+			isDefault
+			relationship: 9b3f74f0-44f2-4f48-8719-2aa9070548fb
+			defaultHierarchy: LocalDateTable_828952b5-95d1-45ff-806f-fbfbe919d1f6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Text after delimiter'
+		dataType: string
+		lineageTag: 541d598d-ef2d-4238-a2bb-359d976c2107
+		summarizeBy: none
+		sourceColumn: Text after delimiter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client Name - Copy'
+		dataType: string
+		lineageTag: cb7c71ed-37f7-4b50-ad5d-e39b1504f272
+		summarizeBy: none
+		sourceColumn: Client Name - Copy
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Long ID'
+		dataType: string
+		lineageTag: ad326c3d-3e25-40a2-a508-1e49a3c35d19
+		summarizeBy: none
+		sourceColumn: Long ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profile Auth End Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 534b3193-80a4-4396-8a10-a96ee6d875dd
+		summarizeBy: none
+		sourceColumn: Profile Auth End Date
+
+		variation Variation
+			isDefault
+			relationship: c1a40297-7fe9-418a-ab12-ef18e1e078e2
+			defaultHierarchy: LocalDateTable_6d1bbfb2-b196-4514-b93e-ae1fa46ab35a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Auth Expired Flag' = IF('API - Clients (Updated)'[Profile Auth End Date]<TODAY(),1)
+		formatString: 0
+		lineageTag: 8ae93aa0-fd51-44dc-b590-0f300bef5204
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date diff from Auth' = DATEDIFF(TODAY(), 'API - Clients (Updated)'[Profile Auth End Date],DAY)
+		formatString: 0
+		lineageTag: 5d11ad2c-8981-443c-94e2-55118fea3bf1
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due within 30' = IF('API - Clients (Updated)'[Date diff from Auth]<=30 && 'API - Clients (Updated)'[Date diff from Auth]>0, 1)
+		formatString: 0
+		lineageTag: db482fca-969b-42aa-a5d2-04714e16a1a4
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age (bins)' =
+			IF(
+				ISBLANK('API - Clients (Updated)'[Age]),
+				BLANK(),
+				INT('API - Clients (Updated)'[Age] / 2) * 2
+			)
+		formatString: 0
+		lineageTag: d4e858ac-f0a3-41af-85c3-72b3a8744c3e
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "API - Clients (Updated)"
+				          }
+				        },
+				        "Property": "Age"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 2.0,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"a","Entity":"API - Clients (Updated)"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}},"Size":2.0}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age (groups)' =
+			SWITCH(
+				TRUE,
+				ISBLANK('API - Clients (Updated)'[Age]),
+				"(Blank)",
+				'API - Clients (Updated)'[Age] IN {0,
+					1,
+					2,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9,
+					10},
+				"0 & 1 & 2 & 4 & 5 & 6 & 7 & 8 & 9 & 10",
+				'API - Clients (Updated)'[Age] IN {11,
+					12,
+					13,
+					14,
+					15,
+					16,
+					17},
+				"11 & 12 & 13 & 14 & 15 & 16 & 17",
+				'API - Clients (Updated)'[Age] IN {18,
+					19,
+					20,
+					21,
+					22,
+					23,
+					24,
+					25},
+				"18 & 19 & 20 & 21 & 22 & 23 & 24 & 25",
+				'API - Clients (Updated)'[Age] IN {26,
+					27,
+					28,
+					29,
+					30,
+					31,
+					32,
+					33},
+				"26 & 27 & 28 & 29 & 30 & 31 & 32 & 33",
+				'API - Clients (Updated)'[Age] IN {34,
+					35,
+					36,
+					37,
+					38,
+					39,
+					40,
+					41},
+				"34 & 35 & 36 & 37 & 38 & 39 & 40 & 41",
+				'API - Clients (Updated)'[Age] IN {42,
+					43,
+					44,
+					45,
+					46,
+					47,
+					48,
+					49},
+				"42 & 43 & 44 & 45 & 46 & 47 & 48 & 49",
+				'API - Clients (Updated)'[Age] IN {50,
+					51,
+					52,
+					53,
+					54,
+					55,
+					56,
+					57},
+				"50 & 51 & 52 & 53 & 54 & 55 & 56 & 57",
+				'API - Clients (Updated)'[Age] IN {58,
+					59,
+					60,
+					61,
+					62,
+					63,
+					64,
+					65},
+				"58 & 59 & 60 & 61 & 62 & 63 & 64 & 65",
+				'API - Clients (Updated)'[Age] IN {66,
+					67,
+					68,
+					69,
+					70,
+					71,
+					72,
+					73},
+				"66 & 67 & 68 & 69 & 70 & 71 & 72 & 73",
+				'API - Clients (Updated)'[Age] IN {74,
+					75,
+					78,
+					79,
+					81},
+				"74 & 75 & 78 & 79 & 81",
+				'API - Clients (Updated)'[Age] IN {82,
+					83,
+					84,
+					86,
+					90,
+					91},
+				"82 & 83 & 84 & 86 & 90 & 91",
+				"Other"
+			)
+		formatString: 0
+		lineageTag: 029c5afc-b663-4427-b82b-398aa37590b2
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "API - Clients (Updated)"
+				          }
+				        },
+				        "Property": "Age"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"a","Entity":"API - Clients (Updated)"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"GroupItems":[{"DisplayName":"(Blank)","BlankDefaultPlaceholder":true},{"DisplayName":"0 & 1 & 2 & 4 & 5 & 6 & 7 & 8 & 9 & 10","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"0L"}}],[{"Literal":{"Value":"1L"}}],[{"Literal":{"Value":"2L"}}],[{"Literal":{"Value":"4L"}}],[{"Literal":{"Value":"5L"}}],[{"Literal":{"Value":"6L"}}],[{"Literal":{"Value":"7L"}}],[{"Literal":{"Value":"8L"}}],[{"Literal":{"Value":"9L"}}],[{"Literal":{"Value":"10L"}}]]}}},{"DisplayName":"11 & 12 & 13 & 14 & 15 & 16 & 17","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"11L"}}],[{"Literal":{"Value":"12L"}}],[{"Literal":{"Value":"13L"}}],[{"Literal":{"Value":"14L"}}],[{"Literal":{"Value":"15L"}}],[{"Literal":{"Value":"16L"}}],[{"Literal":{"Value":"17L"}}]]}}},{"DisplayName":"18 & 19 & 20 & 21 & 22 & 23 & 24 & 25","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"18L"}}],[{"Literal":{"Value":"19L"}}],[{"Literal":{"Value":"20L"}}],[{"Literal":{"Value":"21L"}}],[{"Literal":{"Value":"22L"}}],[{"Literal":{"Value":"23L"}}],[{"Literal":{"Value":"24L"}}],[{"Literal":{"Value":"25L"}}]]}}},{"DisplayName":"26 & 27 & 28 & 29 & 30 & 31 & 32 & 33","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"26L"}}],[{"Literal":{"Value":"27L"}}],[{"Literal":{"Value":"28L"}}],[{"Literal":{"Value":"29L"}}],[{"Literal":{"Value":"30L"}}],[{"Literal":{"Value":"31L"}}],[{"Literal":{"Value":"32L"}}],[{"Literal":{"Value":"33L"}}]]}}},{"DisplayName":"34 & 35 & 36 & 37 & 38 & 39 & 40 & 41","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"34L"}}],[{"Literal":{"Value":"35L"}}],[{"Literal":{"Value":"36L"}}],[{"Literal":{"Value":"37L"}}],[{"Literal":{"Value":"38L"}}],[{"Literal":{"Value":"39L"}}],[{"Literal":{"Value":"40L"}}],[{"Literal":{"Value":"41L"}}]]}}},{"DisplayName":"42 & 43 & 44 & 45 & 46 & 47 & 48 & 49","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"42L"}}],[{"Literal":{"Value":"43L"}}],[{"Literal":{"Value":"44L"}}],[{"Literal":{"Value":"45L"}}],[{"Literal":{"Value":"46L"}}],[{"Literal":{"Value":"47L"}}],[{"Literal":{"Value":"48L"}}],[{"Literal":{"Value":"49L"}}]]}}},{"DisplayName":"50 & 51 & 52 & 53 & 54 & 55 & 56 & 57","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"50L"}}],[{"Literal":{"Value":"51L"}}],[{"Literal":{"Value":"52L"}}],[{"Literal":{"Value":"53L"}}],[{"Literal":{"Value":"54L"}}],[{"Literal":{"Value":"55L"}}],[{"Literal":{"Value":"56L"}}],[{"Literal":{"Value":"57L"}}]]}}},{"DisplayName":"58 & 59 & 60 & 61 & 62 & 63 & 64 & 65","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"58L"}}],[{"Literal":{"Value":"59L"}}],[{"Literal":{"Value":"60L"}}],[{"Literal":{"Value":"61L"}}],[{"Literal":{"Value":"62L"}}],[{"Literal":{"Value":"63L"}}],[{"Literal":{"Value":"64L"}}],[{"Literal":{"Value":"65L"}}]]}}},{"DisplayName":"66 & 67 & 68 & 69 & 70 & 71 & 72 & 73","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"66L"}}],[{"Literal":{"Value":"67L"}}],[{"Literal":{"Value":"68L"}}],[{"Literal":{"Value":"69L"}}],[{"Literal":{"Value":"70L"}}],[{"Literal":{"Value":"71L"}}],[{"Literal":{"Value":"72L"}}],[{"Literal":{"Value":"73L"}}]]}}},{"DisplayName":"74 & 75 & 78 & 79 & 81","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"74L"}}],[{"Literal":{"Value":"75L"}}],[{"Literal":{"Value":"78L"}}],[{"Literal":{"Value":"79L"}}],[{"Literal":{"Value":"81L"}}]]}}},{"DisplayName":"82 & 83 & 84 & 86 & 90 & 91","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Age"}}],"Values":[[{"Literal":{"Value":"82L"}}],[{"Literal":{"Value":"83L"}}],[{"Literal":{"Value":"84L"}}],[{"Literal":{"Value":"86L"}}],[{"Literal":{"Value":"90L"}}],[{"Literal":{"Value":"91L"}}]]}}},{"DisplayName":"Other"}]}
+
+		annotation SummarizationSetBy = Automatic
+
+	column Today
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b8466fb4-c0fa-437a-9555-61125f610f45
+		summarizeBy: none
+		sourceColumn: Today
+
+		variation Variation
+			isDefault
+			relationship: a959d024-a208-412c-b9dd-043cdddf1abc
+			defaultHierarchy: LocalDateTable_c314844c-6a39-4d06-b05c-51b81706b649.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Days Between Auth'
+		dataType: int64
+		formatString: 0
+		lineageTag: ad59a84f-c721-45d2-a405-4cf21795d2b8
+		summarizeBy: sum
+		sourceColumn: Days Between Auth
+
+		annotation SummarizationSetBy = Automatic
+
+	column teams
+		dataType: string
+		lineageTag: aa700e17-01f0-4c6a-9bcf-cc365c208981
+		summarizeBy: none
+		sourceColumn: teams
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Clinician Team'
+		dataType: string
+		lineageTag: 21400a45-5782-49e0-9d97-32ce08ac3f71
+		summarizeBy: none
+		sourceColumn: Clinician Team
+
+		annotation SummarizationSetBy = Automatic
+
+	column employeeid
+		dataType: string
+		lineageTag: 3e10a543-3395-4a7f-b44f-a38768778cc3
+		summarizeBy: none
+		sourceColumn: employeeid
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'API - Clients (Updated)' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"4564730f-6b6d-437e-8875-2e85af1f6351" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="4564730f-6b6d-437e-8875-2e85af1f6351"]}[Data],
+				    #"API - Clients (Updated)_" = #"4564730f-6b6d-437e-8875-2e85af1f6351"{[entity="API - Clients (Updated)",version=""]}[Data]
+				in
+				    #"API - Clients (Updated)_"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

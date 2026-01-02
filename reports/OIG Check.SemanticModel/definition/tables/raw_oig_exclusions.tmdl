@@ -1,0 +1,188 @@
+table raw_oig_exclusions
+	lineageTag: 52e5bb42-4e05-4347-b39a-90627ff4eae5
+
+	column full_name
+		dataType: string
+		lineageTag: 21e21f57-0acc-42b0-bf55-855610b93010
+		summarizeBy: none
+		sourceColumn: full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		lineageTag: 3ffe79f6-084b-4ad5-83e1-2d686e7a4d47
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		lineageTag: 1b06db0c-e4df-4edf-9cc9-2fc10b278c57
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column middle_name
+		dataType: string
+		lineageTag: 7016d8a3-33f9-4f86-9fc7-7bec844267ed
+		summarizeBy: none
+		sourceColumn: middle_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_name
+		dataType: string
+		lineageTag: 8c18fde9-334d-44bc-b69e-1254bd2fd079
+		summarizeBy: none
+		sourceColumn: business_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column general
+		dataType: string
+		lineageTag: 6e07bb96-7608-4074-8464-b2ea33cca5ab
+		summarizeBy: none
+		sourceColumn: general
+
+		annotation SummarizationSetBy = Automatic
+
+	column speciality
+		dataType: string
+		lineageTag: 37119adc-829c-4beb-bde2-676e591fd921
+		summarizeBy: none
+		sourceColumn: speciality
+
+		annotation SummarizationSetBy = Automatic
+
+	column upin
+		dataType: string
+		lineageTag: 4353a55b-0016-4418-a5b6-8358bbceabe9
+		summarizeBy: none
+		sourceColumn: upin
+
+		annotation SummarizationSetBy = Automatic
+
+	column npi
+		dataType: string
+		lineageTag: 101e9587-d281-43c9-b60f-1f9ebafade67
+		summarizeBy: none
+		sourceColumn: npi
+
+		annotation SummarizationSetBy = Automatic
+
+	column dob
+		dataType: string
+		lineageTag: 96afd836-12be-4962-95d1-8dedee3c5cac
+		summarizeBy: none
+		sourceColumn: dob
+
+		annotation SummarizationSetBy = Automatic
+
+	column street_address
+		dataType: string
+		lineageTag: 45491c44-13e9-4611-b871-482fba7e2916
+		summarizeBy: none
+		sourceColumn: street_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: c34e1fc3-4400-459a-ac0d-ea1f3c0ed175
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 24d43617-33ba-463a-a541-5c4b73c70666
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip
+		dataType: string
+		lineageTag: 483535e2-1d55-456c-8539-405ee5935454
+		summarizeBy: none
+		sourceColumn: zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column excl_type
+		dataType: string
+		lineageTag: 910d0c0f-8703-4830-8187-104a2cbc29f6
+		summarizeBy: none
+		sourceColumn: excl_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column excl_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: abb6db5a-2ef5-40b4-807e-f94f530828c5
+		summarizeBy: none
+		sourceColumn: excl_date
+
+		variation Variation
+			isDefault
+			relationship: bf044907-d638-444e-95ae-d4580d662b25
+			defaultHierarchy: LocalDateTable_a12cd755-77c9-405c-8f6d-2a1fb8949711.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column rein_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7e43f439-47a9-42d7-8845-70e947c439fb
+		summarizeBy: none
+		sourceColumn: rein_date
+
+		variation Variation
+			isDefault
+			relationship: 5f6d631b-12c4-4da0-a5b4-15ee204af22c
+			defaultHierarchy: LocalDateTable_baac9f28-69ec-4f48-a2d5-f4a154dd0fa1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column waiver_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6946d9ec-a1e7-42fa-9035-bfc1cc66a1b7
+		summarizeBy: none
+		sourceColumn: waiver_date
+
+		variation Variation
+			isDefault
+			relationship: fcbc0cf6-295b-49ff-b415-3fd7d6305b90
+			defaultHierarchy: LocalDateTable_949bbba1-670f-4256-8816-aa3ef1c83a29.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column waiver_state
+		dataType: string
+		lineageTag: f767bed1-b2f8-467b-8863-a1e4ab1a5a0c
+		summarizeBy: none
+		sourceColumn: waiver_state
+
+		annotation SummarizationSetBy = Automatic
+
+	partition raw_oig_exclusions = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    dbo_raw_oig_exclusions = Source{[Schema="dbo",Item="raw_oig_exclusions"]}[Data]
+				in
+				    dbo_raw_oig_exclusions
+

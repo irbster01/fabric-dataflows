@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "KQLDatabase",
+    "displayName": "voa_warehouse_eventhouse",
+    "description": "voa_warehouse_eventhouse"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c0d5c03a-53d0-82b7-40ba-b901d33a2ffd"
+  }
+}

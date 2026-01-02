@@ -1,0 +1,197 @@
+table cred_sp_lsndc_services_merged
+	lineageTag: 3de1e08a-e84b-404f-b9c6-fe99b3041dea
+
+	measure 'client count' = DISTINCTCOUNT(cred_sp_lsndc_services_merged[client_id])
+		formatString: #,0
+		lineageTag: a00db785-246e-43dc-8e0c-e044e9a6cc81
+
+	column service_id
+		dataType: string
+		lineageTag: d3c01f17-11e6-4f4f-aec8-e7f38145cc4c
+		summarizeBy: none
+		sourceColumn: service_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: 0a32d61a-fdd3-4add-8a4b-4a12daf07756
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 09ac2533-260f-4630-82b4-dfcd267ea3af
+		summarizeBy: none
+		sourceColumn: service_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column service_type
+		dataType: string
+		lineageTag: 3884319b-1c54-46b0-b95c-ca6dc9ba4600
+		summarizeBy: none
+		sourceColumn: service_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column hours
+		dataType: double
+		lineageTag: 52a75919-3b80-4766-99d8-b64cf304cb56
+		summarizeBy: sum
+		sourceColumn: hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column program
+		dataType: string
+		lineageTag: 51baada4-5788-4331-8889-0f100f1f4529
+		summarizeBy: none
+		sourceColumn: program
+
+		annotation SummarizationSetBy = Automatic
+
+	column ed_flag
+		dataType: int64
+		formatString: 0
+		lineageTag: 35528793-3975-4cd8-828f-edf0c747e65d
+		summarizeBy: sum
+		sourceColumn: ed_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column assistance_amount
+		dataType: double
+		lineageTag: c2b407c4-4f42-4b81-a348-9ba3d02bdc65
+		summarizeBy: sum
+		sourceColumn: assistance_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dob
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 78af4644-ae96-40fa-9c1f-d255ca1c7bc6
+		summarizeBy: none
+		sourceColumn: dob
+
+		variation Variation
+			isDefault
+			relationship: b6dd806a-75a9-4399-bf06-7e1a21426eaf
+			defaultHierarchy: LocalDateTable_5e8ce4ea-b809-41aa-be2d-504f7f86eb27.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column gender
+		dataType: string
+		lineageTag: e3d7cfb7-88e6-4b5d-a398-0e1d80654fa3
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip
+		dataType: string
+		lineageTag: 482c88cb-3a5f-4c5f-a843-c794d2af946a
+		summarizeBy: none
+		sourceColumn: zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: a55a23ad-78d5-40b3-9d69-9667c85f7deb
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: cfe9683c-6f95-4fb5-b80a-ccca3190a856
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_address
+		dataType: string
+		lineageTag: f29ee073-7dd7-457b-8099-e2fee9d7fae7
+		summarizeBy: none
+		sourceColumn: full_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_name
+		dataType: string
+		lineageTag: 00fc25fd-17d1-4647-aac0-47129823ef86
+		summarizeBy: none
+		sourceColumn: client_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_full_address
+		dataType: string
+		lineageTag: 5351801e-0336-4cb4-9c73-ace2d242512f
+		summarizeBy: none
+		sourceColumn: client_full_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zip.1'
+		dataType: string
+		lineageTag: 0bc0a9e2-ab81-4c9d-ad53-bd7596f9d1b9
+		summarizeBy: none
+		sourceColumn: zip.1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition cred_sp_lsndc_services_merged = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Silver"),
+				    dbo_cred_sp_lsndc_services_merged = Source{[Schema="dbo",Item="cred_sp_lsndc_services_merged"]}[Data],
+				    #"Replaced Value" = Table.ReplaceValue(dbo_cred_sp_lsndc_services_merged,"VOANLA 3031 - SSVF Rapid Re-Housing","SSSVF - Rapid Rehousing",Replacer.ReplaceText,{"program"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Replaced Value", each ([program] <> "Catholic Charities Emergency Assistance of NLA" and [program] <> "Catholic Charities Money $chool" and [program] <> "Elle Foundation_SSVF_Homeless Prevention" and [program] <> "Elle Foundation_SSVF_Rapid Rehousing" and [program] <> "ESG- Street Outreach St.Luke's Episcopal Mobile Medical" and [program] <> "Grace House Emergency Shelter" and [program] <> "Hope Center SSVF - Veteran's Endurance for Hope" and [program] <> "HOPE Connections - CAP-Coordinated Assessment Project" and [program] <> "HOPE Connections - Safe Haven - NWLA CoC - ESG" and [program] <> "HOPE Connections-Street Outreach (PATH Project)" and [program] <> "Providence House Family Shelter - ESG" and [program] <> "Salvation Army (The)-Shreveport" and [program] <> "Salvation Army Shreveport_ VET Program_VA Contract Residential Services (CRS)" and [program] <> "Salvation Army Shreveport_Merkle Center of Hope_Emergency Shelter" and [program] <> "Salvation Army Social Services-Shreveport" and [program] <> "United Christian Assistance Program, Inc." and [program] <> "VOAGBR - SSVF Program Rapid-Rehousing - BoS BR SSVF RRH" and [program] <> "Volunteers Of America of North Louisiana")),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Filtered Rows","6021","Youth Behavioral Health - Caddo",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","Adult BH","Visions of Hope",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","BH - Office Services","Behavioral Health Office-based Services",Replacer.ReplaceText,{"program"}),
+				    #"Sorted Rows" = Table.Sort(#"Replaced Value3",{{"program", Order.Ascending}}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Sorted Rows","CHRP","Clinical High Risk Program",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value4","SSSVF - Rapid Rehousing","SSVF - Rapid Rehousing",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value6","Desoto BH","Youth Behavioral Health - Desoto",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value7" = Table.ReplaceValue(#"Replaced Value5","VOANLA Medical Respite Program - Hospital to Housing","Medical Respite Program",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value8" = Table.ReplaceValue(#"Replaced Value7","VOANLA 8110 - Choice Neighborhoods","Choice Neighborhoods",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value9" = Table.ReplaceValue(#"Replaced Value8","VOANLA 4080 -The LightHouse - Community Sites","LightHouse - Community Sites",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value10" = Table.ReplaceValue(#"Replaced Value9","VOANLA 4002 -The LightHouse - School Sites","LightHouse - School Sites",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value11" = Table.ReplaceValue(#"Replaced Value10","VOANLA 3505 - Scattered Housing of Choice (SHOC)","Scattered Housing of Choice (SHOC)",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value12" = Table.ReplaceValue(#"Replaced Value11","VOANLA 3504 - NEW GAPS","GAPS",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value13" = Table.ReplaceValue(#"Replaced Value12","VOANLA 3031 - SSVF Homeless Prevention","SSVF - Homeless Prevention",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value14" = Table.ReplaceValue(#"Replaced Value13","VOANLA 3013 - Safe Haven","Safe Haven",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value15" = Table.ReplaceValue(#"Replaced Value14","VOANLA 3001 - Veterans Transitional Living Program","Veterans Transitional Living Program",Replacer.ReplaceText,{"program"}),
+				    #"Filtered Rows1" = Table.SelectRows(#"Replaced Value15", each ([program] <> "VOANLA 3032 - SSVF Shallow Subsidy")),
+				    #"Sorted Rows1" = Table.Sort(#"Filtered Rows1",{{"program", Order.Descending}}),
+				    #"Replaced Value16" = Table.ReplaceValue(#"Sorted Rows1","VOANLA - SUDS","SUDS",Replacer.ReplaceText,{"program"}),
+				    #"Replaced Value17" = Table.ReplaceValue(#"Replaced Value16","C/O","",Replacer.ReplaceText,{"full_address"}),
+				    #"Replaced Value18" = Table.ReplaceValue(#"Replaced Value17","C/o","",Replacer.ReplaceText,{"full_address"}),
+				    #"Replaced Value19" = Table.ReplaceValue(#"Replaced Value18","c/o","",Replacer.ReplaceText,{"full_address"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Replaced Value19", {"service_id"})
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

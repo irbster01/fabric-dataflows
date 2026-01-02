@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_kudos_submissions"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "44e986d6-c635-9dfb-44bd-2d750c61b7b2"
+  }
+}

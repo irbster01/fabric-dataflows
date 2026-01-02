@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_desoto_referral_detail"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d31ac5a0-f7a0-9f72-4c12-b7d3c957e087"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "LightHouse Attendance"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "14dce5e6-8780-91da-4d20-feb03324c581"
+  }
+}

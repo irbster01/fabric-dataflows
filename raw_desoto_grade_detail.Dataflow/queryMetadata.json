@@ -1,0 +1,54 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_desoto_grade_detail",
+  "queryGroups": [
+    {
+      "id": "b1c8ea18-b612-486f-984d-0826c1b78009",
+      "name": "Transform file from desoto_grades_export"
+    },
+    {
+      "id": "6afd6114-e980-42c0-a330-559ef770ca69",
+      "name": "Helper queries",
+      "parentId": "b1c8ea18-b612-486f-984d-0826c1b78009"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "desoto_grades_export": {
+      "queryId": "50b0c4a2-24a9-4bd3-a407-027e2665ff01",
+      "queryName": "desoto_grades_export"
+    },
+    "Sample file": {
+      "queryId": "3b17e0b0-db03-4d52-a3b6-edd520439050",
+      "queryName": "Sample file",
+      "queryGroupId": "6afd6114-e980-42c0-a330-559ef770ca69",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "092b98b6-9db7-4491-b3da-ffe799203422",
+      "queryName": "Parameter",
+      "queryGroupId": "6afd6114-e980-42c0-a330-559ef770ca69",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "1562728e-b6f5-4777-9e88-c194afb2d32e",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "b1c8ea18-b612-486f-984d-0826c1b78009",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "b0746e55-d6e7-4782-8e09-0a1f5f06a1bd",
+      "queryName": "Transform file",
+      "queryGroupId": "6afd6114-e980-42c0-a330-559ef770ca69",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

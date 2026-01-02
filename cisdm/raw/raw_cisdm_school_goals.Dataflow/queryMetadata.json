@@ -1,0 +1,27 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_cisdm_school_goals",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "school_goals": {
+      "queryId": "bbe1e764-9f89-49ab-9db2-b6d4ca01cde5",
+      "queryName": "school_goals",
+      "loadEnabled": false
+    },
+    "school_goals_DataDestination": {
+      "queryId": "5eb214f7-f04f-4d39-a8f8-8479fba92ff1",
+      "queryName": "school_goals_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

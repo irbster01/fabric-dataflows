@@ -1,0 +1,54 @@
+table 'Raw Time Measures'
+	lineageTag: e5663eb3-744b-4396-838c-283ade88a1e5
+
+	measure 'Sum Minutes' = SUM('API - Billing'[Duration])
+		formatString: 0
+		lineageTag: 6142f83a-5c26-4cae-a750-d1d4fdc481d0
+
+	measure 'Hours Last Year' = CALCULATE('Raw Time Measures'[Hours of Services],SAMEPERIODLASTYEAR('Date'[Date]))
+		lineageTag: 481812d6-af66-4165-9036-d51c8e3c567e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Hours of Services' = 'Raw Time Measures'[Sum Minutes] / 60
+		formatString: 0
+		lineageTag: eb2a0971-8d5c-4264-a89d-bb92e69ea82d
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Date Range Selection' = COMBINEVALUES(" - ",MIN('Date'[Date]), MAX('Date'[Date]))
+		lineageTag: 17bf8c2a-8f3e-4caf-9715-5e5a0184c9c2
+
+	measure datediff = DATEDIFF(TODAY(),MAX('4 10 2024'[Course User Results.Compliant Until]), DAY)
+		formatString: 0
+		lineageTag: 814f1c70-c7c9-4845-a33c-008e08aa25a7
+
+	measure 'HAP Date' = ```
+			CALCULATE(MAX('API - Billing'[Service Date]),
+			'API - Billing'[Service Type]="IBHH: OPTUM HAP")
+			
+			```
+		formatString: Short Date
+		lineageTag: adaced43-f229-408d-a548-861450d68d40
+
+	measure 'IBHH Assess Date' =
+			CALCULATE(MAX('API - Billing'[Service Date]),
+			'API - Billing'[Service Type]="IBHH: Assessment" || 'API - Billing'[Service Type]="Assessment CPST")
+		formatString: Short Date
+		lineageTag: da677b1b-79f3-4e26-b8d5-10d7e7afeb76
+
+	column Value
+		formatString: 0
+		lineageTag: 57f225ad-2c2b-4aab-b046-645894167a7f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Raw Time Measures' = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = 3c1a9cdce0c84ba9bedfa5dadac4ce2b
+

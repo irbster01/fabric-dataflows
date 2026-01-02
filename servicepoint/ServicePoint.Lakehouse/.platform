@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "ServicePoint"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "babe9910-3fd2-abf5-4f97-c0bc529f0d5c"
+  }
+}

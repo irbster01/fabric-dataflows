@@ -1,0 +1,54 @@
+table '1. Message Table'
+	lineageTag: 87ac2bbb-1776-4163-b5bd-1a86e5b4eaf9
+
+	measure 'Bundle Message' =
+			
+			"Bundle makes the following checks:" & UNICHAR(10) &
+			"1. The Service is primary" & UNICHAR(10) &
+			"2. The service is not red xed" & UNICHAR(10) &
+			"3. The service is not marked non-billable" & UNICHAR(10) &
+			"4. The service has the required contacts" & UNICHAR(10) &
+			"5. Service has to be approved to fully count"
+		lineageTag: 7190772b-134c-48ce-99df-e6bf0450c2a5
+
+	measure 'Card Message' = "Hover here for Bundle Explanation"
+		lineageTag: 5a0f2e1d-af96-4460-8e24-2f40535ce362
+
+	measure 'Caseload Message' = ```
+			
+			"Caseloads use the following checks:" & UNICHAR(10) &
+			"1. The Episode is Enrolled" & UNICHAR(10) &
+			"2. The client is assigned to a program/team" & UNICHAR(10) &
+			"Client Profile status and Client Type are less important and are usually only used when there are errors with an episode." 
+			```
+		lineageTag: a9aa3d46-daa7-406b-b2c1-bd0065378773
+
+	measure 'Auth Message' =
+			
+			"Auths make the following checks:" & UNICHAR(10) &
+			"1. The client's episode is enrolled" & UNICHAR(10) &
+			"2. The client profile has an Auth End Date entered" & UNICHAR(10) &
+			"3. Client programs come from the client's episodes"
+		lineageTag: b864ad6a-a277-4d53-ae63-87fc0ecea979
+
+	measure 'Auth Card Message' = "Hover here for Auth Explanation"
+		lineageTag: fb7bfc62-7a06-43d7-b2c6-a5e50fac2ece
+
+	measure 'Fist serve check' = IF(MIN('API - Billing'[Service Date])=BLANK(), "First upcoming", "Not first")
+		lineageTag: cda83ff5-0a6b-4696-a9ed-b44343aaffac
+
+	column Value
+		formatString: 0
+		lineageTag: fad3d4b7-3465-4107-953f-93154c1742e4
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1. Message Table' = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = 75af1e02ff5246949599e7c2f3f3e619
+

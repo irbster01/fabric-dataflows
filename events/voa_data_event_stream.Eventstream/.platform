@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Eventstream",
+    "displayName": "voa_data_event_stream"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e634cffe-0fcd-bc63-4798-f4dc5953feec"
+  }
+}

@@ -1,0 +1,468 @@
+table 'API - Billing'
+	lineageTag: 79c3f900-9a0e-4cb3-985b-9c0f64d9ef96
+
+	measure 'Total Clients Served' = DISTINCTCOUNT('API - Billing'[Client ID])
+		formatString: 0
+		lineageTag: a070efb3-5a57-4eab-93fc-d6408f39520c
+
+	measure 'Clients Served LY' = CALCULATE('API - Billing'[Total Clients Served], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: 0
+		lineageTag: 04c27d04-38f1-412d-9142-1d41f9456750
+
+	column 'Service ID'
+		dataType: string
+		lineageTag: 3516ee6b-fea2-4cb8-9f47-fbc2c423eb1a
+		summarizeBy: none
+		sourceColumn: Service ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client ID'
+		dataType: string
+		lineageTag: a68b6388-1d84-4f21-a374-c3b2be758c3b
+		summarizeBy: none
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client Name'
+		dataType: string
+		lineageTag: 0f1a0635-8724-49e0-9fb1-5d2c37bde384
+		summarizeBy: none
+		sourceColumn: Client Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee ID'
+		dataType: string
+		lineageTag: fc7f4d63-956a-44e6-8bb4-cc2f39aca93a
+		summarizeBy: none
+		sourceColumn: Employee ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Type'
+		dataType: string
+		lineageTag: a1fd9eb6-8020-4c3a-b5c3-042453a3ad86
+		summarizeBy: none
+		sourceColumn: Service Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 7dc1e497-5884-492a-b5a5-b710c82b6e2d
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Duration
+		dataType: int64
+		formatString: 0
+		lineageTag: 14cf15a6-2e47-4faa-b503-284fdfb10b08
+		summarizeBy: sum
+		sourceColumn: Duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column clientfirstname
+		dataType: string
+		lineageTag: 4d1dc025-2b62-4ffe-b42e-15a7488f2602
+		summarizeBy: none
+		sourceColumn: clientfirstname
+
+		annotation SummarizationSetBy = Automatic
+
+	column clientlastname
+		dataType: string
+		lineageTag: ba851f89-549e-4a2a-9a68-95d33a425e49
+		summarizeBy: none
+		sourceColumn: clientlastname
+
+		annotation SummarizationSetBy = Automatic
+
+	column emp_name
+		dataType: string
+		lineageTag: 7f5c4aad-5f24-46f8-bf59-9ab9fc1d48fe
+		summarizeBy: none
+		sourceColumn: emp_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rate
+		dataType: double
+		lineageTag: ce5c091c-2c0e-42c4-8f5c-e70cff1cf4ac
+		summarizeBy: sum
+		sourceColumn: Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Units
+		dataType: double
+		formatString: 0.00
+		lineageTag: 83a234c2-1cad-4b23-bb8e-2951583c17b8
+		summarizeBy: sum
+		sourceColumn: Units
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signature Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: a1ad59ee-80d5-409e-ba50-5bf10c9ed360
+		summarizeBy: none
+		sourceColumn: Signature Date
+
+		variation Variation
+			isDefault
+			relationship: ba7ad4c0-464a-4038-bd35-df33c69f3009
+			defaultHierarchy: LocalDateTable_86a44453-2436-419e-95ff-1cbac7226070.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Approval Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 489ed936-d519-4c9c-9924-67ef0a76b205
+		summarizeBy: none
+		sourceColumn: Approval Date
+
+		variation Variation
+			isDefault
+			relationship: 870d28a7-72f9-439d-946e-7da784c1ab47
+			defaultHierarchy: LocalDateTable_18025442-63cf-4b7c-abd7-2f87061d0429.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Program ID'
+		dataType: string
+		lineageTag: 3ac6609d-f081-40e0-a7b0-0f8c9343e25b
+		summarizeBy: none
+		sourceColumn: Program ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column non_billable
+		dataType: string
+		lineageTag: e56b926e-555e-433d-81af-4384360f63cc
+		summarizeBy: none
+		sourceColumn: non_billable
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Rate'
+		dataType: double
+		lineageTag: b96951a8-bd28-4c7e-82b8-a8c37a1ae961
+		summarizeBy: sum
+		sourceColumn: Billing Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Ins Paid'
+		dataType: double
+		lineageTag: f0fcc0f0-b7e9-4650-b030-4ea8b1ca7daa
+		summarizeBy: sum
+		sourceColumn: Ins Paid
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Ins Due'
+		dataType: double
+		lineageTag: bc3e3cb1-d3bf-45f0-9245-5bf123dbbee3
+		summarizeBy: sum
+		sourceColumn: Ins Due
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Service Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6b98f5d1-6c32-484c-a006-4228e7d5c0fa
+		summarizeBy: none
+		sourceColumn: Service Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Is Late'
+		dataType: string
+		lineageTag: 764d8489-10e2-4261-930b-c895e335f494
+		summarizeBy: none
+		sourceColumn: Is Late
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'timeout - Copy'
+		dataType: dateTime
+		formatString: Short Time
+		lineageTag: a1036666-d456-41ac-a618-fa6414e7c2d9
+		summarizeBy: none
+		sourceColumn: timeout - Copy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column manual_update_to_modifier
+		dataType: string
+		lineageTag: ca6811d6-9942-4ee5-a4c8-41b191884e1e
+		summarizeBy: none
+		sourceColumn: manual_update_to_modifier
+
+		annotation SummarizationSetBy = Automatic
+
+	column auth_id
+		dataType: string
+		lineageTag: 12085b46-c45e-4291-9d78-882fe6ef7a87
+		summarizeBy: none
+		sourceColumn: auth_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column timein
+		dataType: dateTime
+		formatString: h:nn AM/PM
+		lineageTag: b971caaa-a999-4806-8dfc-fc632731a028
+		summarizeBy: none
+		sourceColumn: timein
+
+		variation Variation
+			isDefault
+			relationship: 0b3b06ae-3637-4111-8980-e88afd71530f
+			defaultHierarchy: LocalDateTable_ab95b38f-69f2-447f-881b-41efb4600063.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'timeout - Copy - Copy'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d7d1da5b-17bb-46b0-b858-388c2e9af32c
+		summarizeBy: none
+		sourceColumn: timeout - Copy - Copy
+
+		variation Variation
+			isDefault
+			relationship: 928d46cf-7f90-4f13-975c-71a30e76339b
+			defaultHierarchy: LocalDateTable_5d06736c-436c-44e8-80bb-488cd30eb2ac.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column manual_redx
+		dataType: string
+		lineageTag: c5b4c9c4-7df0-408d-a46f-ed663621edaa
+		summarizeBy: none
+		sourceColumn: manual_redx
+
+		annotation SummarizationSetBy = Automatic
+
+	column manual_redx_note
+		dataType: string
+		lineageTag: 246697b8-1998-4767-82c3-78f7b1e67532
+		summarizeBy: none
+		sourceColumn: manual_redx_note
+
+		annotation SummarizationSetBy = Automatic
+
+	column '6020 Units Adjust'
+		dataType: int64
+		formatString: 0
+		lineageTag: 93531a2b-879a-4c8a-ba85-cdab2333c6f3
+		summarizeBy: sum
+		sourceColumn: 6020 Units Adjust
+
+		annotation SummarizationSetBy = Automatic
+
+	column appr
+		dataType: string
+		lineageTag: 2ce32bd1-c46b-48bf-add8-3ec03bcb1fb0
+		summarizeBy: none
+		sourceColumn: appr
+
+		annotation SummarizationSetBy = Automatic
+
+	column cotherapist
+		dataType: string
+		lineageTag: 6c66d2a1-6a13-426c-a968-c36d9e5d6559
+		summarizeBy: none
+		sourceColumn: cotherapist
+
+		annotation SummarizationSetBy = Automatic
+
+	column delayed_reason_code
+		dataType: string
+		lineageTag: 709e1966-51f5-4a7b-9033-e639138571cb
+		summarizeBy: none
+		sourceColumn: delayed_reason_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'serv to sign' = DATEDIFF('API - Billing'[Service Date],'API - Billing'[Signature Date],HOUR)
+		formatString: 0
+		lineageTag: 257cf157-31ca-4061-827c-0720720d230b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signature Time'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 801709d5-7b84-4bc0-99e3-e901ddc5a687
+		summarizeBy: none
+		sourceColumn: Signature Time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column 'Timeout Time'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 3d002e65-8c80-4f53-979f-7f9abc1424cc
+		summarizeBy: none
+		sourceColumn: Timeout Time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column 'Signature Date/Time'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bbcfe9f7-3f56-4fed-92e6-8e48a3493951
+		summarizeBy: none
+		sourceColumn: Signature Date/Time
+
+		variation Variation
+			isDefault
+			relationship: b001cade-3d3f-40f8-a8ae-0b8d4b6dbd53
+			defaultHierarchy: LocalDateTable_b4a7c0d4-be4a-4273-9707-a5d64870c9b3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Timeout Date/Time'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d1d9f8cf-45bd-4603-bb9a-25d71a5a6355
+		summarizeBy: none
+		sourceColumn: Timeout Date/Time
+
+		variation Variation
+			isDefault
+			relationship: 64ebaa63-ed42-405e-8bed-4c100b044328
+			defaultHierarchy: LocalDateTable_d4d7b997-747f-49d4-8150-856b7ef9ad59.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Primary Flag'
+		dataType: string
+		lineageTag: 38658cf7-e255-4419-82f6-3ea9774f6072
+		summarizeBy: none
+		sourceColumn: Primary Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Secondary Flag'
+		dataType: string
+		lineageTag: 342e0b83-d00e-48fe-8789-ab1967f29ed3
+		summarizeBy: none
+		sourceColumn: Secondary Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column comb_units
+		dataType: double
+		lineageTag: ce8d7f37-78bd-444d-817e-118c17df1e94
+		summarizeBy: sum
+		sourceColumn: comb_units
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column comb_rate
+		dataType: double
+		lineageTag: d72bd563-0d7e-4387-8772-1e08fc14fb9b
+		summarizeBy: sum
+		sourceColumn: comb_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Category
+		dataType: string
+		lineageTag: 39347c1c-9406-41d0-b552-cd324164558d
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Adjusted Rate'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 19fe4e20-c0c0-4e93-92d1-179ddf8470e9
+		summarizeBy: sum
+		sourceColumn: Adjusted Rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Note Minutes'
+		dataType: string
+		lineageTag: 0746a7a6-d0e6-4591-8eed-1f5307c2f04b
+		summarizeBy: none
+		sourceColumn: Note Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Program ID - Copy'
+		dataType: string
+		lineageTag: 1933a30d-4f53-46c5-947d-ed885a7d3564
+		summarizeBy: none
+		sourceColumn: Program ID - Copy
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Episode ID'
+		dataType: string
+		lineageTag: 2ee9df51-bc89-416d-afae-1ff14fa07425
+		summarizeBy: none
+		sourceColumn: Episode ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'API - Billing' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"f09e25de-cf5c-4a79-a1ba-c2673d34f3d3" = Workspaces{[workspaceId="f09e25de-cf5c-4a79-a1ba-c2673d34f3d3"]}[Data],
+				    #"6017eed9-2ebe-48f4-b504-d5dcd251c6f0" = #"f09e25de-cf5c-4a79-a1ba-c2673d34f3d3"{[dataflowId="6017eed9-2ebe-48f4-b504-d5dcd251c6f0"]}[Data],
+				    #"API - Billing_" = #"6017eed9-2ebe-48f4-b504-d5dcd251c6f0"{[entity="API - Billing",version=""]}[Data],
+				    #"Added Conditional Column" = Table.AddColumn(#"API - Billing_", "Category", each if Text.Contains([Service Type], "BUN:") then "Bundle" else [Service Type]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Conditional Column",{{"Rate", type number}, {"Adjusted Rate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

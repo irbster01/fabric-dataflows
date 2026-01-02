@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "sp_client_int_id_staging"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "21dfc7b8-8de7-bfb0-4349-6ca63d633b27"
+  }
+}

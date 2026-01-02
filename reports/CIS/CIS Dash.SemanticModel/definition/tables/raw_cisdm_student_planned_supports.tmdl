@@ -1,0 +1,332 @@
+table raw_cisdm_student_planned_supports
+	lineageTag: 0ab83011-d6d1-425e-8314-fcdd7c3b197a
+
+	column org
+		dataType: string
+		lineageTag: c896c9d3-e116-461a-a0cf-3004519ea000
+		summarizeBy: none
+		sourceColumn: org
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_name
+		dataType: string
+		lineageTag: 7ede72db-afa5-4814-aded-9c656fe1c825
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sasid
+		dataType: string
+		lineageTag: bab277ec-feb7-42c7-bf63-480bbf7ef9dc
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: 7cdf0480-a782-4212-8325-b821d695037c
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_full_name
+		dataType: string
+		lineageTag: 5b04a53a-8892-4664-8dd8-e8284dbe508b
+		summarizeBy: none
+		sourceColumn: client_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 7bb9d330-d969-40d4-af8c-3413c7884efe
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column race
+		dataType: string
+		lineageTag: 1b1a86d7-f4e2-4273-b00c-efe3b88683b0
+		summarizeBy: none
+		sourceColumn: race
+
+		annotation SummarizationSetBy = Automatic
+
+	column ethnicity
+		dataType: string
+		lineageTag: 391d8205-f439-4527-b639-83e150668891
+		summarizeBy: none
+		sourceColumn: ethnicity
+
+		annotation SummarizationSetBy = Automatic
+
+	column tribal_affiliation
+		dataType: string
+		lineageTag: e0a7634e-e3e9-4da8-aaa4-917f390ad243
+		summarizeBy: none
+		sourceColumn: tribal_affiliation
+
+		annotation SummarizationSetBy = Automatic
+
+	column addtl_tribal_affltn
+		dataType: string
+		lineageTag: 93d01a58-893e-4a79-9f10-7928454bb21f
+		summarizeBy: none
+		sourceColumn: addtl_tribal_affltn
+
+		annotation SummarizationSetBy = Automatic
+
+	column grade
+		dataType: string
+		lineageTag: d3f7309b-fe14-497d-97fd-47de3c64f305
+		summarizeBy: none
+		sourceColumn: grade
+
+		annotation SummarizationSetBy = Automatic
+
+	column entry_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0d47da04-0884-48cc-a5a1-a54e0ab1097a
+		summarizeBy: none
+		sourceColumn: entry_date
+
+		variation Variation
+			isDefault
+			relationship: 320e1979-5792-447d-bedf-f41abe4617a7
+			defaultHierarchy: LocalDateTable_4cfada0f-cf57-43c0-846d-c5a9fb4db28e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column exit_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 29aa3e6d-24ee-409e-9e58-ee2161913438
+		summarizeBy: none
+		sourceColumn: exit_date
+
+		variation Variation
+			isDefault
+			relationship: 3bc9c4af-8a1c-4db5-96c8-0bf9aa5d7209
+			defaultHierarchy: LocalDateTable_6529b3a5-1ca8-4e3c-b95d-544de2a81ac3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column case_manager
+		dataType: string
+		lineageTag: 454bd9d5-e4a9-4967-9a58-906ab11ecbd1
+		summarizeBy: none
+		sourceColumn: case_manager
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_managed_status
+		dataType: string
+		lineageTag: bf1fbc52-5d67-4a2f-b634-9e061396b08b
+		summarizeBy: none
+		sourceColumn: case_managed_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column intensity_level
+		dataType: string
+		lineageTag: f0634858-4748-4e43-b5d3-c1bd354cb2e3
+		summarizeBy: none
+		sourceColumn: intensity_level
+
+		annotation SummarizationSetBy = Automatic
+
+	column support_category
+		dataType: string
+		lineageTag: 27ea52d0-06c9-4700-9f44-2270baed54fa
+		summarizeBy: none
+		sourceColumn: support_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column support_type
+		dataType: string
+		lineageTag: 359fda02-a29f-42bc-8d16-d987ed1828f1
+		summarizeBy: none
+		sourceColumn: support_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity
+		dataType: string
+		lineageTag: 9fc5f0c6-a151-438a-b547-a5574277e609
+		summarizeBy: none
+		sourceColumn: activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column tier
+		dataType: string
+		lineageTag: 6278e23f-4b77-41d0-9a18-2b932e03bbf8
+		summarizeBy: none
+		sourceColumn: tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column goals_addressed
+		dataType: string
+		lineageTag: b87022e7-79a6-4836-bb5f-b0b1760de856
+		summarizeBy: none
+		sourceColumn: goals_addressed
+
+		annotation SummarizationSetBy = Automatic
+
+	column freq_of_support
+		dataType: string
+		lineageTag: 69be81ba-9b14-4e36-babd-768cbb190b86
+		summarizeBy: none
+		sourceColumn: freq_of_support
+
+		annotation SummarizationSetBy = Automatic
+
+	column other_freq
+		dataType: string
+		lineageTag: d3040ed8-66c1-4018-b090-6092f7cd91ed
+		summarizeBy: none
+		sourceColumn: other_freq
+
+		annotation SummarizationSetBy = Automatic
+
+	column support_received
+		dataType: string
+		lineageTag: 697aea33-47f5-4cdc-b192-c9145a56e9f7
+		summarizeBy: none
+		sourceColumn: support_received
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_supports
+		dataType: int64
+		formatString: 0
+		lineageTag: aa5f3294-81ae-484e-bd94-316cd7d2c280
+		summarizeBy: sum
+		sourceColumn: total_supports
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_support_hours
+		dataType: double
+		lineageTag: 56449ed0-eb9b-4b8a-8369-a4cf344dfcb0
+		summarizeBy: sum
+		sourceColumn: total_support_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column initiatives
+		dataType: string
+		lineageTag: bf85d340-3558-40ad-b0bd-bc7c199ebd0e
+		summarizeBy: none
+		sourceColumn: initiatives
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: string
+		lineageTag: a32101d9-09f9-484b-b630-fcf91189d2ac
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 3be70bc0-3c81-471d-8c3b-4b6a2efc25e4
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_by
+		dataType: string
+		lineageTag: 8e8a9ca4-ff8d-4048-924c-5f627f314f8e
+		summarizeBy: none
+		sourceColumn: created_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ab9f5259-5d52-4525-81f5-793ea7da4a55
+		summarizeBy: none
+		sourceColumn: created_date
+
+		variation Variation
+			isDefault
+			relationship: de633a06-ae80-4a4b-9745-f6a535ad31c8
+			defaultHierarchy: LocalDateTable_a365099d-54a8-46c8-b1c5-3d4b15eba38c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column last_mod_by
+		dataType: string
+		lineageTag: 523565ef-8217-4439-a431-32807ec90735
+		summarizeBy: none
+		sourceColumn: last_mod_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_mod_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9b4cead4-a917-4ae1-ab9d-cebf62375475
+		summarizeBy: none
+		sourceColumn: last_mod_date
+
+		variation Variation
+			isDefault
+			relationship: d5a78cab-6f4c-4221-8af3-842a9aa01835
+			defaultHierarchy: LocalDateTable_0088303e-335d-4e3a-b863-e70b61f1604f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column entry_id
+		dataType: string
+		lineageTag: 476665c9-79c8-4914-b253-d0e3d4857bcd
+		summarizeBy: none
+		sourceColumn: entry_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_year
+		dataType: string
+		lineageTag: db779765-491e-42cb-9dc4-77d3b8c7750b
+		summarizeBy: none
+		sourceColumn: school_year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition raw_cisdm_student_planned_supports = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    dbo_raw_cisdm_student_planned_supports = Source{[Schema="dbo",Item="raw_cisdm_student_planned_supports"]}[Data]
+				in
+				    dbo_raw_cisdm_student_planned_supports
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

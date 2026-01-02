@@ -1,0 +1,51 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "credible_paycor_merge",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_credible_services": {
+      "queryId": "2a020a95-2e95-4e86-89cb-729d17cb62b5",
+      "queryName": "raw_credible_services"
+    },
+    "raw_fep_punches": {
+      "queryId": "ecbcce0c-413e-439c-8c15-e836ecf306c7",
+      "queryName": "raw_fep_punches"
+    },
+    "fep_employees": {
+      "queryId": "40042817-524c-44aa-bc09-96a51cb1c649",
+      "queryName": "fep_employees"
+    },
+    "Sep 14 to Sep 27": {
+      "queryId": "bbd8a0e2-6588-4465-aae6-5e34779e8d46",
+      "queryName": "Sep 14 to Sep 27"
+    },
+    "Sep 28 to Oct 10": {
+      "queryId": "7c822485-2870-49ad-8c3a-39dd9fa68271",
+      "queryName": "Sep 28 to Oct 10"
+    },
+    "Oct 12 to Oct 25": {
+      "queryId": "0070f9e7-912d-4e55-826d-34dedfbf2a23",
+      "queryName": "Oct 12 to Oct 25"
+    },
+    "Appended FEP Billing": {
+      "queryId": "4906e466-20ba-4eaa-be71-7bf91de1362e",
+      "queryName": "Appended FEP Billing",
+      "loadEnabled": false
+    },
+    "Appended FEP Billing_DataDestination": {
+      "queryId": "87de7ee9-5cd9-4659-af1c-6d452e76ecb5",
+      "queryName": "Appended FEP Billing_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

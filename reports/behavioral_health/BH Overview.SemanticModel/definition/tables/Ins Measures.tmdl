@@ -1,0 +1,46 @@
+table 'Ins Measures'
+	lineageTag: ea9ca5af-6571-44d8-824c-0e8f145c1919
+
+	measure 'Total Ins Due' = SUM('Billing'[Insur Due])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 8eb1546c-811a-45b3-96e7-7289bfa32ac5
+
+	measure 'Total Ins Paid' = SUM('Billing'[Ins Paid])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: c024deb6-d80c-4061-8eaa-c704bf0032c4
+
+	measure 'Total Ins Paid % difference from Revenue' =
+			
+			VAR __BASELINE_VALUE = [Revenue]
+			VAR __VALUE_TO_COMPARE = [Total Ins Paid]
+			RETURN
+				IF(
+					NOT ISBLANK(__VALUE_TO_COMPARE),
+					DIVIDE(__VALUE_TO_COMPARE - __BASELINE_VALUE, __BASELINE_VALUE)
+				)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 37402f4f-e217-4bfe-968d-af64acb4ae7c
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MathematicalPercentageDifference"
+				}
+
+		changedProperty = FormatString
+
+	column Value
+		formatString: 0
+		lineageTag: fbed0e70-09a7-4fcd-9840-c9cffc33b280
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Ins Measures' = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = c41e53d6a63047308a0ecbc3de1b326a
+

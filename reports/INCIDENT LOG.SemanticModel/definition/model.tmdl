@@ -1,0 +1,18 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["raw_maint_incident_log"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table raw_maint_incident_log
+ref table DateTableTemplate_9bdc1659-b279-4192-b2b2-0f5a6840eb88
+ref table LocalDateTable_888180a1-ad92-4c0e-9ae6-e641ab8bcb4f
+
+ref cultureInfo en-US
+

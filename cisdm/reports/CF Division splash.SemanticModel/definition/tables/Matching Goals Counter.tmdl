@@ -1,0 +1,37 @@
+table 'Matching Goals Counter'
+	lineageTag: e8887ee3-0910-4d9d-bf31-d2c8932a0acb
+
+	measure matching_goals_percent = DIVIDE(sum('Matching Goals Counter'[Count]),SUM('cis aggregated_all_planned_supports'[Count]))
+		formatString: 0%;-0%;0%
+		lineageTag: 04b51c39-27e9-4555-8c07-9a07a874b86d
+
+	column matching_school_goal
+		dataType: string
+		lineageTag: f84cf8d7-25c9-4935-85ae-ba04aa71c673
+		summarizeBy: none
+		sourceColumn: matching_school_goal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Count
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c65f521-4642-471a-bc3d-04c924ac004c
+		summarizeBy: sum
+		sourceColumn: Count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Matching Goals Counter' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_matching_school_goal_count = Source{[Schema="cis",Item="matching_school_goal_count"]}[Data]
+				in
+				    cis_matching_school_goal_count
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

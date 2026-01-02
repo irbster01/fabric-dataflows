@@ -1,0 +1,43 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "credible_employees_biDataflow",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "API - Employees": {
+      "queryId": "5416fd82-4541-4976-9552-8425be1b8a05",
+      "queryName": "API - Employees",
+      "loadEnabled": false
+    },
+    "API - Employees_DataDestination": {
+      "queryId": "0f99f74f-8b65-46a5-a622-19f59c85c8bf",
+      "queryName": "API - Employees_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "license expiration": {
+      "queryId": "40f68a07-0bf8-4169-8c81-cba6c740b206",
+      "queryName": "license expiration",
+      "loadEnabled": false
+    },
+    "license expiration_DataDestination": {
+      "queryId": "bee58828-bdfa-4afb-8590-e1b2976572ae",
+      "queryName": "license expiration_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "PowerPlatformDataflows",
+      "kind": "PowerPlatformDataflows",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"79a22923-b06f-491f-b6b7-c55e6d054614\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

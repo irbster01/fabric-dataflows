@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_desoto_grade_detail"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5984139d-2c94-ba6b-42ac-0292018e3036"
+  }
+}

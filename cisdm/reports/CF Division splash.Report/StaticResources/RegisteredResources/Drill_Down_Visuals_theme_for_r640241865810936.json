@@ -1,0 +1,20 @@
+{
+  "name": "Drill Down Visuals theme for russell.irby@voanorthla.org",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "paid": [
+          {
+            "show": true
+          }
+        ],
+        "license": [
+          {
+            "key": "ZoomCharts Drill Down Visuals Developer License (valid until: 2026-11-07);PBID-83u23k4p6#Ies0kV/fSUacRtx+B1GgHGhGPKfofu1RT5tItXCOHXzWPaDD30v1eb53pv0DAyS/WY3O/p/i7iH1Tc9uBoShNJ6BySrS9dGbGWvicmHYicN6gO363jRCqwZ8h9G4r+nZjUwpcHnIK+dMpcbUcVuk6yUdICz1y8mRK",
+            "hash": "dosBoY6lf3UOHcMkkC2Sp8AURlpHZBFBv+ByfL/7o4Viv3khvXXj6S1ib2aFN+FMoaghBrmBaHmwTAl2ioHal90vw6U4zPwgskZqYh3CxjvRLVBkkuTL3vcLmJMta1R+uPTgLUsQbFwNbcpemHBdTjkCchn4XAFGQhj8JQXpCIvTBrKAGO25A=="
+          }
+        ]
+      }
+    }
+  }
+}

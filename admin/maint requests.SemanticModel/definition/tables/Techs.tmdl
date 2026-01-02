@@ -1,0 +1,48 @@
+table Techs
+	lineageTag: a3b05ba3-d061-4a6b-a2e5-ddb9efef5510
+
+	column TechnicianId
+		dataType: string
+		lineageTag: c1a11810-f9e0-4de4-97c5-20c423e46a7d
+		summarizeBy: none
+		sourceColumn: TechnicianId
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tech Email'
+		dataType: string
+		lineageTag: b382fc96-cf0e-4fc6-80b5-287ad438505e
+		summarizeBy: none
+		sourceColumn: Tech Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Location'
+		dataType: string
+		lineageTag: ddd42b67-968c-483a-97cb-dd66fd1d5c9d
+		summarizeBy: none
+		sourceColumn: Full Location
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Techs = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"0f412879-576a-4d92-af9f-3948863782fa" = Workspaces{[workspaceId="0f412879-576a-4d92-af9f-3948863782fa"]}[Data],
+				    #"a074d378-8eea-43ce-b8a2-d19b1b9baf85" = #"0f412879-576a-4d92-af9f-3948863782fa"{[dataflowId="a074d378-8eea-43ce-b8a2-d19b1b9baf85"]}[Data],
+				    #"Maintenance Request and History_" = #"a074d378-8eea-43ce-b8a2-d19b1b9baf85"{[entity="Maintenance Request and History",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Maintenance Request and History_",{{"RequestDate", type date}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"ID", "Title", "Modified", "Created", "AuthorId", "EditorId", "ComplianceAssetId", "Requester", "Program", "Location", "LocationDetail", "Unit#", "EntryNotes", "RequestDate", "RequestType:", "ServiceIssue", "DateCompleted", "PartsUsed?", "Request #", "RequesterPhone", "PropertyType", "RepeatIssue?", "Description", "ServiceType", "TicketStatus", "DateApproved", "Completed", "Approved"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Columns", {"TechnicianId"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Duplicates","fred.raley@voanorthla.org","Fred Raley",Replacer.ReplaceText,{"Tech Email"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Replaced Value", each ([TechnicianId] <> ""))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

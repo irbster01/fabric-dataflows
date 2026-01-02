@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "maintenance invoices"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "97064c30-4aa9-a311-4017-316ae83f4276"
+  }
+}

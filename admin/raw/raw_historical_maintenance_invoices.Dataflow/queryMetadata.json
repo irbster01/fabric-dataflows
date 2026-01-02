@@ -1,0 +1,44 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_historical_maintenance_invoices",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "2023": {
+      "queryId": "ef80149d-eb56-42e2-b337-a91e9ae590a7",
+      "queryName": "2023"
+    },
+    "2024": {
+      "queryId": "fa1e12e9-c93d-4a28-86f9-4255ed4f50c7",
+      "queryName": "2024"
+    },
+    "2025": {
+      "queryId": "a58ddd3a-d497-4aba-bc1a-1988e63a5da9",
+      "queryName": "2025"
+    },
+    "appended_historical_maint_invoices": {
+      "queryId": "34d01948-7d61-469a-99a0-b27385c6258a",
+      "queryName": "appended_historical_maint_invoices",
+      "loadEnabled": false
+    },
+    "appended_historical_maint_invoices_DataDestination": {
+      "queryId": "c758a9c4-865a-4b1a-a50d-020789d4aab0",
+      "queryName": "appended_historical_maint_invoices_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://voanorthlaorg.sharepoint.com/sites/TheVOAHub/Logistics/Maintenance/McAdoo%20HVAC%20&%20Plumbing/Byrnes%202023-2025%20McAdoo%20(1).xlsx",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"83971382-2dc6-47ec-9f51-963d56c9e1e1\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+table 'API - Employee Caseload'
+	lineageTag: f4566e7f-2ed6-44d6-8ec9-2fd57c08873a
+
+	column 'Employee ID'
+		dataType: string
+		lineageTag: e0fda58b-475a-4492-ac00-0fad4ae597d1
+		summarizeBy: none
+		sourceColumn: Employee ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client ID'
+		dataType: string
+		lineageTag: 6b8b4571-8621-4db2-987b-6c805b20ab8f
+		summarizeBy: none
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column primary_flag
+		dataType: string
+		lineageTag: 1a9d2614-c5e3-4ea8-b3bd-6e762651f2e6
+		summarizeBy: none
+		sourceColumn: primary_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_manager
+		dataType: string
+		lineageTag: c08ab543-9bd5-488f-8c75-f5ca3376e90b
+		summarizeBy: none
+		sourceColumn: case_manager
+
+		annotation SummarizationSetBy = Automatic
+
+	column team_assigned
+		dataType: string
+		lineageTag: 82c1a8ea-5bcb-45a1-9e68-a73c0f94015f
+		summarizeBy: none
+		sourceColumn: team_assigned
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Program ID'
+		dataType: string
+		lineageTag: 9847ec13-2cc5-4f02-ba92-c96d15504d93
+		summarizeBy: none
+		sourceColumn: Program ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'API - Employee Caseload' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"14444098-6553-4c81-9fbd-a2a48b9ff763" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="14444098-6553-4c81-9fbd-a2a48b9ff763"]}[Data],
+				    #"API - Employee Caseload_" = #"14444098-6553-4c81-9fbd-a2a48b9ff763"{[entity="API - Employee Caseload",version=""]}[Data]
+				in
+				    #"API - Employee Caseload_"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

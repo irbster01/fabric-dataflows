@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw-netsuite-gl-ssvf"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f8e44f79-8e25-b3b1-4993-2754f7b066b0"
+  }
+}

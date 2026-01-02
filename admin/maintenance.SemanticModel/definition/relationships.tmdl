@@ -1,0 +1,56 @@
+relationship 13b5834a-d5bf-4a33-82d3-13db97510f87
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_maintenance_requests.completion_date
+	toColumn: LocalDateTable_34727b1d-829e-4188-9450-1299105aaab1.Date
+
+relationship 05481f76-7b4f-4a31-bd3c-5cc4ac2d9492
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_maintenance_requests.approval_date
+	toColumn: LocalDateTable_c5ba86e5-cb1c-4dfe-a673-595b7a558234.Date
+
+relationship 1f9631d7-0794-4b5d-9f44-b0fa36518953
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_maintenance_requests.modified_date
+	toColumn: LocalDateTable_d2f0f5ff-dc5e-4d9a-8eb2-b1954b1aa852.Date
+
+relationship 592320f3-d485-484e-abd6-55e6fe2b764b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_maintenance_requests.created_date
+	toColumn: LocalDateTable_b0b01d35-9bfa-4afa-bfa6-9db7033711e1.Date
+
+relationship 8588cb33-e771-4bbe-b7bf-90a09358e600
+	joinOnDateBehavior: datePartOnly
+	fromColumn: maintenance_avg_days_open.month_control
+	toColumn: LocalDateTable_428cfedd-7164-49b2-b65f-d634a293ca66.Date
+
+relationship 91367868-0019-43b2-b22c-602f38de968c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: maintenance_avg_days_to_complete.month_control
+	toColumn: LocalDateTable_ad94aa31-7340-4696-8ee0-a90e77cb8777.Date
+
+relationship e7096996-9b3c-7c0b-eb66-219fddc34c2f
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: month_controller.month_control
+	toColumn: maintenance_avg_days_to_complete.month_control
+
+relationship cf4e2ccb-725c-8e67-f450-9dbc149452f6
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: month_controller.month_control
+	toColumn: maintenance_avg_days_open.month_control
+
+relationship 8f113e96-73fe-403c-988f-2a90fa12e8bf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_maintenance_requests.request_date
+	toColumn: LocalDateTable_e1cded6d-27f9-409c-99ab-59bc85b3bfcd.Date
+
+relationship 75741ada-7378-129d-286e-9b058c87e64f
+	fromColumn: raw_maintenance_requests.month_control
+	toColumn: month_controller.month_control
+
+relationship 01137a13-4e67-4a15-9e16-8cb27e3ae568
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_maintenance_requests.today
+	toColumn: LocalDateTable_9945ded4-47d8-4fe0-ac48-4ef1e9b80b72.Date
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "OIG Check"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7b6a5308-3bff-b666-4f8c-47f2afe554fa"
+  }
+}

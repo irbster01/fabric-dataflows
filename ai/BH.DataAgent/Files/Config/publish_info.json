@@ -1,0 +1,4 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/publishInfo/1.0.0/schema.json",
+  "description": "Supervision bot - ask about who or how many employees had supervision.\n\nStart with things like: \"How many employees are good on supervision in august?\" -  \"are there any employees that regularly miss the required hours?\""
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "caddo_grades_transforms"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "32c13eea-b1f3-b2a9-4ccd-31a8fb931481"
+  }
+}

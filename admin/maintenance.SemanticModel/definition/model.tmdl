@@ -1,0 +1,28 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["raw_maintenance_requests","maintenance_avg_days_open","maintenance_avg_days_to_complete","month_controller"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table raw_maintenance_requests
+ref table DateTableTemplate_6e2e766b-5d32-4e44-87ad-291073f9d889
+ref table LocalDateTable_34727b1d-829e-4188-9450-1299105aaab1
+ref table LocalDateTable_c5ba86e5-cb1c-4dfe-a673-595b7a558234
+ref table LocalDateTable_d2f0f5ff-dc5e-4d9a-8eb2-b1954b1aa852
+ref table LocalDateTable_b0b01d35-9bfa-4afa-bfa6-9db7033711e1
+ref table maintenance_avg_days_open
+ref table LocalDateTable_428cfedd-7164-49b2-b65f-d634a293ca66
+ref table maintenance_avg_days_to_complete
+ref table LocalDateTable_ad94aa31-7340-4696-8ee0-a90e77cb8777
+ref table month_controller
+ref table LocalDateTable_e1cded6d-27f9-409c-99ab-59bc85b3bfcd
+ref table LocalDateTable_9945ded4-47d8-4fe0-ac48-4ef1e9b80b72
+
+ref cultureInfo en-US
+

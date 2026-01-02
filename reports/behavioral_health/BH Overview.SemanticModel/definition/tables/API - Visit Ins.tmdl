@@ -1,0 +1,67 @@
+table 'API - Visit Ins'
+	lineageTag: 8bbd24d8-582b-4077-9ad2-53cb8ac63f08
+
+	column 'Service ID'
+		dataType: string
+		lineageTag: e0276567-3960-415b-8dc8-31a750aa22f3
+		summarizeBy: none
+		sourceColumn: Service ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ins ID'
+		dataType: string
+		lineageTag: 5257765e-187c-4eb6-8e18-c4822e98b9db
+		summarizeBy: none
+		sourceColumn: Ins ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column billing_ord1
+		dataType: string
+		lineageTag: 713453d1-98c2-4678-8379-62bb519370e8
+		summarizeBy: none
+		sourceColumn: billing_ord1
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_count1
+		dataType: string
+		lineageTag: 8b1a515a-461a-405f-8f7f-116442e7b1f2
+		summarizeBy: none
+		sourceColumn: batch_count1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payer ID'
+		dataType: string
+		lineageTag: a1f0e6f3-f492-469f-b99c-d3bcefb29bfe
+		summarizeBy: none
+		sourceColumn: Payer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column billing_sequence1
+		dataType: string
+		lineageTag: 03c53434-4b00-451a-848c-ec85d9f006b4
+		summarizeBy: none
+		sourceColumn: billing_sequence1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'API - Visit Ins' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"1ecf50dc-4bb0-42ed-9f3b-e68552b2d12c" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="1ecf50dc-4bb0-42ed-9f3b-e68552b2d12c"]}[Data],
+				    #"API - Visit Ins_" = #"1ecf50dc-4bb0-42ed-9f3b-e68552b2d12c"{[entity="API - Visit Ins",version=""]}[Data]
+				in
+				    #"API - Visit Ins_"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

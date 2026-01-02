@@ -1,0 +1,201 @@
+table 2526_lh_clients
+	lineageTag: 8e9fb5ff-2760-4c8f-a716-131ee37c2035
+
+	column client_id
+		dataType: string
+		lineageTag: e30256d4-099f-4a85-87b8-361a7d95a7c0
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column entry_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 209c8abe-edf2-49ae-8bf0-614191f3b738
+		summarizeBy: none
+		sourceColumn: entry_date
+
+		variation Variation
+			isDefault
+			relationship: 7de67d91-6386-4744-8282-a1c5b15b1957
+			defaultHierarchy: LocalDateTable_9b512b0c-19e1-4047-9105-44dd4597871b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column entry_id
+		dataType: string
+		lineageTag: 833b768c-1aa2-4f5d-9c8f-aee653aa51be
+		summarizeBy: none
+		sourceColumn: entry_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column exit_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 0ae0d30b-3a0e-4147-a494-b67302b00e93
+		summarizeBy: none
+		sourceColumn: exit_date
+
+		variation Variation
+			isDefault
+			relationship: eb9279c0-1e6a-43a1-b0c3-34d8bb1fea54
+			defaultHierarchy: LocalDateTable_01dcf13d-5b35-4ceb-95bb-b1a0d245021b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column program
+		dataType: string
+		lineageTag: 654c37b9-3119-4dba-b298-5f549ae0c4d6
+		summarizeBy: none
+		sourceColumn: program
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_dates
+		dataType: string
+		lineageTag: 7f92441c-2ac3-44fc-a149-d0ed9a023a2c
+		summarizeBy: none
+		sourceColumn: session_dates
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 2b6ab7f0-5674-44e8-b639-0e68e18ef7dd
+		summarizeBy: sum
+		sourceColumn: session_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_enrolled
+		dataType: int64
+		formatString: 0
+		lineageTag: ce73b054-5755-445e-8b29-c7786a2f31a8
+		summarizeBy: sum
+		sourceColumn: days_enrolled
+
+		annotation SummarizationSetBy = Automatic
+
+	column start2
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a402175d-5081-473e-86cf-d818c1630555
+		summarizeBy: none
+		sourceColumn: start2
+
+		variation Variation
+			isDefault
+			relationship: 24e0fb85-6652-4f89-b657-61a242fd8a60
+			defaultHierarchy: LocalDateTable_62890e4c-c9bd-4640-8a53-24b394df5b27.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column dates_from_sept2
+		dataType: string
+		lineageTag: 8e0fab0c-b471-473a-a0c3-48165bd4f24a
+		summarizeBy: none
+		sourceColumn: dates_from_sept2
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_count_from_sept2
+		dataType: int64
+		formatString: 0
+		lineageTag: c1d5c2a9-f29f-4bff-95a9-3ed02908d0b0
+		summarizeBy: sum
+		sourceColumn: session_count_from_sept2
+
+		annotation SummarizationSetBy = Automatic
+
+	column start8
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5e46dcfe-6cc7-4208-b1b3-7af69d4fe954
+		summarizeBy: none
+		sourceColumn: start8
+
+		variation Variation
+			isDefault
+			relationship: a2e2cbc7-f13d-4fd4-9d80-564f150bc71d
+			defaultHierarchy: LocalDateTable_9fae3458-b1cd-46c8-a5c4-e327585e2629.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column session_dates_from_sept8
+		dataType: string
+		lineageTag: eb6a4880-bd4f-4bb6-a88a-66fda70979d8
+		summarizeBy: none
+		sourceColumn: session_dates_from_sept8
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_count_from_sept8
+		dataType: int64
+		formatString: 0
+		lineageTag: e6e52433-8e01-4954-bc95-f2078410b580
+		summarizeBy: sum
+		sourceColumn: session_count_from_sept8
+
+		annotation SummarizationSetBy = Automatic
+
+	column start9
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 60d76f95-31b8-4d86-b023-566750ff951f
+		summarizeBy: none
+		sourceColumn: start9
+
+		variation Variation
+			isDefault
+			relationship: 0a9dd11f-5e1a-497b-bb30-82985d102a44
+			defaultHierarchy: LocalDateTable_71ced890-02fb-4b8a-acc5-04f1b396e03d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column session_dates_from_sept9
+		dataType: string
+		lineageTag: a37e0f36-95a9-47d9-b174-28df41512a67
+		summarizeBy: none
+		sourceColumn: session_dates_from_sept9
+
+		annotation SummarizationSetBy = Automatic
+
+	column session_count_from_sept9
+		dataType: int64
+		formatString: 0
+		lineageTag: e9875a3b-d459-4f3b-ad4b-fadce64eb862
+		summarizeBy: sum
+		sourceColumn: session_count_from_sept9
+
+		annotation SummarizationSetBy = Automatic
+
+	column entry_month_name
+		dataType: string
+		lineageTag: 23c84630-863c-4b9f-9c94-ea9d79de5235
+		summarizeBy: none
+		sourceColumn: entry_month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 2526_lh_clients = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "ServicePoint"),
+				    dbo_2526_lh_clients = Source{[Schema="dbo",Item="2526_lh_clients"]}[Data]
+				in
+				    dbo_2526_lh_clients
+

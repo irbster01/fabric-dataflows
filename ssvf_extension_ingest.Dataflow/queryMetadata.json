@@ -1,0 +1,54 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "ssvf_extension_ingest",
+  "queryGroups": [
+    {
+      "id": "07cd4f16-d3bf-4391-a638-923f94320f45",
+      "name": "Transform file from lsndc_middleman"
+    },
+    {
+      "id": "bb49a970-4ebb-4603-ac66-8bedad9f3409",
+      "name": "Helper queries",
+      "parentId": "07cd4f16-d3bf-4391-a638-923f94320f45"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "lsndc_middleman": {
+      "queryId": "66cd86ef-810c-4cda-a7b3-bd7e8202f40e",
+      "queryName": "lsndc_middleman"
+    },
+    "Sample file": {
+      "queryId": "d6952cf1-7306-45cb-974e-fd8ff95f004f",
+      "queryName": "Sample file",
+      "queryGroupId": "bb49a970-4ebb-4603-ac66-8bedad9f3409",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "bacbf28f-822b-4db3-bea0-91e6a1823b5b",
+      "queryName": "Parameter",
+      "queryGroupId": "bb49a970-4ebb-4603-ac66-8bedad9f3409",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "327005e1-6830-41e0-80d8-57d3f1525cf6",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "07cd4f16-d3bf-4391-a638-923f94320f45",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "e6155ca4-7c1c-4fb5-b5b0-e2463bb0ec2b",
+      "queryName": "Transform file",
+      "queryGroupId": "bb49a970-4ebb-4603-ac66-8bedad9f3409",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

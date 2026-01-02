@@ -1,0 +1,105 @@
+table v_client_month_rollups
+	lineageTag: 3d70bed3-daae-43d1-aa50-40c081307a73
+
+	column client_id
+		dataType: string
+		lineageTag: 2269f53f-4049-44bb-a568-8c50291ac702
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_last_name
+		dataType: string
+		lineageTag: 38e87556-966b-42d3-9624-3b4b52f94505
+		summarizeBy: none
+		sourceColumn: client_last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_first_name
+		dataType: string
+		lineageTag: ee62735e-f51b-4c73-be5f-e003cf37351c
+		summarizeBy: none
+		sourceColumn: client_first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 04e6fb00-f36b-4fd2-8fec-90678c9338bd
+		summarizeBy: none
+		sourceColumn: service_month
+
+		variation Variation
+			isDefault
+			relationship: 94a4afe7-303b-47e9-b4fd-1c42289e0c3b
+			defaultHierarchy: LocalDateTable_63ec162a-0ad1-40d2-8d7c-dd9052965fbf.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column month_name
+		dataType: string
+		lineageTag: 919b70a8-79f8-4812-9659-8326526fb87f
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Count
+		dataType: int64
+		formatString: 0
+		lineageTag: a8059ddd-97fe-4c95-a4dd-cc7b4def6718
+		summarizeBy: sum
+		sourceColumn: Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column max830
+		dataType: int64
+		formatString: 0
+		lineageTag: 35ec35f4-7103-4821-8aa5-cdecbd34a70d
+		summarizeBy: sum
+		sourceColumn: max830
+
+		annotation SummarizationSetBy = Automatic
+
+	column max92
+		dataType: int64
+		formatString: 0
+		lineageTag: f9cd3a36-09a8-4a6a-b65c-a20f07ac93e2
+		summarizeBy: sum
+		sourceColumn: max92
+
+		annotation SummarizationSetBy = Automatic
+
+	column max99
+		dataType: int64
+		formatString: 0
+		lineageTag: a09baf7e-2038-4dcf-a747-18bf902f6a38
+		summarizeBy: sum
+		sourceColumn: max99
+
+		annotation SummarizationSetBy = Automatic
+
+	column max98
+		dataType: int64
+		formatString: 0
+		lineageTag: fb589fdc-1d60-4a4e-8c62-180dfb492424
+		summarizeBy: sum
+		sourceColumn: max98
+
+		annotation SummarizationSetBy = Automatic
+
+	partition v_client_month_rollups = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "ServicePoint"),
+				    dbo_v_client_month_rollups = Source{[Schema="dbo",Item="v_client_month_rollups"]}[Data]
+				in
+				    dbo_v_client_month_rollups
+

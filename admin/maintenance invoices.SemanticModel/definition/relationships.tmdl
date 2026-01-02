@@ -1,0 +1,17 @@
+relationship 51750c41-18f3-41e7-8890-a8864e389fb6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.Date
+	toColumn: LocalDateTable_28c23cab-3fbf-42e1-8bc5-97262fde8ccf.Date
+
+relationship ffeac492-c6a7-4357-23a6-191fc122254e
+	fromColumn: appended_historical_maint_invoices.'Date Completed'
+	toColumn: Date.Date
+
+relationship AutoDetected_970d5e9d-d6f8-4337-b1d2-cc8d399b633d
+	fromColumn: appended_historical_maint_invoices.invoice_num
+	toColumn: '2023 Invoice Number Totals'.invoice_num
+
+relationship AutoDetected_2efab09e-964b-4369-9c5a-89df7e1ca967
+	fromColumn: appended_historical_maint_invoices.loc_value
+	toColumn: '2025 Invoice Number Totals (2)'.Value
+

@@ -1,0 +1,92 @@
+table 'cis cis_dibels'
+	lineageTag: d77c98b5-7b2d-489b-a94f-ab44ec5dc13a
+
+	column student_name
+		dataType: string
+		lineageTag: 7990b38a-5028-4101-a95a-b72e86ada8de
+		summarizeBy: none
+		sourceColumn: student_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sasid
+		dataType: string
+		lineageTag: cc325139-d5fd-49a4-83b1-7091bec59b3f
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column sidno
+		dataType: string
+		lineageTag: be2e17ba-8503-416d-a4a4-e16692ef4613
+		summarizeBy: none
+		sourceColumn: sidno
+
+		annotation SummarizationSetBy = Automatic
+
+	column grade
+		dataType: string
+		lineageTag: dd18a798-1821-431f-937f-818ec7bd2909
+		summarizeBy: none
+		sourceColumn: grade
+
+		annotation SummarizationSetBy = Automatic
+
+	column literacy_boy_score
+		dataType: double
+		lineageTag: 5331aae0-e21f-45a7-b935-ac21144251b1
+		summarizeBy: sum
+		sourceColumn: literacy_boy_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column literacy_moy_score
+		dataType: double
+		lineageTag: cce9a694-84b8-4a81-a863-a15197197af2
+		summarizeBy: sum
+		sourceColumn: literacy_moy_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column literacy_eoy_score
+		dataType: double
+		lineageTag: 86f18db4-00e9-4544-b0bc-56b5e6c0a6f8
+		summarizeBy: sum
+		sourceColumn: literacy_eoy_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column client_id
+		dataType: string
+		lineageTag: 1d361a65-909b-48eb-8291-8b3e234d91d7
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_name
+		dataType: string
+		lineageTag: f2fcad07-df37-4079-9bd5-a6cde691ae56
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'cis cis_dibels' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_cis_dibels = Source{[Schema="cis",Item="cis_dibels"]}[Data]
+				in
+				    cis_cis_dibels
+
+	annotation PBI_ResultType = Table
+

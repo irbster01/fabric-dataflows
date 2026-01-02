@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "active_lsndc_clients",
+    "description": "These are all lsndc clients that have an open entry.\nSHOC, GAPS, SSVF Shreveport/Monroe, GPD\nThis breaks out the entries by program and only active clients."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3a921b2b-c25b-b62b-4dd1-5b9b7ec7a299"
+  }
+}

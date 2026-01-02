@@ -1,0 +1,61 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "caddo-census",
+  "queryGroups": [
+    {
+      "id": "02cf6e9a-2a64-49cb-8c87-53fc526f8481",
+      "name": "Transform file from caddo_census"
+    },
+    {
+      "id": "556a463a-6d99-4f73-afe1-1364b1f5fe14",
+      "name": "Helper queries",
+      "parentId": "02cf6e9a-2a64-49cb-8c87-53fc526f8481"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "caddo_census": {
+      "queryId": "1b43a19a-0a16-45bc-8999-279b317e534c",
+      "queryName": "caddo_census",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "792f347b-fe90-4e94-b85c-1367c8d8e11f",
+      "queryName": "Sample file",
+      "queryGroupId": "556a463a-6d99-4f73-afe1-1364b1f5fe14",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "23fa1fc7-170f-465f-9e51-d90b9caabcdd",
+      "queryName": "Parameter",
+      "queryGroupId": "556a463a-6d99-4f73-afe1-1364b1f5fe14",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "811d18fb-2617-4d31-ab11-ab70f74d8897",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "02cf6e9a-2a64-49cb-8c87-53fc526f8481",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "1fd5e5a9-d988-4f76-8d57-a832d65ccde6",
+      "queryName": "Transform file",
+      "queryGroupId": "556a463a-6d99-4f73-afe1-1364b1f5fe14",
+      "loadEnabled": false
+    },
+    "caddo_census_DataDestination": {
+      "queryId": "72a40d75-d1d7-4c21-9bbe-7825debf66ca",
+      "queryName": "caddo_census_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

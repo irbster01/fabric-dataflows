@@ -1,0 +1,257 @@
+table 'Risk Management Tracker'
+	lineageTag: 1112a5c8-13ab-46fe-8dcc-09f0f9ab6183
+
+	column Id
+		dataType: string
+		lineageTag: 89d8e861-78e3-4e91-8661-fcd7ad0849f3
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: df0878b2-f9f3-4a82-b402-570352e7f5bf
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column Program
+		dataType: string
+		lineageTag: c85890d8-70fe-4c88-a370-ee135a50e226
+		summarizeBy: none
+		sourceColumn: Program
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Financial Perform'
+		dataType: int64
+		formatString: 0
+		lineageTag: bb0d54cb-b00d-48bf-9f8a-48dd90e77f15
+		summarizeBy: sum
+		sourceColumn: Financial Perform
+
+		annotation SummarizationSetBy = Automatic
+
+	column '6 month Outcomes'
+		dataType: int64
+		formatString: 0
+		lineageTag: 43724fa2-c28a-4953-9057-f43ea9aced05
+		summarizeBy: sum
+		sourceColumn: 6 month Outcomes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Annual Outcomes'
+		dataType: int64
+		formatString: 0
+		lineageTag: dad702bb-5f79-454f-b7a6-b4613f9abfae
+		summarizeBy: sum
+		sourceColumn: Annual Outcomes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client Sat Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 08350086-dfa8-41c5-a992-7c64c1851e86
+		summarizeBy: none
+		sourceColumn: Client Sat Date
+
+		variation Variation
+			isDefault
+			relationship: dc13c35b-d88c-46ad-9fb6-da54ed2f01f2
+			defaultHierarchy: LocalDateTable_0e09fe42-f6eb-4a8c-b3f5-17f1e72f9d86.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Avg Client Sat'
+		dataType: double
+		lineageTag: d61112d7-a902-4856-8eb8-6a208aec387b
+		summarizeBy: sum
+		sourceColumn: Avg Client Sat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Safety Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: cbed47f6-90d8-4099-a042-f45f54f8a6cd
+		summarizeBy: none
+		sourceColumn: Safety Date
+
+		variation Variation
+			isDefault
+			relationship: 71e79444-b4db-4185-a467-51fe64365abb
+			defaultHierarchy: LocalDateTable_0f3f72e9-d79e-4c31-9d62-cb760891dab2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column '# of Incidents'
+		dataType: int64
+		formatString: 0
+		lineageTag: 03dc5b79-e23c-463d-83c4-1c2942e13cce
+		summarizeBy: sum
+		sourceColumn: # of Incidents
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Program Pro Update'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7a528683-58b2-4dcb-9a38-be77a6dbabc8
+		summarizeBy: none
+		sourceColumn: Program Pro Update
+
+		variation Variation
+			isDefault
+			relationship: e5da9a9f-8347-4d39-9574-a794c0712761
+			defaultHierarchy: LocalDateTable_0f567314-0103-4035-b2f1-ee13a87fd0f4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Retention Rate'
+		dataType: double
+		lineageTag: 96e9ee17-9d1f-443e-bd5a-8c7ae082c959
+		summarizeBy: sum
+		sourceColumn: Retention Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Division
+		dataType: string
+		lineageTag: 8e8fbce9-1eb1-481f-b4d4-e173a1a34009
+		summarizeBy: none
+		sourceColumn: Division
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ID 1'
+		dataType: string
+		lineageTag: 20830581-ed6d-4dd2-a44c-3ed91edebd76
+		summarizeBy: none
+		sourceColumn: ID 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Modified
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 32b4d66d-04ab-44d5-9963-6fa8961e69a1
+		summarizeBy: none
+		sourceColumn: Modified
+
+		variation Variation
+			isDefault
+			relationship: 73c997d8-3f85-4545-b5ba-8ae65238fd0c
+			defaultHierarchy: LocalDateTable_181c7aa1-ff13-440b-8a6b-bbd63f3a307f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Created
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6e11c2c4-3e85-4aa4-8b5f-4b5f7a67f735
+		summarizeBy: none
+		sourceColumn: Created
+
+		variation Variation
+			isDefault
+			relationship: eab24042-2f58-43ba-91da-d901f4036d07
+			defaultHierarchy: LocalDateTable_3605a162-fea8-4a01-9762-73551bf87da2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Attachments
+		dataType: string
+		lineageTag: 28a8a499-afac-4479-9a6b-12bd0204aae3
+		summarizeBy: none
+		sourceColumn: Attachments
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Since Sat'
+		dataType: int64
+		formatString: 0
+		lineageTag: fd8248c8-435c-4ace-9669-1f91b9fa5236
+		summarizeBy: sum
+		sourceColumn: Days Since Sat
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sat Date Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: d8bf3a31-ceff-4a3f-b986-014ae9303ec9
+		summarizeBy: sum
+		sourceColumn: Sat Date Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Safety Date Difference'
+		dataType: int64
+		formatString: 0
+		lineageTag: a1aca091-1669-4ba2-9d3b-92add0c84a7b
+		summarizeBy: sum
+		sourceColumn: Safety Date Difference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Safety Date Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: 36e9093b-b8e9-406c-866c-65da0043c5e9
+		summarizeBy: sum
+		sourceColumn: Safety Date Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Program Profile Difference'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c2fbd75-da46-4978-88d8-a61a91177f73
+		summarizeBy: sum
+		sourceColumn: Program Profile Difference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Program Profile Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: 71b9797f-5845-4d98-a4a1-bd856d1907fb
+		summarizeBy: sum
+		sourceColumn: Program Profile Score
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Risk Management Tracker' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"ee4a2e08-2809-4073-afd9-ea76a40c2d3d" = Workspaces{[workspaceId="ee4a2e08-2809-4073-afd9-ea76a40c2d3d"]}[Data],
+				    #"8b40bff2-f4c0-4ae6-bdc5-186c99a878de" = #"ee4a2e08-2809-4073-afd9-ea76a40c2d3d"{[dataflowId="8b40bff2-f4c0-4ae6-bdc5-186c99a878de"]}[Data],
+				    #"Risk Management Tracker_" = #"8b40bff2-f4c0-4ae6-bdc5-186c99a878de"{[entity="Risk Management Tracker",version=""]}[Data]
+				in
+				    #"Risk Management Tracker_"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

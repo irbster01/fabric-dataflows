@@ -1,0 +1,91 @@
+table 'Maintenance Completed'
+	lineageTag: d0353a6d-c444-433d-bea7-91645848cdce
+
+	measure '% done 30' = DIVIDE([sum of 30 day comp],[total completed])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 33292df9-6660-468f-8a6b-52f6f4b7622b
+
+	measure 'Avg per day' = DIVIDE([Count Complete], NETWORKDAYS(MIN('Date'[Date]), MAX('Date'[Date])))
+		lineageTag: a189d684-710a-4bff-bcb7-4d224786f1b9
+
+	measure 'Avg per month' = DIVIDE([Count Complete], DISTINCTCOUNT('Date'[Cal Month]))
+		lineageTag: 21d92530-3465-486f-99c9-71c97178521f
+
+	measure 'Count Complete' = DISTINCTCOUNT('Maintenance Completed'[ID])
+		formatString: 0
+		lineageTag: 3d505b40-53b7-489c-bffb-3f27cae1b4ce
+
+	measure 'sum > 30' = SUM('Maintenance Request and History'[> 30 day count])
+		formatString: 0
+		lineageTag: 6369152d-95ff-4f82-8041-d0e5ce55b738
+
+	measure 'sum of 30 day comp' = SUM('Maintenance Request and History'[30 day count])
+		formatString: 0
+		lineageTag: 45d9754c-0e40-4d42-83f8-f38a3e9f1d28
+
+	measure 'total completed' = [sum > 30]+[sum of 30 day comp]
+		formatString: 0
+		lineageTag: 9de632b7-b231-43f2-9044-74b4d3fcb7fd
+
+	column ID
+		dataType: string
+		lineageTag: 57e70fdd-a00d-4810-9994-fb217007117b
+		summarizeBy: none
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateCompleted
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 492b0913-b62a-4a0f-9958-cfb9bd172f25
+		summarizeBy: none
+		sourceColumn: DateCompleted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TechnicianId
+		dataType: string
+		lineageTag: 0dbb7985-eb14-47f9-bbe4-56deafe22c8c
+		summarizeBy: none
+		sourceColumn: TechnicianId
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tech Email'
+		dataType: string
+		lineageTag: 119ee41a-9456-47dc-8abe-ba1529f23e25
+		summarizeBy: none
+		sourceColumn: Tech Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Location'
+		dataType: string
+		lineageTag: 8dbd805a-dc2a-4600-a069-127b932d26fe
+		summarizeBy: none
+		sourceColumn: Full Location
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Maintenance Completed' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"0f412879-576a-4d92-af9f-3948863782fa" = Workspaces{[workspaceId="0f412879-576a-4d92-af9f-3948863782fa"]}[Data],
+				    #"a074d378-8eea-43ce-b8a2-d19b1b9baf85" = #"0f412879-576a-4d92-af9f-3948863782fa"{[dataflowId="a074d378-8eea-43ce-b8a2-d19b1b9baf85"]}[Data],
+				    #"Maintenance Request and History_" = #"a074d378-8eea-43ce-b8a2-d19b1b9baf85"{[entity="Maintenance Request and History",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Maintenance Request and History_",{{"RequestDate", type date}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Title", "Modified", "Created", "AuthorId", "EditorId", "ComplianceAssetId", "Requester", "Program", "Location", "LocationDetail", "Unit#", "EntryNotes", "RequestDate", "RequestType:", "ServiceIssue", "PartsUsed?", "Request #", "RequesterPhone", "PropertyType", "RepeatIssue?", "Description", "ServiceType", "TicketStatus", "DateApproved", "Completed", "Approved"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns",{{"DateCompleted", type date}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

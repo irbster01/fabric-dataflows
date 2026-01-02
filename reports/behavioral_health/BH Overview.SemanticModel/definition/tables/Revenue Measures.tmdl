@@ -1,0 +1,118 @@
+table 'Revenue Measures'
+	lineageTag: b8b9bdcc-f91d-48f8-a36b-e88b380bfaea
+
+	measure Revenue = SUM('API - Billing'[Adjusted Rate])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: e820fa45-bf22-4889-a719-a42c5cf527d5
+
+	measure 'Rev per Hour of Serv' = 'Revenue Measures'[Revenue] / 'Raw Time Measures'[Hours of Services]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 44d87bcd-8e5c-43ec-8a9d-a5262d6356e9
+
+	measure 'Rev per Month' =
+			
+			AVERAGEX(
+				KEEPFILTERS(VALUES('Date'[Month Key])),
+				CALCULATE(SUM('API - Billing'[Billing Rate]))
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: d3a11578-ae32-4e65-ae00-8295a2e47dbd
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "AveragePerCategory"
+				}
+
+		changedProperty = FormatString
+
+	measure Rev/Month/Clin =
+			
+			AVERAGEX(
+				KEEPFILTERS(VALUES('API - Billing'[Employee ID])),
+				CALCULATE([Rev per Month])
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: d1cd61ca-994d-4dee-a321-ff9bf9b7fde7
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "AveragePerCategory"
+				}
+
+		changedProperty = FormatString
+
+	measure 'Revenue LY' = CALCULATE('Revenue Measures'[Revenue], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 0855c54f-e95c-4aef-b49e-dd49458d71b7
+
+	measure 'vs Rev LY' = CALCULATE('Revenue Measures'[Revenue],SAMEPERIODLASTYEAR('Date'[Date]))
+		lineageTag: 59ee8c06-b681-4403-84de-f2634706ee20
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Rev Differential' = 'Revenue Measures'[Revenue]-SUM('6021 Clinician Specific Goals'[Product Goal])
+		lineageTag: 7ec27e49-762c-4217-be63-7549e84c70fd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'bundle ct' = DIVIDE('Revenue Measures'[Revenue],900)
+		formatString: 0.0
+		lineageTag: e9f98e1b-4353-481d-80f3-8354f3555085
+
+	measure 'Total by client' = SUM('API - Billing'[Adjusted Rate])
+		lineageTag: 66c06ae1-7841-48f2-8d36-5837c4cdc3a7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'num of months enrolled' = DISTI
+		lineageTag: 7cbd2f7e-f2d5-4884-8a0c-ff3941f7aa3b
+
+	measure 'Rev avg per client' = [Total by client]/[LOS to months]
+		lineageTag: eb72d3b0-016b-472c-9da4-490a8dc8b6d4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'LOS to months' = DIVIDE(SUM('API - Episodes'[Length of Stay]), DISTINCTCOUNT('Date'[Cal Month]))
+		lineageTag: 75ecbe69-8d13-4095-888c-724639ac34e7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'num of clients' = DISTINCTCOUNT('API - Billing'[Client ID])
+		formatString: 0
+		lineageTag: 2f0fe1df-790f-4373-8434-1b873a9d2b48
+
+	measure rev/client/month = DIVIDE([Rev avg per client], [num of clients])
+		lineageTag: 29dc868a-bd63-4496-b456-8cd5676cd922
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'avg total' = AVERAGE('API - Billing'[Adjusted Rate])
+		lineageTag: e938ad2a-5bf5-4934-a5ad-e36637cd3fdf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'avg last year' = CALCULATE([avg total], SAMEPERIODLASTYEAR('Date'[Date]))
+		lineageTag: b6c52379-3954-4900-9590-27bcda96ddee
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'avg 2 years ago'
+		lineageTag: d788f0b7-a156-4992-b28e-7461dee8b358
+
+	column Value
+		formatString: 0
+		lineageTag: 2ae0af3e-9d62-4ef6-b618-932bf8c21fa9
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Revenue Measures' = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = bf4447cc382a4df4bcf2c67846e425a2
+

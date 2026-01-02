@@ -1,0 +1,67 @@
+table goals
+	lineageTag: 94fbd34e-47ff-411c-b547-fd7e84d6444f
+
+	measure 'adult client target' = 138
+		formatString: 0
+		lineageTag: ac182052-7f69-4830-a6c7-953ce1942877
+
+	measure test =
+			
+			"hey"
+		lineageTag: 39b54ca7-9d16-4a88-86e3-9c8172a20284
+
+	measure test3 =
+			
+			//This Power BI DAX measure was created by BI Samurai.
+			"<!DOCTYPE html>
+			
+			<head>
+			    <meta charset='UTF-8'>
+			      <meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Blurred Background</title>
+			    <style>
+			        body {
+			            margin: 0;
+			            display: flex;
+			            justify-content: center;
+			            align-items: center;
+			            height: 100vh;
+			            background-color: #eee;
+			        }
+			
+			        .blurred-box {
+			            width: 300px;
+			            height: 200px;
+			            background: rgba(255, 0, 0, 1); /* Red with 50% transparency */
+			            backdrop-filter: blur(10px); /* Blur effect */
+			            -webkit-backdrop-filter: blur(10px); /* Safari support */
+			            display: flex;
+			            justify-content: center;
+			            align-items: center;
+			            font-size: 20px;
+			            color: white;
+			            border-radius: 10px;
+			        }
+			    </style>
+			</head>
+			<body>
+			    <div class='blurred-box'>Blurred Box</div>
+			</body>
+			</html>
+			"
+		lineageTag: 488934f1-6490-451d-b112-63189b8766e0
+
+	column Value
+		formatString: 0
+		lineageTag: c23be5e2-a04c-43df-a4f5-c44e4a4044ca
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition goals = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = 77dec2f664814b27a6afe336406d623e
+

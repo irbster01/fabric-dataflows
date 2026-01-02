@@ -1,0 +1,20 @@
+relationship e9dc2f44-795a-42d3-9df3-098ce0ab29c8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DATE.Date
+	toColumn: LocalDateTable_0c4fc5f6-c745-468a-a327-6fdc07318d62.Date
+
+relationship bf044907-d638-444e-95ae-d4580d662b25
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_oig_exclusions.excl_date
+	toColumn: LocalDateTable_a12cd755-77c9-405c-8f6d-2a1fb8949711.Date
+
+relationship 5f6d631b-12c4-4da0-a5b4-15ee204af22c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_oig_exclusions.rein_date
+	toColumn: LocalDateTable_baac9f28-69ec-4f48-a2d5-f4a154dd0fa1.Date
+
+relationship fcbc0cf6-295b-49ff-b415-3fd7d6305b90
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_oig_exclusions.waiver_date
+	toColumn: LocalDateTable_949bbba1-670f-4256-8816-aa3ef1c83a29.Date
+

@@ -1,0 +1,37 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_cred_assess_assignment",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_cred_assess_assignment": {
+      "queryId": "0a251bb4-eb4b-48d8-8e00-5523b1d8eb33",
+      "queryName": "raw_cred_assess_assignment",
+      "loadEnabled": false
+    },
+    "raw_cred_assess_assignment_DataDestination": {
+      "queryId": "f25e082e-caf5-462c-98db-c6804911804f",
+      "queryName": "raw_cred_assess_assignment_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "raw_credible_services": {
+      "queryId": "06b25fa6-8212-4acd-b105-06347d43e50b",
+      "queryName": "raw_credible_services"
+    }
+  },
+  "connections": [
+    {
+      "path": "https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"f2fb5263-399b-47cd-a9fe-2d49f8175759\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ],
+  "fastCombine": true
+}

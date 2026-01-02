@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw-credible-ledger"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8f24ce1f-8cd8-a4d8-4b04-a156f3c9e220"
+  }
+}

@@ -1,0 +1,31 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Date","Maintenance Request and History","Historical Maintenance","Techs","Maintenance Completed"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table Date
+ref table DateTableTemplate_b4e5723c-0673-4912-a0f0-29ee06d4b1fc
+ref table LocalDateTable_cda8ee5b-7884-4dda-a4f9-8756523647a9
+ref table LocalDateTable_a888d2ed-8227-4b18-b000-c1d65286b2b4
+ref table LocalDateTable_c569c014-11b8-4469-9bcf-776d89705196
+ref table LocalDateTable_d32a55a2-0d23-481b-a18c-ce404f0568b6
+ref table LocalDateTable_c49ba3d2-ac4b-486a-bfb9-418da32b8e54
+ref table 'Maintenance Request and History'
+ref table LocalDateTable_b9340560-07e9-4e4c-9552-4eb6b09b8f12
+ref table LocalDateTable_1d317785-1285-4638-9c83-2870b7c5a0b9
+ref table LocalDateTable_ae00d982-dcb7-4159-9b35-90d293b186fb
+ref table LocalDateTable_e9ad6c68-ebd2-4914-aedf-344173eb0b01
+ref table 'Historical Maintenance'
+ref table LocalDateTable_15e8489e-54ad-4c43-bc1c-a7239dd7b5a2
+ref table Techs
+ref table 'Maintenance Completed'
+
+ref cultureInfo en-US
+

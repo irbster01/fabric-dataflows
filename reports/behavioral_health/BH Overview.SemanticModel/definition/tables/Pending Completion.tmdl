@@ -1,0 +1,214 @@
+table 'Pending Completion'
+	lineageTag: 9a8759d7-caa6-44e3-880d-abaafe2e0c03
+
+	column DateClientEnteredProgram(i
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8d6a5890-2255-451d-908a-b2d2561414e2
+		summarizeBy: none
+		sourceColumn: DateClientEnteredProgram(i
+
+		variation Variation
+			isDefault
+			relationship: 02921078-99db-46ea-ac00-af8d63cd25a8
+			defaultHierarchy: LocalDateTable_0f515855-9b67-46fd-8328-707bf6081840.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ReferralDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f9327ef3-77c1-414c-bc1e-1479a50d6eff
+		summarizeBy: none
+		sourceColumn: ReferralDate
+
+		variation Variation
+			isDefault
+			relationship: 07c081df-6c37-4bac-8f97-beb8efb7f6a5
+			defaultHierarchy: LocalDateTable_8635802f-07ac-4a0c-a875-9fd72aa7416e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ReferralSource
+		dataType: string
+		lineageTag: 5cef8126-cff7-46b5-93f5-7f5b705f282e
+		summarizeBy: none
+		sourceColumn: ReferralSource
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReferralPhone
+		dataType: string
+		lineageTag: df9ebd47-9574-418c-88ed-c4b87eaf8ccb
+		summarizeBy: none
+		sourceColumn: ReferralPhone
+
+		annotation SummarizationSetBy = Automatic
+
+	column PhoneNumber
+		dataType: string
+		lineageTag: b0992c61-6b77-477e-92b7-c15b6ccac334
+		summarizeBy: none
+		sourceColumn: PhoneNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClientE-mail
+		dataType: string
+		lineageTag: f8b426a3-f09a-4db7-ab2b-ecb74ce737b2
+		summarizeBy: none
+		sourceColumn: ClientE-mail
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: ea7c0d9a-4f05-4bf0-96dd-0542043dadcd
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Zip
+		dataType: string
+		lineageTag: 9ffa005f-39a1-4483-8ec5-b151276dae55
+		summarizeBy: none
+		sourceColumn: Zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column Modified
+		dataType: string
+		lineageTag: f9c84bdb-6539-47a2-8904-24c3badced35
+		summarizeBy: none
+		sourceColumn: Modified
+
+		annotation SummarizationSetBy = Automatic
+
+	column Created
+		dataType: string
+		lineageTag: 686d6f0f-de78-4602-9c4a-5455fc36f244
+		summarizeBy: none
+		sourceColumn: Created
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client ID'
+		dataType: string
+		lineageTag: b8351889-8036-4cca-8f59-4a3cf0547e82
+		summarizeBy: none
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client Name'
+		dataType: string
+		lineageTag: e13a83a6-0d9f-4c18-950f-aefc10038618
+		summarizeBy: none
+		sourceColumn: Client Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Program
+		dataType: string
+		lineageTag: 89f4ac46-36d9-459c-a4e4-485d230e63a3
+		summarizeBy: none
+		sourceColumn: Program
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Assess'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1cdb82f3-538b-4d04-8300-1aa46463114e
+		summarizeBy: none
+		sourceColumn: Last Assess
+
+		variation Variation
+			isDefault
+			relationship: 97bc465d-1980-438e-afbd-ee6e0853edea
+			defaultHierarchy: LocalDateTable_250aa813-2f97-4887-bb29-efb13e97fdde.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Profile Auth End Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e9696ba0-c762-49fd-960b-ae1f9850e066
+		summarizeBy: none
+		sourceColumn: Profile Auth End Date
+
+		variation Variation
+			isDefault
+			relationship: 8564a865-f470-4f94-9a5c-5b094b5c506f
+			defaultHierarchy: LocalDateTable_24ebe6b7-234f-4534-98a0-5d619ee6d47c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Status
+		dataType: string
+		lineageTag: 571a7f0f-1bf6-4f2f-b0fb-cf87e29684bf
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Today
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 00b2d8ad-40fe-4d9c-925f-904f23d65ac2
+		summarizeBy: none
+		sourceColumn: Today
+
+		variation Variation
+			isDefault
+			relationship: f9e4af5f-a8a1-49db-824b-05318b47299d
+			defaultHierarchy: LocalDateTable_4cf13359-9f77-4d79-a7a5-a25f51d2beee.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Action
+		dataType: string
+		lineageTag: 370f2e7b-fa88-4ba5-974f-0d6053f00a2e
+		summarizeBy: none
+		sourceColumn: Action
+
+		annotation SummarizationSetBy = Automatic
+
+	column SchoolDistrict
+		dataType: string
+		lineageTag: 38475b84-2398-4e84-8f74-d25cf80fa3c0
+		summarizeBy: none
+		sourceColumn: SchoolDistrict
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned Email'
+		dataType: string
+		lineageTag: fb804852-d994-4e1f-baf5-39da849fda91
+		summarizeBy: none
+		sourceColumn: Assigned Email
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Pending Completion' = m
+		mode: import
+		source =
+				let
+				    Source = PowerBI.Datamarts("nzrmcoc5w6tebmq3bkxbdeohga-sjlrizhv64fetjqcl4to76xbzq.datamart.fabric.microsoft.com"),
+				    #"model_Pending Completion" = Source{[Schema="model",Item="Pending Completion"]}[Data]
+				in
+				    #"model_Pending Completion"
+
+	annotation PBI_ResultType = Table
+

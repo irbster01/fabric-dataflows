@@ -1,0 +1,138 @@
+table 'API - IBHH Service Summary'
+	lineageTag: 2a9b2f47-5aa6-4944-9f21-92997fe04938
+
+	column visittype
+		dataType: string
+		lineageTag: 04fc418c-a6b5-43f8-88c3-dd7992a08078
+		summarizeBy: none
+		sourceColumn: visittype
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_id
+		dataType: string
+		lineageTag: e6fd3bb7-67f2-4270-8a08-ebddb990514f
+		summarizeBy: none
+		sourceColumn: location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: e7d06394-2ed0-4356-92b2-f9d279c04acf
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column program_id
+		dataType: string
+		lineageTag: 8a0171e0-6341-4d9d-a943-11597102e58b
+		summarizeBy: none
+		sourceColumn: program_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column rev_timein
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2e8f59d4-dc02-4840-86c9-352bed53721d
+		summarizeBy: none
+		sourceColumn: rev_timein
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column emp_name
+		dataType: string
+		lineageTag: 3fe15ac6-2c30-43f0-8182-d2c874855e5b
+		summarizeBy: none
+		sourceColumn: emp_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column clientlastname
+		dataType: string
+		lineageTag: 14ef9a9b-2780-49d5-af63-358c5df93822
+		summarizeBy: none
+		sourceColumn: clientlastname
+
+		annotation SummarizationSetBy = Automatic
+
+	column clientfirstname
+		dataType: string
+		lineageTag: 39d3d719-1294-44b3-bbe1-bb719029d610
+		summarizeBy: none
+		sourceColumn: clientfirstname
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: 2b9564d5-d3fd-405c-a3ad-4d2793e7606c
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column clientins_id
+		dataType: string
+		lineageTag: dd6ec7ee-cd04-400a-8084-d78403ce5608
+		summarizeBy: none
+		sourceColumn: clientins_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column ins_id
+		dataType: string
+		lineageTag: e204511e-54c4-4cef-8333-af27f75b8155
+		summarizeBy: none
+		sourceColumn: ins_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column which_type_of_core_service_was_582371
+		dataType: string
+		lineageTag: e4e446c4-90cb-46c9-86c3-dd619b886cae
+		summarizeBy: none
+		sourceColumn: which_type_of_core_service_was_582371
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_engagement_type_585413
+		dataType: string
+		lineageTag: f6c3aab3-f9ef-4e5b-a51c-4a85226e205e
+		summarizeBy: none
+		sourceColumn: service_engagement_type_585413
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_of_contact_585505
+		dataType: string
+		lineageTag: f23d1dd5-b0aa-4a22-9523-0403bd21c95b
+		summarizeBy: none
+		sourceColumn: type_of_contact_585505
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service ID'
+		dataType: string
+		lineageTag: 68a2437d-70c0-4de1-a5df-0ac2527817a9
+		summarizeBy: none
+		sourceColumn: Service ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'API - IBHH Service Summary' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"fe71ba65-74f8-4051-aea4-634b17187f5f" = Workspaces{[workspaceId="fe71ba65-74f8-4051-aea4-634b17187f5f"]}[Data],
+				    #"55902aca-4048-4f99-be0c-be14276e28bb" = #"fe71ba65-74f8-4051-aea4-634b17187f5f"{[dataflowId="55902aca-4048-4f99-be0c-be14276e28bb"]}[Data],
+				    #"API - IBHH Service Summary_" = #"55902aca-4048-4f99-be0c-be14276e28bb"{[entity="API - IBHH Service Summary",version=""]}[Data]
+				in
+				    #"API - IBHH Service Summary_"
+

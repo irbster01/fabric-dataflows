@@ -1,0 +1,5 @@
+relationship 2a1b3e64-845e-419f-be1a-1ae98782a280
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_maint_incident_log.incident_date
+	toColumn: LocalDateTable_888180a1-ad92-4c0e-9ae6-e641ab8bcb4f.Date
+

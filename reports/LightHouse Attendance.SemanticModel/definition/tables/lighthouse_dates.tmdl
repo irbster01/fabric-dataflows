@@ -1,0 +1,132 @@
+table lighthouse_dates
+	lineageTag: 1834ed50-0b75-4c92-8634-6bae324054c1
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 480667fb-4287-49df-a193-dd2c2b9d3726
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 338897c9-2579-40ef-83b3-1d88546434b1
+			defaultHierarchy: LocalDateTable_7ddfa571-9f02-4bdc-af18-5037a493c440.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column weekday
+		dataType: string
+		lineageTag: 7b5ef20e-4060-4647-8f68-f6740c3ca3be
+		summarizeBy: none
+		sourceColumn: weekday
+
+		annotation SummarizationSetBy = Automatic
+
+	column weekday_num
+		dataType: int64
+		formatString: 0
+		lineageTag: b423ebe9-e6cb-4faf-92cc-b6129818b59f
+		summarizeBy: sum
+		sourceColumn: weekday_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsTueWedThu
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1a84ee14-e49d-41cd-80ba-fc50c8b18385
+		summarizeBy: none
+		sourceColumn: IsTueWedThu
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsExcluded
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: efc68242-88a8-4269-b335-db99ef14db61
+		summarizeBy: none
+		sourceColumn: IsExcluded
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsSessionDay
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4193ff87-74b2-4f81-b18b-49723c9a16e5
+		summarizeBy: none
+		sourceColumn: IsSessionDay
+
+		annotation SummarizationSetBy = Automatic
+
+	column cume_8_30
+		dataType: int64
+		formatString: 0
+		lineageTag: 56a2946f-774e-4488-a56b-e8134b2e6a3a
+		summarizeBy: sum
+		sourceColumn: cume_8_30
+
+		annotation SummarizationSetBy = Automatic
+
+	column cum_sept_2
+		dataType: int64
+		formatString: 0
+		lineageTag: 17536bce-ed7c-41f2-a6f2-4eeeee0f2654
+		summarizeBy: sum
+		sourceColumn: cum_sept_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column cum_sept_8
+		dataType: int64
+		formatString: 0
+		lineageTag: b8a19f5c-5882-4c1b-b6c1-f8820c376328
+		summarizeBy: sum
+		sourceColumn: cum_sept_8
+
+		annotation SummarizationSetBy = Automatic
+
+	column cum_sept_9
+		dataType: int64
+		formatString: 0
+		lineageTag: 393e40cc-0a8a-4e38-ac1e-86f3e42dfae2
+		summarizeBy: sum
+		sourceColumn: cum_sept_9
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_start
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7774a296-c39c-4d02-9f11-d273617b9ec8
+		summarizeBy: none
+		sourceColumn: month_start
+
+		variation Variation
+			isDefault
+			relationship: d664e950-b56d-4163-ba8c-6800cb7eab67
+			defaultHierarchy: LocalDateTable_12a7c953-6697-4bf7-88fa-4d2d423e1c35.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column month_name
+		dataType: string
+		lineageTag: 13cb7898-96a5-45a9-a9ff-0f0c7bae463f
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lighthouse_dates = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "ServicePoint"),
+				    dbo_lighthouse_dates = Source{[Schema="dbo",Item="lighthouse_dates"]}[Data]
+				in
+				    dbo_lighthouse_dates
+

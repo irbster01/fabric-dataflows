@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "referral-pipe"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "98359ef6-9581-a08c-4682-03ca8e62119c"
+  }
+}

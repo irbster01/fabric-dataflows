@@ -1,0 +1,54 @@
+table 'Aggregated Behavior Goals'
+	lineageTag: 048a468f-b73b-47bc-8c1e-551b1d194a01
+
+	column org_controller
+		dataType: string
+		lineageTag: 3e5c3eff-341c-46c8-8386-3df03c382789
+		summarizeBy: none
+		sourceColumn: org_controller
+
+		annotation SummarizationSetBy = Automatic
+
+	column positive_progress
+		dataType: double
+		lineageTag: def575fa-de5f-46a0-bd1c-024cbdc07c9c
+		summarizeBy: sum
+		sourceColumn: positive_progress
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column all_monitored
+		dataType: double
+		lineageTag: c909770c-e726-460b-bd85-e56fcebbf98b
+		summarizeBy: sum
+		sourceColumn: all_monitored
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column positive_percentage
+		dataType: double
+		lineageTag: d5cd9a70-9e23-47a2-b4a0-6938a5cef0fa
+		summarizeBy: sum
+		sourceColumn: positive_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Aggregated Behavior Goals' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_cis_org_behavior_count = Source{[Schema="cis",Item="cis_org_behavior_count"]}[Data]
+				in
+				    cis_cis_org_behavior_count
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_cisdm_caseManagement_entries"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b95d29c0-5c89-8e64-4c15-a991f189d2e2"
+  }
+}

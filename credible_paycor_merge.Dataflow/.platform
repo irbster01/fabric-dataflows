@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "credible_paycor_merge"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b474a1b9-916b-b950-4103-73b9a02433aa"
+  }
+}

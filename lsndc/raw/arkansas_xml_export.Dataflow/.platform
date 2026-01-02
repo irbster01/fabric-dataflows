@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "arkansas_xml_export"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5846e9c7-0f58-ae08-4b68-3cddd9f08333"
+  }
+}

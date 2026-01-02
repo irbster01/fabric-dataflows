@@ -1,0 +1,25 @@
+CREATE TABLE [dbo].[silver.caddo_census] (
+
+	[Student Name] varchar(8000) NULL, 
+	[SIDNO] varchar(8000) NULL, 
+	[Birth Date] date NULL, 
+	[Sex] varchar(8000) NULL, 
+	[Eth] bigint NULL, 
+	[ECode] varchar(8000) NULL, 
+	[EDate] date NULL, 
+	[LCode] varchar(8000) NULL, 
+	[LDate] varchar(8000) NULL, 
+	[School] bigint NULL, 
+	[Grade] bigint NULL, 
+	[Phone] bigint NULL, 
+	[Father] varchar(8000) NULL, 
+	[Mother] varchar(8000) NULL, 
+	[Address 1] varchar(8000) NULL, 
+	[Apt/Lot/Ste] varchar(8000) NULL, 
+	[City] varchar(8000) NULL, 
+	[State] varchar(8000) NULL, 
+	[Zip] bigint NULL, 
+	[Year] bigint NULL, 
+	[SASID] varchar(8000) NULL, 
+	[Int ID] varchar(8000) NULL
+);

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "maintenance invoices"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "18f723b4-ede3-83ec-494e-2349ab40373f"
+  }
+}

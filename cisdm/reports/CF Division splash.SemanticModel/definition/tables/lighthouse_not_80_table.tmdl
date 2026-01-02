@@ -1,0 +1,47 @@
+table lighthouse_not_80_table
+	lineageTag: a0e3b851-febf-4822-9d64-86f258d54da6
+
+	column lighthouse_location_enrolling
+		dataType: string
+		lineageTag: bb77e698-22f4-4e40-b3c3-2dd3b1e2b7fd
+		summarizeBy: none
+		sourceColumn: lighthouse_location_enrolling
+
+		annotation SummarizationSetBy = Automatic
+
+	column Count
+		dataType: int64
+		formatString: 0
+		lineageTag: a291a339-a503-4656-a038-cad78e86fee8
+		summarizeBy: sum
+		sourceColumn: Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Count.1'
+		dataType: int64
+		formatString: 0
+		lineageTag: 173425e9-526f-48c9-9645-b9655a95dcf0
+		summarizeBy: sum
+		sourceColumn: Count.1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Division
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: 85af645a-60be-4007-89a3-ad3d33e98e25
+		summarizeBy: sum
+		sourceColumn: Division
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lighthouse_not_80_table = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "ServicePoint"),
+				    dbo_lighthouse_not_80_table = Source{[Schema="dbo",Item="lighthouse_not_80_table"]}[Data]
+				in
+				    dbo_lighthouse_not_80_table
+

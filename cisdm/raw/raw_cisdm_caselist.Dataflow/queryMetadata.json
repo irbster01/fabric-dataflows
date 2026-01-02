@@ -1,0 +1,66 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_cisdm_caselist",
+  "queryGroups": [
+    {
+      "id": "427ba6a8-d953-4d12-93d0-4e223c4034bc",
+      "name": "Transform file from cis_clients"
+    },
+    {
+      "id": "ca7db5f1-23f3-442e-90ca-36bdbe0ff81f",
+      "name": "Helper queries",
+      "parentId": "427ba6a8-d953-4d12-93d0-4e223c4034bc"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "cis_clients": {
+      "queryId": "306c1477-9973-43a9-a71d-61ebe1b63c7e",
+      "queryName": "cis_clients",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "2c00a7ea-884b-49d7-b88f-765db38721b7",
+      "queryName": "Sample file",
+      "queryGroupId": "ca7db5f1-23f3-442e-90ca-36bdbe0ff81f",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "48c202c3-8f89-4ef6-bfcb-c116dc457cad",
+      "queryName": "Parameter",
+      "queryGroupId": "ca7db5f1-23f3-442e-90ca-36bdbe0ff81f",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "9ce55461-9ea2-4d4c-bb87-707e48ff99db",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "427ba6a8-d953-4d12-93d0-4e223c4034bc",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "3877da3f-863d-4586-96bf-72cc705b2102",
+      "queryName": "Transform file",
+      "queryGroupId": "ca7db5f1-23f3-442e-90ca-36bdbe0ff81f",
+      "loadEnabled": false
+    },
+    "cis_clients_DataDestination": {
+      "queryId": "b6b4b2ee-a0cc-4eeb-88d3-057a9776f590",
+      "queryName": "cis_clients_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"678f10d1-b794-4318-8152-4c973a8dc9fa\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

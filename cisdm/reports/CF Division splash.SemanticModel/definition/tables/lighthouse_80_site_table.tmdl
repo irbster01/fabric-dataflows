@@ -1,0 +1,47 @@
+table lighthouse_80_site_table
+	lineageTag: 4a123818-79e2-4916-8ec8-cca3328842d2
+
+	column Count
+		dataType: int64
+		formatString: 0
+		lineageTag: 49db29bc-afe2-49a6-8c7b-54d909464680
+		summarizeBy: sum
+		sourceColumn: Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column Division
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: 88467fd8-b67a-404f-b57d-2bb0c52938fd
+		summarizeBy: sum
+		sourceColumn: Division
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'School Name'
+		dataType: string
+		lineageTag: 4928d2c2-5e41-4198-9ab6-d554c6692cb7
+		summarizeBy: none
+		sourceColumn: School Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column total
+		dataType: int64
+		formatString: 0
+		lineageTag: c05eb90d-db65-4529-a37b-c9d7ed3e7735
+		summarizeBy: sum
+		sourceColumn: total
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lighthouse_80_site_table = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "ServicePoint"),
+				    dbo_lighthouse_80_site_table = Source{[Schema="dbo",Item="lighthouse_80_site_table"]}[Data]
+				in
+				    dbo_lighthouse_80_site_table
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "CIS Dash"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2ed2e549-73df-a364-4475-26f6d6bb8536"
+  }
+}

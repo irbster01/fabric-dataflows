@@ -1,0 +1,51 @@
+table 'API - Ins Data'
+	lineageTag: 0bcb09ca-4cbd-465e-a7b5-641320048b7f
+
+	column 'Payer ID'
+		dataType: string
+		lineageTag: e662efb8-f0d1-4421-ac30-978d87cbbfce
+		summarizeBy: none
+		sourceColumn: Payer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payer Desc'
+		dataType: string
+		lineageTag: e2ab3401-44e1-4cc4-ba49-e608e37aaf18
+		summarizeBy: none
+		sourceColumn: Payer Desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payer Code'
+		dataType: string
+		lineageTag: 03c472a6-b0ef-4ca0-901e-ea95eb6fdf6b
+		summarizeBy: none
+		sourceColumn: Payer Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ins Type Code'
+		dataType: string
+		lineageTag: b6daa683-862c-46ae-af4a-9ae0301d5528
+		summarizeBy: none
+		sourceColumn: Ins Type Code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'API - Ins Data' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"7feafb92-8cf9-4d66-b7c8-c0551fab2e6d" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="7feafb92-8cf9-4d66-b7c8-c0551fab2e6d"]}[Data],
+				    #"API - Ins Data_" = #"7feafb92-8cf9-4d66-b7c8-c0551fab2e6d"{[entity="API - Ins Data",version=""]}[Data]
+				in
+				    #"API - Ins Data_"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,117 @@
+table Date
+	lineageTag: d10540a0-58be-4696-bb77-e65b1445254a
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e258d9a5-d4b8-425c-a4aa-a5b2b7616b51
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 51750c41-18f3-41e7-8890-a8864e389fb6
+			defaultHierarchy: LocalDateTable_28c23cab-3fbf-42e1-8bc5-97262fde8ccf.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 81adc344-f00c-4b3c-8f32-c817289b2b6a
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 1e95d71f-b00f-4aae-aaa3-df0d9b663465
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: 86aa5e59-bd04-47b5-9a4e-07064035e123
+		summarizeBy: none
+		sourceColumn: Month Name
+		sortByColumn: Month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ec18ae1-451b-4c26-9258-1f16e2821695
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Name'
+		dataType: string
+		lineageTag: 5c7d0fee-50ab-4caa-bf96-9fa5af59b6ed
+		summarizeBy: none
+		sourceColumn: Day Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: d671ff26-2443-4ac6-bd32-559d2b770f3a
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week of Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 605d0a74-f394-4c75-812a-e1f856a1cbb5
+		summarizeBy: sum
+		sourceColumn: Week of Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = m
+		mode: import
+		source =
+				let
+				    // Define start and end dates
+				    StartDate = #date(2020, 1, 1),
+				    EndDate   = #date(2030, 12, 31),
+				
+				    // Generate list of dates
+				    DateList = List.Dates(
+				        StartDate,
+				        Duration.Days(EndDate - StartDate) + 1,
+				        #duration(1,0,0,0)
+				    ),
+				
+				    // Convert to table
+				    DateTable = Table.FromList(DateList, Splitter.SplitByNothing(), {"Date"}),
+				
+				    // Add useful columns
+				    AddColumns = Table.TransformColumns(DateTable, {{"Date", Date.From}}),
+				    InsertYear = Table.AddColumn(AddColumns, "Year", each Date.Year([Date]), Int64.Type),
+				    InsertMonth = Table.AddColumn(InsertYear, "Month", each Date.Month([Date]), Int64.Type),
+				    InsertMonthName = Table.AddColumn(InsertMonth, "Month Name", each Date.MonthName([Date]), type text),
+				    InsertDay = Table.AddColumn(InsertMonthName, "Day", each Date.Day([Date]), Int64.Type),
+				    InsertDayName = Table.AddColumn(InsertDay, "Day Name", each Date.DayOfWeekName([Date]), type text),
+				    InsertQuarter = Table.AddColumn(InsertDayName, "Quarter", each Date.QuarterOfYear([Date]), Int64.Type),
+				    InsertWeek = Table.AddColumn(InsertQuarter, "Week of Year", each Date.WeekOfYear([Date]), Int64.Type)
+				in
+				    InsertWeek
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

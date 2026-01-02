@@ -1,0 +1,92 @@
+table raw_maint_incident_log
+	lineageTag: e17fabe4-972e-4281-adf8-dfbc574a7c2a
+
+	column location
+		dataType: string
+		lineageTag: aeb97b6a-20cd-4c88-850e-4e53096a4a39
+		summarizeBy: none
+		sourceColumn: location
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 26b44aba-416a-4821-be70-022020f65daa
+		summarizeBy: none
+		sourceColumn: incident_date
+
+		variation Variation
+			isDefault
+			relationship: 2a1b3e64-845e-419f-be1a-1ae98782a280
+			defaultHierarchy: LocalDateTable_888180a1-ad92-4c0e-9ae6-e641ab8bcb4f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column program
+		dataType: string
+		lineageTag: 2cc89237-a75e-4a0a-8437-cb603902ad09
+		summarizeBy: none
+		sourceColumn: program
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_type
+		dataType: string
+		lineageTag: e8dc3448-2122-4b8f-8420-749c28fb6517
+		summarizeBy: none
+		sourceColumn: incident_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column employee
+		dataType: string
+		lineageTag: 177e4533-2410-4dbc-82ad-8a9d4023ed58
+		summarizeBy: none
+		sourceColumn: employee
+
+		annotation SummarizationSetBy = Automatic
+
+	column supervisor
+		dataType: string
+		lineageTag: 1f801237-e845-4f9c-89d5-0f46c60d6d8c
+		summarizeBy: none
+		sourceColumn: supervisor
+
+		annotation SummarizationSetBy = Automatic
+
+	column further_action
+		dataType: string
+		lineageTag: 538ce630-7759-40b4-9c4f-1b0b5ce50d55
+		summarizeBy: none
+		sourceColumn: further_action
+
+		annotation SummarizationSetBy = Automatic
+
+	column notes
+		dataType: string
+		lineageTag: 01629646-4e4a-4320-ab9e-ec717893863b
+		summarizeBy: none
+		sourceColumn: notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_link
+		dataType: string
+		lineageTag: d92247ad-5cd0-48a6-90e4-63e008c2a49d
+		summarizeBy: none
+		sourceColumn: incident_link
+
+		annotation SummarizationSetBy = Automatic
+
+	partition raw_maint_incident_log = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "voa_admin"),
+				    dbo_raw_maint_incident_log = Source{[Schema="dbo",Item="raw_maint_incident_log"]}[Data]
+				in
+				    dbo_raw_maint_incident_log
+

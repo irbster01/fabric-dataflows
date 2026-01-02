@@ -1,0 +1,99 @@
+table '6021 Clinician Specific Goals'
+	lineageTag: a47df4e1-ecbd-4748-a325-c8dc448d6c04
+
+	measure 'Total by client rolling average' =
+			
+			IF(
+				ISFILTERED('Date'[Date]),
+				ERROR("Time intelligence quick measures can only be grouped or filtered by the Power BI-provided date hierarchy or primary date column."),
+				VAR __LAST_DATE = ENDOFYEAR('Date'[Date].[Date])
+				VAR __DATE_PERIOD =
+					DATESBETWEEN(
+						'Date'[Date].[Date],
+						STARTOFYEAR(DATEADD(__LAST_DATE, -3, YEAR)),
+						ENDOFYEAR(DATEADD(__LAST_DATE, 1, YEAR))
+					)
+				RETURN
+					AVERAGEX(
+						CALCULATETABLE(SUMMARIZE(VALUES('Date'), 'Date'[Date].[Year]), __DATE_PERIOD),
+						CALCULATE(
+							[Total by client],
+							ALL(
+								'Date'[Date].[QuarterNo],
+								'Date'[Date].[Quarter],
+								'Date'[Date].[MonthNo],
+								'Date'[Date].[Month],
+								'Date'[Date].[Day]
+							)
+						)
+					)
+			)
+		lineageTag: 5c6c3859-eed2-4278-87f2-43785c674665
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "RollingAverage"
+				}
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'rolling by client' = DIVIDE([Total by client rolling average], [num of clients])
+		lineageTag: 75917de5-fde6-48c5-b3e8-3fc3b5edeb21
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Employee ID'
+		dataType: string
+		lineageTag: 3b4df97d-5e05-44fe-af48-4cf6b0483edf
+		summarizeBy: none
+		sourceColumn: Employee ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cal Month'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a6fe573d-e650-46ae-b09a-789c7b8ce623
+		summarizeBy: none
+		sourceColumn: Cal Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Product Goal'
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 82462f8f-bf91-479b-8d9f-dc2e86c29475
+		summarizeBy: sum
+		sourceColumn: Product Goal
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Goal'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4801df0c-4b80-4a67-89f6-cd00df5817cc
+		summarizeBy: sum
+		sourceColumn: Unit Goal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '6021 Clinician Specific Goals' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"02793591-35f3-454a-970a-874866f9f210" = Workspaces{[workspaceId="02793591-35f3-454a-970a-874866f9f210"]}[Data],
+				    #"d05e2917-6525-4810-a9d5-eba844fa1569" = #"02793591-35f3-454a-970a-874866f9f210"{[dataflowId="d05e2917-6525-4810-a9d5-eba844fa1569"]}[Data],
+				    #"6021 Clinician Specific Goals_" = #"d05e2917-6525-4810-a9d5-eba844fa1569"{[entity="6021 Clinician Specific Goals",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"6021 Clinician Specific Goals_",{{"Employee ID", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

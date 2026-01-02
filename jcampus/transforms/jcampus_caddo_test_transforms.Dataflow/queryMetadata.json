@@ -1,0 +1,35 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "jcampus_caddo_test_transforms",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "jcampus_caddo_tests": {
+      "queryId": "cb5dbe32-4d8b-420a-8688-8bbafc388579",
+      "queryName": "jcampus_caddo_tests"
+    },
+    "cis_client_list": {
+      "queryId": "d85c82af-bc32-4d0d-bfe5-30cc968700b3",
+      "queryName": "cis_client_list"
+    },
+    "cis_dibels": {
+      "queryId": "e3bd509c-00e1-4443-9909-616ff34de96f",
+      "queryName": "cis_dibels",
+      "loadEnabled": false
+    },
+    "cis_dibels_DataDestination": {
+      "queryId": "9980a843-5ff6-4cea-a0a4-f806d7b443bb",
+      "queryName": "cis_dibels_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

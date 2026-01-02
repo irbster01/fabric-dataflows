@@ -1,0 +1,65 @@
+table 'Revenue MTD Measures'
+	lineageTag: fce4434a-e2d9-4052-a4c1-28aa5ca85270
+
+	measure 'Revenue MTD' = CALCULATE ( SUM ( 'API - Billing'[Billing Rate] ), DATESMTD ( 'Date'[Date] ) )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: b576df71-6cec-4601-99bd-341a31bea399
+
+	measure 'Revenue MTD % difference from Revenue MTD Last Year' =
+			
+			VAR __BASELINE_VALUE = [Revenue MTD Last Year]
+			VAR __VALUE_TO_COMPARE = [Revenue MTD]
+			RETURN
+				IF(
+					NOT ISBLANK(__VALUE_TO_COMPARE),
+					DIVIDE(__VALUE_TO_COMPARE - __BASELINE_VALUE, __BASELINE_VALUE)
+				)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 031edce8-1444-449c-a7eb-ea29a4e25854
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MathematicalPercentageDifference"
+				}
+
+		changedProperty = FormatString
+
+	measure 'Revenue MTD Last Year' = CALCULATE('Revenue Measures'[Revenue],SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: d2a58c13-09d3-4b59-a2dc-cf4e7e3fa30e
+
+	measure 'Revenue MTD Last Year average per Fiscal WkNumb' =
+			
+			AVERAGEX(
+				KEEPFILTERS(VALUES('Date'[Fiscal WkNumb])),
+				CALCULATE([Revenue MTD Last Year])
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: fc3f8c59-dd76-48c9-a3d4-33bba9cc3f97
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "AveragePerCategory"
+				}
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Value
+		formatString: 0
+		lineageTag: 5a2b4db7-d1bd-43db-b347-f076c6ecf8ca
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Revenue MTD Measures' = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = 0b6b7cd94c254a0fbf5379bf701416f5
+

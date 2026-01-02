@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "credible_assessment_track_transform"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "04231a83-7b2f-b85e-405e-6f8aa06d722d"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_lsndc_entries",
+  "queryGroups": [
+    {
+      "id": "884dc904-462e-4bc5-b08a-02f3c1d45712",
+      "name": "Transform file from lsndc_entries"
+    },
+    {
+      "id": "ad19b839-31ea-4f02-a1ef-0f5ed7d1eaf7",
+      "name": "Helper queries",
+      "parentId": "884dc904-462e-4bc5-b08a-02f3c1d45712"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "DefaultDestination": {
+      "queryId": "9c7318f1-f35b-4163-9fb0-b853b48d65db",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "lsndc_entries": {
+      "queryId": "be8372f9-5807-4c15-8ab5-b7ed6d4ea5ba",
+      "queryName": "lsndc_entries",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "ba9b8832-dda7-4d02-9dfe-1be93aa6c52e",
+      "queryName": "Sample file",
+      "queryGroupId": "ad19b839-31ea-4f02-a1ef-0f5ed7d1eaf7",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "1d144960-a7c4-43d3-8cf3-9daa3a05599f",
+      "queryName": "Parameter",
+      "queryGroupId": "ad19b839-31ea-4f02-a1ef-0f5ed7d1eaf7",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "eddd284f-df1f-4e52-8b04-42688e562c07",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "884dc904-462e-4bc5-b08a-02f3c1d45712",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "6e360561-9199-4d13-872a-4037fcb3ad7e",
+      "queryName": "Transform file",
+      "queryGroupId": "ad19b839-31ea-4f02-a1ef-0f5ed7d1eaf7",
+      "loadEnabled": false
+    },
+    "lsndc_entries_DataDestination": {
+      "queryId": "2d542f73-86a5-4213-bd6c-58fbfc82ac9c",
+      "queryName": "lsndc_entries_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://voanorthlaorg-my.sharepoint.com/personal/russell_irby_voanorthla_org/",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"44ed497b-e2da-4147-862c-2f58d328e889\"}"
+    },
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"678f10d1-b794-4318-8152-4c973a8dc9fa\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"a4c9ecdc-11fa-4a6c-b3bc-87b885423a47\"}"
+    }
+  ]
+}

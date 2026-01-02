@@ -1,0 +1,35 @@
+table 'API - Client Insurance ID'
+	lineageTag: 8d4d4be5-3bd3-4979-abb5-6278ac88474a
+
+	column 'Client ID'
+		dataType: string
+		lineageTag: 33272891-b78c-4ba4-8d26-c9a154ab234c
+		summarizeBy: none
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Insurance ID'
+		dataType: string
+		lineageTag: 381011f6-0f54-4be1-a2ac-ebd10f066634
+		summarizeBy: none
+		sourceColumn: Insurance ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'API - Client Insurance ID' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"4564730f-6b6d-437e-8875-2e85af1f6351" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="4564730f-6b6d-437e-8875-2e85af1f6351"]}[Data],
+				    #"API - Client Insurance ID_" = #"4564730f-6b6d-437e-8875-2e85af1f6351"{[entity="API - Client Insurance ID",version=""]}[Data]
+				in
+				    #"API - Client Insurance ID_"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

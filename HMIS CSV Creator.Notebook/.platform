@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "HMIS CSV Creator"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9ea41e0e-3185-a31c-4bdb-3829e9f04ec0"
+  }
+}

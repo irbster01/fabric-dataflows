@@ -1,0 +1,215 @@
+table 'New Paycor Format'
+	lineageTag: 12ae2105-a433-4e85-8220-7f3feea3d60e
+
+	column 'Client ID'
+		dataType: string
+		lineageTag: 2a27a7bc-d5a8-4860-8c27-2ef25be11360
+		summarizeBy: none
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column For
+		dataType: string
+		lineageTag: 67f6a02f-d3c2-4e09-9276-846f8fac7eda
+		summarizeBy: none
+		sourceColumn: For
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee #'
+		dataType: string
+		lineageTag: a4f6fef8-039c-4738-b91c-dec1f17f4df2
+		summarizeBy: none
+		sourceColumn: Employee #
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Badge #'
+		dataType: string
+		lineageTag: b072792b-29b0-401b-ab47-63fb517c7a6f
+		summarizeBy: none
+		sourceColumn: Badge #
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Home Department'
+		dataType: string
+		lineageTag: e4da303e-6ecd-4e10-9ab8-dc692e7e3347
+		summarizeBy: none
+		sourceColumn: Home Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column Supervisor
+		dataType: string
+		lineageTag: aa231fea-8a03-4d7b-8845-2ebb258abb71
+		summarizeBy: none
+		sourceColumn: Supervisor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pay Group'
+		dataType: string
+		lineageTag: cef54187-fa6c-4a84-a70b-15e5c27c8fee
+		summarizeBy: none
+		sourceColumn: Pay Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 24b9519c-0f70-4071-8b12-403314ebc955
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column in
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 89fbea60-5eff-47a4-b3a3-b8bc3d33df27
+		summarizeBy: none
+		sourceColumn: in
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column out
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: ed6eed31-b3e2-450b-80b7-b783dfe7c692
+		summarizeBy: none
+		sourceColumn: out
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column Hours
+		dataType: double
+		lineageTag: fa5b5633-c270-4454-8d35-e7347ca0815b
+		summarizeBy: sum
+		sourceColumn: Hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Worked Department'
+		dataType: string
+		lineageTag: 4e08e77c-4f39-4cde-a246-ce49bf38b5a8
+		summarizeBy: none
+		sourceColumn: Worked Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Earnings Code'
+		dataType: string
+		lineageTag: c0c58224-04e6-4080-8b90-43709f7235b4
+		summarizeBy: none
+		sourceColumn: Earnings Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Deduction
+		dataType: string
+		lineageTag: ab183dcf-f2da-4e26-bcf6-236ab4dde72d
+		summarizeBy: none
+		sourceColumn: Deduction
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pay Item'
+		dataType: string
+		lineageTag: 06228788-3e3a-4db2-86d8-c0338d50cde5
+		summarizeBy: none
+		sourceColumn: Pay Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Daily Note'
+		dataType: string
+		lineageTag: 3c64290a-7f4f-41fc-ad82-b029f6b3da5a
+		summarizeBy: none
+		sourceColumn: Daily Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Exceptions
+		dataType: string
+		lineageTag: fa303145-54f6-4d4d-a146-76ad710091be
+		summarizeBy: none
+		sourceColumn: Exceptions
+
+		annotation SummarizationSetBy = Automatic
+
+	column timein
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fc5ce79f-4552-4042-96cd-3a232d2ac460
+		summarizeBy: none
+		sourceColumn: timein
+
+		variation Variation
+			isDefault
+			relationship: af258431-902e-4bf8-a129-cb4bf1c13984
+			defaultHierarchy: LocalDateTable_06194af7-283f-4a61-99ed-f5d63a2ef60e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column timeout
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3146954a-0bec-4b9e-9829-9cc9a0fb6a52
+		summarizeBy: none
+		sourceColumn: timeout
+
+		variation Variation
+			isDefault
+			relationship: f3b0f5e8-7929-430b-ba4c-4c4b2072da6b
+			defaultHierarchy: LocalDateTable_c83aa62c-58f5-420b-b639-092879ee977c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Name'
+		dataType: string
+		lineageTag: 2af9f241-f73a-4ace-8319-4abe12e39311
+		summarizeBy: none
+		sourceColumn: Employee Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'API - Employees.Employee ID'
+		dataType: string
+		lineageTag: 16f920df-00df-4c9d-82d6-a2156ff33582
+		summarizeBy: none
+		sourceColumn: API - Employees.Employee ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'New Paycor Format' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"01d8bcb3-88cc-4550-95e8-659c49ed0e01" = Workspaces{[workspaceId="01d8bcb3-88cc-4550-95e8-659c49ed0e01"]}[Data],
+				    #"1087c12e-7c76-454c-be4e-954b57153aca" = #"01d8bcb3-88cc-4550-95e8-659c49ed0e01"{[dataflowId="1087c12e-7c76-454c-be4e-954b57153aca"]}[Data],
+				    #"New Paycor Format_" = #"1087c12e-7c76-454c-be4e-954b57153aca"{[entity="New Paycor Format",version=""]}[Data],
+				    #"Merged Columns" = Table.CombineColumns(#"New Paycor Format_",{"Employee Last Name", "Employee First Name"},Combiner.CombineTextByDelimiter(", ", QuoteStyle.None),"Employee Name"),
+				    #"Merged Queries" = Table.NestedJoin(#"Merged Columns", {"Employee Name"}, #"API - Employees", {"Employee Name"}, "API - Employees", JoinKind.LeftOuter),
+				    #"Expanded API - Employees" = Table.ExpandTableColumn(#"Merged Queries", "API - Employees", {"Employee ID"}, {"API - Employees.Employee ID"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Expanded API - Employees", each ([Earnings Code] = "OT" or [Earnings Code] = "Reg")),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows",{{"Hours", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,57 @@
+table 'Attendance JCampus - Active CIS Clients'
+	lineageTag: a164d054-fd95-4b90-a935-7017d553a170
+
+	column client_full_name
+		dataType: string
+		lineageTag: c69f80dd-ea56-4ff8-bd08-d455782f5b81
+		summarizeBy: none
+		sourceColumn: client_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sasid
+		dataType: string
+		lineageTag: 37f4b1ad-d62b-4e77-995b-1dd165923808
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: 41ea4bd8-17b8-4929-aad6-144701e2977e
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_name
+		dataType: string
+		lineageTag: 62bf311b-94a0-4d9e-a091-52bfcf155dbc
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Count
+		dataType: int64
+		formatString: 0
+		lineageTag: 56384f7c-d555-4740-8a9c-35492529ddc6
+		summarizeBy: sum
+		sourceColumn: Count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Attendance JCampus - Active CIS Clients' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_cis_active_attendance = Source{[Schema="cis",Item="cis_active_attendance"]}[Data]
+				in
+				    cis_cis_active_attendance
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

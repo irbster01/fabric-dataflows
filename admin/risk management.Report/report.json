@@ -1,0 +1,163 @@
+{
+  "config": "{\"version\":\"5.66\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"type\":2,\"version\":{\"visual\":\"1.8.95\",\"report\":\"2.0.95\",\"page\":\"1.3.95\"}}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":0,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Middle'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "publicCustomVisuals": [
+    "radarChart"
+  ],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    },
+    {
+      "resourcePackage": {
+        "items": [
+          {
+            "name": "Corrected_BI_Background011233200657160158.jpg",
+            "path": "Corrected_BI_Background011233200657160158.jpg",
+            "type": 100
+          },
+          {
+            "name": "Corrected_BI_Background8185170465685806.jpg",
+            "path": "Corrected_BI_Background8185170465685806.jpg",
+            "type": 100
+          },
+          {
+            "name": "Other_Dashes_panel3852003933962346.png",
+            "path": "Other_Dashes_panel3852003933962346.png",
+            "type": 100
+          },
+          {
+            "name": "Picture1432845165064593784.png",
+            "path": "Picture1432845165064593784.png",
+            "type": 100
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#666666'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}},\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Corrected BI Background.jpg'\"}}},\"url\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Corrected_BI_Background011233200657160158.jpg\"}}},\"scaling\":{\"expr\":{\"Literal\":{\"Value\":\"'Normal'\"}}}}}}}],\"outspace\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#666666'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}},\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Corrected BI Background.jpg'\"}}},\"url\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Corrected_BI_Background8185170465685806.jpg\"}}},\"scaling\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}}}}]}}",
+      "displayName": "Organizational Risk Management",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 936.00,
+      "name": "198e8af2212299a95d02",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"053b561858f5dc96ba7f\",\"layouts\":[{\"id\":0,\"position\":{\"x\":119.10020449897752,\"y\":542.7566462167689,\"z\":4006,\"width\":416,\"height\":207.57464212678937,\"tabOrder\":4006}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"THS REPORT PAGE IS A PLACEHOLDER AND NOTHING ON SCREEN IS REAL DATA\",\"textStyle\":{\"fontSize\":\"20pt\"}}]}]}}]}}}",
+          "filters": "[]",
+          "height": 207.57,
+          "width": 416.00,
+          "x": 119.10,
+          "y": 542.76,
+          "z": 4006.00
+        },
+        {
+          "config": "{\"name\":\"101b1766b546048c5089\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1042.9775051124745,\"y\":64.65439672801637,\"z\":0,\"width\":601.4560327198365,\"height\":786.0613496932516,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"image\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"imageUrl\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Other_Dashes_panel3852003933962346.png\"}}}}}],\"imageScaling\":[{\"properties\":{\"imageScalingType\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}}]},\"vcObjects\":{\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"dropShadow\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 786.06,
+          "width": 601.46,
+          "x": 1042.98,
+          "y": 64.65,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"1dd26656053da6d02aa1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":558.0695296523518,\"y\":64.65439672801637,\"z\":4000,\"width\":462.7893660531698,\"height\":575.9345603271984,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"image\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"imageUrl\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Picture1432845165064593784.png\"}}}}}],\"imageScaling\":[{\"properties\":{\"imageScalingType\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}}]},\"vcObjects\":{\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"dropShadow\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}},\"preset\":{\"expr\":{\"Literal\":{\"Value\":\"'BottomRight'\"}}},\"angle\":{\"expr\":{\"Literal\":{\"Value\":\"135L\"}}},\"shadowDistance\":{\"expr\":{\"Literal\":{\"Value\":\"10L\"}}},\"shadowBlur\":{\"expr\":{\"Literal\":{\"Value\":\"10L\"}}},\"shadowSpread\":{\"expr\":{\"Literal\":{\"Value\":\"3L\"}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"70L\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 575.93,
+          "width": 462.79,
+          "x": 558.07,
+          "y": 64.65,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"281ed4bde0b123be0e72\",\"layouts\":[{\"id\":0,\"position\":{\"x\":119.10020449897752,\"y\":436.4171779141105,\"z\":3000,\"width\":416,\"height\":408.3435582822086,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"image\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"imageUrl\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Other_Dashes_panel3852003933962346.png\"}}}}}],\"imageScaling\":[{\"properties\":{\"imageScalingType\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}}]},\"vcObjects\":{\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"dropShadow\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 408.34,
+          "width": 416.00,
+          "x": 119.10,
+          "y": 436.42,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"4f786e9e03fe7777ffc2\",\"layouts\":[{\"id\":0,\"position\":{\"x\":558.0695296523518,\"y\":64.65439672801637,\"z\":4005,\"width\":462.7893660531698,\"height\":47.640081799591,\"tabOrder\":4005}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"R E C E N T L Y   C O M P L E T E D\",\"textStyle\":{\"fontSize\":\"18pt\",\"color\":\"#ffffff\"}}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#33D9FF'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}}}],\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 47.64,
+          "width": 462.79,
+          "x": 558.07,
+          "y": 64.65,
+          "z": 4005.00
+        },
+        {
+          "config": "{\"name\":\"6b41c8b4ea83a29f3e42\",\"layouts\":[{\"id\":0,\"position\":{\"x\":139.51738241308794,\"y\":142.06952965235175,\"z\":4002,\"width\":375.16564417177915,\"height\":186.3067484662577,\"tabOrder\":4002}}],\"singleVisual\":{\"visualType\":\"gauge\",\"projections\":{\"Y\":[{\"queryRef\":\"CountNonNull(Risk Management Tracker.Avg Client Sat)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"Risk Management Tracker\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Avg Client Sat\"}},\"Function\":1},\"Name\":\"CountNonNull(Risk Management Tracker.Avg Client Sat)\",\"NativeReferenceName\":\"Average of Avg Client Sat\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Avg Client Sat\"}},\"Function\":1}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"axis\":[{\"properties\":{\"max\":{\"expr\":{\"Literal\":{\"Value\":\"5D\"}}}}}],\"dataPoint\":[{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"Conditional\":{\"Cases\":[{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Risk Management Tracker\"}},\"Property\":\"Avg Client Sat\"}},\"Function\":1}},\"Right\":{\"Literal\":{\"Value\":\"3D\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Risk Management Tracker\"}},\"Property\":\"Avg Client Sat\"}},\"Function\":1}},\"Right\":{\"Literal\":{\"Value\":\"4D\"}}}}}},\"Value\":{\"Literal\":{\"Value\":\"'#F0FD00'\"}}},{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Risk Management Tracker\"}},\"Property\":\"Avg Client Sat\"}},\"Function\":1}},\"Right\":{\"Literal\":{\"Value\":\"4D\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Risk Management Tracker\"}},\"Property\":\"Avg Client Sat\"}},\"Function\":1}},\"Right\":{\"Literal\":{\"Value\":\"6D\"}}}}}},\"Value\":{\"Literal\":{\"Value\":\"'#00FD11'\"}}},{\"Condition\":{\"And\":{\"Left\":{\"Comparison\":{\"ComparisonKind\":2,\"Left\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Risk Management Tracker\"}},\"Property\":\"Avg Client Sat\"}},\"Function\":1}},\"Right\":{\"Literal\":{\"Value\":\"0D\"}}}},\"Right\":{\"Comparison\":{\"ComparisonKind\":3,\"Left\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Risk Management Tracker\"}},\"Property\":\"Avg Client Sat\"}},\"Function\":1}},\"Right\":{\"Literal\":{\"Value\":\"3D\"}}}}}},\"Value\":{\"Literal\":{\"Value\":\"'#EB5959'\"}}}]}}}}}}}],\"labels\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}],\"target\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}],\"calloutValue\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[{\"name\":\"413edbc0d3b34a44d6ed\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Risk Management Tracker\"}},\"Property\":\"Division\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"Risk Management Tracker\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Division\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Behavioral Health'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+          "height": 186.31,
+          "width": 375.17,
+          "x": 139.52,
+          "y": 142.07,
+          "z": 4002.00
+        },
+        {
+          "config": "{\"name\":\"703b9b34091b51192e8a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1042.9775051124745,\"y\":71.4601226993865,\"z\":1000,\"width\":601.4560327198365,\"height\":47.640081799591,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"R I S K   S C O R E S   B Y  P R O G R A M\",\"textStyle\":{\"fontSize\":\"18pt\",\"color\":\"#ffffff\"}}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#33D9FF'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}}}],\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 47.64,
+          "width": 601.46,
+          "x": 1042.98,
+          "y": 71.46,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"abb4c200e02916619b6a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":119.10020449897752,\"y\":64.65439672801637,\"z\":2000,\"width\":416,\"height\":279.88548057259715,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"image\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"imageUrl\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Other_Dashes_panel3852003933962346.png\"}}}}}],\"imageScaling\":[{\"properties\":{\"imageScalingType\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}}]},\"vcObjects\":{\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"dropShadow\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0}}}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 279.89,
+          "width": 416.00,
+          "x": 119.10,
+          "y": 64.65,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"e783bc2a945e5709c727\",\"layouts\":[{\"id\":0,\"position\":{\"x\":573.3824130879345,\"y\":205.02249488752557,\"z\":4004,\"width\":433.0143149284254,\"height\":420.25357873210635,\"tabOrder\":4004}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Risk Management Tracker.Division\"},{\"queryRef\":\"Risk Management Tracker.Program\"},{\"queryRef\":\"Risk Management Tracker.Created\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"Risk Management Tracker\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Division\"},\"Name\":\"Risk Management Tracker.Division\",\"NativeReferenceName\":\"Division\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Program\"},\"Name\":\"Risk Management Tracker.Program\",\"NativeReferenceName\":\"Program\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Created\"}},\"Function\":4},\"Name\":\"Risk Management Tracker.Created\",\"NativeReferenceName\":\"Latest Created\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"total\":[{\"properties\":{\"totals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"194D\"}}}},\"selector\":{\"metadata\":\"Risk Management Tracker.Division\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"122D\"}}}},\"selector\":{\"metadata\":\"Risk Management Tracker.Program\"}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"stylePreset\":[{\"properties\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Sparse'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 420.25,
+          "width": 433.01,
+          "x": 573.38,
+          "y": 205.02,
+          "z": 4004.00
+        },
+        {
+          "config": "{\"name\":\"fef8f77d0687b52481bd\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1058.2903885480573,\"y\":254.36400817995911,\"z\":4001,\"width\":571.680981595092,\"height\":552.1145194274029,\"tabOrder\":4001}}],\"singleVisual\":{\"visualType\":\"radarChart\",\"projections\":{\"category\":[{\"queryRef\":\"Risk Management Tracker.Program\"}],\"measure\":[{\"queryRef\":\"Date.Total Score\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"Risk Management Tracker\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"Date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Program\"},\"Name\":\"Risk Management Tracker.Program\",\"NativeReferenceName\":\"Program\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Total Score\"},\"Name\":\"Date.Total Score\",\"NativeReferenceName\":\"Total Score\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Total Score\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"Shapes\":[{\"properties\":{\"shapeIcon\":{\"expr\":{\"Literal\":{\"Value\":\"5D\"}}}}}],\"radarC\":[{\"properties\":{\"radarCircle\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"radarAreaOpacity\":{\"expr\":{\"Literal\":{\"Value\":\"0.6D\"}}}}}],\"AxisName\":[{\"properties\":{\"axisColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}},\"axisPadding\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}},\"axisSize\":{\"expr\":{\"Literal\":{\"Value\":\"11D\"}}}}}],\"Labels\":[{\"properties\":{\"labelColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}},\"labelSize\":{\"expr\":{\"Literal\":{\"Value\":\"11D\"}}},\"distanceFromChart\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 552.11,
+          "width": 571.68,
+          "x": 1058.29,
+          "y": 254.36,
+          "z": 4001.00
+        },
+        {
+          "config": "{\"name\":\"ff8d6715a3c726685c24\",\"layouts\":[{\"id\":0,\"position\":{\"x\":119.10020449897752,\"y\":64.65439672801637,\"z\":4003,\"width\":416,\"height\":47.640081799591,\"tabOrder\":4003}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"O R G A N I Z A T I O N A L   A V E R A G E\",\"textStyle\":{\"fontSize\":\"14pt\",\"color\":\"#ffffff\"}}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#33D9FF'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}}}],\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 47.64,
+          "width": 416.00,
+          "x": 119.10,
+          "y": 64.65,
+          "z": 4003.00
+        }
+      ],
+      "width": 1664.00
+    }
+  ]
+}

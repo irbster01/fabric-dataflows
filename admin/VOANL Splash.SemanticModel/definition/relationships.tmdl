@@ -1,0 +1,10 @@
+relationship 38bd3b83-b9f9-4e31-8e42-76ec39ce6655
+	joinOnDateBehavior: datePartOnly
+	fromColumn: lighthouse_dates.date
+	toColumn: LocalDateTable_576512dd-d459-4f54-b9d5-50187075a95a.Date
+
+relationship e7da36cf-167d-4db5-b119-cfaecf82bd22
+	joinOnDateBehavior: datePartOnly
+	fromColumn: lighthouse_dates.month_start
+	toColumn: LocalDateTable_a2cb7156-cb95-4ba5-9334-bcd8b8a9091d.Date
+

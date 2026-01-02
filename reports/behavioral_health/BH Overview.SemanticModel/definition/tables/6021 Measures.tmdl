@@ -1,0 +1,66 @@
+table '6021 Measures'
+	lineageTag: b06fd3b1-0f0c-4047-b60f-1131a8bc95ce
+
+	measure '6021 Actual FTE' = 10
+		formatString: 0
+		lineageTag: 06841865-5f19-4b34-83fd-ca3ae14e1f34
+
+	measure 'Actual CPST units needed' = [billing tgt/actual clinic] / 27.21
+		lineageTag: 618ac5d2-be07-476d-97ee-af88d54c3512
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Actual PSR needed' = [billing tgt/actual clinic] /20.28
+		lineageTag: 3db0a8dd-f44c-4ab3-b50f-38980c8621d3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'billing tgt/actual clinic' = 'AllTgts'[TgtBill] / '6021 Measures'[6021 Actual FTE]
+		lineageTag: 55f8405b-f016-4e2b-bac9-16894aa982a7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Adj Month Tgts' = 'AllTgts'[Deficit] / 11
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 349f8ecb-9f8d-4134-86dd-be7efda2b3fa
+
+	measure 'adj mo tgt per clin' = [Adj Month Tgts] /[FTE Count]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 1d7c1324-e0e9-4a03-acc2-dfb71f2a6c03
+
+	measure 'recovery productivity' = [adj mo tgt per clin] + 'AllTgts'[Billing tgt/clinician]
+		lineageTag: 65cad2eb-1442-4468-813f-70344a52e93a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Late Count' = COUNTROWS(FILTER('API - Billing','API - Billing'[Is Late]="True"))
+		formatString: 0
+		lineageTag: 02aceab6-926b-41eb-8b6f-2acbb251f30b
+
+	measure 'Service Count' = COUNTROWS('API - Billing')
+		formatString: 0
+		lineageTag: 2ce48f99-afe0-456f-b3b7-b81e0d059fd5
+
+	measure 'Late %' = DIVIDE([Late Count],[Service Count])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: aed2b734-b1fd-41c3-8a71-29b236266988
+
+	measure '6021 Month Goal' = 900*DISTINCTCOUNT('Date'[Cal Month])
+		formatString: 0
+		lineageTag: 475db46d-6419-4baf-a744-68bc704abf09
+
+	column Value
+		formatString: 0
+		lineageTag: 7941975d-6dae-423b-953b-c449ca81db7b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '6021 Measures' = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = b9e8cbc0fef148ce9972e606721f0869
+

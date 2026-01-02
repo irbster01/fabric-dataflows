@@ -1,0 +1,48 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw-credible-ledger",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw-credible-ledger": {
+      "queryId": "1652d314-0c72-46ad-a5ef-0f7772e0a3e5",
+      "queryName": "raw-credible-ledger",
+      "loadEnabled": false
+    },
+    "raw-credible-ledger-warehouse": {
+      "queryId": "356ddf98-ea32-40f4-8359-1cea3e234fb2",
+      "queryName": "raw-credible-ledger-warehouse",
+      "loadEnabled": false
+    },
+    "raw-credible-ledger-warehouse_DataDestination": {
+      "queryId": "3f0361ac-ba5b-46f7-a8be-1d642c8565cc",
+      "queryName": "raw-credible-ledger-warehouse_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "raw-credible-ledger_DataDestination": {
+      "queryId": "4f0618a6-2e41-43f1-b9ea-85fbb53299df",
+      "queryName": "raw-credible-ledger_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"f2fb5263-399b-47cd-a9fe-2d49f8175759\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    },
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"678f10d1-b794-4318-8152-4c973a8dc9fa\"}"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "OIG Check"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e6ba1f4f-bf27-ae17-4d5b-41c2124c9b21"
+  }
+}

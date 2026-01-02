@@ -1,0 +1,47 @@
+table maintenance_avg_days_to_complete
+	lineageTag: 7713e542-9f6f-4e65-82de-3d0b267cc924
+
+	column month_control
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7a51d6ec-50b2-47aa-bc69-c85dc720c475
+		summarizeBy: none
+		sourceColumn: month_control
+
+		variation Variation
+			isDefault
+			relationship: 91367868-0019-43b2-b22c-602f38de968c
+			defaultHierarchy: LocalDateTable_ad94aa31-7340-4696-8ee0-a90e77cb8777.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column request_month
+		dataType: string
+		lineageTag: 54952697-edde-409a-9e7e-408e562863eb
+		summarizeBy: none
+		sourceColumn: request_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_days_to_complete
+		dataType: int64
+		formatString: 0
+		lineageTag: 0bd99ddb-3fd1-4cd0-b555-cd332a265a3f
+		summarizeBy: sum
+		sourceColumn: avg_days_to_complete
+
+		annotation SummarizationSetBy = Automatic
+
+	partition maintenance_avg_days_to_complete = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "voa_admin"),
+				    dbo_maintenance_avg_days_to_complete = Source{[Schema="dbo",Item="maintenance_avg_days_to_complete"]}[Data]
+				in
+				    dbo_maintenance_avg_days_to_complete
+
+	annotation PBI_ResultType = Table
+

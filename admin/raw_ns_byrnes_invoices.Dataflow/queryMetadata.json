@@ -1,0 +1,20 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_ns_byrnes_invoices",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "Query": {
+      "queryId": "b222010c-85c3-40c6-a6eb-ca5a26ae3268",
+      "queryName": "Query"
+    }
+  },
+  "connections": [
+    {
+      "path": "https://9060623.app.netsuite.com/",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"0d3f6282-017e-455b-a67d-2261d5496a46\"}"
+    }
+  ]
+}

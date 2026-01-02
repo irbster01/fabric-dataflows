@@ -1,0 +1,83 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "lighthouse_client_attend_final",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "2526_lh_clients": {
+      "queryId": "dffe1949-08f3-4689-b371-f9368383af17",
+      "queryName": "2526_lh_clients"
+    },
+    "raw_lighthouse_registration": {
+      "queryId": "88a702bf-ed23-4363-b067-b5078ec6a70c",
+      "queryName": "raw_lighthouse_registration"
+    },
+    "raw_sp_demographics": {
+      "queryId": "51a583d0-90d3-4e09-b77d-287c8ebc8e97",
+      "queryName": "raw_sp_demographics"
+    },
+    "raw_sp_entries": {
+      "queryId": "ae6862cb-8005-4cc0-8f7b-f593593bb4dd",
+      "queryName": "raw_sp_entries"
+    },
+    "silver_lighthouse client_month_possible_vs_actual": {
+      "queryId": "6d909da2-e244-4212-ad01-3d9b90144373",
+      "queryName": "silver_lighthouse client_month_possible_vs_actual"
+    },
+    "v_client_month_rollups": {
+      "queryId": "94887db3-4cd8-4e7d-8fa3-f33245fcadf9",
+      "queryName": "v_client_month_rollups",
+      "loadEnabled": false
+    },
+    "v_client_month_rollups_DataDestination": {
+      "queryId": "a7a22935-5b54-4f1b-bcdc-c6d28d175d42",
+      "queryName": "v_client_month_rollups_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "80 sites": {
+      "queryId": "b7fb54e8-7f85-4b6e-8e8e-4e57e7ce2b3d",
+      "queryName": "80 sites",
+      "loadEnabled": false
+    },
+    "not 80 sites": {
+      "queryId": "299d9751-b6eb-4c3e-a08c-4aa09e94fa3f",
+      "queryName": "not 80 sites",
+      "loadEnabled": false
+    },
+    "not 80 sites_DataDestination": {
+      "queryId": "d6e8a7fd-3f09-4a78-b706-a7313cc88c93",
+      "queryName": "not 80 sites_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "80 sites_DataDestination": {
+      "queryId": "8e538e39-0555-4108-ba1f-f84ecb6009b8",
+      "queryName": "80 sites_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "silver_lighthouse Lighthouse Matched with JCampus": {
+      "queryId": "881cfdf8-269d-43b4-be55-ef3cc314be06",
+      "queryName": "silver_lighthouse Lighthouse Matched with JCampus"
+    },
+    "80 sites (2)": {
+      "queryId": "beb43886-0c0f-40dd-aa86-7cd9f0a5eef6",
+      "queryName": "80 sites (2)",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"678f10d1-b794-4318-8152-4c973a8dc9fa\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

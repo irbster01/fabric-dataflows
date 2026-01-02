@@ -1,0 +1,37 @@
+table '2025 Invoice Number Totals (2)'
+	lineageTag: d8f2341e-4668-4b13-a2f4-d6907491980a
+
+	column Value
+		dataType: string
+		lineageTag: 9485456e-d08e-4dd6-b438-82fe7befe29d
+		summarizeBy: none
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Count
+		dataType: double
+		lineageTag: 38eb4320-e4d3-4a6c-ba9a-88b38d55f0ad
+		summarizeBy: none
+		sourceColumn: Count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition '2025 Invoice Number Totals (2)' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "voa_admin"),
+				    dbo_appended_historical_maint_invoices = Source{[Schema="dbo",Item="appended_historical_maint_invoices"]}[Data],
+				    #"Filtered Rows" = Table.SelectRows(dbo_appended_historical_maint_invoices, each [Date Completed] >= #date(2025, 1, 1) and [Date Completed] <= #date(2025, 12, 31)),
+				    #"Grouped Rows" = Table.Group(#"Filtered Rows", {"invoice_num", "Value"}, {{"Count", each List.Max([Cost]), type nullable number}}),
+				    #"Grouped Rows1" = Table.Group(#"Grouped Rows", {"Value"}, {{"Count", each List.Sum([Count]), type nullable number}})
+				in
+				    #"Grouped Rows1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

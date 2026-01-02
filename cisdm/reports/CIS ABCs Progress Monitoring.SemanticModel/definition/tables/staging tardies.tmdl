@@ -1,0 +1,123 @@
+table 'staging tardies'
+	lineageTag: 777aef0e-a39e-4afb-811a-47ac9fa41e7b
+
+	column school_name
+		dataType: string
+		lineageTag: 9f874b96-6f28-49f5-8bec-55047060eaf9
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sasid
+		dataType: string
+		lineageTag: a8de89d9-fe46-4fb2-b61b-2d719d3beaa7
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: 0944864b-50ae-4698-99f4-55d41e684d97
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_full_name
+		dataType: string
+		lineageTag: 0627554e-c4a7-4b6b-9235-ac90e0d3d88a
+		summarizeBy: none
+		sourceColumn: client_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal
+		dataType: string
+		lineageTag: db637adb-bd16-4d99-adcc-a56dfa65f58c
+		summarizeBy: none
+		sourceColumn: goal
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric
+		dataType: string
+		lineageTag: bbdb16d1-4545-4f2d-984a-af39821bdbf3
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline
+		dataType: double
+		lineageTag: 9f4e475f-8a5e-4885-b011-464d4b6027a1
+		summarizeBy: sum
+		sourceColumn: baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column target
+		dataType: int64
+		formatString: 0
+		lineageTag: 5d40dfd0-3bc3-4927-9a2b-e9d543c5ef7b
+		summarizeBy: sum
+		sourceColumn: target
+
+		annotation SummarizationSetBy = Automatic
+
+	column tardies
+		dataType: double
+		lineageTag: 94992979-2e61-4906-81b1-78369694b33e
+		summarizeBy: sum
+		sourceColumn: tardies
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column bad_flag
+		dataType: string
+		lineageTag: ed722247-9356-4c64-9875-abd998f2aaee
+		summarizeBy: none
+		sourceColumn: bad_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'staging tardies' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    dbo_cis_attendance_goal_clients = Source{[Schema="dbo",Item="cis_attendance_goal_clients"]}[Data],
+				    #"Merged Queries" = Table.NestedJoin(dbo_cis_attendance_goal_clients, {"sasid"}, #"Attendance JCampus - Active CIS Clients", {"sasid"}, "Attendance JCampus - Active CIS Clients", JoinKind.LeftOuter),
+				    #"Expanded Attendance JCampus - Active CIS Clients" = Table.ExpandTableColumn(#"Merged Queries", "Attendance JCampus - Active CIS Clients", {"Count"}, {"Attendance JCampus - Active CIS Clients.Count"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Expanded Attendance JCampus - Active CIS Clients",null,0,Replacer.ReplaceValue,{"Attendance JCampus - Active CIS Clients.Count"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Replaced Value",{{"Attendance JCampus - Active CIS Clients.Count", "jcampus_unexcused"}}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Renamed Columns", {"client_id"}, #"cis cis_tardies_by_student", {"client_id"}, "cis cis_tardies_by_student", JoinKind.LeftOuter),
+				    #"Expanded cis cis_tardies_by_student" = Table.ExpandTableColumn(#"Merged Queries1", "cis cis_tardies_by_student", {"tardies"}, {"cis cis_tardies_by_student.tardies"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Expanded cis cis_tardies_by_student",null,0,Replacer.ReplaceValue,{"cis cis_tardies_by_student.tardies"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Replaced Value1",{{"cis cis_tardies_by_student.tardies", "tardies"}}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Renamed Columns1","Midway Professional Development Center","Midway",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","Woodlawn High School","Woodlawn",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","Caddo Middle Career and Technology School","CMCTS",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4","Caddo Heights Elementary","Caddo Heights",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","Westwood Elementary","Westwood",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value7" = Table.ReplaceValue(#"Replaced Value6","Broadmoor STEM Academy","Broadmoor",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value8" = Table.ReplaceValue(#"Replaced Value7","Creswell Elementary School","Creswell",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value9" = Table.ReplaceValue(#"Replaced Value8","Bethune-Oak Park","Bethune",Replacer.ReplaceText,{"school_name"}),
+				    #"Sorted Rows" = Table.Sort(#"Replaced Value9",{{"school_name", Order.Ascending}}),
+				    #"Replaced Value10" = Table.ReplaceValue(#"Sorted Rows","Atkins Technology Elementary School","Atkins",Replacer.ReplaceText,{"school_name"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Replaced Value10", each ([metric] = "Tardies")),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"school_name", "sasid", "client_id", "client_full_name", "goal", "metric", "baseline", "target", "tardies"}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Removed Other Columns", "bad_flag", each if [target] < [tardies] then 1 else 0),
+				    #"Sorted Rows1" = Table.Sort(#"Added Conditional Column",{{"tardies", Order.Descending}})
+				in
+				    #"Sorted Rows1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

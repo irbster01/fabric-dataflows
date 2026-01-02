@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "Bundle Counter Notebook",
+    "description": "Describes how the division bundle totals are calculated."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0f17514d-58b6-ab81-400e-657755c3932c"
+  }
+}

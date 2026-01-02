@@ -1,0 +1,121 @@
+table 'API - Lookup Dict'
+	lineageTag: 51fb764c-7ffa-4b43-be0d-9a24772aacf9
+
+	column 'Lookup ID'
+		dataType: string
+		lineageTag: bd7a0646-d067-421f-9276-bc6a77608998
+		summarizeBy: none
+		sourceColumn: Lookup ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lookup Category'
+		dataType: string
+		lineageTag: a9f88038-576a-41c2-80ea-f1449ab542f9
+		summarizeBy: none
+		sourceColumn: Lookup Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lookup Description'
+		dataType: string
+		lineageTag: 40880877-dbda-4e85-96da-33556a894a0b
+		summarizeBy: none
+		sourceColumn: Lookup Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column lookup_code1
+		dataType: string
+		lineageTag: e0419ce5-821d-4ce4-b1de-1a06dd24f3c5
+		summarizeBy: none
+		sourceColumn: lookup_code1
+
+		annotation SummarizationSetBy = Automatic
+
+	column lookup_code
+		dataType: string
+		lineageTag: faf5c76b-231d-46ac-beb8-5b145e2500b3
+		summarizeBy: none
+		sourceColumn: lookup_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_updated
+		dataType: string
+		lineageTag: 46b1dad8-af35-42e7-88a9-e73d7c8af34c
+		summarizeBy: none
+		sourceColumn: date_updated
+
+		annotation SummarizationSetBy = Automatic
+
+	column updatedby_emp_id
+		dataType: string
+		lineageTag: 54e8afe5-e802-43ec-9e15-c5a19a356e63
+		summarizeBy: none
+		sourceColumn: updatedby_emp_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column outcome_value
+		dataType: string
+		lineageTag: a7cfca19-35ac-4e33-b016-a83cd4a42042
+		summarizeBy: none
+		sourceColumn: outcome_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column hl7_code1
+		dataType: string
+		lineageTag: afc5c5b5-c98a-41bc-857e-01e9e9c17860
+		summarizeBy: none
+		sourceColumn: hl7_code1
+
+		annotation SummarizationSetBy = Automatic
+
+	column hl7_code
+		dataType: string
+		lineageTag: 584f1cff-f15b-40ab-8ca3-da46f2e3d722
+		summarizeBy: none
+		sourceColumn: hl7_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column external_id1
+		dataType: string
+		lineageTag: a997cc4c-114f-403a-84ea-3590295735a1
+		summarizeBy: none
+		sourceColumn: external_id1
+
+		annotation SummarizationSetBy = Automatic
+
+	column short_desc
+		dataType: string
+		lineageTag: 174f781f-c8d7-4ddc-ac60-9cd0f3959b86
+		summarizeBy: none
+		sourceColumn: short_desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column external_id
+		dataType: string
+		lineageTag: 5947afbd-1655-43b8-a1df-e7711d50c0a1
+		summarizeBy: none
+		sourceColumn: external_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'API - Lookup Dict' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"48159fb3-931d-4cd7-89fc-c3ecd3f82fb8" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="48159fb3-931d-4cd7-89fc-c3ecd3f82fb8"]}[Data],
+				    #"API - Lookup Dict_" = #"48159fb3-931d-4cd7-89fc-c3ecd3f82fb8"{[entity="API - Lookup Dict",version=""]}[Data]
+				in
+				    #"API - Lookup Dict_"
+
+	annotation PBI_ResultType = Table
+

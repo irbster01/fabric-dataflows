@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "employee_supervision"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c922f193-77ac-bc51-4476-ef6d49aeeb87"
+  }
+}

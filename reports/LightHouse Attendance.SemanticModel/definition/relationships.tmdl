@@ -1,0 +1,129 @@
+relationship 338897c9-2579-40ef-83b3-1d88546434b1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: lighthouse_dates.date
+	toColumn: LocalDateTable_7ddfa571-9f02-4bdc-af18-5037a493c440.Date
+
+relationship d664e950-b56d-4163-ba8c-6800cb7eab67
+	joinOnDateBehavior: datePartOnly
+	fromColumn: lighthouse_dates.month_start
+	toColumn: LocalDateTable_12a7c953-6697-4bf7-88fa-4d2d423e1c35.Date
+
+relationship a0b571d3-7177-4972-9676-bfb092900eab
+	joinOnDateBehavior: datePartOnly
+	fromColumn: v_client_month_rollups.service_month
+	toColumn: LocalDateTable_f52ae445-ba1a-4db8-974b-487eab5714bd.Date
+
+relationship 03e558e6-3e7f-4d1e-9ff8-b3a348e799db
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'silver_lighthouse Lighthouse Matched with JCampus'.client_dob
+	toColumn: LocalDateTable_e598a8e4-2fa6-4e7a-9d31-98d78df1eecf.Date
+
+relationship 314a4e16-12c7-4e9e-8234-206cff48f9a7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'silver_lighthouse Lighthouse Matched with JCampus'.entry_date
+	toColumn: LocalDateTable_b899099c-d584-426d-8222-5d538f71a1a3.Date
+
+relationship de4e8a75-21b7-4c8a-9c12-0b2980f6372a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'silver_lighthouse Lighthouse Matched with JCampus'.exit_date
+	toColumn: LocalDateTable_4c37b6d3-c426-4057-ba40-d2fe78b025e0.Date
+
+relationship AutoDetected_6dc743e3-1c2b-4caf-a7bf-e0c4a2c7c87f
+	crossFilteringBehavior: bothDirections
+	fromColumn: v_client_month_rollups.client_id
+	toColumn: 'silver_lighthouse Lighthouse Matched with JCampus'.client_id
+
+relationship 7de67d91-6386-4744-8282-a1c5b15b1957
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 2526_lh_clients.entry_date
+	toColumn: LocalDateTable_9b512b0c-19e1-4047-9105-44dd4597871b.Date
+
+relationship eb9279c0-1e6a-43a1-b0c3-34d8bb1fea54
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 2526_lh_clients.exit_date
+	toColumn: LocalDateTable_01dcf13d-5b35-4ceb-95bb-b1a0d245021b.Date
+
+relationship 24e0fb85-6652-4f89-b657-61a242fd8a60
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 2526_lh_clients.start2
+	toColumn: LocalDateTable_62890e4c-c9bd-4640-8a53-24b394df5b27.Date
+
+relationship a2e2cbc7-f13d-4fd4-9d80-564f150bc71d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 2526_lh_clients.start8
+	toColumn: LocalDateTable_9fae3458-b1cd-46c8-a5c4-e327585e2629.Date
+
+relationship 0a9dd11f-5e1a-497b-bb30-82985d102a44
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 2526_lh_clients.start9
+	toColumn: LocalDateTable_71ced890-02fb-4b8a-acc5-04f1b396e03d.Date
+
+relationship 8d62f7cb-9c92-4abb-a82e-c6278f0638f1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_lighthouse_registration.date_file_modified
+	toColumn: LocalDateTable_ccff1069-b5f2-4a3c-afc1-d5c746f1d928.Date
+
+relationship 515e80a3-bf0f-4267-8552-5b1eeaaf728a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_lighthouse_registration.app_date
+	toColumn: LocalDateTable_dc13bd12-84f0-4ef1-8b2e-1233b57f8376.Date
+
+relationship AutoDetected_207be8cf-2829-48f5-be4b-2239e2bf606c
+	fromColumn: v_client_month_rollups.client_id
+	toColumn: raw_lighthouse_registration.client_id
+
+relationship AutoDetected_9593173a-0cf2-49b3-b49c-6dc93b7ef392
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'silver_lighthouse Lighthouse Matched with JCampus'.client_id
+	toColumn: raw_lighthouse_registration.client_id
+
+relationship AutoDetected_9117fba2-2237-496b-981f-4a44b84ea5dd
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 2526_lh_clients.client_id
+	toColumn: raw_lighthouse_registration.client_id
+
+relationship AutoDetected_d3e91e85-605a-4821-bc29-ee168504cdbd
+	fromColumn: raw_sp_services.client_id
+	toColumn: raw_lighthouse_registration.client_id
+
+relationship 4a4f68bd-d59a-4d41-97ea-be440ada8c12
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Merged Service Counts'.entry_date
+	toColumn: LocalDateTable_c04e0428-bce5-4f47-9711-d0378d60e130.Date
+
+relationship 995f71de-8e32-448a-ba33-f3e3316da8b9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Merged Service Counts'.exit_date
+	toColumn: LocalDateTable_d564710f-2a8c-4e2a-b899-6061c869213f.Date
+
+relationship 9c4e374f-08e7-42fd-95e3-a504b6c112e9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Merged Service Counts'.start2
+	toColumn: LocalDateTable_e947480c-1d92-45bf-95a5-5b9f75f6f19a.Date
+
+relationship 62f098e8-280d-45ed-b634-ba0efd202798
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Merged Service Counts'.start8
+	toColumn: LocalDateTable_a8319330-e6f0-4534-926e-59ca8fa25b7f.Date
+
+relationship cae336f1-c02b-4c0f-a491-6ae109931ae5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Merged Service Counts'.start9
+	toColumn: LocalDateTable_d6714426-2910-4afb-ae27-69687b9a06b3.Date
+
+relationship AutoDetected_f56ff1ed-a989-4081-a6e0-fa5c8f487562
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Merged Service Counts'.client_id
+	toColumn: raw_lighthouse_registration.client_id
+
+relationship AutoDetected_c3cfcc74-7a8b-4145-849a-6161319df403
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Merged Service Counts'.entry_id
+	toColumn: 2526_lh_clients.entry_id
+

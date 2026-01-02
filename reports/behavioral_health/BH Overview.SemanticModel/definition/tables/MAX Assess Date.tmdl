@@ -1,0 +1,133 @@
+table 'MAX Assess Date'
+	lineageTag: 44d28b01-6065-494a-b941-a6def8dbacbe
+
+	column 'Client ID'
+		dataType: string
+		lineageTag: d281265b-37b5-43b4-8376-ffa65e9baedb
+		summarizeBy: none
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Type'
+		dataType: string
+		lineageTag: 1333a8a4-a7c5-4705-8734-26fae923aba6
+		summarizeBy: none
+		sourceColumn: Service Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Assess'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: b5504038-499b-49d1-a64d-41f2438610a4
+		summarizeBy: none
+		sourceColumn: Last Assess
+
+		variation Variation
+			isDefault
+			relationship: cd812b75-fe86-4551-9809-309f5913e132
+			defaultHierarchy: LocalDateTable_7b67db6d-6987-4d0d-bc4a-972d7337ff33.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Custom.1'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6a87c3d9-4eef-4ab0-afc8-046bb1489a95
+		summarizeBy: none
+		sourceColumn: Custom.1
+
+		variation Variation
+			isDefault
+			relationship: 8e19d804-8b2d-4396-bc0b-6d517b1e1af9
+			defaultHierarchy: LocalDateTable_98cec5fc-4ca3-4ef5-bb96-e4f2247cbf68.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'API - Clients (Updated).Age'
+		dataType: int64
+		formatString: 0
+		lineageTag: dd3cbfe2-325e-43ed-b2cd-16282e7da7df
+		summarizeBy: sum
+		sourceColumn: API - Clients (Updated).Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Custom
+		dataType: string
+		lineageTag: ba751889-8d21-43c5-a418-93c63a0cee07
+		summarizeBy: none
+		sourceColumn: Custom
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'date from assess'
+		dataType: string
+		lineageTag: 813573d4-e0ca-49d0-a2ec-22140f1ed996
+		summarizeBy: none
+		sourceColumn: date from assess
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Number of Days Due'
+		dataType: string
+		lineageTag: 4dd1ef30-0d1a-4a24-9f06-3d0a239c08b2
+		summarizeBy: none
+		sourceColumn: Number of Days Due
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Custom.2'
+		dataType: string
+		lineageTag: 6fc8c076-812e-49f1-a13b-f6c7fbc55d97
+		summarizeBy: none
+		sourceColumn: Custom.2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assess or Reauth'
+		dataType: string
+		lineageTag: 84cba1f3-27fa-4141-841d-80a3b473f3ef
+		summarizeBy: none
+		sourceColumn: Assess or Reauth
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'MAX Assess Date' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"f09e25de-cf5c-4a79-a1ba-c2673d34f3d3" = Workspaces{[workspaceId="f09e25de-cf5c-4a79-a1ba-c2673d34f3d3"]}[Data],
+				    #"6017eed9-2ebe-48f4-b504-d5dcd251c6f0" = #"f09e25de-cf5c-4a79-a1ba-c2673d34f3d3"{[dataflowId="6017eed9-2ebe-48f4-b504-d5dcd251c6f0"]}[Data],
+				    #"API - Billing_" = #"6017eed9-2ebe-48f4-b504-d5dcd251c6f0"{[entity="API - Billing",version=""]}[Data],
+				    #"Added Conditional Column" = Table.AddColumn(#"API - Billing_", "Category", each if Text.Contains([Service Type], "BUN:") then "Bundle" else [Service Type]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Conditional Column",{{"Rate", type number}, {"Adjusted Rate", type number}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each ([Service Type] = "Assessment CPST" or [Service Type] = "FEP Assessment" or [Service Type] = "IBHH: Assessment")),
+				    #"Grouped Rows" = Table.Group(#"Filtered Rows", {"Client ID", "Service Type"}, {{"Count", each List.Max([Service Date]), type nullable date}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Grouped Rows", {"Client ID"}, #"API - Clients (Updated)", {"Client ID"}, "API - Clients (Updated)", JoinKind.LeftOuter),
+				    #"Expanded API - Clients (Updated)" = Table.ExpandTableColumn(#"Merged Queries", "API - Clients (Updated)", {"Age"}, {"API - Clients (Updated).Age"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded API - Clients (Updated)",{{"Count", "Last Assess"}}),
+				    #"Added Conditional Column1" = Table.AddColumn(#"Renamed Columns", "Custom", each if [#"API - Clients (Updated).Age"] >= 18 then "Adult" else if [#"API - Clients (Updated).Age"] < 18 then "Child" else null),
+				    #"Added Custom" = Table.AddColumn(#"Added Conditional Column1", "Custom.1", each DateTime.LocalNow()),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Custom.1", type date}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Changed Type1",{"Client ID", "Service Type", "Last Assess", "Custom.1", "API - Clients (Updated).Age", "Custom"}),
+				    #"Added Custom1" = Table.AddColumn(#"Reordered Columns", "date from assess", each Duration.Days([Custom.1]-[Last Assess])),
+				    #"Added Conditional Column2" = Table.AddColumn(#"Added Custom1", "Number of Days Due", each if [Custom] = "Adult" then 365 else if [Custom] = "Child" then 180 else null),
+				    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Added Conditional Column2", {"Custom"}),
+				    #"Added Custom2" = Table.AddColumn(#"Removed Errors", "Custom.2", each [Number of Days Due]-[date from assess]),
+				    #"Added Conditional Column3" = Table.AddColumn(#"Added Custom2", "Custom.3", each if [Custom.2] < 0 then "FULL" else if [Custom.2] <= 30 then "FULL" else "Reauth"),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Added Conditional Column3",{{"Custom.3", "Assess or Reauth"}})
+				in
+				    #"Renamed Columns1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

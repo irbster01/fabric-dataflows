@@ -1,0 +1,47 @@
+table maintenance_avg_days_open
+	lineageTag: 7daccd5c-9ba8-4aa4-97c3-d09fcf16ef69
+
+	column request_month
+		dataType: string
+		lineageTag: 1ea19323-d88f-4934-a90f-97d6e5417683
+		summarizeBy: none
+		sourceColumn: request_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_control
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2ca9546f-5ba2-42e2-9a07-7c48f0d5f2ac
+		summarizeBy: none
+		sourceColumn: month_control
+
+		variation Variation
+			isDefault
+			relationship: 8588cb33-e771-4bbe-b7bf-90a09358e600
+			defaultHierarchy: LocalDateTable_428cfedd-7164-49b2-b65f-d634a293ca66.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column avg_days_open
+		dataType: int64
+		formatString: 0
+		lineageTag: b9eecaaa-ae50-41c0-8925-5d3755a73d57
+		summarizeBy: sum
+		sourceColumn: avg_days_open
+
+		annotation SummarizationSetBy = Automatic
+
+	partition maintenance_avg_days_open = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "voa_admin"),
+				    dbo_maintenance_avg_days_open = Source{[Schema="dbo",Item="maintenance_avg_days_open"]}[Data]
+				in
+				    dbo_maintenance_avg_days_open
+
+	annotation PBI_ResultType = Table
+

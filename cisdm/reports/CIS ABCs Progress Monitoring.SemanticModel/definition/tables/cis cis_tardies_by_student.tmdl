@@ -1,0 +1,55 @@
+table 'cis cis_tardies_by_student'
+	lineageTag: 6b0055c3-800f-45ab-95f9-e8ad80ce2333
+
+	column client_id
+		dataType: string
+		lineageTag: 2c05bb18-e4a3-4ba8-81f5-88e00ce81162
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sasid
+		dataType: string
+		lineageTag: 0e679a25-6e11-4bf3-8334-3e0c71482e31
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_full_name
+		dataType: string
+		lineageTag: a9e2e88e-4f77-46e1-90fb-1f82e3668f21
+		summarizeBy: none
+		sourceColumn: client_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_name
+		dataType: string
+		lineageTag: e570d16b-a43f-46b5-952a-cd7d297338a4
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column tardies
+		dataType: int64
+		formatString: 0
+		lineageTag: b391adb7-6620-45df-b5cb-85f48af8d6c1
+		summarizeBy: sum
+		sourceColumn: tardies
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'cis cis_tardies_by_student' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_cis_tardies_by_student = Source{[Schema="cis",Item="cis_tardies_by_student"]}[Data]
+				in
+				    cis_cis_tardies_by_student
+
+	annotation PBI_ResultType = Table
+

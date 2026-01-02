@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "lighthouse_services_mlv",
+    "description": "Materialized Lake view for Lighthouse services"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "de63d0cd-1d89-99da-4c94-5e65ff6bcaee"
+  }
+}

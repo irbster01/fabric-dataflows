@@ -1,0 +1,412 @@
+table raw_maintenance_requests
+	lineageTag: 1206f222-1d20-423b-8c84-20cf0b72415f
+
+	column ticket_num
+		dataType: string
+		lineageTag: 1098ba00-dcdc-454f-bad6-2fe21e12f3b5
+		summarizeBy: none
+		sourceColumn: ticket_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column requester
+		dataType: string
+		lineageTag: 6072efab-e02d-49e2-8be8-c534b18ce217
+		summarizeBy: none
+		sourceColumn: requester
+
+		annotation SummarizationSetBy = Automatic
+
+	column requester_phone
+		dataType: double
+		lineageTag: 4823e798-5be0-4b3e-95af-50d9b9acca45
+		summarizeBy: sum
+		sourceColumn: requester_phone
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column program
+		dataType: string
+		lineageTag: e6d44b65-8a49-4860-be72-85af3e0f3641
+		summarizeBy: none
+		sourceColumn: program
+
+		annotation SummarizationSetBy = Automatic
+
+	column location
+		dataType: string
+		lineageTag: dc05484a-0b52-4aa7-bef2-1850c7555cdf
+		summarizeBy: none
+		sourceColumn: location
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaction_detail
+		dataType: string
+		lineageTag: 1fc64ff4-d4d6-4746-93e5-04a6bffa2a78
+		summarizeBy: none
+		sourceColumn: loaction_detail
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit
+		dataType: string
+		lineageTag: cd41a646-5650-4e80-aea7-bd1b5a8c60d6
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column perm2enter
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ad85d10d-7efa-49f6-993f-b2129e0e8c46
+		summarizeBy: none
+		sourceColumn: perm2enter
+
+		annotation SummarizationSetBy = Automatic
+
+	column notes
+		dataType: string
+		lineageTag: b139c1f3-abf3-44d7-83d5-96ef7769ac87
+		summarizeBy: none
+		sourceColumn: notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Property Type'
+		dataType: string
+		lineageTag: 9f031506-a321-4e7f-8bb0-d1e0091ea1e5
+		summarizeBy: none
+		sourceColumn: Property Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column request_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: d59dca6f-e342-42f3-838f-e2810c93f1e6
+		summarizeBy: none
+		sourceColumn: request_date
+
+		variation Variation
+			isDefault
+			relationship: 8f113e96-73fe-403c-988f-2a90fa12e8bf
+			defaultHierarchy: LocalDateTable_e1cded6d-27f9-409c-99ab-59bc85b3bfcd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column request_type
+		dataType: string
+		lineageTag: a17d9ed5-3e40-457b-ba41-47ab4fd391e0
+		summarizeBy: none
+		sourceColumn: request_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column repeat_issue
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5d76abd7-3990-486a-9f77-bf9a193d1d3e
+		summarizeBy: none
+		sourceColumn: repeat_issue
+
+		annotation SummarizationSetBy = Automatic
+
+	column issue
+		dataType: string
+		lineageTag: b920b8a7-8638-4c2f-b0f8-71f1797bfd19
+		summarizeBy: none
+		sourceColumn: issue
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_type
+		dataType: string
+		lineageTag: 2e2c9184-910b-4700-adec-fd30176bce3e
+		summarizeBy: none
+		sourceColumn: service_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 6f2b2d8a-55e9-48a2-963b-cab9eb0904c5
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column tech_email
+		dataType: string
+		lineageTag: 29ed3f65-6085-48b6-ac5f-29f34ab3921b
+		summarizeBy: none
+		sourceColumn: tech_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column completion_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 5779bbec-ac77-47bb-bb3c-5e704109b333
+		summarizeBy: none
+		sourceColumn: completion_date
+
+		variation Variation
+			isDefault
+			relationship: 13b5834a-d5bf-4a33-82d3-13db97510f87
+			defaultHierarchy: LocalDateTable_34727b1d-829e-4188-9450-1299105aaab1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column parts_used
+		dataType: string
+		lineageTag: dc73f4e7-6094-4232-b295-1d6a0abba653
+		summarizeBy: none
+		sourceColumn: parts_used
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 067cefbf-9da2-4a28-975a-d72626acdeac
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column approval_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3bdb5ef0-4377-4cfc-b3c3-ade4adce8ca0
+		summarizeBy: none
+		sourceColumn: approval_date
+
+		variation Variation
+			isDefault
+			relationship: 05481f76-7b4f-4a31-bd3c-5cc4ac2d9492
+			defaultHierarchy: LocalDateTable_c5ba86e5-cb1c-4dfe-a673-595b7a558234.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column completed
+		dataType: string
+		lineageTag: a9d7b024-7c9e-4ad6-b240-18760a2e4fbc
+		summarizeBy: none
+		sourceColumn: completed
+
+		annotation SummarizationSetBy = Automatic
+
+	column approved
+		dataType: string
+		lineageTag: 972b7c0e-4c8b-462c-8bf9-b2afdca29c26
+		summarizeBy: none
+		sourceColumn: approved
+
+		annotation SummarizationSetBy = Automatic
+
+	column tech
+		dataType: string
+		lineageTag: 6bb8b8a7-cf5a-4006-a541-92b474e0016d
+		summarizeBy: none
+		sourceColumn: tech
+
+		annotation SummarizationSetBy = Automatic
+
+	column resolution
+		dataType: string
+		lineageTag: ee4d7b04-31c3-4dd9-9a41-301206a2588a
+		summarizeBy: none
+		sourceColumn: resolution
+
+		annotation SummarizationSetBy = Automatic
+
+	column epoch
+		dataType: double
+		lineageTag: 0a875ab5-5267-48b8-ac55-5b48f2460d27
+		summarizeBy: sum
+		sourceColumn: epoch
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column modified_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 47b7f2c1-0cfe-4207-9a2c-993d7d01cfe4
+		summarizeBy: none
+		sourceColumn: modified_date
+
+		variation Variation
+			isDefault
+			relationship: 1f9631d7-0794-4b5d-9f44-b0fa36518953
+			defaultHierarchy: LocalDateTable_d2f0f5ff-dc5e-4d9a-8eb2-b1954b1aa852.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column created_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: baec5e04-f5c7-4bcd-a4b5-f89ae7235d7e
+		summarizeBy: none
+		sourceColumn: created_date
+
+		variation Variation
+			isDefault
+			relationship: 592320f3-d485-484e-abd6-55e6fe2b764b
+			defaultHierarchy: LocalDateTable_b0b01d35-9bfa-4afa-bfa6-9db7033711e1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column submitter
+		dataType: string
+		lineageTag: e33dfdc3-41f5-4b37-bc69-b1ac4483478d
+		summarizeBy: none
+		sourceColumn: submitter
+
+		annotation SummarizationSetBy = Automatic
+
+	column submitter_email
+		dataType: string
+		lineageTag: 7ae8f47c-ea51-4820-a6f6-66a6f4833a6b
+		summarizeBy: none
+		sourceColumn: submitter_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column department
+		dataType: string
+		lineageTag: d418f91b-2c92-4932-8c73-4057b1afdcd7
+		summarizeBy: none
+		sourceColumn: department
+
+		annotation SummarizationSetBy = Automatic
+
+	column perm_to_enter
+		dataType: string
+		lineageTag: be43a1d1-c096-44d9-ba0b-4adc8ea6d75e
+		summarizeBy: none
+		sourceColumn: perm_to_enter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'old req #'
+		dataType: string
+		lineageTag: 58c5ee53-e0f3-4c96-9907-ba563c1d5e3f
+		summarizeBy: none
+		sourceColumn: old req #
+
+		annotation SummarizationSetBy = Automatic
+
+	column request_month
+		dataType: string
+		lineageTag: 7f73741e-9ce4-4142-9b16-94e7fe07c940
+		summarizeBy: none
+		sourceColumn: request_month
+		sortByColumn: month_control
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_control
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ed7b1bad-bf3e-498a-b2b5-d6e352dcfa4e
+		summarizeBy: none
+		sourceColumn: month_control
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column days_to_complete
+		dataType: double
+		formatString: 0
+		lineageTag: 8e9684f3-2c2b-4b95-bad1-4a4caa611d9a
+		summarizeBy: sum
+		sourceColumn: days_to_complete
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column today
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f764c4dc-c306-47c2-a1ea-349e27857b24
+		summarizeBy: none
+		sourceColumn: today
+
+		variation Variation
+			isDefault
+			relationship: 01137a13-4e67-4a15-9e16-8cb27e3ae568
+			defaultHierarchy: LocalDateTable_9945ded4-47d8-4fe0-ac48-4ef1e9b80b72.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column days_open
+		dataType: double
+		lineageTag: 08c64319-f5dd-480d-b909-0e918ad81afc
+		summarizeBy: sum
+		sourceColumn: days_open
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column jobTitle
+		dataType: string
+		lineageTag: b5f19c68-27bb-4dca-8f6d-847d5150a7a0
+		summarizeBy: none
+		sourceColumn: jobTitle
+
+		annotation SummarizationSetBy = Automatic
+
+	column comb_open_days
+		dataType: int64
+		formatString: 0
+		lineageTag: d8a5d206-e7ec-41ce-a5cd-4b3ad7fad19f
+		summarizeBy: sum
+		sourceColumn: comb_open_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column repeat_fixed
+		dataType: string
+		lineageTag: 16b25edc-475f-456d-8b96-42f042a431f9
+		summarizeBy: none
+		sourceColumn: repeat_fixed
+
+		annotation SummarizationSetBy = Automatic
+
+	partition raw_maintenance_requests = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "voa_admin"),
+				    dbo_raw_maintenance_requests = Source{[Schema="dbo",Item="raw_maintenance_requests"]}[Data],
+				    #"Sorted Rows" = Table.Sort(dbo_raw_maintenance_requests,{{"completed", Order.Ascending}}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Sorted Rows", "repeat_fixed", each if [repeat_issue] = true then "Yes" else "No")
+				in
+				    #"Added Conditional Column"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

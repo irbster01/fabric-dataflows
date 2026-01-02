@@ -1,0 +1,56 @@
+table Period
+	lineageTag: d4f16b12-c875-48b9-b523-46a3c38c4891
+
+	measure Amount = ```
+			
+			    SWITCH( TRUE(),
+			        [Selected Period] = "ALL", [Revenue],
+			        [Selected Period] = "MTD", [Revenue MTD],
+			        [Selected Period] = "YTD", [Revenue YTD],
+			        [Revenue])
+			```
+		lineageTag: 0a8025fb-c251-432f-90c2-8a038787ccaa
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Selected Period' = SELECTEDVALUE(Period[Period], "ALL")
+		lineageTag: bc75ba31-a4b1-418a-969c-aedbfaa859fd
+
+		changedProperty = IsHidden
+
+	column Period
+		dataType: string
+		lineageTag: 60ad0c6e-d7e4-411a-bdaf-a9436e6ed615
+		summarizeBy: none
+		sourceColumn: Period
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 23ca81be-bf10-4210-8c3a-009c92c87d0a
+		summarizeBy: sum
+		sourceColumn: Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Period = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcvTxUdJRMlSK1YlW8g1xAbKNwOxIMNtYKTYWAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Period = _t, Index = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Period", type text}, {"Index", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

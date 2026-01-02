@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_shoc_locations"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4d47e719-5a24-b05b-449f-66b9e557d3c9"
+  }
+}

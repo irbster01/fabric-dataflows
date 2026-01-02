@@ -1,0 +1,74 @@
+{
+  "sources": [
+    {
+      "id": "4cbf1783-629e-42b9-994d-e27a83dbc302",
+      "name": "new-source",
+      "type": "FabricOneLakeEvents",
+      "properties": {
+        "tenantId": "38c1626e-b75d-40a6-b21b-0aae1191c730",
+        "workspaceId": "4241c9c7-5818-4c56-9220-faf632741770",
+        "itemId": "1b643108-97a2-432c-a0c0-391df26e0eea",
+        "oneLakePaths": [
+          "/Files/2526 Desoto JCampus"
+        ],
+        "includedEventTypes": [
+          "Microsoft.Fabric.OneLake.FileCreated",
+          "Microsoft.Fabric.OneLake.FileDeleted",
+          "Microsoft.Fabric.OneLake.FileRenamed",
+          "Microsoft.Fabric.OneLake.FolderCreated",
+          "Microsoft.Fabric.OneLake.FolderDeleted",
+          "Microsoft.Fabric.OneLake.FolderRenamed"
+        ],
+        "filters": []
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "id": "1e113e7e-b698-4d3e-bd95-9629ee9da96a",
+      "name": "Eventhouse",
+      "type": "Eventhouse",
+      "properties": {
+        "dataIngestionMode": "ProcessedIngestion",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "c0d5c03a-53d0-82b7-40ba-b901d33a2ffd",
+        "databaseName": "voa_warehouse_eventhouse",
+        "tableName": "jcampus_file_event",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "voa_data_event_stream-stream"
+        }
+      ],
+      "inputSchemas": [
+        {
+          "name": "voa_data_event_stream-stream",
+          "schema": {
+            "columns": []
+          }
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "53c9dee3-e281-42f7-a8d8-57e243cde3f4",
+      "name": "voa_data_event_stream-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "new-source"
+        }
+      ]
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.1"
+}

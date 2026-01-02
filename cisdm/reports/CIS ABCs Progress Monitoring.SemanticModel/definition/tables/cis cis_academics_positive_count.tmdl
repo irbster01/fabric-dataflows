@@ -1,0 +1,72 @@
+table 'cis cis_academics_positive_count'
+	lineageTag: 9b601b86-d0c2-4200-b4b1-fcf9d9e7d236
+
+	measure 'All Acacemic Clients' = SUM('cis cis_academics_positive_count'[all_monitored])
+		formatString: 0
+		lineageTag: 4b82faef-6094-416d-b92a-ccc09a2c17d1
+
+	measure 'Positive Progress Clients' = SUM('cis cis_academics_positive_count'[positive_progress])
+		formatString: 0
+		lineageTag: baf9db1c-23ae-4918-827a-12a919da662e
+
+	measure 'Academic Cumulative %' = DIVIDE('cis cis_academics_positive_count'[Positive Progress Clients], [All Acacemic Clients])
+		formatString: 0%;-0%;0%
+		lineageTag: 51d3e20b-5955-438e-85b5-ac58aafa73eb
+
+	column school_name
+		dataType: string
+		lineageTag: 23c719a6-1e59-4e22-9ab3-5c4b8598a4cc
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column positive_progress
+		dataType: int64
+		formatString: 0
+		lineageTag: 59be0224-904d-4bf3-b408-6e1118a5112b
+		summarizeBy: sum
+		sourceColumn: positive_progress
+
+		annotation SummarizationSetBy = Automatic
+
+	column all_monitored
+		dataType: int64
+		formatString: 0
+		lineageTag: 4bbc47c5-356a-4282-bdeb-0ccdb5a2260d
+		summarizeBy: sum
+		sourceColumn: all_monitored
+
+		annotation SummarizationSetBy = Automatic
+
+	column positive_percentage
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: 43bbda42-25c1-4cc3-bb1c-0af8b13e2224
+		summarizeBy: none
+		sourceColumn: positive_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal
+		dataType: string
+		lineageTag: aec2e375-9d7f-4e0e-8cc7-c5f0963f0462
+		summarizeBy: none
+		sourceColumn: goal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'cis cis_academics_positive_count' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_cis_academics_positive_count = Source{[Schema="cis",Item="cis_academics_positive_count"]}[Data],
+				    #"Added Custom" = Table.AddColumn(cis_cis_academics_positive_count, "goal", each "Academics")
+				in
+				    #"Added Custom"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

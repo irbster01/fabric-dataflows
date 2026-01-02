@@ -1,0 +1,323 @@
+table cis_behavior_goal_clients
+	lineageTag: 76bb019c-f47b-4906-a33f-f7937b498fdb
+
+	column school_name
+		dataType: string
+		lineageTag: 9e17c206-8d4e-44d7-be29-a0a0796c453f
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sasid
+		dataType: string
+		lineageTag: 2265e21f-abf9-428c-83e3-5915837fa209
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: 4e81c62c-585d-437e-8853-bbab765aca8f
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_full_name
+		dataType: string
+		lineageTag: 7e7da34f-c688-4647-aff0-efbd80310536
+		summarizeBy: none
+		sourceColumn: client_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column grade
+		dataType: string
+		lineageTag: e551fa05-d8d6-437d-b13a-42f09256501f
+		summarizeBy: none
+		sourceColumn: grade
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 655e42a1-15a6-4723-9d8d-bfa1df7ce123
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column race
+		dataType: string
+		lineageTag: 47b35dc6-d6ce-4c0f-a6b3-80c12542890f
+		summarizeBy: none
+		sourceColumn: race
+
+		annotation SummarizationSetBy = Automatic
+
+	column ethnicity
+		dataType: string
+		lineageTag: 4e199de7-eb41-43bd-a318-4c4bdd656236
+		summarizeBy: none
+		sourceColumn: ethnicity
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_manager
+		dataType: string
+		lineageTag: 46ffffa1-bdbf-4ec2-84bf-8c2f77d33017
+		summarizeBy: none
+		sourceColumn: case_manager
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal
+		dataType: string
+		lineageTag: 1d79c2c7-09a4-45a5-b5ef-369918dfdcf0
+		summarizeBy: none
+		sourceColumn: goal
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric
+		dataType: string
+		lineageTag: 459f38c0-8550-435c-ae65-93bfc2352b7b
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline
+		dataType: double
+		lineageTag: 52ad7619-eec0-4688-bad4-3b8f385a66b1
+		summarizeBy: sum
+		sourceColumn: baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column target
+		dataType: int64
+		formatString: 0
+		lineageTag: 83158f09-d9e3-44af-88a9-a1f963c59895
+		summarizeBy: sum
+		sourceColumn: target
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6d773f3e-f3ea-4e0a-823d-15992219ce4e
+		summarizeBy: none
+		sourceColumn: baseline_date
+
+		variation Variation
+			isDefault
+			relationship: 1a7943d7-7b71-42b9-8f4d-095bf2e4017e
+			defaultHierarchy: LocalDateTable_4a6dd238-7bad-4bcf-ad58-3d0310919039.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column baseline_report_period
+		dataType: string
+		lineageTag: 33c442c0-a40a-4b9d-ad79-c76ec2f06561
+		summarizeBy: none
+		sourceColumn: baseline_report_period
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_set_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 33bb3e21-b345-441f-ac96-934f02f8592b
+		summarizeBy: none
+		sourceColumn: target_set_date
+
+		variation Variation
+			isDefault
+			relationship: aa33e352-825c-4b55-891b-772c4ce8e58f
+			defaultHierarchy: LocalDateTable_06c81a66-3c8c-4d9e-87d0-340ad398921e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column grading_period
+		dataType: string
+		lineageTag: 7648e269-b3c0-4a9f-a241-45021ea90af7
+		summarizeBy: none
+		sourceColumn: grading_period
+
+		annotation SummarizationSetBy = Automatic
+
+	column grading_period_progress
+		dataType: string
+		lineageTag: f26de76e-255e-42e7-951e-22c3858d5afb
+		summarizeBy: none
+		sourceColumn: grading_period_progress
+
+		annotation SummarizationSetBy = Automatic
+
+	column nonNumeric_value
+		dataType: int64
+		formatString: 0
+		lineageTag: 8347d19f-fa65-4da4-98d9-48463e5852f0
+		summarizeBy: sum
+		sourceColumn: nonNumeric_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric_value
+		dataType: int64
+		formatString: 0
+		lineageTag: a7624d7b-4ebd-43a2-8c3e-d1a4a95786ab
+		summarizeBy: sum
+		sourceColumn: metric_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_in_report_prd
+		dataType: string
+		lineageTag: 39a988d3-e0f5-41be-bbd3-60500f1f9475
+		summarizeBy: none
+		sourceColumn: days_in_report_prd
+
+		annotation SummarizationSetBy = Automatic
+
+	column excused_absences
+		dataType: string
+		lineageTag: 406b4c9d-8439-4917-bfb4-b14d029e6a03
+		summarizeBy: none
+		sourceColumn: excused_absences
+
+		annotation SummarizationSetBy = Automatic
+
+	column unexcused_absences
+		dataType: string
+		lineageTag: a7a60251-5be4-4f59-b412-44e05be25bda
+		summarizeBy: none
+		sourceColumn: unexcused_absences
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 19491bdf-cf16-431a-9605-8aec4321d820
+		summarizeBy: none
+		sourceColumn: review_date
+
+		variation Variation
+			isDefault
+			relationship: 750756eb-0f7e-4d78-80b3-46c1b3e46533
+			defaultHierarchy: LocalDateTable_e4263b0b-37a5-4da2-8710-61a1624176c2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column latest_progress
+		dataType: string
+		lineageTag: 8c4d1ae4-b10a-4230-adc3-e92488190251
+		summarizeBy: none
+		sourceColumn: latest_progress
+
+		annotation SummarizationSetBy = Automatic
+
+	column progress_notes
+		dataType: string
+		lineageTag: d6d12823-bfa6-4555-bcab-cce7e64753bc
+		summarizeBy: none
+		sourceColumn: progress_notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal_narrative
+		dataType: string
+		lineageTag: 30201535-7437-4c8c-bfbb-20a6c41a47d6
+		summarizeBy: none
+		sourceColumn: goal_narrative
+
+		annotation SummarizationSetBy = Automatic
+
+	column entry_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 00abeb82-4831-467f-b2bc-c536598ae32a
+		summarizeBy: none
+		sourceColumn: entry_date
+
+		variation Variation
+			isDefault
+			relationship: a7bde6ed-ab24-4e82-9deb-5916c42b7e69
+			defaultHierarchy: LocalDateTable_08e00fc9-a553-42cd-9a97-f0a3e0e87c25.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column exit_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8815ebae-26ec-42a6-b593-4b7c033a2163
+		summarizeBy: none
+		sourceColumn: exit_date
+
+		variation Variation
+			isDefault
+			relationship: 6825b1f7-dc8c-445b-819c-ebdda4486008
+			defaultHierarchy: LocalDateTable_e009049c-06ab-4bf9-91e0-11c9b141f68a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column enrollment_status
+		dataType: string
+		lineageTag: 76729fc8-dd54-4bf2-b809-07e2ee033ae1
+		summarizeBy: none
+		sourceColumn: enrollment_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_year
+		dataType: string
+		lineageTag: e899415c-9fc2-435b-b937-e5e184a9094b
+		summarizeBy: none
+		sourceColumn: school_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column short_name_academics
+		dataType: string
+		lineageTag: 6bb97b22-1579-415b-b61e-391838ec44f9
+		summarizeBy: none
+		sourceColumn: short_name_academics
+
+		annotation SummarizationSetBy = Automatic
+
+	column attendance_type
+		dataType: string
+		lineageTag: 0c92f0c0-43ad-4144-9ee1-30e05ee78789
+		summarizeBy: none
+		sourceColumn: attendance_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition cis_behavior_goal_clients = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    dbo_cis_behavior_goal_clients = Source{[Schema="dbo",Item="cis_behavior_goal_clients"]}[Data]
+				in
+				    dbo_cis_behavior_goal_clients
+
+	annotation PBI_ResultType = Table
+

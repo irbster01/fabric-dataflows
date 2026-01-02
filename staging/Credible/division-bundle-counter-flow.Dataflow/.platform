@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "division-bundle-counter-flow"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "18d9fa63-24a5-b18f-425c-22a5be7c6d98"
+  }
+}

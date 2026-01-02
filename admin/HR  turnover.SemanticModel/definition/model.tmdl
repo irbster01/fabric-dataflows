@@ -1,0 +1,24 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["raw_paycor_turnover","raw_turnover_by_dept"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table raw_paycor_turnover
+ref table DateTableTemplate_eb6d2a9b-d3e0-46f5-ab47-dfa8eb4587ef
+ref table LocalDateTable_fb70ce22-fd53-49c5-8207-f4f84ef122ad
+ref table LocalDateTable_ddcedf35-c8a4-4647-b223-3e1363b31200
+ref table LocalDateTable_fc71e3d8-d8cd-409a-bb53-cfcd7745df31
+ref table raw_turnover_by_dept
+ref table LocalDateTable_387521e9-245a-4d9e-9a50-2f72725952f5
+ref table LocalDateTable_52c6e111-a249-46e7-b3de-e1f85be94d76
+ref table LocalDateTable_861bfe2a-1844-4750-b288-0445b1dec545
+
+ref cultureInfo en-US
+

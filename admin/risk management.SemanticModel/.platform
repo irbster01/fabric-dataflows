@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "risk management"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "171726b6-706b-90ac-4f31-7d8ba19ca819"
+  }
+}

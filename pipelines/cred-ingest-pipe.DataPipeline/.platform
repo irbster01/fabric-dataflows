@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "cred-ingest-pipe"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e4b90e2e-458a-bfa7-4d17-76756786987c"
+  }
+}

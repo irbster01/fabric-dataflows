@@ -1,0 +1,31 @@
+table month_controller
+	lineageTag: bedd729f-ad0a-44d3-95fa-c59989ae1cb9
+
+	column month_control
+		dataType: dateTime
+		formatString: mmmm yyyy
+		lineageTag: ceb970b3-d091-4e43-896c-30d6280848d9
+		summarizeBy: none
+		sourceColumn: month_control
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition month_controller = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "voa_admin"),
+				    dbo_maintenance_avg_days_to_complete = Source{[Schema="dbo",Item="maintenance_avg_days_to_complete"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(dbo_maintenance_avg_days_to_complete,{"month_control"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

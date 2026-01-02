@@ -1,0 +1,65 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_sp_choice_intake",
+  "queryGroups": [
+    {
+      "id": "ffe594f1-537f-450a-b52e-a4d57cfbe37c",
+      "name": "Transform file from Choice Intake"
+    },
+    {
+      "id": "3a6eaef8-5acf-4127-9ed9-b14d15ff1b70",
+      "name": "Helper queries",
+      "parentId": "ffe594f1-537f-450a-b52e-a4d57cfbe37c"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "Choice Intake": {
+      "queryId": "5eee1fef-cb1d-4aed-8d33-4a694398ef34",
+      "queryName": "Choice Intake",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "73381227-7edc-453c-9b38-e1c6240a4344",
+      "queryName": "Sample file",
+      "queryGroupId": "3a6eaef8-5acf-4127-9ed9-b14d15ff1b70",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "09d9a7a7-261f-42c8-ad41-11b50f1bd573",
+      "queryName": "Parameter",
+      "queryGroupId": "3a6eaef8-5acf-4127-9ed9-b14d15ff1b70",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "ce8ee034-f427-44c3-b7b4-f0d4680adb4d",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "ffe594f1-537f-450a-b52e-a4d57cfbe37c",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "7bc296a0-ed0a-48bd-be3b-d3e59a2dd4fb",
+      "queryName": "Transform file",
+      "queryGroupId": "3a6eaef8-5acf-4127-9ed9-b14d15ff1b70",
+      "loadEnabled": false
+    },
+    "Choice Intake_DataDestination": {
+      "queryId": "ada3acb6-cb2a-4bc4-83eb-cc34e5166a0a",
+      "queryName": "Choice Intake_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "Choice Intake (2)": {
+      "queryId": "9e8ebaa3-c819-4763-86c1-330ddfe0a3dc",
+      "queryName": "Choice Intake (2)"
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

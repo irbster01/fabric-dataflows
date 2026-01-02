@@ -1,0 +1,48 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+/// Errors in queries that were loaded on 11/12/2025 2:46:11 PM.
+queryGroup 'Query Errors - 11/12/2025 2:46:11 PM'
+
+	annotation PBI_QueryGroupOrder = 0
+
+annotation PBI_QueryOrder = ["lighthouse_not_80_table","lighthouse_80_site_table","lighthouse_dates","v_client_month_rollups","silver_lighthouse Lighthouse Matched with JCampus","2526_lh_clients","raw_lighthouse_registration","raw_sp_services","Merged Service Counts","Errors in Merged Service Counts"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table lighthouse_not_80_table
+ref table lighthouse_80_site_table
+ref table lighthouse_dates
+ref table DateTableTemplate_101ef1ff-ded5-41ae-bc1d-65712a39667e
+ref table LocalDateTable_7ddfa571-9f02-4bdc-af18-5037a493c440
+ref table LocalDateTable_12a7c953-6697-4bf7-88fa-4d2d423e1c35
+ref table v_client_month_rollups
+ref table LocalDateTable_f52ae445-ba1a-4db8-974b-487eab5714bd
+ref table 'silver_lighthouse Lighthouse Matched with JCampus'
+ref table LocalDateTable_e598a8e4-2fa6-4e7a-9d31-98d78df1eecf
+ref table LocalDateTable_b899099c-d584-426d-8222-5d538f71a1a3
+ref table LocalDateTable_4c37b6d3-c426-4057-ba40-d2fe78b025e0
+ref table 2526_lh_clients
+ref table LocalDateTable_9b512b0c-19e1-4047-9105-44dd4597871b
+ref table LocalDateTable_01dcf13d-5b35-4ceb-95bb-b1a0d245021b
+ref table LocalDateTable_62890e4c-c9bd-4640-8a53-24b394df5b27
+ref table LocalDateTable_9fae3458-b1cd-46c8-a5c4-e327585e2629
+ref table LocalDateTable_71ced890-02fb-4b8a-acc5-04f1b396e03d
+ref table raw_lighthouse_registration
+ref table LocalDateTable_ccff1069-b5f2-4a3c-afc1-d5c746f1d928
+ref table LocalDateTable_dc13bd12-84f0-4ef1-8b2e-1233b57f8376
+ref table raw_sp_services
+ref table 'Merged Service Counts'
+ref table LocalDateTable_c04e0428-bce5-4f47-9711-d0378d60e130
+ref table LocalDateTable_d564710f-2a8c-4e2a-b899-6061c869213f
+ref table LocalDateTable_e947480c-1d92-45bf-95a5-5b9f75f6f19a
+ref table LocalDateTable_a8319330-e6f0-4534-926e-59ca8fa25b7f
+ref table LocalDateTable_d6714426-2910-4afb-ae27-69687b9a06b3
+
+ref cultureInfo en-US
+

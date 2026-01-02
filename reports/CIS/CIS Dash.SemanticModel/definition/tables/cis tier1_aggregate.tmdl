@@ -1,0 +1,62 @@
+table 'cis tier1_aggregate'
+	lineageTag: 6fbbf426-755b-4834-854b-98ddb070c509
+
+	measure 'tier 1 percentage' = DIVIDE(SUM('cis tier1_aggregate'[tier1_sum]), SUM('cis tier1_aggregate'[enrollment_sum]))
+		formatString: 0%;-0%;0%
+		lineageTag: 193b7fcd-445f-4e84-ae1d-74292cb6e8df
+
+	measure 'non tier 1 students' = SUM('cis tier1_aggregate'[enrollment_sum])-SUM('cis tier1_aggregate'[tier1_sum])
+		formatString: 0
+		lineageTag: e39b4b2f-912a-4f43-81c8-25c9fc547f17
+
+	column org
+		dataType: string
+		lineageTag: d39b2353-0df8-4fa6-b135-b1af997ac2a1
+		summarizeBy: none
+		sourceColumn: org
+
+		annotation SummarizationSetBy = Automatic
+
+	column enrollment_sum
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ad1de73-ea97-430a-97a3-68e3b43ffc19
+		summarizeBy: sum
+		sourceColumn: enrollment_sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column tier1_sum
+		dataType: int64
+		formatString: 0
+		lineageTag: f0e20fe4-7b9b-491a-967a-73700ce28ef4
+		summarizeBy: sum
+		sourceColumn: tier1_sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column tier1_perc
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 642dd2ee-6e46-43df-9505-3555536a7293
+		summarizeBy: sum
+		sourceColumn: tier1_perc
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'cis tier1_aggregate' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_tier1_aggregate = Source{[Schema="cis",Item="tier1_aggregate"]}[Data],
+				    #"Added Custom" = Table.AddColumn(cis_tier1_aggregate, "Custom", each [tier1_sum] / [enrollment_sum]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"Custom", Percentage.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Custom", "tier1_perc"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

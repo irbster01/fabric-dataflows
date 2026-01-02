@@ -1,0 +1,55 @@
+relationship dc13c35b-d88c-46ad-9fb6-da54ed2f01f2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Risk Management Tracker'.'Client Sat Date'
+	toColumn: LocalDateTable_0e09fe42-f6eb-4a8c-b3f5-17f1e72f9d86.Date
+
+relationship 71e79444-b4db-4185-a467-51fe64365abb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Risk Management Tracker'.'Safety Date'
+	toColumn: LocalDateTable_0f3f72e9-d79e-4c31-9d62-cb760891dab2.Date
+
+relationship e5da9a9f-8347-4d39-9574-a794c0712761
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Risk Management Tracker'.'Program Pro Update'
+	toColumn: LocalDateTable_0f567314-0103-4035-b2f1-ee13a87fd0f4.Date
+
+relationship 73c997d8-3f85-4545-b5ba-8ae65238fd0c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Risk Management Tracker'.Modified
+	toColumn: LocalDateTable_181c7aa1-ff13-440b-8a6b-bbd63f3a307f.Date
+
+relationship eab24042-2f58-43ba-91da-d901f4036d07
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Risk Management Tracker'.Created
+	toColumn: LocalDateTable_3605a162-fea8-4a01-9762-73551bf87da2.Date
+
+relationship 0b3dbff2-032a-411a-9856-91e8f5a1b2fe
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.Date
+	toColumn: LocalDateTable_46723891-6da5-4a61-9e66-b950f08aa9b0.Date
+
+relationship ff82548e-87fa-4639-835c-b8eeb04f9b58
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'Cal Month'
+	toColumn: LocalDateTable_ddc38ec8-3276-4075-b625-1f39437e8e93.Date
+
+relationship f2333726-b84d-4e68-bef8-e00e85b885cf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'Fiscal Hierarchy'
+	toColumn: LocalDateTable_5342d232-b23f-435c-8d99-fe1bc6849878.Date
+
+relationship 5aa8e0d6-e7e3-49fc-935a-c2a63576439f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'pay start date'
+	toColumn: LocalDateTable_cf90f57a-127b-4aaa-941e-4bd3cf549cdd.Date
+
+relationship 553b2310-ae89-44fa-ab09-82d871a5c914
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'start text'
+	toColumn: LocalDateTable_82deffe6-00d7-4241-aa76-aa554cad81ec.Date
+
+relationship c7622b4c-b580-44bb-982d-e48d54f9359d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'end text'
+	toColumn: LocalDateTable_14eb4bd3-5f6d-4618-a22c-4a7d27d6d8b9.Date
+

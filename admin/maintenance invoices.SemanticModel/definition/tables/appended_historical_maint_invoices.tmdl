@@ -1,0 +1,518 @@
+table appended_historical_maint_invoices
+	lineageTag: 22783b17-6bd2-4e8b-bc1a-5f73599221b9
+
+	measure 'total cost' =
+			SUMX(
+			    VALUES(appended_historical_maint_invoices[invoice_num]),
+			    CALCULATE( MAX(appended_historical_maint_invoices[CostAmount]) )
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: f3d2b115-a70e-43bd-9f59-45793b6d7b84
+
+	column 'Date Completed'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7c2e214f-1f36-4b1e-921f-538be74dfa30
+		summarizeBy: none
+		sourceColumn: Date Completed
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column invoice_num
+		dataType: string
+		lineageTag: 57a683bd-25c9-42cb-81c0-54192245168a
+		summarizeBy: none
+		sourceColumn: invoice_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type of Service'
+		dataType: string
+		lineageTag: b6e9c46b-09b3-4514-89f9-db0b87087279
+		summarizeBy: none
+		sourceColumn: Type of Service
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cost
+		dataType: string
+		lineageTag: 100659af-0eee-4ce4-bdda-ca023b5b56cc
+		summarizeBy: none
+		sourceColumn: Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Multiple Days worked'
+		dataType: string
+		lineageTag: 6ea389c6-af26-4bbf-aac8-a2e1033c7364
+		summarizeBy: none
+		sourceColumn: Multiple Days worked
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: 94874a93-61a2-4c33-8bb6-7867fee25b1b
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attribute
+		dataType: string
+		lineageTag: 62454a80-e355-49f7-98db-acfca2bd3635
+		summarizeBy: none
+		sourceColumn: Attribute
+
+		annotation SummarizationSetBy = Automatic
+
+	column loc_value
+		dataType: string
+		lineageTag: bb588c9f-506c-4b25-9a32-fb09a2970575
+		summarizeBy: none
+		sourceColumn: loc_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 81d442c1-4983-4c4f-ba41-745704261bd5
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column CostAmount
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 1d910f29-2028-4f67-ac75-13d416d5b506
+		summarizeBy: sum
+		sourceColumn: CostAmount
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsMultiDay
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: fa6d6284-de5f-4c68-b06c-1386ddbdfd0e
+		summarizeBy: none
+		sourceColumn: IsMultiDay
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a5cc212-c3e2-470d-9f30-b93eac13d1ee
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 2e8fe2ce-dbfa-46a2-9db2-36441254b8db
+		summarizeBy: none
+		sourceColumn: MonthName
+		sortByColumn: Month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: 84defd58-010d-465f-a3d4-1b97d118f06a
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkCategory
+		dataType: string
+		lineageTag: 65d33207-d2c8-4ed5-9f47-0fa6c5f79741
+		summarizeBy: none
+		sourceColumn: WorkCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComponentCategory
+		dataType: string
+		lineageTag: 798e1f70-b7d8-4bb7-8f5a-a104b3bb913f
+		summarizeBy: none
+		sourceColumn: ComponentCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCriticalAsset
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6b49bda7-ddc0-4f5b-9d21-17749adc7451
+		summarizeBy: none
+		sourceColumn: IsCriticalAsset
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineID
+		dataType: int64
+		formatString: 0
+		lineageTag: b3fda057-1a75-42bf-8e89-6942ef3e37d7
+		summarizeBy: count
+		sourceColumn: LineID
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsClientRoom
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b6b63e97-dc68-42c1-8e0f-aeaa2dc5609d
+		summarizeBy: none
+		sourceColumn: IsClientRoom
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationCategory
+		dataType: string
+		lineageTag: bdf8db46-6c0b-455a-b546-04e972f3c649
+		summarizeBy: none
+		sourceColumn: LocationCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	partition appended_historical_maint_invoices = m
+		mode: import
+		source =
+				let
+				    // 1. Source: your existing historical invoice table
+				    Source = Sql.Database(
+				        "nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com",
+				        "voa_admin"
+				    ),
+				    RawInvoices =
+				        Source{[Schema = "dbo", Item = "appended_historical_maint_invoices"]}[Data],
+				
+				    // 2. Set basic types (tweak if any names differ)
+				    #"Changed Type" =
+				        Table.TransformColumnTypes(
+				            RawInvoices,
+				            {
+				                {"invoice_num", type text},
+				                {"Date Completed", type date},
+				                {"Cost", type text},
+				                {"Attribute", type text},
+				                {"Multiple Days worked", type text},
+				                {"Notes", type text},
+				                {"Type of Service", type text},
+				                {"Value", type text}
+				            }
+				        ),
+				
+				    // 3. Clean numeric cost from [Cost] (strip $, commas, parentheses)
+				    #"Added CostAmount" =
+				        Table.AddColumn(
+				            #"Changed Type",
+				            "CostAmount",
+				            each
+				                let
+				                    c = Text.Trim(Text.From([Cost])),
+				                    cleaned =
+				                        if c = null or c = "" then
+				                            null
+				                        else
+				                            let
+				                                noDollar = Text.Replace(c, "$", ""),
+				                                noComma  = Text.Replace(noDollar, ",", ""),
+				                                // handle (123.45) as -123.45
+				                                negOpen  = Text.Replace(noComma, "(", "-"),
+				                                negClean = Text.Replace(negOpen, ")", "")
+				                            in
+				                                negClean
+				                in
+				                    if cleaned = null then
+				                        null
+				                    else
+				                        (try Number.From(cleaned) otherwise null),
+				            type number
+				        ),
+				
+				    // 4. Multi-day flag from [Multiple Days worked]
+				    #"Added IsMultiDay" =
+				        Table.AddColumn(
+				            #"Added CostAmount",
+				            "IsMultiDay",
+				            each
+				                let
+				                    s = Text.Lower(Text.Trim(Text.From([Multiple Days worked])))
+				                in
+				                    if s = "yes" or s = "y" or s = "true" then true
+				                    else if s = "no" or s = "n" or s = "false" then false
+				                    else null,
+				            type logical
+				        ),
+				
+				    // 5. Date parts for time-based analysis
+				    #"Added Year" =
+				        Table.AddColumn(
+				            #"Added IsMultiDay",
+				            "Year",
+				            each Date.Year([Date Completed]),
+				            Int64.Type
+				        ),
+				
+				    #"Added Month" =
+				        Table.AddColumn(
+				            #"Added Year",
+				            "Month",
+				            each Date.Month([Date Completed]),
+				            Int64.Type
+				        ),
+				
+				    #"Added MonthName" =
+				        Table.AddColumn(
+				            #"Added Month",
+				            "MonthName",
+				            each Date.ToText([Date Completed], "MMM"),
+				            type text
+				        ),
+				
+				    #"Added Quarter" =
+				        Table.AddColumn(
+				            #"Added MonthName",
+				            "Quarter",
+				            each "Q" & Number.ToText(Date.QuarterOfYear([Date Completed])),
+				            type text
+				        ),
+				
+				    // 6. WorkCategory using your rules on [Value]
+				    #"Added WorkCategory" =
+				        Table.AddColumn(
+				            #"Added Quarter",
+				            "WorkCategory",
+				            each
+				                let
+				                    vRaw = if [Value] = null then "" else Text.From([Value]),
+				                    vTrim = Text.Trim(vRaw),
+				                    nVal  = try Number.From(vTrim) otherwise null
+				                in
+				                    // Floor / tier from text
+				                    if Text.Contains(vTrim, "1st", Comparer.OrdinalIgnoreCase) then "1st"
+				                    else if Text.Contains(vTrim, "2nd", Comparer.OrdinalIgnoreCase) then "2nd"
+				                    else if Text.Contains(vTrim, "3rd", Comparer.OrdinalIgnoreCase) then "3rd"
+				
+				                    // Floor / tier from numeric 100–199 / 200–299 / 300–399
+				                    else if nVal <> null and nVal >= 100 and nVal < 200 then "1st"
+				                    else if nVal <> null and nVal >= 200 and nVal < 300 then "2nd"
+				                    else if nVal <> null and nVal >= 300 and nVal < 400 then "3rd"
+				
+				                    // Systems / areas from Value text
+				                    else if Text.Contains(vTrim, "Sprinkler",      Comparer.OrdinalIgnoreCase) then "Sprinkler"
+				                    else if Text.Contains(vTrim, "Heating",        Comparer.OrdinalIgnoreCase) then "Heating"
+				                    else if Text.Contains(vTrim, "Cooling",        Comparer.OrdinalIgnoreCase) then "Cooling"
+				                    else if Text.Contains(vTrim, "Toilet",         Comparer.OrdinalIgnoreCase) then "Plumbing"
+				                    else if Text.Contains(vTrim, "Roof",           Comparer.OrdinalIgnoreCase) then "Roof"
+				                    else if Text.Contains(vTrim, "Boiler",         Comparer.OrdinalIgnoreCase) then "Boiler Room"
+				                    else if Text.Contains(vTrim, "Conference Room",Comparer.OrdinalIgnoreCase) then "Conference Room"
+				                    else if Text.Contains(vTrim, "Building",       Comparer.OrdinalIgnoreCase) then "Exterior"
+				                    else null,
+				            type text
+				        ),
+				
+				    // 7. IsClientRoom: does Value contain ANY 3-digit sequence? (e.g., 212, 305, 408)
+				    #"Added IsClientRoom" =
+				        Table.AddColumn(
+				            #"Added WorkCategory",
+				            "IsClientRoom",
+				            each
+				                let
+				                    vRaw = if [Value] = null then "" else Text.From([Value]),
+				                    vTrim = Text.Trim(vRaw),
+				                    len   = Text.Length(vTrim),
+				                    hasThreeDigit =
+				                        if len < 3 then
+				                            false
+				                        else
+				                            let
+				                                chars = Text.ToList(vTrim)
+				                            in
+				                                List.AnyTrue(
+				                                    List.Transform(
+				                                        {0 .. len - 3},
+				                                        (i) =>
+				                                            let
+				                                                c1 = chars{i},
+				                                                c2 = chars{i + 1},
+				                                                c3 = chars{i + 2}
+				                                            in
+				                                                (c1 >= "0" and c1 <= "9")
+				                                                and (c2 >= "0" and c2 <= "9")
+				                                                and (c3 >= "0" and c3 <= "9")
+				                                    )
+				                                )
+				                in
+				                    hasThreeDigit,
+				            type logical
+				        ),
+				
+				    // 8. ComponentCategory from [Notes] (what actually broke)
+				    #"Added ComponentCategory" =
+				        Table.AddColumn(
+				            #"Added IsClientRoom",
+				            "ComponentCategory",
+				            each
+				                let
+				                    rawNotes =
+				                        if [Notes] = null then
+				                            ""
+				                        else
+				                            Text.Lower(Text.Trim(Text.From([Notes])))
+				                in
+				                    if rawNotes = "" then
+				                        null
+				
+				                    // water heaters / tankless
+				                    else if Text.Contains(rawNotes, "water heater")
+				                         or Text.Contains(rawNotes, "tankless") then
+				                        "Water heater"
+				
+				                    // cooling tower
+				                    else if Text.Contains(rawNotes, "cooling tower") then
+				                        "Cooling tower"
+				
+				                    // compressors
+				                    else if Text.Contains(rawNotes, "compressor") then
+				                        "Compressor"
+				
+				                    // control boards
+				                    else if Text.Contains(rawNotes, "control board")
+				                         or Text.Contains(rawNotes, "control boards") then
+				                        "Control board"
+				
+				                    // txv (expansion valve)
+				                    else if Text.Contains(rawNotes, "txv") then
+				                        "TXV"
+				
+				                    // pumps
+				                    else if Text.Contains(rawNotes, "pump") then
+				                        "Pump"
+				
+				                    // backflow
+				                    else if Text.Contains(rawNotes, "back flow")
+				                         or Text.Contains(rawNotes, "backflow") then
+				                        "Backflow preventer"
+				
+				                    // sprinkler in notes
+				                    else if Text.Contains(rawNotes, "sprinkler") then
+				                        "Sprinkler"
+				
+				                    // toilets in notes
+				                    else if Text.Contains(rawNotes, "toilet") then
+				                        "Toilet"
+				
+				                    // generic "replaced unit"
+				                    else if Text.Contains(rawNotes, "replaced unit") then
+				                        "Unit (general)"
+				
+				                    else
+				                        null,
+				            type text
+				        ),
+				
+				    // 9. Critical asset flag from ComponentCategory
+				    #"Added IsCriticalAsset" =
+				        Table.AddColumn(
+				            #"Added ComponentCategory",
+				            "IsCriticalAsset",
+				            each
+				                let c = [ComponentCategory]
+				                in
+				                    c = "Water heater"
+				                    or c = "Compressor"
+				                    or c = "Cooling tower"
+				                    or c = "Control board"
+				                    or c = "Pump"
+				                    or c = "Backflow preventer"
+				                    or c = "Sprinkler"
+				                    or c = "Toilet",
+				            type logical
+				        ),
+				
+				    // 10. LocationCategory: where is this work happening?
+				    #"Added LocationCategory" =
+				        Table.AddColumn(
+				            #"Added IsCriticalAsset",
+				            "LocationCategory",
+				            each
+				                let
+				                    vRaw = if [Value] = null then "" else Text.Lower(Text.Trim(Text.From([Value]))),
+				                    nRaw = if [Notes] = null then "" else Text.Lower(Text.Trim(Text.From([Notes]))),
+				                    isClient = [IsClientRoom] = true
+				                in
+				                    // Client rooms (3-digit room numbers)
+				                    if isClient then
+				                        "Client Room"
+				
+				                    // Common areas
+				                    else if Text.Contains(vRaw, "conference room") or Text.Contains(nRaw, "conference room")
+				                        or Text.Contains(vRaw, "day room") or Text.Contains(nRaw, "day room")
+				                        or Text.Contains(vRaw, "living room") or Text.Contains(nRaw, "living room")
+				                        or Text.Contains(vRaw, "dining") or Text.Contains(nRaw, "dining")
+				                        or Text.Contains(vRaw, "kitchen") or Text.Contains(nRaw, "kitchen")
+				                        or Text.Contains(vRaw, "lobby") or Text.Contains(nRaw, "lobby")
+				                        or Text.Contains(vRaw, "hallway") or Text.Contains(nRaw, "hallway")
+				                        or Text.Contains(vRaw, "hall ") or Text.Contains(nRaw, "hall ")
+				                        or Text.Contains(vRaw, "laundry") or Text.Contains(nRaw, "laundry")
+				                        or Text.Contains(vRaw, "common") or Text.Contains(nRaw, "common")
+				                        or Text.Contains(vRaw, "activity room") or Text.Contains(nRaw, "activity room") then
+				                        "Common Area"
+				
+				                    // Mechanical / service areas
+				                    else if Text.Contains(vRaw, "mechanical room") or Text.Contains(nRaw, "mechanical room")
+				                        or Text.Contains(vRaw, "boiler room") or Text.Contains(nRaw, "boiler room")
+				                        or Text.Contains(vRaw, "electrical room") or Text.Contains(nRaw, "electrical room")
+				                        or Text.Contains(vRaw, "janitor") or Text.Contains(nRaw, "janitor")
+				                        or Text.Contains(vRaw, "maintenance") or Text.Contains(nRaw, "maintenance")
+				                        or Text.Contains(vRaw, "storage") or Text.Contains(nRaw, "storage") then
+				                        "Mechanical / Service Area"
+				
+				                    // Exterior spaces
+				                    else if Text.Contains(vRaw, "roof") or Text.Contains(nRaw, "roof")
+				                        or Text.Contains(vRaw, "exterior") or Text.Contains(nRaw, "exterior")
+				                        or Text.Contains(vRaw, "parking") or Text.Contains(nRaw, "parking")
+				                        or Text.Contains(vRaw, "sidewalk") or Text.Contains(nRaw, "sidewalk")
+				                        or Text.Contains(vRaw, "grounds") or Text.Contains(nRaw, "grounds")
+				                        or Text.Contains(vRaw, "building exterior") or Text.Contains(nRaw, "building exterior") then
+				                        "Exterior"
+				
+				                    // Offices / admin
+				                    else if Text.Contains(vRaw, "office") or Text.Contains(nRaw, "office")
+				                        or Text.Contains(vRaw, "admin") or Text.Contains(nRaw, "admin")
+				                        or Text.Contains(vRaw, "reception") or Text.Contains(nRaw, "reception")
+				                        or Text.Contains(vRaw, "front desk") or Text.Contains(nRaw, "front desk") then
+				                        "Office / Admin"
+				
+				                    else
+				                        null,
+				            type text
+				        ),
+				
+				    // 11. Add a LineID so each row is a unique line item
+				    #"Added LineID" =
+				        Table.AddIndexColumn(
+				            #"Added LocationCategory",
+				            "LineID",
+				            1,
+				            1,
+				            Int64.Type
+				        ),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added LineID",{{"Value", "loc_value"}})
+				
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

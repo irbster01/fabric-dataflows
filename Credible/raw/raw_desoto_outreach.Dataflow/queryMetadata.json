@@ -1,0 +1,61 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_desoto_outreach",
+  "queryGroups": [
+    {
+      "id": "301fe699-d923-486b-b02a-8ab8edaf807a",
+      "name": "Transform file from desoto_outreach"
+    },
+    {
+      "id": "529ffaf5-9ea3-4bf2-a247-660ecd4f3b8d",
+      "name": "Helper queries",
+      "parentId": "301fe699-d923-486b-b02a-8ab8edaf807a"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "desoto_outreach": {
+      "queryId": "9f98b01c-e3df-477f-9f0b-1998893cb45c",
+      "queryName": "desoto_outreach",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "407fdb27-f0f0-4916-aa11-2e91bd6ea080",
+      "queryName": "Sample file",
+      "queryGroupId": "529ffaf5-9ea3-4bf2-a247-660ecd4f3b8d",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "bf891420-1e3e-4336-ad3b-d600b28d513e",
+      "queryName": "Parameter",
+      "queryGroupId": "529ffaf5-9ea3-4bf2-a247-660ecd4f3b8d",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "4c61b847-0d8d-46bd-9253-05563f67706c",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "301fe699-d923-486b-b02a-8ab8edaf807a",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "3d7b96f3-0b68-4d1a-b683-d48bfa2620aa",
+      "queryName": "Transform file",
+      "queryGroupId": "529ffaf5-9ea3-4bf2-a247-660ecd4f3b8d",
+      "loadEnabled": false
+    },
+    "desoto_outreach_DataDestination": {
+      "queryId": "173c5ab3-1d16-48ca-bbda-62bb8137f5ae",
+      "queryName": "desoto_outreach_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

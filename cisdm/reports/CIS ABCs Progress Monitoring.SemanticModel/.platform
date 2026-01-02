@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "CIS ABCs Progress Monitoring"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6360034e-c996-b56e-47a7-c83f0bdd7ef0"
+  }
+}

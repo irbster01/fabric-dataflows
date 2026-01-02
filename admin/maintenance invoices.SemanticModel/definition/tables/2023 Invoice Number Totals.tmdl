@@ -1,0 +1,37 @@
+table '2023 Invoice Number Totals'
+	lineageTag: c461b120-ac36-49b8-a634-f94de3231137
+
+	column invoice_num
+		dataType: string
+		lineageTag: 8f76ae32-edc8-44b2-b24d-371682c434e0
+		summarizeBy: none
+		sourceColumn: invoice_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column Count
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 16141b6f-9065-4b85-a86b-b5639642e54d
+		summarizeBy: none
+		sourceColumn: Count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '2023 Invoice Number Totals' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "voa_admin"),
+				    dbo_appended_historical_maint_invoices = Source{[Schema="dbo",Item="appended_historical_maint_invoices"]}[Data],
+				    #"Filtered Rows" = Table.SelectRows(dbo_appended_historical_maint_invoices, each [Date Completed] >= #date(2023, 1, 1) and [Date Completed] <= #date(2023, 12, 31)),
+				    #"Grouped Rows" = Table.Group(#"Filtered Rows", {"invoice_num"}, {{"Count", each List.Max([Cost]), type nullable number}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Grouped Rows", {"invoice_num"}),
+				    #"Removed Duplicates1" = Table.Distinct(#"Removed Duplicates", {"invoice_num"})
+				in
+				    #"Removed Duplicates1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

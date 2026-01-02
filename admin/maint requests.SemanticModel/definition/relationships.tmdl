@@ -1,0 +1,72 @@
+relationship e2760dc8-26ad-48c3-b187-d9079d883e0b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'Cal Month'
+	toColumn: LocalDateTable_cda8ee5b-7884-4dda-a4f9-8756523647a9.Date
+
+relationship c0b5da67-8373-45dd-a941-e11b678e674f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'pay end date'
+	toColumn: LocalDateTable_a888d2ed-8227-4b18-b000-c1d65286b2b4.Date
+
+relationship bce48dbd-3caa-41d3-9777-ca65bf37658b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'pay start date'
+	toColumn: LocalDateTable_c569c014-11b8-4469-9bcf-776d89705196.Date
+
+relationship f314f91c-9872-4dff-896b-6d8c28779806
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'start text'
+	toColumn: LocalDateTable_d32a55a2-0d23-481b-a18c-ce404f0568b6.Date
+
+relationship 01772859-a70d-4c57-ac3c-04eaf6441a23
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.'end text'
+	toColumn: LocalDateTable_c49ba3d2-ac4b-486a-bfb9-418da32b8e54.Date
+
+relationship 2a14ac24-4ff6-44f1-9778-291fcd165b27
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Maintenance Request and History'.Modified
+	toColumn: LocalDateTable_b9340560-07e9-4e4c-9552-4eb6b09b8f12.Date
+
+relationship f7242d51-0b22-48cf-9efc-ab8fd19fa70d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Maintenance Request and History'.Created
+	toColumn: LocalDateTable_1d317785-1285-4638-9c83-2870b7c5a0b9.Date
+
+relationship 0bb7e8a9-1817-4460-8b8f-565c8770f0a1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Maintenance Request and History'.DateCompleted
+	toColumn: LocalDateTable_ae00d982-dcb7-4159-9b35-90d293b186fb.Date
+
+relationship e43dfabe-1aa8-4928-b20b-fedd95ce1cce
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Maintenance Request and History'.DateApproved
+	toColumn: LocalDateTable_e9ad6c68-ebd2-4914-aedf-344173eb0b01.Date
+
+relationship 3f40e4e8-3ab2-4499-8e42-61b806e383a1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Historical Maintenance'.'Cal Month'
+	toColumn: LocalDateTable_15e8489e-54ad-4c43-bc1c-a7239dd7b5a2.Date
+
+relationship d4d026c9-4f62-7b9e-6b6e-f1b1b589e546
+	fromColumn: 'Maintenance Request and History'.TechnicianId
+	toColumn: Techs.TechnicianId
+
+relationship 120af996-eda5-c68a-9472-0010a2c8bda6
+	fromColumn: 'Maintenance Completed'.TechnicianId
+	toColumn: Techs.TechnicianId
+
+relationship 154bc6be-2abd-e9d6-9add-3aa04b7881e5
+	fromColumn: 'Maintenance Request and History'.RequestDate
+	toColumn: Date.Date
+
+relationship 85c340d8-16a9-cf03-8fcf-2aa64672d2e9
+	fromColumn: 'Maintenance Completed'.DateCompleted
+	toColumn: Date.Date
+
+relationship e08ef4e6-5158-806d-d168-a16ba23c567b
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Date.Date
+	toColumn: 'Historical Maintenance'.'Cal Month'
+

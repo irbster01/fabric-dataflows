@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["appended_historical_maint_invoices","Date","2023 Invoice Number Totals","2024 Invoice Number Totals","2025 Invoice Number Totals","2025 Invoice Number Totals (2)"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table appended_historical_maint_invoices
+ref table DateTableTemplate_f06ba0d5-03e1-4f13-ba3c-f99bd5090f41
+ref table Date
+ref table LocalDateTable_28c23cab-3fbf-42e1-8bc5-97262fde8ccf
+ref table '2023 Invoice Number Totals'
+ref table '2024 Invoice Number Totals'
+ref table '2025 Invoice Number Totals'
+ref table '2025 Invoice Number Totals (2)'
+
+ref cultureInfo en-US
+

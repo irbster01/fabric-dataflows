@@ -1,0 +1,226 @@
+table 'Assess and Ref Appended (2)'
+	lineageTag: 0877318d-2ac3-433a-a2e2-d83d288a83f3
+
+	column Status
+		dataType: string
+		lineageTag: 7a9236c7-1964-48a5-ae38-21bbf335c617
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateClientEnteredProgram(i
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fbd94997-ce48-4780-bd52-4b3474daf30a
+		summarizeBy: none
+		sourceColumn: DateClientEnteredProgram(i
+
+		variation Variation
+			isDefault
+			relationship: fcd872c9-ce83-411a-b2d5-479c5e523891
+			defaultHierarchy: LocalDateTable_579f783a-7cc5-4944-9736-6c7ff72bc4a5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ReferralDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c42702d0-6de4-4e4f-9985-75519d0e1741
+		summarizeBy: none
+		sourceColumn: ReferralDate
+
+		variation Variation
+			isDefault
+			relationship: 583fd53e-fcd5-4a32-bec8-bba983025443
+			defaultHierarchy: LocalDateTable_a6b5cf85-c207-46de-a9b0-ff44d13e69e3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ReferralSource
+		dataType: string
+		lineageTag: f48d8cbe-2ede-4bee-a4c0-aee7bf542389
+		summarizeBy: none
+		sourceColumn: ReferralSource
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReferralPhone
+		dataType: string
+		lineageTag: 72bb21f1-67fb-45aa-b4d6-34669c5cbaa4
+		summarizeBy: none
+		sourceColumn: ReferralPhone
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client Name'
+		dataType: string
+		lineageTag: 1bac76bb-5cb7-4214-a21d-b97d71e4707b
+		summarizeBy: none
+		sourceColumn: Client Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column PhoneNumber
+		dataType: string
+		lineageTag: 661a31ab-5bf9-49a6-b0fa-8e7578f7e4fe
+		summarizeBy: none
+		sourceColumn: PhoneNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClientE-mail
+		dataType: string
+		lineageTag: d588e317-4f92-4530-8754-6265e063b40f
+		summarizeBy: none
+		sourceColumn: ClientE-mail
+
+		annotation SummarizationSetBy = Automatic
+
+	column Program
+		dataType: string
+		lineageTag: c793665c-9177-4b71-ba9a-58894513f687
+		summarizeBy: none
+		sourceColumn: Program
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: c3e873ab-eeb3-423e-a7a9-f624d16bce75
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Zip
+		dataType: string
+		lineageTag: df0a040b-ceba-4440-9568-789411c679c9
+		summarizeBy: none
+		sourceColumn: Zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column SchoolDistrict
+		dataType: string
+		lineageTag: 202c5129-9b1f-4f2c-abd6-e013adb19abf
+		summarizeBy: none
+		sourceColumn: SchoolDistrict
+
+		annotation SummarizationSetBy = Automatic
+
+	column Modified
+		dataType: string
+		lineageTag: a85f5aea-fa03-408e-9584-eb902c79d73c
+		summarizeBy: none
+		sourceColumn: Modified
+
+		annotation SummarizationSetBy = Automatic
+
+	column Created
+		dataType: string
+		lineageTag: 524e1acd-e643-416f-8304-d5c18a0c58eb
+		summarizeBy: none
+		sourceColumn: Created
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned Email'
+		dataType: string
+		lineageTag: 48e3942d-1c5e-4449-accc-f92b8adefdc0
+		summarizeBy: none
+		sourceColumn: Assigned Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Today
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ae0862fc-4a73-4c92-88e1-b1281cfe23d2
+		summarizeBy: none
+		sourceColumn: Today
+
+		variation Variation
+			isDefault
+			relationship: 0523ef6d-5fae-477c-90ac-04d0bdd35fcf
+			defaultHierarchy: LocalDateTable_af236330-8467-4a13-b059-12db3937c847.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Action
+		dataType: string
+		lineageTag: 3daf2173-cabb-46b8-96b4-ba67a0f4654c
+		summarizeBy: none
+		sourceColumn: Action
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client ID'
+		dataType: string
+		lineageTag: 4daa9414-bc8f-4bb5-8e6e-27fd0e06d451
+		summarizeBy: none
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Assess'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 939a79b4-08ff-4792-b8e4-1f1132f7ac50
+		summarizeBy: none
+		sourceColumn: Last Assess
+
+		variation Variation
+			isDefault
+			relationship: 778e4ec0-10bc-42dc-98a1-8ebff7c8c96f
+			defaultHierarchy: LocalDateTable_0bd80961-ae41-427b-b9fa-cef479662dc1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Profile Auth End Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a4565750-e384-4fa1-9fce-4651ae3e60bd
+		summarizeBy: none
+		sourceColumn: Profile Auth End Date
+
+		variation Variation
+			isDefault
+			relationship: 6233aa14-e2f9-433e-b699-db49611cbc41
+			defaultHierarchy: LocalDateTable_d2094439-426a-463f-90a2-6b1840da67c4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Assigned clinician'
+		dataType: string
+		lineageTag: 2e7c901c-2c26-44b4-9089-3bd75c760b93
+		summarizeBy: none
+		sourceColumn: Assigned clinician
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Assess and Ref Appended (2)' = m
+		mode: import
+		source =
+				let
+				    Source = PowerBI.Datamarts("nzrmcoc5w6tebmq3bkxbdeohga-sjlrizhv64fetjqcl4to76xbzq.datamart.fabric.microsoft.com"),
+				    #"model_Assess and Ref Appended" = Source{[Schema="model",Item="Assess and Ref Appended"]}[Data],
+				    #"Added Conditional Column" = Table.AddColumn(#"model_Assess and Ref Appended", "Custom", each if [Assigned Email] = null then null else if [Assigned Email] <> null then [Assigned Email] else null),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Conditional Column",{{"Custom", "Assigned clinician"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_desoto_outreach",
+    "description": "This is the source of data that Desoto uses for kids in crisis. This source is \"pushed\" to us."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f987293f-3af6-a819-43da-998f028ac9ae"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Eventhouse",
+    "displayName": "voa_warehouse_eventhouse",
+    "description": "voa_warehouse_eventhouse"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "78a6217a-b246-9195-45ce-3645aeb73237"
+  }
+}

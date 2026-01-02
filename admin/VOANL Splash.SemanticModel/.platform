@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "VOANL Splash"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "08930ef1-2fba-8cb3-43c7-bb41556ed3c3"
+  }
+}

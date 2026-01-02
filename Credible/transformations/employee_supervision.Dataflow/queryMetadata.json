@@ -1,0 +1,112 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "employee_supervision",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_credible_services": {
+      "queryId": "4de755fa-4795-421e-a665-267ef238775b",
+      "queryName": "raw_credible_services"
+    },
+    "raw_credible_episodes": {
+      "queryId": "ee8d4fcb-279d-439c-950d-ea606b7314b7",
+      "queryName": "raw_credible_episodes"
+    },
+    "individual supervision": {
+      "queryId": "3c6e97b2-e2bd-4b32-9f8a-2add87a9d122",
+      "queryName": "individual supervision",
+      "loadEnabled": false
+    },
+    "group_supervision": {
+      "queryId": "31e50e6d-fcd3-4cc6-b742-76a3c1454ee8",
+      "queryName": "group_supervision",
+      "loadEnabled": false
+    },
+    "group_supervision_hours": {
+      "queryId": "e373192f-7572-452c-a489-dfae1a511a3e",
+      "queryName": "group_supervision_hours",
+      "loadEnabled": false
+    },
+    "individual supervision_hours": {
+      "queryId": "e2fd1306-7e3d-4310-8392-c48b3f82584f",
+      "queryName": "individual supervision_hours",
+      "loadEnabled": false
+    },
+    "individual supervision_DataDestination": {
+      "queryId": "7dbe76bb-a4d9-4203-8eac-35d96c22cf8e",
+      "queryName": "individual supervision_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "group_supervision_DataDestination": {
+      "queryId": "7f8b2aac-3292-42d7-b074-781705f9aeab",
+      "queryName": "group_supervision_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "individual supervision_hours_DataDestination": {
+      "queryId": "4d65d331-1921-4272-b5cf-f32e85f19d28",
+      "queryName": "individual supervision_hours_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "group_supervision_hours_DataDestination": {
+      "queryId": "f32743d6-b636-4c87-9881-779176d3c2f2",
+      "queryName": "group_supervision_hours_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "combined_supervision_hours": {
+      "queryId": "0c577aae-bb9f-4d0a-ad2e-d4e70235044c",
+      "queryName": "combined_supervision_hours",
+      "loadEnabled": false
+    },
+    "Append_DataDestination": {
+      "queryId": "d9b1f117-c6c4-4f86-983f-1e546a02abf1",
+      "queryName": "Append_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "active_employees": {
+      "queryId": "ae79b9bf-5f1c-4621-96c9-df2058d543a3",
+      "queryName": "active_employees",
+      "loadEnabled": false
+    },
+    "active_employees_DataDestination": {
+      "queryId": "b4ae03d3-d00b-405a-97a7-cf74f72e32fa",
+      "queryName": "active_employees_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "combined_supervision_totals": {
+      "queryId": "e4ecfd49-6f56-4c41-b9f9-78c251e34850",
+      "queryName": "combined_supervision_totals",
+      "loadEnabled": false
+    },
+    "combined_supervision_totals_DataDestination": {
+      "queryId": "48099d19-81d4-4783-bc47-207be6549217",
+      "queryName": "combined_supervision_totals_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "monthly_supervision_totals": {
+      "queryId": "272fd60d-04ba-4e5b-9c5a-6eb4ed0447d4",
+      "queryName": "monthly_supervision_totals",
+      "loadEnabled": false
+    },
+    "monthly_supervision_totals_DataDestination": {
+      "queryId": "ee2e96b6-e23f-433d-bfe4-33e46fd646ed",
+      "queryName": "monthly_supervision_totals_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

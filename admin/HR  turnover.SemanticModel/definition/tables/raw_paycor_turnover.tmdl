@@ -1,0 +1,208 @@
+table raw_paycor_turnover
+	lineageTag: 1bba2b0a-2983-4037-8928-b11f298276a1
+
+	column work_location
+		dataType: string
+		lineageTag: 5f15f78f-382e-41df-9662-2645b2b18b6d
+		summarizeBy: none
+		sourceColumn: work_location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Name'
+		dataType: string
+		lineageTag: a6a1c6db-c50f-4e02-9762-25e8519c1039
+		summarizeBy: none
+		sourceColumn: Employee Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column dept
+		dataType: string
+		lineageTag: 2330a6a5-fc2e-4f7d-8db2-9e0e109a4d91
+		summarizeBy: none
+		sourceColumn: dept
+
+		annotation SummarizationSetBy = Automatic
+
+	column job_title
+		dataType: string
+		lineageTag: c21ca1f0-63b6-4cf3-a6a8-76de9bfec4a9
+		summarizeBy: none
+		sourceColumn: job_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column manager
+		dataType: string
+		lineageTag: f7b55c9c-3f05-4d58-99fa-4fbd17516ecf
+		summarizeBy: none
+		sourceColumn: manager
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: ef0ff5f1-f346-4d78-aa6f-1ad7f0dee997
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column termination_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 38e0519d-d264-488d-9949-1815e14c514c
+		summarizeBy: none
+		sourceColumn: termination_date
+
+		variation Variation
+			isDefault
+			relationship: e6c646b0-0dd7-49f6-87b7-9981363110b1
+			defaultHierarchy: LocalDateTable_fb70ce22-fd53-49c5-8207-f4f84ef122ad.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column voluntary
+		dataType: string
+		lineageTag: fc6b8909-80cf-4f08-83a5-48eb811c89a9
+		summarizeBy: none
+		sourceColumn: voluntary
+
+		annotation SummarizationSetBy = Automatic
+
+	column rehire_eligible
+		dataType: string
+		lineageTag: 7cde6b55-b1c4-44a0-afb2-b8a1d5820501
+		summarizeBy: none
+		sourceColumn: rehire_eligible
+
+		annotation SummarizationSetBy = Automatic
+
+	column term_reason
+		dataType: string
+		lineageTag: da53c748-5ad6-43b8-acba-d672a6a0cf39
+		summarizeBy: none
+		sourceColumn: term_reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column hire_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 33e3e3aa-0334-4088-9f74-cded811f44b9
+		summarizeBy: none
+		sourceColumn: hire_date
+
+		variation Variation
+			isDefault
+			relationship: 05dd6059-9a2f-40a4-987f-69a8ab6496c5
+			defaultHierarchy: LocalDateTable_ddcedf35-c8a4-4647-b223-3e1363b31200.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column rehire_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3bfd6a92-6169-40b9-9ba4-199d59ce1af6
+		summarizeBy: none
+		sourceColumn: rehire_date
+
+		variation Variation
+			isDefault
+			relationship: 4ddcc3e1-8689-4fa7-886e-53c69656d5f3
+			defaultHierarchy: LocalDateTable_fc71e3d8-d8cd-409a-bb53-cfcd7745df31.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column service_length
+		dataType: string
+		lineageTag: fdf5cdca-0ea4-4814-b3d6-ed3bfd727917
+		summarizeBy: none
+		sourceColumn: service_length
+
+		annotation SummarizationSetBy = Automatic
+
+	column separations
+		dataType: int64
+		formatString: 0
+		lineageTag: be64a2d4-a1d5-4a07-aeef-37a56d53e3e7
+		summarizeBy: sum
+		sourceColumn: separations
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_headcount
+		dataType: double
+		lineageTag: 8548fa8e-af9c-4f66-b76c-df9531a68a40
+		summarizeBy: sum
+		sourceColumn: avg_headcount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column turnover_rate
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 74b86c65-4864-4cb2-8827-8564e17deedc
+		summarizeBy: sum
+		sourceColumn: turnover_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column dept_code
+		dataType: string
+		lineageTag: f5848444-d915-40ec-a7e2-7b8d561dd52d
+		summarizeBy: none
+		sourceColumn: dept_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column emp_num
+		dataType: string
+		lineageTag: 28757819-7517-45d1-9093-de458807d359
+		summarizeBy: none
+		sourceColumn: emp_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column flsa
+		dataType: string
+		lineageTag: f9ca1547-02cf-44ac-940e-c3e17aa99fe1
+		summarizeBy: none
+		sourceColumn: flsa
+
+		annotation SummarizationSetBy = Automatic
+
+	column emp_type
+		dataType: string
+		lineageTag: 34670e83-d665-475f-9da6-d23634e549bc
+		summarizeBy: none
+		sourceColumn: emp_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column worker_type
+		dataType: string
+		lineageTag: b3114f3c-20e3-4967-b628-c5e5dcf8bf58
+		summarizeBy: none
+		sourceColumn: worker_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition raw_paycor_turnover = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "voa_admin"),
+				    dbo_raw_paycor_turnover = Source{[Schema="dbo",Item="raw_paycor_turnover"]}[Data]
+				in
+				    dbo_raw_paycor_turnover
+

@@ -1,0 +1,64 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "lighthouse_cis_comb",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_cis_caselist": {
+      "queryId": "13943713-debf-4e5b-a8f3-7ea9c10f8e35",
+      "queryName": "raw_cis_caselist"
+    },
+    "silver lighthouse_studentData": {
+      "queryId": "ce8d7359-3c3c-4ca7-968a-53298714f61b",
+      "queryName": "silver lighthouse_studentData"
+    },
+    "LH Undupe": {
+      "queryId": "aca2a782-0369-4bb3-ac0a-2109ba3c50cc",
+      "queryName": "LH Undupe"
+    },
+    "CIS Undupe": {
+      "queryId": "709151ef-aca4-433f-afa1-2fb183778c32",
+      "queryName": "CIS Undupe"
+    },
+    "Matching CIS LH CLients": {
+      "queryId": "ed69029d-30fd-45ea-a215-890ece1ef9ba",
+      "queryName": "Matching CIS LH CLients"
+    },
+    "silver caddo_census": {
+      "queryId": "bc559b46-6531-4312-80ac-17c394d41f63",
+      "queryName": "silver caddo_census"
+    },
+    "CIS_LH_byGrade_staging": {
+      "queryId": "eeb588e8-e210-424f-aec9-ea223d30a95f",
+      "queryName": "CIS_LH_byGrade_staging"
+    },
+    "CIS_LH_byGrade_staging (2)": {
+      "queryId": "ada71eab-1c1e-427a-8061-6899f2040399",
+      "queryName": "CIS_LH_byGrade_staging (2)"
+    },
+    "Matching_CIS_LH_Final": {
+      "queryId": "ac804190-ceda-4019-9643-e161c6598971",
+      "queryName": "Matching_CIS_LH_Final",
+      "loadEnabled": false
+    },
+    "Matching_CIS_LH_Final_DataDestination": {
+      "queryId": "b8d67101-bff9-435c-acab-6a0d290628f2",
+      "queryName": "Matching_CIS_LH_Final_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"678f10d1-b794-4318-8152-4c973a8dc9fa\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

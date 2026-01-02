@@ -1,0 +1,132 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Billing
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'General Data'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Client and Auths'
+
+	annotation PBI_QueryGroupOrder = 2
+
+annotation PBI_QueryOrder = ["StartOfFiscalYear","StartDate","EndDate","Period","API - Billing","API - Programs","API - Employees","API - Ins Data","Date","API - Clients (Updated)","API - Lookup Dict","Refresh Date/Time","API - Episodes","API - Employee Caseload","API - Client Insurance ID","6021 Clinician Specific Goals","API - Claims","New Paycor Format","2018 - 2020 SP BH Services","API - Visit Ins","API - IBHH Service Summary","MAX Assess Date","Assess and Ref Appended","Assessor Needed","Auths Due","Pending Completion","Assess and Ref Appended (2)","division-bundle-counter"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table DateTableTemplate_7a749e6f-9df5-4ceb-b550-57a11ecb3729
+ref table 'Non-Bill Measures'
+ref table 'Revenue YTD Measures'
+ref table 'Revenue MTD Measures'
+ref table 'Units Measures'
+ref table 'Raw Time Measures'
+ref table Period
+ref table '6021 Measures'
+ref table 'Revenue Measures'
+ref table 'Ins Measures'
+ref table 'API - Billing'
+ref table LocalDateTable_86a44453-2436-419e-95ff-1cbac7226070
+ref table LocalDateTable_18025442-63cf-4b7c-abd7-2f87061d0429
+ref table 'API - Programs'
+ref table 'API - Employees'
+ref table 'API - Ins Data'
+ref table Date
+ref table LocalDateTable_2d536e35-8448-41fb-9464-59f4f0144da5
+ref table LocalDateTable_19f042c9-56db-4130-ab2c-6f9e37b75881
+ref table LocalDateTable_09c02d24-bb55-4fcf-8d06-06028eb24b46
+ref table LocalDateTable_a592159d-f49a-4af3-aeea-e29e7b8f38fa
+ref table LocalDateTable_fe56dada-9e37-4f14-ac3d-bcaf2f6f6c8b
+ref table LocalDateTable_447bf720-1e2a-42b3-acbf-cc6df1c641ce
+ref table 'API - Clients (Updated)'
+ref table LocalDateTable_53faf00d-04bd-4d2a-a5e5-77c8f365f7b6
+ref table LocalDateTable_eca4a2c7-d2fb-4024-bc7b-5f6ff535f698
+ref table LocalDateTable_7a7675e9-fad5-4e72-8712-e3420c6bb630
+ref table LocalDateTable_f76f6354-f76d-4634-b84f-9ff40cf9d314
+ref table LocalDateTable_e369ced4-e94b-4c33-bbe8-9283e620fbfe
+ref table LocalDateTable_1cc3c757-caac-4edd-9710-7776718f11d4
+ref table LocalDateTable_17694ffb-4f8b-483c-895b-1121bb304dd6
+ref table 'API - Lookup Dict'
+ref table 'Refresh Date/Time'
+ref table LocalDateTable_62cdafe7-7c6b-4b86-8fb0-222e9682da7d
+ref table LocalDateTable_ab74330e-e0aa-46cc-846d-29bac2674606
+ref table 'API - Episodes'
+ref table LocalDateTable_cae19707-4293-4cf5-a37a-fa06b10aa9a3
+ref table LocalDateTable_240cb31d-5974-4e63-9d3e-3d0d4c7ca761
+ref table LocalDateTable_e5dda634-a016-42d5-af3c-b9fda3543dc8
+ref table LocalDateTable_a2d8d4a7-bfc8-4b14-afbf-9a5c2006ff1a
+ref table LocalDateTable_90cf9dec-3bc0-4bc5-95fb-f0825808cdee
+ref table 'API - Employee Caseload'
+ref table 'API - Client Insurance ID'
+ref table LocalDateTable_ab95b38f-69f2-447f-881b-41efb4600063
+ref table LocalDateTable_5d06736c-436c-44e8-80bb-488cd30eb2ac
+ref table '6021 Clinician Specific Goals'
+ref table 'API - Claims'
+ref table LocalDateTable_add8af26-fec7-48cd-aaf7-99217bfd2178
+ref table LocalDateTable_2806fbdf-3d55-4c8f-8229-46a58d729f33
+ref table LocalDateTable_b4a7c0d4-be4a-4273-9707-a5d64870c9b3
+ref table LocalDateTable_d4d7b997-747f-49d4-8150-856b7ef9ad59
+ref table LocalDateTable_828952b5-95d1-45ff-806f-fbfbe919d1f6
+ref table LocalDateTable_a2161b4b-fcce-4ff1-936b-00cd1e8b652c
+ref table LocalDateTable_5b4f0f76-e593-4060-82f3-a9ca9d929942
+ref table LocalDateTable_6d1bbfb2-b196-4514-b93e-ae1fa46ab35a
+ref table 'New Paycor Format'
+ref table LocalDateTable_06194af7-283f-4a61-99ed-f5d63a2ef60e
+ref table LocalDateTable_c83aa62c-58f5-420b-b639-092879ee977c
+ref table LocalDateTable_c314844c-6a39-4d06-b05c-51b81706b649
+ref table '2018 - 2020 SP BH Services'
+ref table 'API - Visit Ins'
+ref table goals
+ref table 'API - IBHH Service Summary'
+ref table 'MAX Assess Date'
+ref table LocalDateTable_7b67db6d-6987-4d0d-bc4a-972d7337ff33
+ref table LocalDateTable_98cec5fc-4ca3-4ef5-bb96-e4f2247cbf68
+ref table 'Assess and Ref Appended'
+ref table LocalDateTable_04bdee20-f29a-4f76-8aed-8dc219438a86
+ref table LocalDateTable_5acd2cdc-7407-423e-b797-624bc5f41599
+ref table LocalDateTable_c89f53ed-0714-46bb-a756-4990d84e30a1
+ref table 'Assessor Needed'
+ref table LocalDateTable_c9c1407f-cb3b-4fa3-8308-9d22ac0ef54e
+ref table LocalDateTable_0183bd54-6526-4564-ae0a-2de1af3364ba
+ref table LocalDateTable_36f049fd-8545-4cf4-b334-96f08a1f2728
+ref table 'Auths Due'
+ref table LocalDateTable_dd67c1a2-c3af-490a-990d-375da3450143
+ref table LocalDateTable_1b1806d3-f6b2-40aa-99ba-8587e7658a77
+ref table LocalDateTable_e4bb9b05-b56d-45cd-b1e5-b73e9cac9f34
+ref table 'Pending Completion'
+ref table LocalDateTable_250aa813-2f97-4887-bb29-efb13e97fdde
+ref table LocalDateTable_24ebe6b7-234f-4534-98a0-5d619ee6d47c
+ref table LocalDateTable_4cf13359-9f77-4d79-a7a5-a25f51d2beee
+ref table 'Assess and Ref Appended (2)'
+ref table LocalDateTable_579f783a-7cc5-4944-9736-6c7ff72bc4a5
+ref table LocalDateTable_a6b5cf85-c207-46de-a9b0-ff44d13e69e3
+ref table LocalDateTable_af236330-8467-4a13-b059-12db3937c847
+ref table LocalDateTable_0bd80961-ae41-427b-b9fa-cef479662dc1
+ref table LocalDateTable_d2094439-426a-463f-90a2-6b1840da67c4
+ref table LocalDateTable_ba0dfc72-68f5-49a1-b1b4-667d31fe9e3a
+ref table LocalDateTable_03a841c9-5b1e-427f-882b-7596ec90d1d2
+ref table LocalDateTable_04ccbbcf-802d-4087-aa99-0658cce1d4a1
+ref table LocalDateTable_b82fa7f0-bcfa-49de-8a96-38acd77fe6ba
+ref table LocalDateTable_176c0125-225f-434b-ba3a-6328091651ef
+ref table LocalDateTable_7e127cb8-bc90-4cde-8c37-c50561fa2e03
+ref table LocalDateTable_02986383-ef0c-4fbb-bb43-9c23d5253d02
+ref table LocalDateTable_0f515855-9b67-46fd-8328-707bf6081840
+ref table LocalDateTable_8635802f-07ac-4a0c-a875-9fd72aa7416e
+ref table '1. Message Table'
+ref table LocalDateTable_cac8b401-38e4-4b23-8ca4-5e522daf8609
+ref table LocalDateTable_07bb3da8-af2e-4e7b-bfcd-1638c7c1f088
+ref table '2. Employee Measures'
+ref table LocalDateTable_983b2fc7-a779-41d6-a1ef-f3d71746a6a2
+ref table division-bundle-counter
+ref table LocalDateTable_865954e6-f9ee-4572-a19e-9b677d0240a2
+
+ref cultureInfo en-US
+

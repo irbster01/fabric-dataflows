@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Communications Dash"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9bc17d24-ecb2-8411-417e-db4de5139e2b"
+  }
+}

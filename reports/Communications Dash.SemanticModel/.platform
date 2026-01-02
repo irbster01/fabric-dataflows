@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Communications Dash"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0b278447-0e8b-a79e-4051-35367b239e42"
+  }
+}

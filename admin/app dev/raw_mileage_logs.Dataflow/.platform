@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_mileage_logs"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "427c9550-294e-9edf-4d2e-ee519f5113ae"
+  }
+}

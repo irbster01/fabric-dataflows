@@ -1,0 +1,154 @@
+table v_client_month_rollups
+	lineageTag: 88193bed-3263-4d4a-80be-2cb2eb64c3bf
+
+	measure avg_poss = ```
+			
+			    AVERAGEX(VALUES(v_client_month_rollups[client_id]),
+			    CALCULATE(AVERAGE([max99]))
+			    )
+			```
+		lineageTag: 5ccb1117-e682-4a5f-9e82-816bd89c3af9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure avg_attended = ```
+			
+			    AVERAGEX(VALUES(v_client_month_rollups[client_id]),
+			    CALCULATE(SUM([count]))
+			    )
+			```
+		lineageTag: 8bccc8da-c069-4cf2-8a3b-b5deec9bbc18
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'attend percentage' = DIVIDE([avg_attended],[avg_poss])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 9c0b56f6-dae7-4250-bb50-0db926948bc3
+
+	column client_id
+		dataType: string
+		lineageTag: 322f5d2e-9625-4d71-a77e-0c06972e3a3f
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_last_name
+		dataType: string
+		lineageTag: 5562b276-ddd9-4671-a6a3-2e54949913f2
+		summarizeBy: none
+		sourceColumn: client_last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_first_name
+		dataType: string
+		lineageTag: a63acd87-40e5-46ec-a2d8-7086d665b076
+		summarizeBy: none
+		sourceColumn: client_first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 43a735a0-4cc8-47a8-9748-1b14a54f2701
+		summarizeBy: none
+		sourceColumn: service_month
+
+		variation Variation
+			isDefault
+			relationship: a0b571d3-7177-4972-9676-bfb092900eab
+			defaultHierarchy: LocalDateTable_f52ae445-ba1a-4db8-974b-487eab5714bd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column month_name
+		dataType: string
+		lineageTag: 235b5d36-da1c-4e27-bb4c-fb2f37fa3e19
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Count
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f9db283-ad27-42f2-b336-ebb16b8ca1ee
+		summarizeBy: sum
+		sourceColumn: Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column max830
+		dataType: int64
+		formatString: 0
+		lineageTag: 53e03622-1a08-4ea4-b411-f034ce8f4b6b
+		summarizeBy: sum
+		sourceColumn: max830
+
+		annotation SummarizationSetBy = Automatic
+
+	column max92
+		dataType: int64
+		formatString: 0
+		lineageTag: 24b03068-21ca-4698-9cf6-2e6d141f6184
+		summarizeBy: sum
+		sourceColumn: max92
+
+		annotation SummarizationSetBy = Automatic
+
+	column max99
+		dataType: int64
+		formatString: 0
+		lineageTag: 5373ee1f-a240-44df-9372-f599080aacec
+		summarizeBy: sum
+		sourceColumn: max99
+
+		annotation SummarizationSetBy = Automatic
+
+	column max98
+		dataType: int64
+		formatString: 0
+		lineageTag: 610f5de1-3944-419c-9fdb-3e062ea4e4c2
+		summarizeBy: sum
+		sourceColumn: max98
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'silver_lighthouse Lighthouse Matched with JCampus.School Name'
+		dataType: string
+		lineageTag: 37e74e2f-dc2f-4b81-a8a5-5fc32f953ec5
+		summarizeBy: none
+		sourceColumn: silver_lighthouse Lighthouse Matched with JCampus.School Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column lighthouse_location_enrolling
+		dataType: string
+		lineageTag: b6575ae6-b7b6-4133-84df-65770b8a5b72
+		summarizeBy: none
+		sourceColumn: lighthouse_location_enrolling
+
+		annotation SummarizationSetBy = Automatic
+
+	partition v_client_month_rollups = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "ServicePoint"),
+				    dbo_v_client_month_rollups = Source{[Schema="dbo",Item="v_client_month_rollups"]}[Data],
+				    #"Merged Queries" = Table.NestedJoin(dbo_v_client_month_rollups, {"client_id"}, #"silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, "silver_lighthouse Lighthouse Matched with JCampus", JoinKind.LeftOuter),
+				    #"Expanded silver_lighthouse Lighthouse Matched with JCampus" = Table.ExpandTableColumn(#"Merged Queries", "silver_lighthouse Lighthouse Matched with JCampus", {"School Name"}, {"silver_lighthouse Lighthouse Matched with JCampus.School Name"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Expanded silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter),
+				    #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Merged Queries1", "raw_lighthouse_registration", {"lighthouse_location_enrolling"}, {"lighthouse_location_enrolling"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Expanded raw_lighthouse_registration", each ([month_name] = "August" or [month_name] = "October" or [month_name] = "September"))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

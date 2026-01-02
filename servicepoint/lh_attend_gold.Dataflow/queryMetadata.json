@@ -1,0 +1,40 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "lh_attend_gold",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "silver_lighthouse new_monthly_client_attend": {
+      "queryId": "ae7fac8c-0155-4559-8147-d5a288931ea0",
+      "queryName": "silver_lighthouse new_monthly_client_attend"
+    },
+    "60_monthly_attend_good": {
+      "queryId": "57f1f735-bee7-4cde-8295-3f35404675e5",
+      "queryName": "60_monthly_attend_good"
+    },
+    "monthly_attend_good (2)": {
+      "queryId": "1596d221-7f3c-4669-a15c-6d95bbdde3db",
+      "queryName": "monthly_attend_good (2)"
+    },
+    "monthly_attend_good (3)": {
+      "queryId": "8a258e0e-06ee-4b6d-92f9-d73634abbd6f",
+      "queryName": "monthly_attend_good (3)"
+    },
+    "silver_lighthouse lh_client_month_agg": {
+      "queryId": "1313a32d-ff28-42d0-b46f-691ab587b1b0",
+      "queryName": "silver_lighthouse lh_client_month_agg"
+    },
+    "silver_lighthouse v3_monthly_client_attend": {
+      "queryId": "d51a67ee-1fed-400d-a41d-cf6e70ad2f4a",
+      "queryName": "silver_lighthouse v3_monthly_client_attend"
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

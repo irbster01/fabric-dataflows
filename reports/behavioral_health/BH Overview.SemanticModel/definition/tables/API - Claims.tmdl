@@ -1,0 +1,299 @@
+table 'API - Claims'
+	lineageTag: c0723ba3-56b7-4679-84e8-239d7708c0aa
+
+	column 'Claim ID'
+		dataType: string
+		lineageTag: 269bf290-9605-4909-bb8d-8c265de02dd4
+		summarizeBy: none
+		sourceColumn: Claim ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Batch ID'
+		dataType: string
+		lineageTag: e2a6ab53-a34c-45ee-b6bb-eed643f753f1
+		summarizeBy: none
+		sourceColumn: Batch ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column l2300_id
+		dataType: string
+		lineageTag: 7b120cdb-b0e9-4319-8f10-2f0e97b9109f
+		summarizeBy: none
+		sourceColumn: l2300_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column l2400_id
+		dataType: string
+		lineageTag: b1d52347-9304-4c86-b7c8-4d0e1c6ecc86
+		summarizeBy: none
+		sourceColumn: l2400_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column clientvisit_id
+		dataType: string
+		lineageTag: a7a0e2c0-50ec-44be-bb7f-0e3a6de4671b
+		summarizeBy: none
+		sourceColumn: clientvisit_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client ID'
+		dataType: string
+		lineageTag: 892c7554-986a-43ba-92ec-96a692493d9a
+		summarizeBy: none
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payer ID'
+		dataType: string
+		lineageTag: ad61652f-6081-44e7-b209-48823a4bbe19
+		summarizeBy: none
+		sourceColumn: Payer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column payer_desc
+		dataType: string
+		lineageTag: d758f553-bf21-40fa-b277-4f577e96e21e
+		summarizeBy: none
+		sourceColumn: payer_desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Rate'
+		dataType: string
+		lineageTag: 0456d716-5034-450e-99c1-a9a3cf942f96
+		summarizeBy: none
+		sourceColumn: Billing Rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column Charges
+		dataType: string
+		lineageTag: 5514302b-49fc-4626-9c30-038dff21f6ca
+		summarizeBy: none
+		sourceColumn: Charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column Copay
+		dataType: string
+		lineageTag: ca43a9cc-4061-4a8d-b9b9-167669f5d679
+		summarizeBy: none
+		sourceColumn: Copay
+
+		annotation SummarizationSetBy = Automatic
+
+	column clientins_id
+		dataType: string
+		lineageTag: bb4a4fa0-baa4-4367-82c1-55b71db236dd
+		summarizeBy: none
+		sourceColumn: clientins_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Insurance ID'
+		dataType: string
+		lineageTag: b1d705c7-3237-4ccc-8022-6651123e9804
+		summarizeBy: none
+		sourceColumn: Insurance ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Insurance Paid Amount'
+		dataType: string
+		lineageTag: 6c1115b2-3fb0-42dd-83bd-b8bda47fd907
+		summarizeBy: none
+		sourceColumn: Insurance Paid Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Disallowed Amount'
+		dataType: string
+		lineageTag: f7f916c8-bbb3-4677-ba5f-bdfe2f8c7b69
+		summarizeBy: none
+		sourceColumn: Disallowed Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_due
+		dataType: string
+		lineageTag: 860b138e-f2ef-4ac8-a16a-8c8d65e951c5
+		summarizeBy: none
+		sourceColumn: client_due
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Claim Status'
+		dataType: string
+		lineageTag: 284e294b-1992-49e4-86ce-8d3a7db27d17
+		summarizeBy: none
+		sourceColumn: Claim Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Closed?'
+		dataType: string
+		lineageTag: 6b52884d-f61c-4d09-b62d-bf942b7e3c11
+		summarizeBy: none
+		sourceColumn: Service Closed?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Batched'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d63fe614-e9d4-45f2-af1a-3847ba366b33
+		summarizeBy: none
+		sourceColumn: Date Batched
+
+		variation Variation
+			isDefault
+			relationship: c8e1656d-01a3-4da3-bc38-9a5cc0fac231
+			defaultHierarchy: LocalDateTable_add8af26-fec7-48cd-aaf7-99217bfd2178.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Load 835 ID'
+		dataType: string
+		lineageTag: 545d3f04-7a52-4388-b2ed-2932de06e5fe
+		summarizeBy: none
+		sourceColumn: Load 835 ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column external_claim_id
+		dataType: string
+		lineageTag: 0bd52b29-9a11-456b-b5f9-319f7c484262
+		summarizeBy: none
+		sourceColumn: external_claim_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Order'
+		dataType: string
+		lineageTag: 7cbdc0eb-2278-4d42-a298-5e649e7fe82a
+		summarizeBy: none
+		sourceColumn: Billing Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Date'
+		dataType: string
+		lineageTag: 02591e4d-fa85-48d2-b0c5-492773e3079f
+		summarizeBy: none
+		sourceColumn: Service Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Retracted Amount'
+		dataType: string
+		lineageTag: df63684e-9869-4e43-b114-2d14a627e10d
+		summarizeBy: none
+		sourceColumn: Retracted Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column rendering_emp_id
+		dataType: string
+		lineageTag: fcdccb9a-d52c-4bf2-b210-4cbe2ebe5914
+		summarizeBy: none
+		sourceColumn: rendering_emp_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Paid Status'
+		dataType: string
+		lineageTag: a0eb30cf-f0f7-41cc-b4a8-498bf8a7e0e7
+		summarizeBy: none
+		sourceColumn: Paid Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment ID'
+		dataType: string
+		lineageTag: 95742838-d652-4728-b357-f3a46d90d826
+		summarizeBy: none
+		sourceColumn: Payment ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column allowed_amount
+		dataType: string
+		lineageTag: 2a2774a3-4159-49ff-b82d-4138218838fd
+		summarizeBy: none
+		sourceColumn: allowed_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column return_codes
+		dataType: string
+		lineageTag: c0278a60-20ab-4b5c-9503-2907912d226c
+		summarizeBy: none
+		sourceColumn: return_codes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'EOB Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: af0f0663-8282-4d3f-9727-a739de734f0b
+		summarizeBy: none
+		sourceColumn: EOB Date
+
+		variation Variation
+			isDefault
+			relationship: e1fa1292-b9a4-4e88-a7ff-998ff5c3d4df
+			defaultHierarchy: LocalDateTable_2806fbdf-3d55-4c8f-8229-46a58d729f33.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Resubmission Type'
+		dataType: string
+		lineageTag: 1341db26-9348-47d4-ad27-b92e7e724300
+		summarizeBy: none
+		sourceColumn: Resubmission Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Resubmission Code'
+		dataType: string
+		lineageTag: 19c76117-8c51-4df6-8356-fbcdd1e5f190
+		summarizeBy: none
+		sourceColumn: Resubmission Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Retract Payment ID'
+		dataType: string
+		lineageTag: e4abc4b2-dd70-40e4-a2ac-66b391a4a1fd
+		summarizeBy: none
+		sourceColumn: Retract Payment ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'API - Claims' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"20d57f1f-7ffe-40fe-83fe-f39aa8e08807" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="20d57f1f-7ffe-40fe-83fe-f39aa8e08807"]}[Data],
+				    #"API - Claims_" = #"20d57f1f-7ffe-40fe-83fe-f39aa8e08807"{[entity="API - Claims",version=""]}[Data]
+				in
+				    #"API - Claims_"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

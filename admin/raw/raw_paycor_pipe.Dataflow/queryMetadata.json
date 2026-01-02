@@ -1,0 +1,72 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_paycor_pipe",
+  "queryGroups": [
+    {
+      "id": "b550b12e-c901-4424-871a-a9ab00771b78",
+      "name": "Transform file from punches"
+    },
+    {
+      "id": "85616062-feba-44d0-b3d0-de46a767799b",
+      "name": "Helper queries (2)",
+      "parentId": "b550b12e-c901-4424-871a-a9ab00771b78"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "punches": {
+      "queryId": "b6b879f5-b3bd-458b-9192-1d3c75cb19bb",
+      "queryName": "punches",
+      "loadEnabled": false
+    },
+    "Sample file (2)": {
+      "queryId": "c409ce7c-bcd8-4af3-a118-e039fc3b95d9",
+      "queryName": "Sample file (2)",
+      "queryGroupId": "85616062-feba-44d0-b3d0-de46a767799b",
+      "loadEnabled": false
+    },
+    "Parameter (2)": {
+      "queryId": "d3571ff1-7b41-449c-a798-e7a055bd0934",
+      "queryName": "Parameter (2)",
+      "queryGroupId": "85616062-feba-44d0-b3d0-de46a767799b",
+      "loadEnabled": false
+    },
+    "Transform Sample file (2)": {
+      "queryId": "31c5d64d-b480-4746-aa3f-2fc094fc8614",
+      "queryName": "Transform Sample file (2)",
+      "queryGroupId": "b550b12e-c901-4424-871a-a9ab00771b78",
+      "loadEnabled": false
+    },
+    "Transform file (2)": {
+      "queryId": "f33f26b1-4634-41d5-8f40-8a8e02673ee4",
+      "queryName": "Transform file (2)",
+      "queryGroupId": "85616062-feba-44d0-b3d0-de46a767799b",
+      "loadEnabled": false
+    },
+    "punches_DataDestination": {
+      "queryId": "f11d7c8d-ee43-4185-a9f8-ea8862c9f200",
+      "queryName": "punches_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "FEP Punches": {
+      "queryId": "ca7f347a-525f-4085-8ee3-1bbbe33e0d42",
+      "queryName": "FEP Punches",
+      "loadEnabled": false
+    },
+    "FEP Punches_DataDestination": {
+      "queryId": "3032175f-a8aa-4840-be09-d3871137b158",
+      "queryName": "FEP Punches_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

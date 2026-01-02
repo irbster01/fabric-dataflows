@@ -1,0 +1,20 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["cred_sp_lsndc_services_merged","Date"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table cred_sp_lsndc_services_merged
+ref table DateTableTemplate_6e20f963-497b-4b66-b042-a45b35e28c63
+ref table Date
+ref table LocalDateTable_d6297fe6-f6ce-4ee5-ae08-ea568c100701
+ref table LocalDateTable_5e8ce4ea-b809-41aa-be2d-504f7f86eb27
+
+ref cultureInfo en-US
+

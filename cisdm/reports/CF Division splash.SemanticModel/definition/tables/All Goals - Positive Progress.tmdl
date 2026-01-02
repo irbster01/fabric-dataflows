@@ -1,0 +1,86 @@
+table 'All Goals - Positive Progress'
+	lineageTag: c812fc9b-d2b3-4d9f-9d1d-d9444505ad65
+
+	measure 'No Progress Clients' = SUM('All Goals - Positive Progress'[all_monitored])-SUM('All Goals - Positive Progress'[positive_progress])
+		formatString: 0
+		lineageTag: 1ae3d66c-f0a7-415b-9396-de30828ce203
+
+	measure 'Cume All Monitored' = CALCULATE( SUM('All Goals - Positive Progress'[all_monitored]),FILTER('All Goals - Positive Progress', 'All Goals - Positive Progress'[goal]="Any Goal"))
+		formatString: 0
+		lineageTag: 30c4003a-1abb-4c6f-85c9-fc5ff7666213
+
+	measure 'All Positive Clients' = SUM('All Goals - Positive Progress'[positive_progress])
+		formatString: 0
+		lineageTag: 1fd80cf0-d742-4d57-8388-bb58369d6465
+
+	measure 'Cume Positive Percentage' = DIVIDE([All Positive Clients], [Cume All Monitored])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 24386af4-6339-42af-8e8e-37ebac81e523
+
+	measure 'ProgMon Tooltip' = "These are calculated using the progress monitoring report in CISDM"
+		lineageTag: df20af71-28e9-4554-b8f2-e358d4119343
+
+	column school_name
+		dataType: string
+		lineageTag: bb7a0aa0-655e-429c-81f6-a0a33bd5dd16
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column positive_progress
+		dataType: int64
+		formatString: 0
+		lineageTag: d5099068-9570-4bfa-923c-7b43aa424567
+		summarizeBy: sum
+		sourceColumn: positive_progress
+
+		annotation SummarizationSetBy = Automatic
+
+	column all_monitored
+		dataType: int64
+		formatString: 0
+		lineageTag: 543d4d10-871b-40a3-b8ac-90e331c4846c
+		summarizeBy: sum
+		sourceColumn: all_monitored
+
+		annotation SummarizationSetBy = Automatic
+
+	column positive_percentage
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: 3c19b7bc-4a2d-420f-b35d-582e2d2cccec
+		summarizeBy: none
+		sourceColumn: positive_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal
+		dataType: string
+		lineageTag: 06aa33e9-c77f-4a29-b07a-58e54469241e
+		summarizeBy: none
+		sourceColumn: goal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'All Goals - Positive Progress' = m
+		mode: import
+		source =
+				let
+				    Source = Table.Combine({#"All Goals - Any Progress by School", #"cis cis_behavior_positive_count", #"cis cis_academics_positive_count", #"Attendance - Positive Progress by School"}),
+				    #"Replaced Value" = Table.ReplaceValue(Source,"Broadmoor STEM Academy","Broadmoor",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","Caddo Middle Career and Technology School","CMCTS",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","Woodlawn High School","Woodlawn",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","Westwood Elementary","Westwood",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","Caddo Heights Elementary","Caddo Heights",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4","Bethune-Oak Park","Bethune",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","Midway Professional Development Center","Midway",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value7" = Table.ReplaceValue(#"Replaced Value6","Creswell Elementary School","Creswell",Replacer.ReplaceText,{"school_name"}),
+				    #"Replaced Value8" = Table.ReplaceValue(#"Replaced Value7","Atkins Technology Elementary School","Atkins",Replacer.ReplaceText,{"school_name"})
+				in
+				    #"Replaced Value8"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,108 @@
+table 'silver_lighthouse Lighthouse Matched with JCampus'
+	lineageTag: c7b7e8b1-c969-4502-83e2-0c89d5480609
+
+	column client_id
+		dataType: string
+		lineageTag: d550546b-2c85-4c4d-a467-9e6f47c5ece1
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_first_name
+		dataType: string
+		lineageTag: b5fdf82d-2581-420e-b804-c5ac523edbdc
+		summarizeBy: none
+		sourceColumn: client_first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_last_name
+		dataType: string
+		lineageTag: d8f4c12a-477b-4449-bd11-d1ba4bc41059
+		summarizeBy: none
+		sourceColumn: client_last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_dob
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2b7e4c17-1af0-4ec9-83de-938cea380cc2
+		summarizeBy: none
+		sourceColumn: client_dob
+
+		variation Variation
+			isDefault
+			relationship: 03e558e6-3e7f-4d1e-9ff8-b3a348e799db
+			defaultHierarchy: LocalDateTable_e598a8e4-2fa6-4e7a-9d31-98d78df1eecf.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column int_id
+		dataType: string
+		lineageTag: 60583e85-ee5c-4eb1-9e78-59a78dd3b3df
+		summarizeBy: none
+		sourceColumn: int_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column SIDNO
+		dataType: string
+		lineageTag: 6b8e10c7-ca13-4729-bd6d-d0edea56c760
+		summarizeBy: none
+		sourceColumn: SIDNO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'School Name'
+		dataType: string
+		lineageTag: 1fb60426-af06-4354-8073-626ba87e46a8
+		summarizeBy: none
+		sourceColumn: School Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column entry_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1dce9606-5a85-4714-a8a4-ccee83a2bf6a
+		summarizeBy: none
+		sourceColumn: entry_date
+
+		variation Variation
+			isDefault
+			relationship: 314a4e16-12c7-4e9e-8234-206cff48f9a7
+			defaultHierarchy: LocalDateTable_b899099c-d584-426d-8222-5d538f71a1a3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column exit_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 49d106cb-16e5-415c-825e-8db9c09b222d
+		summarizeBy: none
+		sourceColumn: exit_date
+
+		variation Variation
+			isDefault
+			relationship: de4e8a75-21b7-4c8a-9c12-0b2980f6372a
+			defaultHierarchy: LocalDateTable_4c37b6d3-c426-4057-ba40-d2fe78b025e0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'silver_lighthouse Lighthouse Matched with JCampus' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "ServicePoint"),
+				    #"silver_lighthouse_Lighthouse Matched with JCampus" = Source{[Schema="silver_lighthouse",Item="Lighthouse Matched with JCampus"]}[Data]
+				in
+				    #"silver_lighthouse_Lighthouse Matched with JCampus"
+

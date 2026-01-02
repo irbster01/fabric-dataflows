@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_caddo_locator"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e6afc72a-751a-b41c-4cc2-ee8c903b20e3"
+  }
+}

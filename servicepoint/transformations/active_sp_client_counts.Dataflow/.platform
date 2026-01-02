@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "active_sp_client_counts",
+    "description": "This dataflow counts ServicePoint Clients by program."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "049fd692-8f7d-9cf4-4b7c-96b361bcaa09"
+  }
+}

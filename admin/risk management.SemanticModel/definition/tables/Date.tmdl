@@ -1,0 +1,239 @@
+table Date
+	lineageTag: 226593af-498c-415c-9214-386b719accf2
+
+	measure 'Financial Score' = SUM('Risk Management Tracker'[Financial Perform])*3
+		formatString: 0
+		lineageTag: aac3ef41-c049-4553-bab5-0f70e795af13
+
+	measure 'Incident Score' = SUM('Risk Management Tracker'[# of Incidents])*3
+		formatString: 0
+		lineageTag: 01ceb73d-a234-43b5-96f9-3203007dbb48
+
+	measure 'Outcomes Score' = (SUM('Risk Management Tracker'[6 month Outcomes])+SUM('Risk Management Tracker'[Annual Outcomes]))*2
+		formatString: 0
+		lineageTag: 9c5cacb1-e2f6-4cfe-9dfd-618a82ee8586
+
+	measure 'Profile Score' = SUM('Risk Management Tracker'[Program Profile Score])
+		formatString: 0
+		lineageTag: 592cf40b-0ec4-46fc-9a8f-904a86e02469
+
+	measure 'Retention Score' = SUM('Risk Management Tracker'[Retention Rate])*3
+		lineageTag: 8a3172ab-a4ca-478f-a934-a1b2247af52b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Safety Score' = SUM('Risk Management Tracker'[Safety Date Score])*2
+		formatString: 0
+		lineageTag: 13fbcd4c-378a-48f0-9d3a-7a55baff7ce1
+
+	measure 'Total Score' = 100-([Financial Score]+[Incident Score]+[Outcomes Score]+[Profile Score]+[Retention Score]+[Safety Score]+[Sat Score])
+		lineageTag: e99d17b7-5e6f-4c1e-b3c3-2bd96b970b65
+
+	measure 'Sat Score' = (SUM('Risk Management Tracker'[Avg Client Sat])+SUM('Risk Management Tracker'[Sat Date Score]))*3
+		lineageTag: 1078f40f-6eeb-4edb-8516-e9cc9555c9eb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 68e426cd-0ca2-4f3e-92e7-964c7bdddf71
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 0b3dbff2-032a-411a-9856-91e8f5a1b2fe
+			defaultHierarchy: LocalDateTable_46723891-6da5-4a61-9e66-b950f08aa9b0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Fiscal Year'
+		dataType: string
+		lineageTag: 3f941dcc-5abd-4edd-891f-866630577104
+		summarizeBy: none
+		sourceColumn: Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cal Month'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 50e51e5d-e4ad-422e-a73e-19f1b7c1c72c
+		summarizeBy: none
+		sourceColumn: Cal Month
+
+		variation Variation
+			isDefault
+			relationship: ff82548e-87fa-4639-835c-b8eeb04f9b58
+			defaultHierarchy: LocalDateTable_ddc38ec8-3276-4075-b625-1f39437e8e93.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Cal wk Num'
+		dataType: int64
+		formatString: 0
+		lineageTag: 41038f51-45ab-48a6-b8b8-b280d1a197cf
+		summarizeBy: sum
+		sourceColumn: Cal wk Num
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal WkNumb'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2935bd44-a478-4f6e-b22f-1b55033f9727
+		summarizeBy: sum
+		sourceColumn: Fiscal WkNumb
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: b63b1fa9-f74c-42f5-9f8e-a7affb3fe3ed
+		summarizeBy: sum
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FY 2024 Pay period'
+		dataType: int64
+		formatString: 0
+		lineageTag: c396eb86-3d53-4812-9a81-099c840948aa
+		summarizeBy: sum
+		sourceColumn: FY 2024 Pay period
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Hierarchy'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e072e3e8-5074-4836-bad7-f47d680f1cdf
+		summarizeBy: none
+		sourceColumn: Fiscal Hierarchy
+
+		variation Variation
+			isDefault
+			relationship: f2333726-b84d-4e68-bef8-e00e85b885cf
+			defaultHierarchy: LocalDateTable_5342d232-b23f-435c-8d99-fe1bc6849878.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'pay start date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b9891e23-82f7-47f7-8838-4421bfc722d7
+		summarizeBy: none
+		sourceColumn: pay start date
+
+		variation Variation
+			isDefault
+			relationship: 5aa8e0d6-e7e3-49fc-935a-c2a63576439f
+			defaultHierarchy: LocalDateTable_cf90f57a-127b-4aaa-941e-4bd3cf549cdd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'pay prd range'
+		dataType: string
+		lineageTag: 5574eb18-5998-44c7-9fea-5b0fb534d26d
+		summarizeBy: none
+		sourceColumn: pay prd range
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'start text'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ec9ded2f-0955-449a-92f1-ce5c3883ba74
+		summarizeBy: none
+		sourceColumn: start text
+
+		variation Variation
+			isDefault
+			relationship: 553b2310-ae89-44fa-ab09-82d871a5c914
+			defaultHierarchy: LocalDateTable_82deffe6-00d7-4241-aa76-aa554cad81ec.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'end text'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7f7c95c4-5619-4ac3-b775-9158e61aceb0
+		summarizeBy: none
+		sourceColumn: end text
+
+		variation Variation
+			isDefault
+			relationship: c7622b4c-b580-44bb-982d-e48d54f9359d
+			defaultHierarchy: LocalDateTable_14eb4bd3-5f6d-4618-a22c-4a7d27d6d8b9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'FY 2024 batch period'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c23f671-4415-4318-bd14-d9fb154a477a
+		summarizeBy: sum
+		sourceColumn: FY 2024 batch period
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Short paypd start'
+		dataType: string
+		lineageTag: 3a66477f-3b34-438d-89ed-d68a76a818cb
+		summarizeBy: none
+		sourceColumn: Short paypd start
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Short paypd end'
+		dataType: string
+		lineageTag: e210ba2d-5e22-4e10-9ae2-2d99133aa0a1
+		summarizeBy: none
+		sourceColumn: Short paypd end
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Short range'
+		dataType: string
+		lineageTag: 3017bcec-96fe-4764-a40b-59cab3bde4c3
+		summarizeBy: none
+		sourceColumn: Short range
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"15e1459e-5163-472b-875f-617b0156e4be" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="15e1459e-5163-472b-875f-617b0156e4be"]}[Data],
+				    Date_ = #"15e1459e-5163-472b-875f-617b0156e4be"{[entity="Date",version=""]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Date_,{{"pay end date", "Fiscal Hierarchy"}}),
+				    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Custom", each Date.ToText([pay start date], [Format="MMM dd", Culture = "en-US"])),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Added Custom",{{"Custom", "Short paypd start"}}),
+				    #"Added Custom1" = Table.AddColumn(#"Renamed Columns1", "Custom", each Date.ToText([end text], [Format="MMM dd", Culture = "en-US"])),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Added Custom1",{{"Custom", "Short paypd end"}}),
+				    #"Inserted Merged Column" = Table.AddColumn(#"Renamed Columns2", "Short range", each Text.Combine({[Short paypd start], [Short paypd end]}, "-"), type text)
+				in
+				    #"Inserted Merged Column"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

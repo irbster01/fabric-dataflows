@@ -1,0 +1,8 @@
+CREATE TABLE [dbo].[raw_sp_entry] (
+
+	[Client ID] bigint NULL, 
+	[Entry Date] date NULL, 
+	[Entry Exit ID] bigint NULL, 
+	[Exit Date] date NULL, 
+	[Provider] varchar(8000) NULL
+);

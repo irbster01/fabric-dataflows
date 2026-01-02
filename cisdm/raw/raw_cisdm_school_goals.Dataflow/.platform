@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_cisdm_school_goals"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4d908f81-dadd-80f2-434c-8bbcb535e522"
+  }
+}

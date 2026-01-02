@@ -1,0 +1,26 @@
+CREATE TABLE [dbo].[cred_client_assess_assign] (
+
+	[Client ID] varchar(8000) NULL, 
+	[Client Name] varchar(8000) NULL, 
+	[assess_status] varchar(8000) NULL, 
+	[auth_status] varchar(8000) NULL, 
+	[last_assess] datetime2(6) NULL, 
+	[Profile Auth End Date] datetime2(6) NULL, 
+	[Assignment] varchar(8000) NULL, 
+	[days_since_assess] bigint NULL, 
+	[days_to_auth] bigint NULL, 
+	[service_id] varchar(8000) NULL, 
+	[primary_insurance] varchar(8000) NULL, 
+	[assess_type] varchar(8000) NULL, 
+	[lmhp_assigned] varchar(8000) NULL, 
+	[auth_due] date NULL, 
+	[auth_exp] varchar(8000) NULL, 
+	[assess_reason] varchar(8000) NULL, 
+	[completion_date] varchar(8000) NULL, 
+	[issues_impacting] varchar(8000) NULL, 
+	[font_colorpurpleadditional_not_594565] varchar(8000) NULL, 
+	[notes] varchar(8000) NULL, 
+	[impact_notes] varchar(8000) NULL, 
+	[ref_outcome] varchar(8000) NULL, 
+	[font_colornavyreferral_datefon_594566] varchar(8000) NULL
+);

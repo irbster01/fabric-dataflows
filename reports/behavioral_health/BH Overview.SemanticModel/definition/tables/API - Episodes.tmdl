@@ -1,0 +1,262 @@
+table 'API - Episodes'
+	lineageTag: 464f7826-437d-472f-beec-ae8edd9fd786
+
+	column 'Episode ID'
+		dataType: string
+		lineageTag: 930513c8-ad22-4a36-8072-94ee559f96dc
+		summarizeBy: none
+		sourceColumn: Episode ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Client ID'
+		dataType: string
+		lineageTag: 4cae9348-9d35-47e4-944b-3da636f17ba9
+		summarizeBy: none
+		sourceColumn: Client ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Episode Status'
+		dataType: string
+		lineageTag: e18ee3d1-3f62-40b7-8354-6e006e4b66df
+		summarizeBy: none
+		sourceColumn: Episode Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assessment Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a3d8ab13-6745-4354-a33d-d3a1407949ae
+		summarizeBy: none
+		sourceColumn: Assessment Date
+
+		variation Variation
+			isDefault
+			relationship: dec6397f-7e69-46e0-8db7-15a193307889
+			defaultHierarchy: LocalDateTable_cae19707-4293-4cf5-a37a-fa06b10aa9a3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Admission Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 40cb9633-4bcd-410a-952c-c8ee70016572
+		summarizeBy: none
+		sourceColumn: Admission Date
+
+		variation Variation
+			isDefault
+			relationship: ca30c23d-a272-4b0d-b537-f9766757e40c
+			defaultHierarchy: LocalDateTable_240cb31d-5974-4e63-9d3e-3d0d4c7ca761.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column program_id1
+		dataType: string
+		lineageTag: 080eea49-153d-45f0-bc50-49e43ca570f1
+		summarizeBy: none
+		sourceColumn: program_id1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Program ID'
+		dataType: string
+		lineageTag: 77f5fe8b-480c-43ac-a14e-acec1b6ed767
+		summarizeBy: none
+		sourceColumn: Program ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column assessment_date
+		dataType: string
+		lineageTag: a7a27eb5-c4d7-4b17-b8f6-4bb2f672a8cf
+		summarizeBy: none
+		sourceColumn: assessment_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Episode Updated'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: bc9ef019-804d-4dcb-a793-f1c238f9b91e
+		summarizeBy: none
+		sourceColumn: Date Episode Updated
+
+		variation Variation
+			isDefault
+			relationship: e8da491e-d338-450a-a861-d10af72c5e41
+			defaultHierarchy: LocalDateTable_e5dda634-a016-42d5-af3c-b9fda3543dc8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Date Episode Created'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 85e9c7fe-b9c1-4866-8214-8950b46fd694
+		summarizeBy: none
+		sourceColumn: Date Episode Created
+
+		variation Variation
+			isDefault
+			relationship: eb9248d0-f098-4da6-98a9-b0ef1f9a412c
+			defaultHierarchy: LocalDateTable_a2d8d4a7-bfc8-4b14-afbf-9a5c2006ff1a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Length of Stay'
+		dataType: int64
+		formatString: 0
+		lineageTag: ff5570e1-b081-4f9e-a3df-62ba1cc4e468
+		summarizeBy: sum
+		sourceColumn: Length of Stay
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discharge Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2c5738f0-d0e0-446e-8b49-240c49ad0024
+		summarizeBy: none
+		sourceColumn: Discharge Date
+
+		variation Variation
+			isDefault
+			relationship: 810f9808-f7e0-4301-92a9-3014baadbf00
+			defaultHierarchy: LocalDateTable_90cf9dec-3bc0-4bc5-95fb-f0825808cdee.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column discharge_date1
+		dataType: string
+		lineageTag: 8a0947a0-dc47-482f-9acb-3713d63726d5
+		summarizeBy: none
+		sourceColumn: discharge_date1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discharge Outcome'
+		dataType: string
+		lineageTag: 9b9e5f9f-497a-4df2-912b-ddc550beb4a8
+		summarizeBy: none
+		sourceColumn: Discharge Outcome
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discharge Location'
+		dataType: string
+		lineageTag: ad2e9871-7ac5-4c84-ae3d-e3ebe30b4527
+		summarizeBy: none
+		sourceColumn: Discharge Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Auto Closed'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: ae616624-295f-4c72-b14d-39fb9060f537
+		summarizeBy: none
+		sourceColumn: Date Auto Closed
+
+		variation Variation
+			isDefault
+			relationship: 082512ba-a485-4ce6-8bd6-8d3f41d8342a
+			defaultHierarchy: LocalDateTable_865954e6-f9ee-4572-a19e-9b677d0240a2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Referral Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 5f5d79ad-861f-473a-b58c-a12ff6cf0554
+		summarizeBy: none
+		sourceColumn: Referral Date
+
+		variation Variation
+			isDefault
+			relationship: a9ccef4e-5ee4-402f-8c7c-8f74b9066897
+			defaultHierarchy: LocalDateTable_5b4f0f76-e593-4060-82f3-a9ca9d929942.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Referred By'
+		dataType: string
+		lineageTag: 9fc98934-ca67-4faa-a776-dfd3a7b3fa95
+		summarizeBy: none
+		sourceColumn: Referred By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Referred Source'
+		dataType: string
+		lineageTag: 6eaa365d-2d25-4a9b-a753-87a77ced76fb
+		summarizeBy: none
+		sourceColumn: Referred Source
+
+		annotation SummarizationSetBy = Automatic
+
+	column fep_first_contact
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 029cabeb-2ad9-4a78-a34c-a67fc8164fdc
+		summarizeBy: none
+		sourceColumn: fep_first_contact
+
+		variation Variation
+			isDefault
+			relationship: dc1d3d87-10fc-4cc1-81e4-7a2a600599da
+			defaultHierarchy: LocalDateTable_a2161b4b-fcce-4ff1-936b-00cd1e8b652c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Program = IF('API - Episodes'[Program ID]="6", "ADULT BUND", IF('API - Episodes'[Program ID]="12", "6021"))
+		lineageTag: a09fab7b-215f-40e4-9ef1-ffae8623e1e3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'months enrolled' = DIVIDE('API - Episodes'[Length of Stay],30)
+		lineageTag: 39831d1e-010d-41ba-a72b-e56f5621e170
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'API - Episodes' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"4564730f-6b6d-437e-8875-2e85af1f6351" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="4564730f-6b6d-437e-8875-2e85af1f6351"]}[Data],
+				    #"API - Episodes_" = #"4564730f-6b6d-437e-8875-2e85af1f6351"{[entity="API - Episodes",version=""]}[Data],
+				    #"Extracted Text Range" = Table.TransformColumns(#"API - Episodes_", {{"Date Auto Closed", each Text.Middle(_, 0, 10), type text}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Extracted Text Range",{{"Date Auto Closed", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

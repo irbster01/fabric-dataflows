@@ -1,0 +1,47 @@
+table division-bundle-counter
+	lineageTag: c2e671fb-1722-410b-962b-2875de274f82
+
+	column Month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1f140566-d104-4340-80ee-c993b0a65238
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column bundle-flag
+		dataType: string
+		lineageTag: f112cda8-0786-4055-b645-0649c91a31f5
+		summarizeBy: none
+		sourceColumn: bundle-flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column bundle-count
+		dataType: int64
+		formatString: 0
+		lineageTag: e8b18d4c-6d85-4047-aa88-8ea3f66a42d4
+		summarizeBy: sum
+		sourceColumn: bundle-count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition division-bundle-counter = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"4241c9c7-5818-4c56-9220-faf632741770" = Workspaces{[workspaceId="4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+				    #"3fa29b08-6850-4b32-85de-75e3173de3fd" = #"4241c9c7-5818-4c56-9220-faf632741770"{[dataflowId="3fa29b08-6850-4b32-85de-75e3173de3fd"]}[Data],
+				    #"division-bundle-counter_" = #"3fa29b08-6850-4b32-85de-75e3173de3fd"{[entity="division-bundle-counter",version=""]}[Data]
+				in
+				    #"division-bundle-counter_"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

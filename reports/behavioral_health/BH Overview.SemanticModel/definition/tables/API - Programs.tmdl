@@ -1,0 +1,41 @@
+table 'API - Programs'
+	lineageTag: 68963a89-3585-4156-9d89-74e06645dd25
+
+	column 'Program ID'
+		dataType: string
+		lineageTag: e26cc134-ab23-4bd9-9c0f-2be59baeff29
+		summarizeBy: none
+		sourceColumn: Program ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Program Code'
+		dataType: string
+		lineageTag: d0ae7f55-85cc-41b8-b759-65f2618195cf
+		summarizeBy: none
+		sourceColumn: Program Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Program Description'
+		dataType: string
+		lineageTag: 3b3ead33-8211-40b2-b835-a9b3147502e0
+		summarizeBy: none
+		sourceColumn: Program Description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'API - Programs' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"f4fc267f-9a01-43f4-a2a7-84f272e65c96" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="f4fc267f-9a01-43f4-a2a7-84f272e65c96"]}[Data],
+				    #"API - Programs_" = #"f4fc267f-9a01-43f4-a2a7-84f272e65c96"{[entity="API - Programs",version=""]}[Data]
+				in
+				    #"API - Programs_"
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,60 @@
+table 'Non-Bill Measures'
+	lineageTag: 768870aa-170b-446b-b80a-0f48264b628e
+
+	measure 'Non-Bill Hours' = ```
+			'Non-Bill Measures'[Non-Bill Time (Mins)] / 60 
+			```
+		lineageTag: 1a948aeb-5584-4b39-8d7a-9389ade36ec1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Non-Bill Time (Mins)' =
+			
+			CALCULATE(
+				SUM('API - Billing'[Duration]),
+				'API - Billing'[Billing Rate] IN { 0 }
+			)
+		formatString: 0
+		lineageTag: f9728b02-300c-407a-b1c5-82b8c7eda5ca
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "FilteredMeasure"
+				}
+
+		changedProperty = FormatString
+
+	measure 'Total Services' = DISTINCTCOUNT('API - Billing'[Service ID])
+		formatString: 0
+		lineageTag: 246b3cad-849e-42c1-85f6-70a701156edd
+
+	measure 'No Show Count' = COUNTROWS(FILTER('API - Billing', 'API - Billing'[Service Type]="Cancel / No Show"))
+		formatString: 0
+		lineageTag: 5b31dcbd-7ecb-4bd4-a3e1-940a0dcb33eb
+
+	measure 'No Show Rate' = DIVIDE([No Show Count], [Total Services])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d76195e3-859b-4653-9539-2f4f6a9e76b2
+
+	measure 'Date from Hospitalization' = DATESBETWEEN('Date'[Date],MAX('API - Billing'[Service Date]),TODAY())
+		formatString: General Date
+		lineageTag: 8be7de79-6ee0-468e-a3ea-5f82cfa56184
+
+	column Value
+		formatString: 0
+		lineageTag: 584f02fe-6f01-4fb2-9527-17d5d80092cb
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Non-Bill Measures' = calculated
+		mode: import
+		source = ```
+				{0} 
+				```
+
+	annotation PBI_Id = 447c142e06cf433eb64f26f723f9dd35
+

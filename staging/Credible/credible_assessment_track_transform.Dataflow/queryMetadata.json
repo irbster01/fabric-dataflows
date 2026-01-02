@@ -1,0 +1,75 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "credible_assessment_track_transform",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_cred_assess_assignment": {
+      "queryId": "1d40fe58-52b1-4f6f-ad8d-591e5f0357d6",
+      "queryName": "raw_cred_assess_assignment"
+    },
+    "transform_enrolled_credible_clients": {
+      "queryId": "89de92ae-d2f8-480b-9195-69f61b9643de",
+      "queryName": "transform_enrolled_credible_clients",
+      "loadEnabled": false
+    },
+    "raw_credible_services": {
+      "queryId": "37c02d3e-7cbc-4e2c-b6b3-45d4e9abf118",
+      "queryName": "raw_credible_services"
+    },
+    "raw_credible_services (2)": {
+      "queryId": "3e6657e6-17b7-4eb7-8727-94b73de0cf87",
+      "queryName": "raw_credible_services (2)"
+    },
+    "transform_enrolled_credible_clients_DataDestination": {
+      "queryId": "dd9dccf3-1447-435a-8576-316f8fdfd6bf",
+      "queryName": "transform_enrolled_credible_clients_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "active_clients": {
+      "queryId": "b46e0e5a-2e89-45c3-bfde-5826a23a3efb",
+      "queryName": "active_clients"
+    },
+    "last_assess_staging": {
+      "queryId": "5e251513-37c7-4ba7-9471-25eb974e6061",
+      "queryName": "last_assess_staging"
+    },
+    "gold_assigment_table": {
+      "queryId": "16a31aac-a01b-423c-b33a-3f3dcd450979",
+      "queryName": "gold_assigment_table",
+      "loadEnabled": false
+    },
+    "max_assignment_date": {
+      "queryId": "0d62e39c-8045-4634-8801-cb01912dea5c",
+      "queryName": "max_assignment_date"
+    },
+    "active_clients (2)": {
+      "queryId": "1bdc35e0-42ea-4168-a766-abfb4b039ba1",
+      "queryName": "active_clients (2)"
+    },
+    "gold_assigment_table_DataDestination": {
+      "queryId": "b36088a1-9ef5-4483-ac3a-097a3a44d05e",
+      "queryName": "gold_assigment_table_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "raw_credible_clients": {
+      "queryId": "2b9d845d-050e-4c70-b706-ccb59bcdf9e3",
+      "queryName": "raw_credible_clients"
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    },
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"678f10d1-b794-4318-8152-4c973a8dc9fa\"}"
+    }
+  ]
+}

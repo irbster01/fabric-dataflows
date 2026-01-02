@@ -1,0 +1,79 @@
+table 'Refresh Date/Time'
+	lineageTag: 6ab14f1d-c41c-4f8b-97dc-d074ba395a0b
+
+	measure 'Date Refreshed' = MAX('Refresh Date/Time'[Last Refresh])-TIME(5,0,0)
+		formatString: Short Date
+		lineageTag: 94d7b405-3681-4ce9-aaaf-2f23f3c9bdbf
+
+	measure 'Time Refreshed' = MAX('Refresh Date/Time'[Time])-TIME(5,0,0)
+		formatString: Short Time
+		lineageTag: 0232e330-644f-42bf-a184-6ffe0e4a52cd
+
+	column 'Last Refresh'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a73a1d13-adbb-46a3-ac2a-1d5dbe20bdd7
+		summarizeBy: none
+		sourceColumn: Last Refresh
+
+		variation Variation
+			isDefault
+			relationship: 2ce78745-e82b-4669-91df-b7d697b66219
+			defaultHierarchy: LocalDateTable_62cdafe7-7c6b-4b86-8fb0-222e9682da7d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d4095d41-3a8d-48b1-8ad8-d50d616a23ff
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 37e399d3-26fb-4f86-a39f-37920ac658bb
+			defaultHierarchy: LocalDateTable_ab74330e-e0aa-46cc-846d-29bac2674606.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Time
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 27adc4db-6086-44bd-86b2-45e852f08cf1
+		summarizeBy: none
+		sourceColumn: Time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column 'Local Timezone'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 6abcbf8e-0c38-45e7-8433-a847e27e7bfc
+		summarizeBy: none
+		sourceColumn: Local Timezone
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	partition 'Refresh Date/Time' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"f09e25de-cf5c-4a79-a1ba-c2673d34f3d3" = Workspaces{[workspaceId="f09e25de-cf5c-4a79-a1ba-c2673d34f3d3"]}[Data],
+				    #"6017eed9-2ebe-48f4-b504-d5dcd251c6f0" = #"f09e25de-cf5c-4a79-a1ba-c2673d34f3d3"{[dataflowId="6017eed9-2ebe-48f4-b504-d5dcd251c6f0"]}[Data],
+				    #"Refresh Time_" = #"6017eed9-2ebe-48f4-b504-d5dcd251c6f0"{[entity="Refresh Time",version=""]}[Data]
+				in
+				    #"Refresh Time_"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

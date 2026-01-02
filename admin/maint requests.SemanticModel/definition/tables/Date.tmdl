@@ -1,0 +1,173 @@
+table Date
+	lineageTag: ab37018c-d038-4ca1-ab42-8eb639be548e
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3a46f227-abd9-4d95-b498-3d54c4a8bc6d
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Fiscal Year'
+		dataType: string
+		lineageTag: d0a80d1a-ad72-4c58-9cf4-834f44b528f6
+		summarizeBy: none
+		sourceColumn: Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cal Month'
+		dataType: dateTime
+		formatString: mmmm yyyy
+		lineageTag: becd7459-6805-4f66-9b2f-0866378b0b53
+		summarizeBy: none
+		sourceColumn: Cal Month
+
+		variation Variation
+			isDefault
+			relationship: e2760dc8-26ad-48c3-b187-d9079d883e0b
+			defaultHierarchy: LocalDateTable_cda8ee5b-7884-4dda-a4f9-8756523647a9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Cal wk Num'
+		dataType: int64
+		formatString: 0
+		lineageTag: 338fa127-7ad4-492a-8ecc-d914db0676d4
+		summarizeBy: sum
+		sourceColumn: Cal wk Num
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal WkNumb'
+		dataType: int64
+		formatString: 0
+		lineageTag: 63d821e5-6e49-4d62-9e4e-dee83dc4f2c3
+		summarizeBy: sum
+		sourceColumn: Fiscal WkNumb
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 526f1386-3698-4b3d-993f-71de1dfce9f6
+		summarizeBy: sum
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FY 2024 Pay period'
+		dataType: int64
+		formatString: 0
+		lineageTag: 292c0c7c-d29c-4d74-97ee-b0a5e5b8e29a
+		summarizeBy: sum
+		sourceColumn: FY 2024 Pay period
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'pay end date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 64cd01e5-b11a-4ec7-9ec0-0ce5cc2746c6
+		summarizeBy: none
+		sourceColumn: pay end date
+
+		variation Variation
+			isDefault
+			relationship: c0b5da67-8373-45dd-a941-e11b678e674f
+			defaultHierarchy: LocalDateTable_a888d2ed-8227-4b18-b000-c1d65286b2b4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'pay start date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 62d1e06c-b32e-43cf-8817-2ea84fcfbb91
+		summarizeBy: none
+		sourceColumn: pay start date
+
+		variation Variation
+			isDefault
+			relationship: bce48dbd-3caa-41d3-9777-ca65bf37658b
+			defaultHierarchy: LocalDateTable_c569c014-11b8-4469-9bcf-776d89705196.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'pay prd range'
+		dataType: string
+		lineageTag: e47fa888-db5d-49d4-ae48-b59a37a99dc8
+		summarizeBy: none
+		sourceColumn: pay prd range
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'start text'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 46c57690-6528-427e-bd80-279ef61a06e5
+		summarizeBy: none
+		sourceColumn: start text
+
+		variation Variation
+			isDefault
+			relationship: f314f91c-9872-4dff-896b-6d8c28779806
+			defaultHierarchy: LocalDateTable_d32a55a2-0d23-481b-a18c-ce404f0568b6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'end text'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 99135378-7320-4bbc-83b7-8ee7acf4831d
+		summarizeBy: none
+		sourceColumn: end text
+
+		variation Variation
+			isDefault
+			relationship: 01772859-a70d-4c57-ac3c-04eaf6441a23
+			defaultHierarchy: LocalDateTable_c49ba3d2-ac4b-486a-bfb9-418da32b8e54.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'FY 2024 batch period'
+		dataType: int64
+		formatString: 0
+		lineageTag: 991c79a3-b07e-401b-ab40-10247edccaf4
+		summarizeBy: sum
+		sourceColumn: FY 2024 batch period
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2e078b2f-481a-42df-8fee-6d81b3c2dac1" = Workspaces{[workspaceId="2e078b2f-481a-42df-8fee-6d81b3c2dac1"]}[Data],
+				    #"15e1459e-5163-472b-875f-617b0156e4be" = #"2e078b2f-481a-42df-8fee-6d81b3c2dac1"{[dataflowId="15e1459e-5163-472b-875f-617b0156e4be"]}[Data],
+				    Date_ = #"15e1459e-5163-472b-875f-617b0156e4be"{[entity="Date",version=""]}[Data]
+				in
+				    Date_
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

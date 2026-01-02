@@ -1,0 +1,48 @@
+table 'cis cis_active_client_gpa'
+	lineageTag: e4637107-94a3-4672-ae1e-ee3b1eaa97de
+
+	column client_full_name
+		dataType: string
+		lineageTag: df22c83f-5a5e-4be1-98ec-76212407e657
+		summarizeBy: none
+		sourceColumn: client_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: d06fec2c-8e7e-4fab-a2af-1d24c0943729
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sasid
+		dataType: string
+		lineageTag: d37e454a-3001-41aa-8b15-46e8a30b66f8
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1st_9_gpa
+		dataType: double
+		lineageTag: 601aa9b3-ec69-42c9-bc40-15ad1faf6148
+		summarizeBy: sum
+		sourceColumn: 1st_9_gpa
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'cis cis_active_client_gpa' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "Bronze"),
+				    cis_cis_active_client_gpa = Source{[Schema="cis",Item="cis_active_client_gpa"]}[Data]
+				in
+				    cis_cis_active_client_gpa
+
+	annotation PBI_ResultType = Table
+

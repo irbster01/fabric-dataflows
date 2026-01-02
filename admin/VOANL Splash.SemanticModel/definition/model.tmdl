@@ -1,0 +1,19 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["lighthouse_dates"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table lighthouse_dates
+ref table DateTableTemplate_691b8577-af50-4985-8d34-65e6d10eca0c
+ref table LocalDateTable_576512dd-d459-4f54-b9d5-50187075a95a
+ref table LocalDateTable_a2cb7156-cb95-4ba5-9334-bcd8b8a9091d
+
+ref cultureInfo en-US
+

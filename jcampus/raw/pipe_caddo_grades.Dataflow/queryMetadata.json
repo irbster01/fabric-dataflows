@@ -1,0 +1,61 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "pipe_caddo_grades",
+  "queryGroups": [
+    {
+      "id": "909d211c-268f-441e-8076-0b99732f13c0",
+      "name": "Transform file from caddo_grades_export"
+    },
+    {
+      "id": "95056265-f720-4efc-9a83-c2581bc57d71",
+      "name": "Helper queries",
+      "parentId": "909d211c-268f-441e-8076-0b99732f13c0"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "caddo_grades_export": {
+      "queryId": "ce203250-12d6-45d4-a3ad-7484c511d740",
+      "queryName": "caddo_grades_export",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "0324909f-4252-4372-9138-db93281d0c95",
+      "queryName": "Sample file",
+      "queryGroupId": "95056265-f720-4efc-9a83-c2581bc57d71",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "90eb8542-1e41-4d39-aa66-28bec824ad89",
+      "queryName": "Parameter",
+      "queryGroupId": "95056265-f720-4efc-9a83-c2581bc57d71",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "01919579-6595-491d-8d8f-625aa2aed54a",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "909d211c-268f-441e-8076-0b99732f13c0",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "d5b48ea2-78b3-4981-9c9b-5d58d3acc6d9",
+      "queryName": "Transform file",
+      "queryGroupId": "95056265-f720-4efc-9a83-c2581bc57d71",
+      "loadEnabled": false
+    },
+    "caddo_grades_export_DataDestination": {
+      "queryId": "cea707dd-dbdc-448c-a85d-cabf0659a880",
+      "queryName": "caddo_grades_export_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

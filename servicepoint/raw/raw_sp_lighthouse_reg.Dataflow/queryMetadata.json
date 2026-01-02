@@ -1,0 +1,31 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_sp_lighthouse_reg",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "sp_lighthouse_registration": {
+      "queryId": "a552ac6f-d8db-483a-afd5-472091027f62",
+      "queryName": "sp_lighthouse_registration"
+    },
+    "sp_lighthouse_registration csv_DataDestination": {
+      "queryId": "f57744d7-cf52-4d51-a4ad-88de2ac2bdfa",
+      "queryName": "sp_lighthouse_registration csv_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    },
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"678f10d1-b794-4318-8152-4c973a8dc9fa\"}"
+    }
+  ]
+}

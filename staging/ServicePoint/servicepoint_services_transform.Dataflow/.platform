@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "servicepoint_services_transform"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bab146e3-dfaa-8326-4920-447760998ca1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "Bronze",
+    "description": "The primary data source for VOA analytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f26e0eea-391d-a0c0-432c-97a21b643108"
+  }
+}

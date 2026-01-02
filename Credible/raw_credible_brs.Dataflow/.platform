@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_credible_brs",
+    "description": "This is the BRS report used by accounting."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c8e69891-e089-acf2-4448-7bdd3ad29a34"
+  }
+}

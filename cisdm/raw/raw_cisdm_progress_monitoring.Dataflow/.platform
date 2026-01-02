@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_cisdm_progress_monitoring"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4640a60b-740b-8951-4960-1387e780a46c"
+  }
+}

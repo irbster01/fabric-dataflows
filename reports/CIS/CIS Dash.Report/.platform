@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "CIS Dash"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ae74881d-ae24-86f5-48d7-b3b9590c97de"
+  }
+}

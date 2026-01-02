@@ -1,0 +1,27 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "caddo_grades_transforms",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_caddo_grades_export": {
+      "queryId": "4e5aca63-e504-4322-85f1-c60f2096f696",
+      "queryName": "raw_caddo_grades_export",
+      "loadEnabled": false
+    },
+    "raw_caddo_grades_export_DataDestination": {
+      "queryId": "06f95d69-6f8f-456b-b3e3-58dcff3df0ee",
+      "queryName": "raw_caddo_grades_export_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

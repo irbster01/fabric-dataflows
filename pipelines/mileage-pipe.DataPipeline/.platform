@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "mileage-pipe"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "72b09470-71b2-bc1c-402a-a3733e32a805"
+  }
+}

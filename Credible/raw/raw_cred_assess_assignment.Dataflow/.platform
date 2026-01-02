@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_cred_assess_assignment"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "96e6d59c-e2d8-88c0-4ab5-afe38eb56db4"
+  }
+}

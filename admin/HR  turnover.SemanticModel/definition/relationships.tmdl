@@ -1,0 +1,30 @@
+relationship e6c646b0-0dd7-49f6-87b7-9981363110b1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_paycor_turnover.termination_date
+	toColumn: LocalDateTable_fb70ce22-fd53-49c5-8207-f4f84ef122ad.Date
+
+relationship 05dd6059-9a2f-40a4-987f-69a8ab6496c5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_paycor_turnover.hire_date
+	toColumn: LocalDateTable_ddcedf35-c8a4-4647-b223-3e1363b31200.Date
+
+relationship 4ddcc3e1-8689-4fa7-886e-53c69656d5f3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_paycor_turnover.rehire_date
+	toColumn: LocalDateTable_fc71e3d8-d8cd-409a-bb53-cfcd7745df31.Date
+
+relationship 2aa32934-120b-4ee6-afba-ca9b61dc754b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_turnover_by_dept.term_date
+	toColumn: LocalDateTable_387521e9-245a-4d9e-9a50-2f72725952f5.Date
+
+relationship 7b89dbbb-33b4-4e80-a222-a1f37cd71635
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_turnover_by_dept.hire_date
+	toColumn: LocalDateTable_52c6e111-a249-46e7-b3de-e1f85be94d76.Date
+
+relationship 4841752f-968c-4d7e-b189-f2263531a78e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_turnover_by_dept.rehire_date
+	toColumn: LocalDateTable_861bfe2a-1844-4750-b288-0445b1dec545.Date
+

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "active_sp_clients",
+    "description": "This dataflow contains all the active clients in servicepoint."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "80d04d97-e39a-9617-4a59-2d04da98f81c"
+  }
+}

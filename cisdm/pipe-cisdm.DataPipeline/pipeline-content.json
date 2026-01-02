@@ -1,0 +1,396 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "c11d27d6-e757-969c-4664-446e5bdd6796",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "pipe-cisdm-clients",
+        "dependsOn": [
+          {
+            "activity": "case management entries",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "fff478c9-e1c5-996b-4d2d-3e7e3999d6fa",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "pipe-cisdm-accreditation",
+        "dependsOn": [
+          {
+            "activity": "pipe-cisdm-clients",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "4640a60b-740b-8951-4960-1387e780a46c",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "pipe-cisdm-progress-monitoring",
+        "dependsOn": []
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "f09ab097-dc1e-9f3d-4b17-f6a079d77fc0",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "raw_cisdm_student_support_detail",
+        "dependsOn": [
+          {
+            "activity": "pipe-cisdm-accreditation",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "7413b193-0ed2-ae2e-4640-bea1f1a2f320",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "cisdm progress monitoring transforms",
+        "dependsOn": [
+          {
+            "activity": "pipe-cisdm-progress-monitoring",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "287db052-f595-a976-49ac-3dab6e309065",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "cisdm student planned supports",
+        "dependsOn": [
+          {
+            "activity": "refresh cis dashboards",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "4d908f81-dadd-80f2-434c-8bbcb535e522",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "cisdm school goals",
+        "dependsOn": [
+          {
+            "activity": "cisdm student planned supports",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "b95d29c0-5c89-8e64-4c15-a991f189d2e2",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "case management entries",
+        "dependsOn": [
+          {
+            "activity": "cisdm progress monitoring transforms",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "PBISemanticModelRefresh",
+        "typeProperties": {
+          "method": "post",
+          "groupId": "4241c9c7-5818-4c56-9220-faf632741770",
+          "datasetId": "d6bb8536-26f6-4475-a364-73df2ed2e549",
+          "commitMode": "Transactional",
+          "objects": [
+            {
+              "table": "Aggregated Behavior Goals"
+            },
+            {
+              "table": "Aggregated Attendance Goals"
+            },
+            {
+              "table": "cis cis_org_all_goals_count"
+            },
+            {
+              "table": "Aggregated Academic Goals"
+            },
+            {
+              "table": "cis cis_dibels"
+            },
+            {
+              "table": "cis cis_client_list"
+            },
+            {
+              "table": "cis cis_behavior_positive_count"
+            },
+            {
+              "table": "cis cis_academics_positive_count"
+            },
+            {
+              "table": "Attendance - Positive Progress by School"
+            },
+            {
+              "table": "All Goals - Any Progress by School"
+            },
+            {
+              "table": "All Goals - Positive Progress"
+            },
+            {
+              "table": "cis_academics_goal_clients"
+            },
+            {
+              "table": "DateTableTemplate_763a018f-9cc8-470d-bb59-07aa37f35a9c"
+            },
+            {
+              "table": "LocalDateTable_3ee59b59-7b0f-449d-a0c7-77889065155d"
+            },
+            {
+              "table": "LocalDateTable_51c0ac74-1bc6-45a5-bcd4-84eb2e1e5f9b"
+            },
+            {
+              "table": "LocalDateTable_8ada483f-98a9-4cfb-bd37-88c9c66e2be9"
+            },
+            {
+              "table": "LocalDateTable_b6bcd101-3cfd-4361-8e82-e5f04bb4c721"
+            },
+            {
+              "table": "LocalDateTable_75344f5e-aac4-4e41-8f23-3c33b9148e60"
+            },
+            {
+              "table": "ProgMon - Attendance Detail"
+            },
+            {
+              "table": "LocalDateTable_38c986f2-252a-48c0-b744-84bd2273f22d"
+            },
+            {
+              "table": "LocalDateTable_569c32c1-9567-43e0-bf93-32e28db75b0f"
+            },
+            {
+              "table": "LocalDateTable_f6725728-78dd-4b87-a4f2-36c207e85b6c"
+            },
+            {
+              "table": "LocalDateTable_d87dcb2d-63e2-4434-9c30-e3c109b4401b"
+            },
+            {
+              "table": "LocalDateTable_597a7e3c-f157-4082-a7c7-6e91939d3d43"
+            },
+            {
+              "table": "ProgMon - Behavior"
+            },
+            {
+              "table": "LocalDateTable_4a6dd238-7bad-4bcf-ad58-3d0310919039"
+            },
+            {
+              "table": "LocalDateTable_06c81a66-3c8c-4d9e-87d0-340ad398921e"
+            },
+            {
+              "table": "LocalDateTable_e4263b0b-37a5-4da2-8710-61a1624176c2"
+            },
+            {
+              "table": "LocalDateTable_08e00fc9-a553-42cd-9a97-f0a3e0e87c25"
+            },
+            {
+              "table": "LocalDateTable_e009049c-06ab-4bf9-91e0-11c9b141f68a"
+            },
+            {
+              "table": "cis tier1_aggregate"
+            },
+            {
+              "table": "raw_cisdm_accred_case_manage"
+            },
+            {
+              "table": "Quarterly Checkins Good"
+            },
+            {
+              "table": "Quarterly All Planned supports"
+            },
+            {
+              "table": "cis planned_support_detail"
+            },
+            {
+              "table": "LocalDateTable_f1ee05ad-51ba-41d6-b824-fef1404d67b2"
+            },
+            {
+              "table": "LocalDateTable_477a5801-96de-4b65-928b-5206170f4df6"
+            },
+            {
+              "table": "LocalDateTable_6f82ad38-1e9a-4613-a457-6d2482bf46fc"
+            },
+            {
+              "table": "LocalDateTable_2f6a0df0-bcd3-4f3e-9883-9a04db063811"
+            },
+            {
+              "table": "cis leadership_support_counter"
+            },
+            {
+              "table": "caddo_jcampus 2526 1st_9_student_gpas"
+            },
+            {
+              "table": "Grades - Client Grade Breakdown"
+            },
+            {
+              "table": "cis cis_active_client_gpa"
+            },
+            {
+              "table": "Attendance JCampus - Active CIS Clients"
+            },
+            {
+              "table": "cis cis_active_client_referrals"
+            },
+            {
+              "table": "Aggregated Any Goals"
+            },
+            {
+              "table": "cis cis_tardies_by_student"
+            },
+            {
+              "table": "staging tardies"
+            },
+            {
+              "table": "stagine unexcused"
+            },
+            {
+              "table": "Matching Goals Counter"
+            },
+            {
+              "table": "raw_cisdm_student_planned_supports"
+            },
+            {
+              "table": "LocalDateTable_4cfada0f-cf57-43c0-846d-c5a9fb4db28e"
+            },
+            {
+              "table": "LocalDateTable_6529b3a5-1ca8-4e3c-b95d-544de2a81ac3"
+            },
+            {
+              "table": "LocalDateTable_a365099d-54a8-46c8-b1c5-3d4b15eba38c"
+            },
+            {
+              "table": "LocalDateTable_0088303e-335d-4e3a-b863-e70b61f1604f"
+            }
+          ],
+          "waitOnCompletion": true,
+          "operationType": "SemanticModelRefresh"
+        },
+        "externalReferences": {
+          "connection": "52140cb6-76f7-4f57-93bd-931ea7d737b0"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "refresh cis dashboards",
+        "dependsOn": [
+          {
+            "activity": "raw_cisdm_student_support_detail",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

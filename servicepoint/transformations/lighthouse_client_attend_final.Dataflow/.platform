@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "lighthouse_client_attend_final"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "06eb2b94-2824-943a-4671-ec26ebf38692"
+  }
+}

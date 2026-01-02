@@ -1,13 +1,10 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-
-// ===== CONFIGURATION PARAMETERS =====
-// Dataflow last updated: 2026-01-02
 shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
 shared LakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a" meta [Description = "Lakehouse ID"];
 shared CredibleServicesApiUrl = "https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rfRvTPNU2S5FtAXPwjqgHzA__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=" meta [Description = "Credible Services API endpoint"];
 shared CredibleOutreachApiUrl = "https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2r1OkQYY7dl3jpHEC3CGjVlQ__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=" meta [Description = "Credible Outreach API endpoint"];
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw-credible-services_DataDestination", IsNewTarget = false], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw-credible-services_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared #"raw-credible-services" = let
   Source = Xml.Tables(Web.Contents("https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rfRvTPNU2S5FtAXPwjqgHzA__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=")),
   Navigation = Source{1}[Table], // Navigate to main data table in XML
@@ -23,12 +20,10 @@ shared #"raw-credible-services" = let
   #"Changed column type 2" = Table.TransformColumnTypes(#"Extracted text range 1", {{"appr_date", type date}}), // Convert appr_date to date type
   #"Inserted text range" = Table.AddColumn(#"Changed column type 2", "service_date", each Text.Middle([timein], 0, 10), type text), // Extract service date from timein timestamp before converting to time
   #"Changed column type 4" = Table.TransformColumnTypes(#"Inserted text range", {{"service_date", type date}}), // Convert service_date to date type
-  #"Changed column type 3" = Table.TransformColumnTypes(#"Changed column type 4", {{"timein", type datetimezone}}), // Convert timein to datetimezone
-  #"Extracted time" = Table.TransformColumns(#"Changed column type 3", {{"timein", each DateTime.Time(_), type nullable time}}), // Extract time portion from timein
-  #"Changed column type 5" = Table.TransformColumnTypes(#"Extracted time", {{"timeout", type datetimezone}}), // Convert timeout to datetimezone
-  #"Extracted time 1" = Table.TransformColumns(#"Changed column type 5", {{"timeout", each DateTime.Time(_), type nullable time}}), // Extract time portion from timeout
-  #"Renamed columns" = Table.RenameColumns(#"Extracted time 1", {{"clientvisit_id", "service_id"}, {"client_id", "client_id"}, {"emp_id", "employee_id"}, {"visittype", "service_type"}, {"status", "service_status"}, {"duration", "duration"}, {"emp_name", "emp_name"}, {"rate", "rate"}, {"units_of_svc", "units"}, {"signature_datetime", "signature_datetime"}, {"appr_date", "appr_date"}, {"program_id", "program_id"}, {"non_billable", "non_billable"}, {"contract_rate", "contract_rate"}, {"ins_paid_amount", "ins_paid_amount"}, {"ins_due", "ins_due"}, {"is_late", "is_late"}, {"manual_update_to_modifier", "manual_update_to_modifier"}, {"auth_id", "auth_id"}, {"manual_redx", "manual_redx"}, {"manual_redx_note", "manual_redx_note"}, {"appr", "appr"}, {"cotherapist", "cotherapist"}, {"comb_primary", "comb_primary"}, {"comb_secondary", "comb_secondary"}, {"comb_units", "comb_units"}, {"comb_rate", "comb_rate"}, {"episode_id", "episode_id"}, {"delayed_reason_code", "delayed_reason_code"}}), // Rename columns to standard field names
-  #"Sorted rows" = Table.Sort(#"Renamed columns", {{"service_date", Order.Descending}}) // Sort by service date, most recent first
+  #"Changed column type 3" = Table.TransformColumnTypes(#"Changed column type 4", {{"timein", type datetimezone}, {"timeout", type datetimezone}}), // Extract time portion from timeout
+  #"Renamed columns" = Table.RenameColumns(#"Changed column type 3", {{"clientvisit_id", "service_id"}, {"client_id", "client_id"}, {"emp_id", "employee_id"}, {"visittype", "service_type"}, {"status", "service_status"}, {"duration", "duration"}, {"emp_name", "emp_name"}, {"rate", "rate"}, {"units_of_svc", "units"}, {"signature_datetime", "signature_datetime"}, {"appr_date", "appr_date"}, {"program_id", "program_id"}, {"non_billable", "non_billable"}, {"contract_rate", "contract_rate"}, {"ins_paid_amount", "ins_paid_amount"}, {"ins_due", "ins_due"}, {"is_late", "is_late"}, {"manual_update_to_modifier", "manual_update_to_modifier"}, {"auth_id", "auth_id"}, {"manual_redx", "manual_redx"}, {"manual_redx_note", "manual_redx_note"}, {"appr", "appr"}, {"cotherapist", "cotherapist"}, {"comb_primary", "comb_primary"}, {"comb_secondary", "comb_secondary"}, {"comb_units", "comb_units"}, {"comb_rate", "comb_rate"}, {"episode_id", "episode_id"}, {"delayed_reason_code", "delayed_reason_code"}}),
+  #"Changed column type 5" = Table.TransformColumnTypes(#"Renamed columns", {{"timeout", type datetime}, {"timein", type datetime}}), // Rename columns to standard field names
+  #"Sorted rows" = Table.Sort(#"Changed column type 5", {{"service_date", Order.Descending}}) // Sort by service date, most recent first
 in
   #"Sorted rows";
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "API - Outreach_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
@@ -60,7 +55,7 @@ in
 shared #"raw-credible-services_DataDestination" = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a"]}[Data],
-  TableNavigation = Navigation_2{[Id = "raw_credible_services", ItemKind = "Table"]}[Data]
+  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  TableNavigation = Navigation_2{[Id = "raw_credible_services", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;

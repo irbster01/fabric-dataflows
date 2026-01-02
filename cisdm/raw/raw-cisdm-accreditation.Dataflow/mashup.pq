@@ -2,7 +2,7 @@
 section Section1;
 
 // ===== CONFIGURATION PARAMETERS =====
-// Change these values to point to different data sources or school years
+// Update these values to point to different data sources or school years
 shared SchoolYear = "2526 CIS" meta [Description = "School year folder (e.g., '2526 CIS' for 2025-2026)"];
 shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
 shared LakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea" meta [Description = "Lakehouse ID"];

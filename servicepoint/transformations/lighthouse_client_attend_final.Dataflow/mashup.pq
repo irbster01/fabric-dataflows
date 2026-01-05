@@ -53,6 +53,22 @@ shared #"silver_lighthouse Lighthouse Matched with JCampus" = let
 in
   #"Navigation 2";
 
+shared raw_sp_services = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = WorkspaceId]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_services", ItemKind = "Table"]}[Data],
+  #"Filtered rows" = Table.SelectRows(#"Navigation 2", each ([program_name] = "VOANLA 4002 -The LightHouse - School Sites" or [program_name] = "VOANLA 4080 -The LightHouse - Community Sites" or [program_name] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
+  #"Added nine_week_period" = Table.AddColumn(#"Filtered rows", "nine_week_period", each 
+    if [service_date] >= NineWeekPeriods[FirstNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[FirstNineWeeks][EndDate] then NineWeekPeriods[FirstNineWeeks][Name]
+    else if [service_date] >= NineWeekPeriods[SecondNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[SecondNineWeeks][EndDate] then NineWeekPeriods[SecondNineWeeks][Name]
+    else if [service_date] >= NineWeekPeriods[ThirdNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[ThirdNineWeeks][EndDate] then NineWeekPeriods[ThirdNineWeeks][Name]
+    else if [service_date] >= NineWeekPeriods[FourthNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[FourthNineWeeks][EndDate] then NineWeekPeriods[FourthNineWeeks][Name]
+    else null, type text), // Assign each service to a 9-week period based on service_date
+  #"Filtered to nine weeks" = Table.SelectRows(#"Added nine_week_period", each [nine_week_period] <> null) // Keep only services within defined 9-week periods
+in
+  #"Filtered to nine weeks";
+
 shared lh_dates = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],
@@ -63,25 +79,15 @@ in
 
 // ===== BASE ATTENDANCE CALCULATION =====
 shared base_client_attendance = let
-  Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = WorkspaceId]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "v_client_month_rollups", ItemKind = "View"]}[Data],
-  #"Added custom" = Table.TransformColumnTypes(Table.AddColumn(#"Navigation 2", "today", each DateTime.Date(DateTimeZone.LocalNow())), {{"today", type datetime}}), // Add current date for tracking
-  #"Added nine_week_period" = Table.AddColumn(#"Added custom", "nine_week_period", each 
-    if [service_month] >= NineWeekPeriods[FirstNineWeeks][StartDate] and [service_month] <= NineWeekPeriods[FirstNineWeeks][EndDate] then NineWeekPeriods[FirstNineWeeks][Name]
-    else if [service_month] >= NineWeekPeriods[SecondNineWeeks][StartDate] and [service_month] <= NineWeekPeriods[SecondNineWeeks][EndDate] then NineWeekPeriods[SecondNineWeeks][Name]
-    else if [service_month] >= NineWeekPeriods[ThirdNineWeeks][StartDate] and [service_month] <= NineWeekPeriods[ThirdNineWeeks][EndDate] then NineWeekPeriods[ThirdNineWeeks][Name]
-    else if [service_month] >= NineWeekPeriods[FourthNineWeeks][StartDate] and [service_month] <= NineWeekPeriods[FourthNineWeeks][EndDate] then NineWeekPeriods[FourthNineWeeks][Name]
-    else null), // Calculate which 9-week period each service_month falls into
-  #"Filtered to nine week periods" = Table.SelectRows(#"Added nine_week_period", each [nine_week_period] <> null), // Keep only rows within defined 9-week periods
-  #"Merged queries" = Table.NestedJoin(#"Filtered to nine week periods", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter), // Join to get registration details
-  #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Merged queries", "raw_lighthouse_registration", {"app_date", "lighthouse_location_enrolling", "school_name"}, {"app_date", "lighthouse_location_enrolling", "school_name"}), // Expand registration fields
-  #"Merged with entries" = Table.NestedJoin(#"Expanded raw_lighthouse_registration", {"client_id"}, raw_sp_entries, {"client_id"}, "entry_data", JoinKind.LeftOuter), // Join to get entry and exit dates
-  #"Expanded entry_data" = Table.ExpandTableColumn(#"Merged with entries", "entry_data", {"Count", "exit_date"}, {"entry_date", "exit_date"}), // Expand entry and exit dates (Count field contains entry_date from grouped entries)
-  #"Removed columns" = Table.RemoveColumns(#"Expanded entry_data", {"max830", "max92", "max98", "max99"}), // Remove unused max columns - we'll calculate possible sessions from lh_dates instead
-  #"Grouped rows" = Table.Group(#"Removed columns", {"client_id", "client_last_name", "client_first_name", "lighthouse_location_enrolling", "nine_week_period", "entry_date", "exit_date"}, {{"sessions_attended", each List.Sum([Count]), type nullable number}}), // Sum attended sessions by client and period
-  #"Merged with dates" = Table.NestedJoin(#"Grouped rows", {"nine_week_period"}, lh_dates, {"nine_week_period"}, "program_dates", JoinKind.LeftOuter), // Join to program dates calendar
+  Source = raw_sp_services,
+  #"Grouped services" = Table.Group(Source, {"client_id", "nine_week_period"}, {{"sessions_attended", each Table.RowCount(_), Int64.Type}}), // Count services per client per 9-week period
+  #"Merged with demographics" = Table.NestedJoin(#"Grouped services", {"client_id"}, raw_sp_demographics, {"client_id"}, "demographics", JoinKind.LeftOuter), // Join to get client names
+  #"Expanded demographics" = Table.ExpandTableColumn(#"Merged with demographics", "demographics", {"last_name", "first_name"}, {"client_last_name", "client_first_name"}),
+  #"Merged with registration" = Table.NestedJoin(#"Expanded demographics", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "registration", JoinKind.LeftOuter), // Join to get lighthouse location
+  #"Expanded registration" = Table.ExpandTableColumn(#"Merged with registration", "registration", {"lighthouse_location_enrolling"}, {"lighthouse_location_enrolling"}),
+  #"Merged with entries" = Table.NestedJoin(#"Expanded registration", {"client_id"}, raw_sp_entries, {"client_id"}, "entry_data", JoinKind.LeftOuter), // Join to get entry and exit dates
+  #"Expanded entry_data" = Table.ExpandTableColumn(#"Merged with entries", "entry_data", {"Count", "exit_date"}, {"entry_date", "exit_date"}), // Count field has entry_date from grouped entries
+  #"Merged with dates" = Table.NestedJoin(#"Expanded entry_data", {"nine_week_period"}, lh_dates, {"nine_week_period"}, "program_dates", JoinKind.LeftOuter), // Join to program dates calendar
   #"Added sessions_possible" = Table.AddColumn(#"Merged with dates", "sessions_possible", each 
     let
       dates_table = [program_dates],
@@ -97,7 +103,7 @@ shared base_client_attendance = let
             (client_entry = null or [date] >= client_entry) and
             (client_exit = null or [date] <= client_exit)
           )
-        ), Int64.Type), // Count session days between client's entry and exit dates
+        ), Int64.Type), // Count session days between client's entry and exit dates within this 9-week period
   #"Removed program_dates" = Table.RemoveColumns(#"Added sessions_possible", {"program_dates"}), // Clean up nested table
   #"Merged queries 1" = Table.NestedJoin(#"Removed program_dates", {"client_id"}, #"silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, "jcampus_match", JoinKind.LeftOuter), // Join to get JCampus school name
   #"Expanded jcampus_match" = Table.ExpandTableColumn(#"Merged queries 1", "jcampus_match", {"School Name"}, {"jcampus_school_name"}), // Expand JCampus school name

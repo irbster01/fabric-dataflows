@@ -2,12 +2,6 @@
 section Section1;
 WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
 LakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910" meta [Description = "ServicePoint lakehouse ID"];
-NineWeekPeriods = [
-  FirstNineWeeks = [StartDate = #date(2025, 8, 13), EndDate = #date(2025, 10, 17), Name = "1st 9 Weeks"],
-  SecondNineWeeks = [StartDate = #date(2025, 10, 20), EndDate = #date(2025, 12, 17), Name = "2nd 9 Weeks"],
-  ThirdNineWeeks = [StartDate = #date(2026, 1, 6), EndDate = #date(2026, 3, 6), Name = "3rd 9 Weeks"],
-  FourthNineWeeks = [StartDate = #date(2026, 3, 16), EndDate = #date(2026, 5, 21), Name = "4th 9 Weeks"]
-] meta [Description = "9-week period date ranges"];
 MinimumDaysEnrolled = 7 meta [Description = "Minimum days enrolled to be included in calculations"];
 EntryExitDateFilter = #date(2025, 9, 1) meta [Description = "Only include entries/exits after this date"];
 HighAttendanceThreshold = 0.80 meta [Description = "Attendance threshold for 80% schools"];
@@ -58,10 +52,10 @@ shared raw_sp_services = let
   #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
   #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_services", ItemKind = "Table"]}[Data],
   #"Added nine_week_period" = Table.AddColumn(#"Navigation 2", "nine_week_period", each 
-    if [service_date] >= NineWeekPeriods[FirstNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[FirstNineWeeks][EndDate] then NineWeekPeriods[FirstNineWeeks][Name]
-    else if [service_date] >= NineWeekPeriods[SecondNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[SecondNineWeeks][EndDate] then NineWeekPeriods[SecondNineWeeks][Name]
-    else if [service_date] >= NineWeekPeriods[ThirdNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[ThirdNineWeeks][EndDate] then NineWeekPeriods[ThirdNineWeeks][Name]
-    else if [service_date] >= NineWeekPeriods[FourthNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[FourthNineWeeks][EndDate] then NineWeekPeriods[FourthNineWeeks][Name]
+    if [service_date] >= #date(2025, 8, 13) and [service_date] <= #date(2025, 10, 17) then "1st 9 Weeks"
+    else if [service_date] >= #date(2025, 10, 20) and [service_date] <= #date(2025, 12, 17) then "2nd 9 Weeks"
+    else if [service_date] >= #date(2026, 1, 6) and [service_date] <= #date(2026, 3, 6) then "3rd 9 Weeks"
+    else if [service_date] >= #date(2026, 3, 16) and [service_date] <= #date(2026, 5, 21) then "4th 9 Weeks"
     else null, type text), // Assign each service to a 9-week period based on service_date
   #"Filtered to nine weeks" = Table.SelectRows(#"Added nine_week_period", each [nine_week_period] <> null) // Keep only services within defined 9-week periods
 in

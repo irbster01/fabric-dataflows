@@ -58,7 +58,7 @@ shared raw_sp_services = let
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
   #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_services", ItemKind = "Table"]}[Data],
-  #"Filtered rows" = Table.SelectRows(#"Navigation 2", each ([program_name] = "VOANLA 4002 -The LightHouse - School Sites" or [program_name] = "VOANLA 4080 -The LightHouse - Community Sites" or [program_name] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
+  #"Filtered rows" = Table.SelectRows(#"Navigation 2", each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
   #"Added nine_week_period" = Table.AddColumn(#"Filtered rows", "nine_week_period", each 
     if [service_date] >= NineWeekPeriods[FirstNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[FirstNineWeeks][EndDate] then NineWeekPeriods[FirstNineWeeks][Name]
     else if [service_date] >= NineWeekPeriods[SecondNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[SecondNineWeeks][EndDate] then NineWeekPeriods[SecondNineWeeks][Name]

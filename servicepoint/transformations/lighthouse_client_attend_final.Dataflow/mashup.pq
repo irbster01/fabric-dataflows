@@ -57,7 +57,7 @@ shared lh_dates = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "lh_dates", ItemKind = "Table"]}[Data] // Load lighthouse program operating dates calendar
+  #"Navigation 2" = #"Navigation 1"{[Id = "lighthouse_dates", ItemKind = "Table"]}[Data] // Load lighthouse program operating dates calendar
 in
   #"Navigation 2";
 

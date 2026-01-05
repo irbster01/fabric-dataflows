@@ -128,11 +128,8 @@ shared base_client_attendance = let
 in
   #"Changed column type";
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "client_attendance_detail_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
-shared client_attendance_detail = let
-  Source = base_client_attendance,
-  #"Removed columns" = Table.RemoveColumns(Source, {"last_name", "first_name"})
-in
-  #"Removed columns";
+shared client_attendance_detail = 
+  Table.RemoveColumns(base_client_attendance, {"last_name", "first_name"});
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_summary_80_schools_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared attendance_summary_80_schools = let
   Source = base_client_attendance,

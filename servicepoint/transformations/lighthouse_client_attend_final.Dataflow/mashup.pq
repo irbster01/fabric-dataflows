@@ -79,9 +79,16 @@ shared base_client_attendance = let
   #"Merged queries 1" = Table.NestedJoin(#"Grouped rows", {"client_id"}, #"silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, "jcampus_match", JoinKind.LeftOuter), // Join to get JCampus school name
   #"Expanded jcampus_match" = Table.ExpandTableColumn(#"Merged queries 1", "jcampus_match", {"School Name"}, {"jcampus_school_name"}), // Expand JCampus school name
   #"Added school_name" = Table.AddColumn(#"Expanded jcampus_match", "school_name", each 
-    if [jcampus_school_name] <> null and [jcampus_school_name] <> "" 
-    then [jcampus_school_name] 
-    else [lighthouse_location_enrolling]), // Use JCampus school name if available, otherwise use lighthouse location
+    if [jcampus_school_name] <> null and [jcampus_school_name] <> "" then 
+      [jcampus_school_name]
+    else if [lighthouse_location_enrolling] = "School Site - Broadmoor" then 
+      "Broadmoor STEM"
+    else if [lighthouse_location_enrolling] = "School Site - Creswell" then 
+      "Creswell Elementary"
+    else if [lighthouse_location_enrolling] = "School Site - Oak Park" then 
+      "Bethune/Oak Park"
+    else 
+      [lighthouse_location_enrolling]), // Normalize school site names to match JCampus, otherwise use lighthouse location
   #"Added is_80_school" = Table.AddColumn(#"Added school_name", "is_80_school", each List.Contains(HighAttendanceSchools, [school_name])), // Flag if school requires 80% attendance (based on final school_name)
   #"Added required_threshold" = Table.AddColumn(#"Added is_80_school", "required_threshold", each if [is_80_school] then HighAttendanceThreshold else StandardAttendanceThreshold), // Set required threshold based on school type
   #"Added attendance_rate" = Table.AddColumn(#"Added required_threshold", "attendance_rate", each [sessions_attended] / [sessions_possible], type number), // Calculate attendance rate

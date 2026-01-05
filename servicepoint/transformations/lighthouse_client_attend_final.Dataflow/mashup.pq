@@ -34,11 +34,11 @@ shared raw_sp_entries = let
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
   raw_sp_entries = #"Navigation 1"{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data],
-  #"Filtered rows" = Table.SelectRows(raw_sp_entries, each [exit_date] > EntryExitDateFilter or [exit_date] = null), // Filter to recent entries/exits
-  #"Filtered rows 1" = Table.SelectRows(#"Filtered rows", each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
-  #"Grouped rows" = Table.Group(#"Filtered rows 1", {"client_id"}, {{"entry_date", each List.Max([entry_date]), type nullable date}, {"exit_date", each List.Max([exit_date]), type nullable date}, {"program", each List.Max([program]), type nullable text}}) // Get most recent entry per client
+  #"Filtered to programs" = Table.SelectRows(raw_sp_entries, each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
+  #"Grouped rows" = Table.Group(#"Filtered to programs", {"client_id"}, {{"entry_date", each List.Max([entry_date]), type nullable date}, {"exit_date", each List.Max([exit_date]), type nullable date}, {"program", each List.Max([program]), type nullable text}}), // Get most recent entry per client
+  #"Filtered by date" = Table.SelectRows(#"Grouped rows", each [exit_date] = null or [exit_date] > EntryExitDateFilter) // Filter to recent entries/exits after grouping
 in
-  #"Grouped rows";
+  #"Filtered by date";
 shared #"silver_lighthouse Lighthouse Matched with JCampus" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

@@ -115,16 +115,29 @@ shared base_client_attendance = let
       "Bethune/Oak Park"
     else 
       [lighthouse_location_enrolling]), // Normalize school site names to match JCampus, otherwise use lighthouse location
-  #"Added is_80_school" = Table.AddColumn(#"Added school_name", "is_80_school", each List.Contains(HighAttendanceSchools, [school_name])), // Flag if school requires 80% attendance (based on final school_name)
-  #"Added required_threshold" = Table.AddColumn(#"Added is_80_school", "required_threshold", each if [is_80_school] then HighAttendanceThreshold else StandardAttendanceThreshold), // Set required threshold based on school type
+  #"Added is_80_school" = Table.AddColumn(#"Added school_name", "is_80_school", each List.Contains(HighAttendanceSchools, [school_name]), type logical), // Flag if school requires 80% attendance (based on final school_name)
+  #"Added required_threshold" = Table.AddColumn(#"Added is_80_school", "required_threshold", each if [is_80_school] then HighAttendanceThreshold else StandardAttendanceThreshold, type number), // Set required threshold based on school type
   #"Added attendance_rate" = Table.AddColumn(#"Added required_threshold", "attendance_rate", each if [sessions_possible] = 0 then null else [sessions_attended] / [sessions_possible], type number), // Calculate attendance rate, null if no possible sessions
-  #"Added meets_threshold" = Table.AddColumn(#"Added attendance_rate", "meets_threshold", each if [attendance_rate] = null then false else [attendance_rate] >= [required_threshold]), // Flag if client meets their threshold
+  #"Added meets_threshold" = Table.AddColumn(#"Added attendance_rate", "meets_threshold", each if [attendance_rate] = null then false else [attendance_rate] >= [required_threshold], type logical), // Flag if client meets their threshold
   #"Added attendance_flag" = Table.AddColumn(#"Added meets_threshold", "attendance_flag", each 
     if [attendance_rate] = null then "NO SESSIONS POSSIBLE"
     else if [attendance_rate] >= HighAttendanceThreshold then "80%+ GOOD"
     else if [attendance_rate] >= StandardAttendanceThreshold then "60%+ GOOD"
-    else "BELOW THRESHOLD"), // Create readable flag
-  #"Changed column type" = Table.TransformColumnTypes(#"Added attendance_flag", {{"attendance_rate", Percentage.Type}}) // Format attendance rate as percentage
+    else "BELOW THRESHOLD", type text), // Create readable flag
+  #"Changed column type" = Table.TransformColumnTypes(#"Added attendance_flag", {
+    {"client_id", Int64.Type},
+    {"nine_week_period", type text},
+    {"sessions_attended", Int64.Type},
+    {"last_name", type text},
+    {"first_name", type text},
+    {"lighthouse_location_enrolling", type text},
+    {"entry_date", type date},
+    {"exit_date", type date},
+    {"sessions_possible", Int64.Type},
+    {"jcampus_school_name", type text},
+    {"school_name", type text},
+    {"attendance_rate", Percentage.Type}
+  }) // Ensure all columns have correct types
 in
   #"Changed column type";
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "client_attendance_detail_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]

@@ -157,6 +157,34 @@
       "queryName": "cis_org_all_goals_count_DataDestination",
       "isHidden": true,
       "loadEnabled": false
+    },
+    "1st_9wks_positive_prog_withRaw_%": {
+      "queryId": "64f6902b-1a37-4797-b648-aa9e891d268b",
+      "queryName": "1st_9wks_positive_prog_withRaw_%",
+      "loadEnabled": false
+    },
+    "2nd_9wks_positive_prog_withRaw_%": {
+      "queryId": "149a20df-568c-41b1-b65c-a97faa2a40d2",
+      "queryName": "2nd_9wks_positive_prog_withRaw_%",
+      "loadEnabled": false
+    },
+    "NavigationQuery": {
+      "queryId": "9f9a057d-af68-4645-9b30-6f666e5381b3",
+      "queryName": "NavigationQuery",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "1st_9wks_positive_prog_withRaw_%_DataDestination": {
+      "queryId": "5e02228b-33d4-4d9a-81c5-15007df6d44b",
+      "queryName": "1st_9wks_positive_prog_withRaw_%_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "2nd_9wks_positive_prog_withRaw_%_DataDestination": {
+      "queryId": "f62627e7-ba31-4243-a7ac-05bc6c30129b",
+      "queryName": "2nd_9wks_positive_prog_withRaw_%_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
     }
   },
   "connections": [

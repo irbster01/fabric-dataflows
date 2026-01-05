@@ -301,3 +301,35 @@ shared cis_org_all_goals_count_DataDestination = let
   TableNavigation = Navigation_2{[Id = "cis_org_all_goals_count", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "1st_9wks_positive_prog_withRaw_%_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared #"1st_9wks_positive_prog_withRaw_%" = let
+  Source = #"positive_prog_withRaw_%",
+  #"Filtered rows" = Table.SelectRows(Source, each ([grading_period] = "1st Grading Period"))
+in
+  #"Filtered rows";
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "2nd_9wks_positive_prog_withRaw_%_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared #"2nd_9wks_positive_prog_withRaw_%" = let
+  Source = #"positive_prog_withRaw_%",
+  #"Filtered rows" = Table.SelectRows(Source, each ([grading_period] = "2nd Grading Period"))
+in
+  #"Filtered rows";
+shared NavigationQuery = let
+  Source = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data]
+in
+  #"Navigation 1";
+shared #"1st_9wks_positive_prog_withRaw_%_DataDestination" = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  TableNavigation = Navigation_2{[Id = "1st_9wks_positive_prog_withRaw_%", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared #"2nd_9wks_positive_prog_withRaw_%_DataDestination" = let
+  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  TableNavigation = Navigation_2{[Id = "2nd_9wks_positive_prog_withRaw_%", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;

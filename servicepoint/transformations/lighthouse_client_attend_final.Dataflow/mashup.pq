@@ -120,7 +120,8 @@ shared base_client_attendance = let
   #"Added attendance_rate" = Table.AddColumn(#"Added required_threshold", "attendance_rate", each if [sessions_possible] = 0 then null else [sessions_attended] / [sessions_possible], type number), // Calculate attendance rate, null if no possible sessions
   #"Added meets_threshold" = Table.AddColumn(#"Added attendance_rate", "meets_threshold", each if [attendance_rate] = null then false else [attendance_rate] >= [required_threshold]), // Flag if client meets their threshold
   #"Added attendance_flag" = Table.AddColumn(#"Added meets_threshold", "attendance_flag", each 
-    if [attendance_rate] >= HighAttendanceThreshold then "80%+ GOOD"
+    if [attendance_rate] = null then "NO SESSIONS POSSIBLE"
+    else if [attendance_rate] >= HighAttendanceThreshold then "80%+ GOOD"
     else if [attendance_rate] >= StandardAttendanceThreshold then "60%+ GOOD"
     else "BELOW THRESHOLD"), // Create readable flag
   #"Changed column type" = Table.TransformColumnTypes(#"Added attendance_flag", {{"attendance_rate", Percentage.Type}}) // Format attendance rate as percentage

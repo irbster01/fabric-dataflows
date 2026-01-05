@@ -8,37 +8,49 @@ HighAttendanceThreshold = 0.80 meta [Description = "Attendance threshold for 80%
 StandardAttendanceThreshold = 0.60 meta [Description = "Attendance threshold for non-80% schools"];
 HighAttendanceSchools = {"Bethune/Oak Park", "Broadmoor STEM", "Creswell Elementary"} meta [Description = "Schools requiring 80% attendance"];
 shared #"2526_lh_clients" = let
-  Source = Lakehouse.Contents([WorkspaceId = WorkspaceId, LakehouseId = LakehouseId]),
-  #"2526_lh_clients" = Source{[Id = "2526_lh_clients", ItemKind = "Table"]}[Data],
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  #"2526_lh_clients" = #"Navigation 1"{[Id = "2526_lh_clients", ItemKind = "Table"]}[Data],
   #"Filtered rows" = Table.SelectRows(#"2526_lh_clients", each [days_enrolled] > MinimumDaysEnrolled) // Filter to clients enrolled more than minimum days
 in
   #"Filtered rows";
 shared raw_lighthouse_registration = let
-  Source = Lakehouse.Contents([WorkspaceId = WorkspaceId, LakehouseId = LakehouseId]),
-  raw_lighthouse_registration = Source{[Id = "raw_lighthouse_registration", ItemKind = "Table"]}[Data] // Load lighthouse registration data with location and school info
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  raw_lighthouse_registration = #"Navigation 1"{[Id = "raw_lighthouse_registration", ItemKind = "Table"]}[Data] // Load lighthouse registration data with location and school info
 in
   raw_lighthouse_registration;
 shared raw_sp_demographics = let
-  Source = Lakehouse.Contents([WorkspaceId = WorkspaceId, LakehouseId = LakehouseId]),
-  raw_sp_demographics = Source{[Id = "raw_sp_demographics", ItemKind = "Table"]}[Data] // Load ServicePoint demographics data
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  raw_sp_demographics = #"Navigation 1"{[Id = "raw_sp_demographics", ItemKind = "Table"]}[Data] // Load ServicePoint demographics data
 in
   raw_sp_demographics;
 shared raw_sp_entries = let
-  Source = Lakehouse.Contents([WorkspaceId = WorkspaceId, LakehouseId = LakehouseId]),
-  raw_sp_entries = Source{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data],
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  raw_sp_entries = #"Navigation 1"{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data],
   #"Filtered rows" = Table.SelectRows(raw_sp_entries, each [exit_date] > EntryExitDateFilter or [exit_date] = null), // Filter to recent entries/exits
   #"Filtered rows 1" = Table.SelectRows(#"Filtered rows", each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
   #"Grouped rows" = Table.Group(#"Filtered rows 1", {"client_id"}, {{"Count", each List.Max([entry_date]), type nullable date}, {"exit_date", each List.Max([exit_date]), type nullable date}, {"program", each List.Max([program]), type nullable text}}) // Get most recent entry per client
 in
   #"Grouped rows";
 shared #"silver_lighthouse Lighthouse Matched with JCampus" = let
-  Source = Lakehouse.Contents([WorkspaceId = WorkspaceId, LakehouseId = LakehouseId]),
-  #"Lighthouse Matched with JCampus" = Source{[Id = "silver_lighthouse.Lighthouse Matched with JCampus", ItemKind = "Table"]}[Data] // Load matched data with JCampus school names
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  #"Lighthouse Matched with JCampus" = #"Navigation 1"{[Id = "silver_lighthouse.Lighthouse Matched with JCampus", ItemKind = "Table"]}[Data] // Load matched data with JCampus school names
 in
   #"Lighthouse Matched with JCampus";
 shared raw_sp_services = let
-  Source = Lakehouse.Contents([WorkspaceId = WorkspaceId, LakehouseId = LakehouseId]),
-  raw_sp_services = Source{[Id = "raw_sp_services", ItemKind = "Table"]}[Data],
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  raw_sp_services = #"Navigation 1"{[Id = "raw_sp_services", ItemKind = "Table"]}[Data],
   #"Added nine_week_period" = Table.AddColumn(raw_sp_services, "nine_week_period", each 
     if [service_date] >= #date(2025, 8, 13) and [service_date] <= #date(2025, 10, 17) then "1st 9 Weeks"
     else if [service_date] >= #date(2025, 10, 20) and [service_date] <= #date(2025, 12, 17) then "2nd 9 Weeks"
@@ -49,8 +61,10 @@ shared raw_sp_services = let
 in
   #"Filtered to nine weeks";
 shared lh_dates = let
-  Source = Lakehouse.Contents([WorkspaceId = WorkspaceId, LakehouseId = LakehouseId]),
-  lighthouse_dates = Source{[Id = "lighthouse_dates", ItemKind = "Table"]}[Data] // Load lighthouse program operating dates calendar
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  lighthouse_dates = #"Navigation 1"{[Id = "lighthouse_dates", ItemKind = "Table"]}[Data] // Load lighthouse program operating dates calendar
 in
   lighthouse_dates;
 shared base_client_attendance = let

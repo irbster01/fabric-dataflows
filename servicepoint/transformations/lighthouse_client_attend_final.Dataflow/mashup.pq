@@ -36,7 +36,7 @@ shared raw_sp_entries = let
   raw_sp_entries = #"Navigation 1"{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data],
   #"Filtered rows" = Table.SelectRows(raw_sp_entries, each [exit_date] > EntryExitDateFilter or [exit_date] = null), // Filter to recent entries/exits
   #"Filtered rows 1" = Table.SelectRows(#"Filtered rows", each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
-  #"Grouped rows" = Table.Group(#"Filtered rows 1", {"client_id"}, {{"Count", each List.Max([entry_date]), type nullable date}, {"exit_date", each List.Max([exit_date]), type nullable date}, {"program", each List.Max([program]), type nullable text}}) // Get most recent entry per client
+  #"Grouped rows" = Table.Group(#"Filtered rows 1", {"client_id"}, {{"entry_date", each List.Max([entry_date]), type nullable date}, {"exit_date", each List.Max([exit_date]), type nullable date}, {"program", each List.Max([program]), type nullable text}}) // Get most recent entry per client
 in
   #"Grouped rows";
 shared #"silver_lighthouse Lighthouse Matched with JCampus" = let

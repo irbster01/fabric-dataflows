@@ -12,7 +12,8 @@ shared #"2526_lh_clients" = let
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
   #"2526_lh_clients" = #"Navigation 1"{[Id = "2526_lh_clients", ItemKind = "Table"]}[Data],
-  #"Filtered rows" = Table.SelectRows(#"2526_lh_clients", each [days_enrolled] > MinimumDaysEnrolled) // Filter to clients enrolled more than minimum days
+  #"Removed errors" = Table.SelectRows(#"2526_lh_clients", each not (try [days_enrolled])[HasError]), // Remove rows with errors in days_enrolled
+  #"Filtered rows" = Table.SelectRows(#"Removed errors", each [days_enrolled] > MinimumDaysEnrolled) // Filter to clients enrolled more than minimum days
 in
   #"Filtered rows";
 shared raw_lighthouse_registration = let
@@ -34,7 +35,8 @@ shared raw_sp_entries = let
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
   raw_sp_entries = #"Navigation 1"{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data],
-  #"Filtered to programs" = Table.SelectRows(raw_sp_entries, each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
+  #"Removed errors" = Table.SelectRows(raw_sp_entries, each not (try [client_id])[HasError] and not (try [program])[HasError]), // Remove rows with errors in key columns
+  #"Filtered to programs" = Table.SelectRows(#"Removed errors", each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
   #"Grouped rows" = Table.Group(#"Filtered to programs", {"client_id"}, {{"entry_date", each List.Max([entry_date]), type nullable date}, {"exit_date", each List.Max([exit_date]), type nullable date}, {"program", each List.Max([program]), type nullable text}}), // Get most recent entry per client
   #"Filtered by date" = Table.SelectRows(#"Grouped rows", each [exit_date] = null or [exit_date] > EntryExitDateFilter) // Filter to recent entries/exits after grouping
 in

@@ -1,18 +1,18 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
-shared LakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910" meta [Description = "ServicePoint lakehouse ID"];
-shared NineWeekPeriods = [
+WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
+LakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910" meta [Description = "ServicePoint lakehouse ID"];
+NineWeekPeriods = [
   FirstNineWeeks = [StartDate = #date(2025, 8, 13), EndDate = #date(2025, 10, 17), Name = "1st 9 Weeks"],
   SecondNineWeeks = [StartDate = #date(2025, 10, 20), EndDate = #date(2025, 12, 17), Name = "2nd 9 Weeks"],
   ThirdNineWeeks = [StartDate = #date(2026, 1, 6), EndDate = #date(2026, 3, 6), Name = "3rd 9 Weeks"],
   FourthNineWeeks = [StartDate = #date(2026, 3, 16), EndDate = #date(2026, 5, 21), Name = "4th 9 Weeks"]
 ] meta [Description = "9-week period date ranges"];
-shared MinimumDaysEnrolled = 7 meta [Description = "Minimum days enrolled to be included in calculations"];
-shared EntryExitDateFilter = #date(2025, 9, 1) meta [Description = "Only include entries/exits after this date"];
-shared HighAttendanceThreshold = 0.80 meta [Description = "Attendance threshold for 80% schools"];
-shared StandardAttendanceThreshold = 0.60 meta [Description = "Attendance threshold for non-80% schools"];
-shared HighAttendanceSchools = {"Bethune/Oak Park", "Broadmoor STEM", "Creswell Elementary"} meta [Description = "Schools requiring 80% attendance"];
+MinimumDaysEnrolled = 7 meta [Description = "Minimum days enrolled to be included in calculations"];
+EntryExitDateFilter = #date(2025, 9, 1) meta [Description = "Only include entries/exits after this date"];
+HighAttendanceThreshold = 0.80 meta [Description = "Attendance threshold for 80% schools"];
+StandardAttendanceThreshold = 0.60 meta [Description = "Attendance threshold for non-80% schools"];
+HighAttendanceSchools = {"Bethune/Oak Park", "Broadmoor STEM", "Creswell Elementary"} meta [Description = "Schools requiring 80% attendance"];
 shared #"2526_lh_clients" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],

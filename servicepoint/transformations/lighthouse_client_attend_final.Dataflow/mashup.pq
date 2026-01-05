@@ -188,36 +188,36 @@ in
   #"Sorted by count";
 shared attendance_summary_80_schools_DataDestination = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
   TableNavigation = Navigation_2{[Id = "attendance_summary_80_schools", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
 shared attendance_summary_other_schools_DataDestination = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
   TableNavigation = Navigation_2{[Id = "attendance_summary_other_schools", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
 shared attendance_averages_by_location_DataDestination = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
   TableNavigation = Navigation_2{[Id = "attendance_averages_by_location", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
 shared unmatched_clients_DataDestination = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
   TableNavigation = Navigation_2{[Id = "unmatched_clients", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
 shared client_attendance_detail_DataDestination = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
   TableNavigation = Navigation_2{[Id = "client_attendance_detail", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;

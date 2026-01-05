@@ -13,10 +13,6 @@
       "queryId": "491dc5f8-3c4d-485c-811f-d559c74fb06c",
       "queryName": "LakehouseId"
     },
-    "NineWeekPeriods": {
-      "queryId": "37dfac1b-7f0f-4e2c-904f-6e8a727f1326",
-      "queryName": "NineWeekPeriods"
-    },
     "MinimumDaysEnrolled": {
       "queryId": "98b3546a-9973-4837-9a83-c44f55aeb008",
       "queryName": "MinimumDaysEnrolled"
@@ -39,7 +35,8 @@
     },
     "2526_lh_clients": {
       "queryId": "dffe1949-08f3-4689-b371-f9368383af17",
-      "queryName": "2526_lh_clients"
+      "queryName": "2526_lh_clients",
+      "loadEnabled": false
     },
     "raw_lighthouse_registration": {
       "queryId": "88a702bf-ed23-4363-b067-b5078ec6a70c",
@@ -51,7 +48,8 @@
     },
     "raw_sp_entries": {
       "queryId": "ae6862cb-8005-4cc0-8f7b-f593593bb4dd",
-      "queryName": "raw_sp_entries"
+      "queryName": "raw_sp_entries",
+      "loadEnabled": false
     },
     "silver_lighthouse Lighthouse Matched with JCampus": {
       "queryId": "881cfdf8-269d-43b4-be55-ef3cc314be06",
@@ -67,7 +65,8 @@
     },
     "base_client_attendance": {
       "queryId": "3dfc39d6-8d1c-40a1-bea6-1907f368ca7b",
-      "queryName": "base_client_attendance"
+      "queryName": "base_client_attendance",
+      "loadEnabled": false
     },
     "client_attendance_detail": {
       "queryId": "30a40f2a-6bfa-434e-8628-cb0c95f2353d",
@@ -94,33 +93,9 @@
       "queryName": "unmatched_clients",
       "loadEnabled": false
     },
-    "attendance_summary_80_schools_DataDestination": {
-      "queryId": "05d84cd6-b2b1-4d1a-b3e3-83c53a2f5853",
-      "queryName": "attendance_summary_80_schools_DataDestination",
-      "isHidden": true,
-      "loadEnabled": false
-    },
-    "attendance_summary_other_schools_DataDestination": {
-      "queryId": "67f722bd-a6cb-4b57-b4c2-3d9cee8cc1d9",
-      "queryName": "attendance_summary_other_schools_DataDestination",
-      "isHidden": true,
-      "loadEnabled": false
-    },
-    "attendance_averages_by_location_DataDestination": {
-      "queryId": "40dda063-c872-4980-a2d7-2f5f1515a16b",
-      "queryName": "attendance_averages_by_location_DataDestination",
-      "isHidden": true,
-      "loadEnabled": false
-    },
-    "unmatched_clients_DataDestination": {
-      "queryId": "5115da3a-9bab-49a8-ad08-b98b279ea867",
-      "queryName": "unmatched_clients_DataDestination",
-      "isHidden": true,
-      "loadEnabled": false
-    },
-    "client_attendance_detail_DataDestination": {
-      "queryId": "0139c1ac-8300-404e-bd21-15f5595c5e1b",
-      "queryName": "client_attendance_detail_DataDestination",
+    "DefaultDestination": {
+      "queryId": "0639f611-0614-40d6-ada1-bf9d389036d8",
+      "queryName": "DefaultDestination",
       "isHidden": true,
       "loadEnabled": false
     }

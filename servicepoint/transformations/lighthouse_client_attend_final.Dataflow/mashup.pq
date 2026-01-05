@@ -1,12 +1,12 @@
-[StagingDefinition = [Kind = "FastCopy"]]
+[DefaultOutputDestinationSettings = [DestinationDefinition = [Kind = "Reference", QueryName = "DefaultDestination", IsNewTarget = true], UpdateMethod = [Kind = "Replace"], DestinationTypeSettings = [Kind = "Table"]], StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
-LakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910" meta [Description = "ServicePoint lakehouse ID"];
-MinimumDaysEnrolled = 7 meta [Description = "Minimum days enrolled to be included in calculations"];
-EntryExitDateFilter = #date(2025, 9, 1) meta [Description = "Only include entries/exits after this date"];
-HighAttendanceThreshold = 0.80 meta [Description = "Attendance threshold for 80% schools"];
-StandardAttendanceThreshold = 0.60 meta [Description = "Attendance threshold for non-80% schools"];
-HighAttendanceSchools = {"Bethune/Oak Park", "Broadmoor STEM", "Creswell Elementary"} meta [Description = "Schools requiring 80% attendance"];
+shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
+shared LakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910" meta [Description = "ServicePoint lakehouse ID"];
+shared MinimumDaysEnrolled = 7 meta [Description = "Minimum days enrolled to be included in calculations"];
+shared EntryExitDateFilter = #date(2025, 9, 1) meta [Description = "Only include entries/exits after this date"];
+shared HighAttendanceThreshold = 0.80 meta [Description = "Attendance threshold for 80% schools"];
+shared StandardAttendanceThreshold = 0.60 meta [Description = "Attendance threshold for non-80% schools"];
+shared HighAttendanceSchools = {"Bethune/Oak Park", "Broadmoor STEM", "Creswell Elementary"} meta [Description = "Schools requiring 80% attendance"];
 shared #"2526_lh_clients" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -72,6 +72,7 @@ shared lh_dates = let
   lighthouse_dates = #"Navigation 1"{[Id = "lighthouse_dates", ItemKind = "Table"]}[Data] // Load lighthouse program operating dates calendar
 in
   lighthouse_dates;
+[BindToDefaultDestination = true]
 shared base_client_attendance = let
   Source = raw_sp_services,
   #"Merged with entries to filter" = Table.NestedJoin(Source, {"client_id"}, raw_sp_entries, {"client_id"}, "entry_check", JoinKind.Inner), // Inner join to keep only Lighthouse clients
@@ -161,10 +162,9 @@ shared base_client_attendance = let
   #"Replace errors" = Table.ReplaceErrorValues(#"Changed column type", List.Transform(Table.ColumnNames(#"Changed column type"), each {_, null}))
 in
   #"Replace errors";
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "client_attendance_detail_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
-shared client_attendance_detail = 
-  Table.RemoveColumns(base_client_attendance, {"last_name", "first_name"});
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_summary_80_schools_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+[BindToDefaultDestination = true]
+shared client_attendance_detail = Table.RemoveColumns(base_client_attendance, {"last_name", "first_name"});
+[BindToDefaultDestination = true]
 shared attendance_summary_80_schools = let
   Source = base_client_attendance,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true), // Filter to only 80% schools
@@ -176,7 +176,7 @@ shared attendance_summary_80_schools = let
   #"Added percentage" = Table.AddColumn(#"Count meeting threshold", "pct_meeting_threshold", each [students_meeting_80] / [total_students], Percentage.Type) // Calculate percentage meeting threshold
 in
   #"Added percentage";
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_summary_other_schools_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+[BindToDefaultDestination = true]
 shared attendance_summary_other_schools = let
   Source = base_client_attendance,
   #"Filtered to non-80 schools" = Table.SelectRows(Source, each [is_80_school] = false), // Filter to locations requiring 60% attendance
@@ -191,7 +191,7 @@ shared attendance_summary_other_schools = let
   #"Filtered rows" = Table.SelectRows(#"Added percentage", each ([lighthouse_location_enrolling] <> null and [lighthouse_location_enrolling] <> "School Site - Judson"))
 in
   #"Filtered rows";
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_averages_by_location_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+[BindToDefaultDestination = true]
 shared attendance_averages_by_location = let
   Source = base_client_attendance,
   #"Removed duplicates" = Table.Distinct(Source, {"client_id", "nine_week_period"}), // Deduplicate clients per period
@@ -206,7 +206,7 @@ shared attendance_averages_by_location = let
   #"Filtered rows" = Table.SelectRows(#"Sorted by location", each ([lighthouse_location_enrolling] <> null and [lighthouse_location_enrolling] <> "School Site - Judson"))
 in
   #"Filtered rows";
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "unmatched_clients_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+[BindToDefaultDestination = true]
 shared unmatched_clients = let
   Source = base_client_attendance,
   #"Filtered to unmatched" = Table.SelectRows(Source, each [jcampus_school_name] = null or [jcampus_school_name] = ""), // Filter to clients without JCampus school match
@@ -216,3 +216,4 @@ shared unmatched_clients = let
   #"Sorted by count" = Table.Sort(#"Grouped by location and period", {{"unmatched_count", Order.Descending}}) // Sort by highest unmatched count
 in
   #"Sorted by count";
+shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data];

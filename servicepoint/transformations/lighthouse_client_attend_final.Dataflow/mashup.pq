@@ -119,10 +119,10 @@ shared attendance_summary_80_schools = let
   Source = base_client_attendance,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true), // Filter to only 80% schools
   #"Removed duplicates" = Table.Distinct(#"Filtered to 80 schools", {"client_id"}), // Deduplicate clients
-  #"Count meeting threshold" = Table.Group(#"Removed duplicates", {"school_name"}, {
+  #"Count meeting threshold" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling"}, {
     {"students_meeting_80", each List.Count(List.Select([meets_threshold], each _ = true)), Int64.Type},
     {"total_students", each List.Count([client_id]), Int64.Type}
-  }), // Count students meeting 80% threshold per school
+  }), // Count students meeting 80% threshold per lighthouse location
   #"Added percentage" = Table.AddColumn(#"Count meeting threshold", "pct_meeting_threshold", each [students_meeting_80] / [total_students], Percentage.Type) // Calculate percentage meeting threshold
 in
   #"Added percentage";
@@ -139,13 +139,13 @@ in
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_summary_other_schools_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared attendance_summary_other_schools = let
   Source = base_client_attendance,
-  #"Filtered to non-80 schools" = Table.SelectRows(Source, each [is_80_school] = false), // Filter to schools requiring 60% attendance
-  #"Filter out specific locations" = Table.SelectRows(#"Filtered to non-80 schools", each [school_name] <> "Highland" and [school_name] <> "Teen Club"), // Exclude certain locations from summary
+  #"Filtered to non-80 schools" = Table.SelectRows(Source, each [is_80_school] = false), // Filter to locations requiring 60% attendance
+  #"Filter out specific locations" = Table.SelectRows(#"Filtered to non-80 schools", each [lighthouse_location_enrolling] <> "Highland" and [lighthouse_location_enrolling] <> "Teen Club"), // Exclude certain locations from summary
   #"Removed duplicates" = Table.Distinct(#"Filter out specific locations", {"client_id"}), // Deduplicate clients
-  #"Count meeting threshold" = Table.Group(#"Removed duplicates", {"school_name"}, {
+  #"Count meeting threshold" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling"}, {
     {"students_meeting_60", each List.Count(List.Select([meets_threshold], each _ = true)), Int64.Type},
     {"total_students", each List.Count([client_id]), Int64.Type}
-  }), // Count students meeting 60% threshold per location
+  }), // Count students meeting 60% threshold per lighthouse location
   #"Added percentage" = Table.AddColumn(#"Count meeting threshold", "pct_meeting_threshold", each [students_meeting_60] / [total_students], Percentage.Type) // Calculate percentage meeting threshold
 in
   #"Added percentage";
@@ -187,8 +187,8 @@ shared unmatched_clients = let
   Source = base_client_attendance,
   #"Filtered to unmatched" = Table.SelectRows(Source, each [jcampus_school_name] = null or [jcampus_school_name] = ""), // Filter to clients without JCampus school match
   #"Removed duplicates" = Table.Distinct(#"Filtered to unmatched", {"client_id"}), // Deduplicate clients
-  #"Selected columns" = Table.SelectColumns(#"Removed duplicates", {"client_id", "client_first_name", "client_last_name", "school_name", "sessions_attended", "sessions_possible", "attendance_rate"}), // Keep relevant columns for investigation
-  #"Grouped by location" = Table.Group(#"Selected columns", {"school_name"}, {{"unmatched_count", each List.Count([client_id]), Int64.Type}}), // Count unmatched clients per school name (which is lighthouse location for unmatched)
+  #"Selected columns" = Table.SelectColumns(#"Removed duplicates", {"client_id", "client_first_name", "client_last_name", "lighthouse_location_enrolling", "sessions_attended", "sessions_possible", "attendance_rate"}), // Keep relevant columns for investigation
+  #"Grouped by location" = Table.Group(#"Selected columns", {"lighthouse_location_enrolling"}, {{"unmatched_count", each List.Count([client_id]), Int64.Type}}), // Count unmatched clients per lighthouse location
   #"Sorted by count" = Table.Sort(#"Grouped by location", {{"unmatched_count", Order.Descending}}) // Sort by highest unmatched count
 in
   #"Sorted by count";

@@ -162,11 +162,12 @@ shared base_client_attendance = let
   #"Replace errors" = Table.ReplaceErrorValues(#"Changed column type", List.Transform(Table.ColumnNames(#"Changed column type"), each {_, null}))
 in
   #"Replace errors";
-shared client_attendance_detail = let
+shared client_attendance_detail_v2 = let
   Source = base_client_attendance,
-  #"Select columns" = Table.SelectColumns(Source, {"client_id", "nine_week_period", "sessions_attended", "lighthouse_location_enrolling", "entry_date", "exit_date", "sessions_possible", "jcampus_school_name", "school_name", "is_80_school", "required_threshold", "attendance_rate", "meets_threshold", "attendance_flag"})
+  #"Select columns" = Table.SelectColumns(Source, {"client_id", "nine_week_period", "sessions_attended", "lighthouse_location_enrolling", "entry_date", "exit_date", "sessions_possible", "jcampus_school_name", "school_name", "is_80_school", "required_threshold", "attendance_rate", "meets_threshold", "attendance_flag"}),
+  #"Replace all errors" = Table.ReplaceErrorValues(#"Select columns", List.Transform(Table.ColumnNames(#"Select columns"), each {_, null}))
 in
-  #"Select columns";
+  #"Replace all errors";
 shared attendance_summary_80_schools = let
   Source = base_client_attendance,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true), // Filter to only 80% schools

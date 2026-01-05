@@ -82,7 +82,13 @@ shared lighthouse_dates = let
   #"Renamed columns 1" = Table.RenameColumns(#"Inserted start of month", {{"Start of month", "month_start"}}),
   #"Inserted month name" = Table.AddColumn(#"Renamed columns 1", "Month name", each Date.MonthName([month_start]), type text),
   #"Renamed columns 2" = Table.RenameColumns(#"Inserted month name", {{"Month name", "month_name"}}),
-  #"Removed duplicates" = Table.Distinct(#"Renamed columns 2", {"date"})
+  #"Added nine_week_period" = Table.AddColumn(#"Renamed columns 2", "nine_week_period", each 
+    if [date] >= #date(2025, 8, 13) and [date] <= #date(2025, 10, 17) then "1st 9 Weeks"
+    else if [date] >= #date(2025, 10, 20) and [date] <= #date(2025, 12, 17) then "2nd 9 Weeks"
+    else if [date] >= #date(2026, 1, 6) and [date] <= #date(2026, 3, 6) then "3rd 9 Weeks"
+    else if [date] >= #date(2026, 3, 16) and [date] <= #date(2026, 5, 21) then "4th 9 Weeks"
+    else null, type text),
+  #"Removed duplicates" = Table.Distinct(#"Added nine_week_period", {"date"})
 in
     #"Removed duplicates";
 shared lighthouse_dates_DataDestination = let

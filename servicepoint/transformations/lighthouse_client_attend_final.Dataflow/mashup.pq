@@ -81,7 +81,7 @@ shared base_client_attendance = let
     else null), // Calculate which 9-week period each month_date falls into
   #"Filtered to nine week periods" = Table.SelectRows(#"Added nine_week_period", each [nine_week_period] <> null), // Keep only rows within defined 9-week periods
   #"Merged queries" = Table.NestedJoin(#"Filtered to nine week periods", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter), // Join to get registration details
-  #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Added custom 1", "raw_lighthouse_registration", {"app_date", "lighthouse_location_enrolling", "school_name"}, {"app_date", "lighthouse_location_enrolling", "school_name"}), // Expand registration fields
+  #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Merged queries", "raw_lighthouse_registration", {"app_date", "lighthouse_location_enrolling", "school_name"}, {"app_date", "lighthouse_location_enrolling", "school_name"}), // Expand registration fields
   #"Removed columns" = Table.RemoveColumns(#"Expanded raw_lighthouse_registration", {"max830", "max92", "max98"}), // Remove unused max columns
   #"Removed duplicates" = Table.Distinct(#"Removed columns", {"client_id", "nine_week_period"}), // Deduplicate by client and 9-week period
   #"Grouped rows" = Table.Group(#"Removed duplicates", {"client_id", "client_last_name", "client_first_name", "lighthouse_location_enrolling", "nine_week_period"}, {{"sessions_attended", each List.Sum([Count]), type nullable number}, {"sessions_possible", each List.Sum([max99]), type nullable number}}), // Sum attended and possible sessions by client and period

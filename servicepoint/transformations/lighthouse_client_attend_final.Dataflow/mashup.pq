@@ -158,26 +158,26 @@ shared attendance_summary_other_schools_DataDestination = let
 in
   TableNavigation;
 
-// ===== OUTPUT: AVERAGE SESSIONS BY SCHOOL =====
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_averages_by_school_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
-shared attendance_averages_by_school = let
+// ===== OUTPUT: AVERAGE SESSIONS BY LIGHTHOUSE LOCATION =====
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_averages_by_location_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared attendance_averages_by_location = let
   Source = base_client_attendance,
   #"Removed duplicates" = Table.Distinct(Source, {"client_id"}), // Deduplicate clients
-  #"Grouped by school" = Table.Group(#"Removed duplicates", {"school_name", "is_80_school"}, {
+  #"Grouped by location" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling"}, {
     {"avg_sessions_attended", each List.Average([sessions_attended]), type nullable number},
     {"avg_sessions_possible", each List.Average([sessions_possible]), type nullable number},
     {"student_count", each List.Count([client_id]), Int64.Type}
-  }), // Calculate average attended and possible sessions per school
-  #"Added avg_attendance_rate" = Table.AddColumn(#"Grouped by school", "avg_attendance_rate", each [avg_sessions_attended] / [avg_sessions_possible], Percentage.Type), // Calculate average attendance rate
-  #"Sorted by school" = Table.Sort(#"Added avg_attendance_rate", {{"school_name", Order.Ascending}}) // Sort alphabetically by school
+  }), // Calculate average attended and possible sessions per lighthouse location
+  #"Added avg_attendance_rate" = Table.AddColumn(#"Grouped by location", "avg_attendance_rate", each [avg_sessions_attended] / [avg_sessions_possible], Percentage.Type), // Calculate average attendance rate
+  #"Sorted by location" = Table.Sort(#"Added avg_attendance_rate", {{"lighthouse_location_enrolling", Order.Ascending}}) // Sort alphabetically by location
 in
-  #"Sorted by school";
+  #"Sorted by location";
 
-shared attendance_averages_by_school_DataDestination = let
+shared attendance_averages_by_location_DataDestination = let
   Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
   Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
-  TableNavigation = Navigation_2{[Id = "lighthouse_attendance_averages_by_school", ItemKind = "Table"]}?[Data]?
+  TableNavigation = Navigation_2{[Id = "lighthouse_attendance_averages_by_location", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
 

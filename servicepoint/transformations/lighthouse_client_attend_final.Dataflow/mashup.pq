@@ -1,198 +1,148 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
+
+// ===== CONFIGURATION PARAMETERS =====
+// Dataflow last updated: 2026-01-05
+shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
+shared LakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910" meta [Description = "ServicePoint lakehouse ID"];
+
+// Reporting period configuration
+shared ReportingMonths = {"August", "September", "October"} meta [Description = "Months to include in attendance calculations"];
+shared ReportingPeriodName = "1st 9 Weeks" meta [Description = "Name of the reporting period"];
+shared MinimumDaysEnrolled = 7 meta [Description = "Minimum days enrolled to be included in calculations"];
+shared EntryExitDateFilter = #date(2025, 9, 1) meta [Description = "Only include entries/exits after this date"];
+
+// Attendance threshold configuration
+shared HighAttendanceThreshold = 0.80 meta [Description = "Attendance threshold for 80% schools"];
+shared StandardAttendanceThreshold = 0.60 meta [Description = "Attendance threshold for non-80% schools"];
+shared HighAttendanceSchools = {"Bethune/Oak Park", "Broadmoor STEM", "Creswell Elementary"} meta [Description = "Schools requiring 80% attendance"];
+
+// ===== SOURCE DATA QUERIES =====
 shared #"2526_lh_clients" = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  Navigation = Source{[workspaceId = WorkspaceId]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
   #"Navigation 2" = #"Navigation 1"{[Id = "2526_lh_clients", ItemKind = "Table"]}[Data],
-  #"Filtered rows" = Table.SelectRows(#"Navigation 2", each [days_enrolled] > 7)
+  #"Filtered rows" = Table.SelectRows(#"Navigation 2", each [days_enrolled] > MinimumDaysEnrolled) // Filter to clients enrolled more than minimum days
 in
   #"Filtered rows";
+
 shared raw_lighthouse_registration = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "raw_lighthouse_registration", ItemKind = "Table"]}[Data]
+  Navigation = Source{[workspaceId = WorkspaceId]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_lighthouse_registration", ItemKind = "Table"]}[Data] // Load lighthouse registration data with location and school info
 in
   #"Navigation 2";
+
 shared raw_sp_demographics = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_demographics", ItemKind = "Table"]}[Data]
+  Navigation = Source{[workspaceId = WorkspaceId]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_demographics", ItemKind = "Table"]}[Data] // Load ServicePoint demographics data
 in
   #"Navigation 2";
+
 shared raw_sp_entries = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  Navigation = Source{[workspaceId = WorkspaceId]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
   #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data],
-  #"Filtered rows" = Table.SelectRows(#"Navigation 2", each [exit_date] > #date(2025, 9, 1) or [exit_date] = null),
-  #"Filtered rows 1" = Table.SelectRows(#"Filtered rows", each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")),
-  #"Grouped rows" = Table.Group(#"Filtered rows 1", {"client_id"}, {{"Count", each List.Max([entry_date]), type nullable date}, {"exit_date", each List.Max([exit_date]), type nullable date}, {"program", each List.Max([program]), type nullable text}})
+  #"Filtered rows" = Table.SelectRows(#"Navigation 2", each [exit_date] > EntryExitDateFilter or [exit_date] = null), // Filter to recent entries/exits
+  #"Filtered rows 1" = Table.SelectRows(#"Filtered rows", each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
+  #"Grouped rows" = Table.Group(#"Filtered rows 1", {"client_id"}, {{"Count", each List.Max([entry_date]), type nullable date}, {"exit_date", each List.Max([exit_date]), type nullable date}, {"program", each List.Max([program]), type nullable text}}) // Get most recent entry per client
 in
   #"Grouped rows";
-shared #"silver_lighthouse client_month_possible_vs_actual" = let
-  Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "silver_lighthouse.client_month_possible_vs_actual", ItemKind = "Table"]}[Data],
-  #"Grouped rows" = Table.Group(#"Navigation 2", {"client_id"}, {{"Count", each List.Max([possible_sessions_in_month]), type nullable Int64.Type}})
-in
-  #"Grouped rows";
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "v_client_month_rollups_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
-shared v_client_month_rollups = let
-  Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "v_client_month_rollups", ItemKind = "View"]}[Data],
-  #"Added custom" = Table.TransformColumnTypes(Table.AddColumn(#"Navigation 2", "today", each DateTime.Date(DateTimeZone.LocalNow())), {{"today", type datetime}}),
-  #"Filtered rows" = Table.SelectRows(#"Added custom", each ([month_name] = "August" or [month_name] = "October" or [month_name] = "September")),
-  #"Merged queries" = Table.NestedJoin(#"Filtered rows", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter),
-  #"Added custom 1" = Table.AddColumn(#"Merged queries", "Custom", each "1st 9 Weeks"),
-  #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Added custom 1", "raw_lighthouse_registration", {"app_date", "lighthouse_location_enrolling", "school_name"}, {"app_date", "lighthouse_location_enrolling", "school_name"}),
-  #"Removed columns" = Table.RemoveColumns(#"Expanded raw_lighthouse_registration", {"max830", "max92", "max98"}),
-  #"Removed duplicates" = Table.Distinct(#"Removed columns", {"client_id"}),
-  #"Grouped rows" = Table.Group(#"Removed duplicates", {"client_id", "client_last_name", "client_first_name"}, {{"Count", each List.Sum([Count]), type nullable number}, {"days poss", each List.Sum([max99]), type nullable number}}),
-  #"Sorted rows" = Table.Sort(#"Grouped rows", {{"Count", Order.Descending}}),
-  #"Inserted multiplication" = Table.AddColumn(#"Sorted rows", "Multiplication", each [days poss] * 0.8, type number),
-  #"Renamed columns" = Table.RenameColumns(#"Inserted multiplication", {{"Multiplication", "80 Check"}}),
-  #"Inserted multiplication 1" = Table.AddColumn(#"Renamed columns", "Multiplication", each [days poss] * 0.6, type number),
-  #"Renamed columns 1" = Table.RenameColumns(#"Inserted multiplication 1", {{"Multiplication", "60 Check"}}),
-  #"Inserted conditional column" = Table.AddColumn(#"Renamed columns 1", "attend_flag", each if [Count] >= [80 Check] then "80% GOOD" else if [Count] >= [60 Check] then "60% GOOD" else "BAD ATTENDANCE"),
-  #"Changed column type" = Table.TransformColumnTypes(#"Inserted conditional column", {{"attend_flag", type text}}),
-  #"Merged queries 1" = Table.NestedJoin(#"Changed column type", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter),
-  #"Expanded raw_lighthouse_registration 1" = Table.ExpandTableColumn(#"Merged queries 1", "raw_lighthouse_registration", {"lighthouse_location_enrolling", "school_name"}, {"lighthouse_location_enrolling", "school_name"}),
-  #"Grouped rows 1" = Table.Group(#"Expanded raw_lighthouse_registration 1", {"lighthouse_location_enrolling"}, {{"Count", each List.Count(List.Distinct([client_id])), Int64.Type}})
 
-in
-  #"Grouped rows 1";
-shared v_client_month_rollups_DataDestination = let
-  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  TableNavigation = Navigation_2{[Id = "lghthouse_attend_rollups_w_aggregates", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "80 sites_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
-shared #"80 sites" = let
-  Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "v_client_month_rollups", ItemKind = "View"]}[Data],
-  #"Added custom" = Table.TransformColumnTypes(Table.AddColumn(#"Navigation 2", "today", each DateTime.Date(DateTimeZone.LocalNow())), {{"today", type datetime}}),
-  #"Filtered rows" = Table.SelectRows(#"Added custom", each ([month_name] = "August" or [month_name] = "October" or [month_name] = "September")),
-  #"Merged queries" = Table.NestedJoin(#"Filtered rows", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter),
-  #"Added custom 1" = Table.AddColumn(#"Merged queries", "Custom", each "1st 9 Weeks"),
-  #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Added custom 1", "raw_lighthouse_registration", {"app_date", "lighthouse_location_enrolling", "school_name"}, {"app_date", "lighthouse_location_enrolling", "school_name"}),
-  #"Removed columns" = Table.RemoveColumns(#"Expanded raw_lighthouse_registration", {"max830", "max92", "max98"}),
-  #"Removed duplicates" = Table.Distinct(#"Removed columns", {"client_id"}),
-  #"Grouped rows" = Table.Group(#"Removed duplicates", {"client_id", "client_last_name", "client_first_name", "lighthouse_location_enrolling"}, {{"Count", each List.Sum([Count]), type nullable number}, {"days poss", each List.Sum([max99]), type nullable number}}),
-  #"Sorted rows" = Table.Sort(#"Grouped rows", {{"Count", Order.Descending}}),
-  #"Inserted multiplication" = Table.AddColumn(#"Sorted rows", "Multiplication", each [days poss] * 0.8, type number),
-  #"Renamed columns" = Table.RenameColumns(#"Inserted multiplication", {{"Multiplication", "80 Check"}}),
-  #"Inserted multiplication 1" = Table.AddColumn(#"Renamed columns", "Multiplication", each [days poss] * 0.6, type number),
-  #"Renamed columns 1" = Table.RenameColumns(#"Inserted multiplication 1", {{"Multiplication", "60 Check"}}),
-  #"Inserted conditional column" = Table.AddColumn(#"Renamed columns 1", "attend_flag", each if [Count] >= [80 Check] then "80% GOOD" else if [Count] >= [60 Check] then "60% GOOD" else "BAD ATTENDANCE"),
-  #"Subtracted from column" = Table.TransformColumns(#"Inserted conditional column", {{"80 Check", each _ - 1, type number}}),
-  #"Changed column type" = Table.TransformColumnTypes(#"Subtracted from column", {{"attend_flag", type text}}),
-  #"Merged queries 1" = Table.NestedJoin(#"Changed column type", {"client_id"}, #"silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, "silver_lighthouse Lighthouse Matched with JCampus", JoinKind.LeftOuter),
-  #"Expanded silver_lighthouse Lighthouse Matched with JCampus" = Table.ExpandTableColumn(#"Merged queries 1", "silver_lighthouse Lighthouse Matched with JCampus", {"client_dob", "int_id", "SIDNO", "School Name", "entry_date", "exit_date"}, {"client_dob", "int_id", "SIDNO", "School Name", "entry_date", "exit_date"}),
-  #"Filtered rows 1" = Table.SelectRows(#"Expanded silver_lighthouse Lighthouse Matched with JCampus", each ([School Name] = "Bethune/Oak Park" or [School Name] = "Broadmoor STEM" or [School Name] = "Creswell Elementary")),
-  #"Removed duplicates 1" = Table.Distinct(#"Filtered rows 1", {"client_id"}),
-  #"Filtered rows 2" = Table.SelectRows(#"Removed duplicates 1", each ([attend_flag] = "80% GOOD")),
-  #"Grouped rows 1" = Table.Group(#"Filtered rows 2", {"School Name"}, {{"Count", each List.Count(List.Distinct([client_id])), Int64.Type}}),
-  #"Merged queries 2" = Table.NestedJoin(#"Grouped rows 1", {"School Name"}, #"80 sites (2)", {"School Name"}, "80 sites (2)", JoinKind.LeftOuter),
-  #"Expanded 80 sites (2)" = Table.ExpandTableColumn(#"Merged queries 2", "80 sites (2)", {"total"}, {"total"}),
-  #"Inserted division" = Table.AddColumn(#"Expanded 80 sites (2)", "Division", each [Count] / [total], type number),
-  #"Changed column type 1" = Table.TransformColumnTypes(#"Inserted division", {{"Division", Percentage.Type}})
-
-in
-  #"Changed column type 1";
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "not 80 sites_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
-shared #"not 80 sites" = let
-  Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "v_client_month_rollups", ItemKind = "View"]}[Data],
-  #"Added custom" = Table.TransformColumnTypes(Table.AddColumn(#"Navigation 2", "today", each DateTime.Date(DateTimeZone.LocalNow())), {{"today", type datetime}}),
-  #"Filtered rows" = Table.SelectRows(#"Added custom", each ([month_name] = "August" or [month_name] = "October" or [month_name] = "September")),
-  #"Merged queries" = Table.NestedJoin(#"Filtered rows", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter),
-  #"Added custom 1" = Table.AddColumn(#"Merged queries", "Custom", each "1st 9 Weeks"),
-  #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Added custom 1", "raw_lighthouse_registration", {"app_date", "lighthouse_location_enrolling", "school_name"}, {"app_date", "lighthouse_location_enrolling", "school_name"}),
-  #"Removed columns" = Table.RemoveColumns(#"Expanded raw_lighthouse_registration", {"max830", "max92", "max98"}),
-  #"Removed duplicates" = Table.Distinct(#"Removed columns", {"client_id"}),
-  #"Grouped rows" = Table.Group(#"Removed duplicates", {"client_id", "client_last_name", "client_first_name"}, {{"Count", each List.Sum([Count]), type nullable number}, {"days poss", each List.Sum([max99]), type nullable number}}),
-  #"Sorted rows" = Table.Sort(#"Grouped rows", {{"Count", Order.Descending}}),
-  #"Inserted multiplication" = Table.AddColumn(#"Sorted rows", "Multiplication", each [days poss] * 0.8, type number),
-  #"Renamed columns" = Table.RenameColumns(#"Inserted multiplication", {{"Multiplication", "80 Check"}}),
-  #"Inserted multiplication 1" = Table.AddColumn(#"Renamed columns", "Multiplication", each [days poss] * 0.6, type number),
-  #"Renamed columns 1" = Table.RenameColumns(#"Inserted multiplication 1", {{"Multiplication", "60 Check"}}),
-  #"Inserted conditional column" = Table.AddColumn(#"Renamed columns 1", "attend_flag", each if [Count] >= [80 Check] then "80% GOOD" else if [Count] >= [60 Check] then "60% GOOD" else "BAD ATTENDANCE"),
-  #"Subtracted from column" = Table.TransformColumns(#"Inserted conditional column", {{"80 Check", each _ - 1, type number}}),
-  #"Subtracted from column 1" = Table.TransformColumns(#"Subtracted from column", {{"60 Check", each _ - 1, type number}}),
-  #"Changed column type" = Table.TransformColumnTypes(#"Subtracted from column 1", {{"attend_flag", type text}}),
-  #"Merged queries 1" = Table.NestedJoin(#"Changed column type", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter),
-  #"Expanded raw_lighthouse_registration 1" = Table.ExpandTableColumn(#"Merged queries 1", "raw_lighthouse_registration", {"lighthouse_location_enrolling", "school_name"}, {"lighthouse_location_enrolling", "school_name"}),
-  #"Filtered rows 1" = Table.SelectRows(#"Expanded raw_lighthouse_registration 1", each ([attend_flag] <> "BAD ATTENDANCE")),
-  #"Grouped rows 1" = Table.Group(#"Filtered rows 1", {"lighthouse_location_enrolling"}, {{"Count", each List.Count(List.Distinct([client_id])), Int64.Type}}),
-  #"Filtered rows 2" = Table.SelectRows(#"Grouped rows 1", each ([lighthouse_location_enrolling] <> "Highland" and [lighthouse_location_enrolling] <> "School Site - Broadmoor" and [lighthouse_location_enrolling] <> "School Site - Creswell" and [lighthouse_location_enrolling] <> "School Site - Oak Park")),
-  #"Merged queries 2" = Table.NestedJoin(#"Filtered rows 2", {"lighthouse_location_enrolling"}, v_client_month_rollups, {"lighthouse_location_enrolling"}, "v_client_month_rollups", JoinKind.LeftOuter),
-  #"Expanded v_client_month_rollups" = Table.ExpandTableColumn(#"Merged queries 2", "v_client_month_rollups", {"Count"}, {"Count.1"}),
-  #"Inserted division" = Table.AddColumn(#"Expanded v_client_month_rollups", "Division", each [Count] / [Count.1], type number),
-  #"Changed column type 1" = Table.TransformColumnTypes(#"Inserted division", {{"Division", Percentage.Type}}),
-  #"Filtered rows 3" = Table.SelectRows(#"Changed column type 1", each ([lighthouse_location_enrolling] <> "Teen Club"))
-
-in
-  #"Filtered rows 3";
-shared #"not 80 sites_DataDestination" = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  TableNavigation = Navigation_2{[Id = "lighthouse_not_80_table", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared #"80 sites_DataDestination" = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  TableNavigation = Navigation_2{[Id = "lighthouse_80_site_table", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
 shared #"silver_lighthouse Lighthouse Matched with JCampus" = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "silver_lighthouse.Lighthouse Matched with JCampus", ItemKind = "Table"]}[Data]
+  Navigation = Source{[workspaceId = WorkspaceId]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "silver_lighthouse.Lighthouse Matched with JCampus", ItemKind = "Table"]}[Data] // Load matched data with JCampus school names
 in
   #"Navigation 2";
-shared #"80 sites (2)" = let
-  Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "v_client_month_rollups", ItemKind = "View"]}[Data],
-  #"Added custom" = Table.TransformColumnTypes(Table.AddColumn(#"Navigation 2", "today", each DateTime.Date(DateTimeZone.LocalNow())), {{"today", type datetime}}),
-  #"Filtered rows" = Table.SelectRows(#"Added custom", each ([month_name] = "August" or [month_name] = "October" or [month_name] = "September")),
-  #"Merged queries" = Table.NestedJoin(#"Filtered rows", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter),
-  #"Added custom 1" = Table.AddColumn(#"Merged queries", "Custom", each "1st 9 Weeks"),
-  #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Added custom 1", "raw_lighthouse_registration", {"app_date", "lighthouse_location_enrolling", "school_name"}, {"app_date", "lighthouse_location_enrolling", "school_name"}),
-  #"Removed columns" = Table.RemoveColumns(#"Expanded raw_lighthouse_registration", {"max830", "max92", "max98"}),
-  #"Removed duplicates" = Table.Distinct(#"Removed columns", {"client_id"}),
-  #"Grouped rows" = Table.Group(#"Removed duplicates", {"client_id", "client_last_name", "client_first_name", "lighthouse_location_enrolling"}, {{"Count", each List.Sum([Count]), type nullable number}, {"days poss", each List.Sum([max99]), type nullable number}}),
-  #"Sorted rows" = Table.Sort(#"Grouped rows", {{"Count", Order.Descending}}),
-  #"Inserted multiplication" = Table.AddColumn(#"Sorted rows", "Multiplication", each [days poss] * 0.8, type number),
-  #"Renamed columns" = Table.RenameColumns(#"Inserted multiplication", {{"Multiplication", "80 Check"}}),
-  #"Inserted multiplication 1" = Table.AddColumn(#"Renamed columns", "Multiplication", each [days poss] * 0.6, type number),
-  #"Renamed columns 1" = Table.RenameColumns(#"Inserted multiplication 1", {{"Multiplication", "60 Check"}}),
-  #"Inserted conditional column" = Table.AddColumn(#"Renamed columns 1", "attend_flag", each if [Count] >= [80 Check] then "80% GOOD" else if [Count] >= [60 Check] then "60% GOOD" else "BAD ATTENDANCE"),
-  #"Subtracted from column" = Table.TransformColumns(#"Inserted conditional column", {{"80 Check", each _ - 1, type number}}),
-  #"Changed column type" = Table.TransformColumnTypes(#"Subtracted from column", {{"attend_flag", type text}}),
-  #"Merged queries 1" = Table.NestedJoin(#"Changed column type", {"client_id"}, #"silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, "silver_lighthouse Lighthouse Matched with JCampus", JoinKind.LeftOuter),
-  #"Expanded silver_lighthouse Lighthouse Matched with JCampus" = Table.ExpandTableColumn(#"Merged queries 1", "silver_lighthouse Lighthouse Matched with JCampus", {"client_dob", "int_id", "SIDNO", "School Name", "entry_date", "exit_date"}, {"client_dob", "int_id", "SIDNO", "School Name", "entry_date", "exit_date"}),
-  #"Filtered rows 1" = Table.SelectRows(#"Expanded silver_lighthouse Lighthouse Matched with JCampus", each ([School Name] = "Bethune/Oak Park" or [School Name] = "Broadmoor STEM" or [School Name] = "Creswell Elementary")),
-  #"Removed duplicates 1" = Table.Distinct(#"Filtered rows 1", {"client_id"}),
-  #"Grouped rows 1" = Table.Group(#"Removed duplicates 1", {"School Name"}, {{"Count", each List.Count(List.Distinct([client_id])), Int64.Type}}),
-  #"Renamed columns 2" = Table.RenameColumns(#"Grouped rows 1", {{"Count", "total"}})
 
+// ===== BASE ATTENDANCE CALCULATION =====
+shared base_client_attendance = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = WorkspaceId]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "v_client_month_rollups", ItemKind = "View"]}[Data],
+  #"Added custom" = Table.TransformColumnTypes(Table.AddColumn(#"Navigation 2", "today", each DateTime.Date(DateTimeZone.LocalNow())), {{"today", type datetime}}), // Add current date for tracking
+  #"Filtered rows" = Table.SelectRows(#"Added custom", each List.Contains(ReportingMonths, [month_name])), // Filter to configured reporting months
+  #"Merged queries" = Table.NestedJoin(#"Filtered rows", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter), // Join to get registration details
+  #"Added custom 1" = Table.AddColumn(#"Merged queries", "reporting_period", each ReportingPeriodName), // Add reporting period name
+  #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Added custom 1", "raw_lighthouse_registration", {"app_date", "lighthouse_location_enrolling", "school_name"}, {"app_date", "lighthouse_location_enrolling", "school_name"}), // Expand registration fields
+  #"Removed columns" = Table.RemoveColumns(#"Expanded raw_lighthouse_registration", {"max830", "max92", "max98"}), // Remove unused max columns
+  #"Removed duplicates" = Table.Distinct(#"Removed columns", {"client_id"}), // Deduplicate by client
+  #"Grouped rows" = Table.Group(#"Removed duplicates", {"client_id", "client_last_name", "client_first_name", "lighthouse_location_enrolling"}, {{"sessions_attended", each List.Sum([Count]), type nullable number}, {"sessions_possible", each List.Sum([max99]), type nullable number}}), // Sum attended and possible sessions
+  #"Merged queries 1" = Table.NestedJoin(#"Grouped rows", {"client_id"}, #"silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, "jcampus_match", JoinKind.LeftOuter), // Join to get JCampus school name
+  #"Expanded jcampus_match" = Table.ExpandTableColumn(#"Merged queries 1", "jcampus_match", {"School Name"}, {"jcampus_school_name"}), // Expand JCampus school name
+  #"Added is_80_school" = Table.AddColumn(#"Expanded jcampus_match", "is_80_school", each List.Contains(HighAttendanceSchools, [jcampus_school_name])), // Flag if school requires 80% attendance
+  #"Added required_threshold" = Table.AddColumn(#"Added is_80_school", "required_threshold", each if [is_80_school] then HighAttendanceThreshold else StandardAttendanceThreshold), // Set required threshold based on school type
+  #"Added attendance_rate" = Table.AddColumn(#"Added required_threshold", "attendance_rate", each [sessions_attended] / [sessions_possible], type number), // Calculate attendance rate
+  #"Added meets_threshold" = Table.AddColumn(#"Added attendance_rate", "meets_threshold", each [attendance_rate] >= [required_threshold]), // Flag if client meets their threshold
+  #"Added attendance_flag" = Table.AddColumn(#"Added meets_threshold", "attendance_flag", each 
+    if [attendance_rate] >= HighAttendanceThreshold then "80%+ GOOD"
+    else if [attendance_rate] >= StandardAttendanceThreshold then "60%+ GOOD"
+    else "BELOW THRESHOLD"), // Create readable flag
+  #"Changed column type" = Table.TransformColumnTypes(#"Added attendance_flag", {{"attendance_rate", Percentage.Type}}) // Format attendance rate as percentage
 in
-  #"Renamed columns 2";
+  #"Changed column type";
+
+// ===== OUTPUT: CLIENT-LEVEL DETAIL =====
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "client_attendance_detail_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared client_attendance_detail = base_client_attendance;
+
+shared client_attendance_detail_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
+  TableNavigation = Navigation_2{[Id = "lighthouse_client_attendance_detail", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+
+// ===== OUTPUT: 80% SCHOOLS SUMMARY =====
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_summary_80_schools_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared attendance_summary_80_schools = let
+  Source = base_client_attendance,
+  #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true), // Filter to only 80% schools
+  #"Removed duplicates" = Table.Distinct(#"Filtered to 80 schools", {"client_id"}), // Deduplicate clients
+  #"Count meeting threshold" = Table.Group(#"Removed duplicates", {"jcampus_school_name"}, {
+    {"students_meeting_80", each List.Count(List.Select([meets_threshold], each _ = true)), Int64.Type},
+    {"total_students", each List.Count([client_id]), Int64.Type}
+  }), // Count students meeting 80% threshold per school
+  #"Added percentage" = Table.AddColumn(#"Count meeting threshold", "pct_meeting_threshold", each [students_meeting_80] / [total_students], Percentage.Type) // Calculate percentage meeting threshold
+in
+  #"Added percentage";
+
+shared attendance_summary_80_schools_DataDestination = let
+  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
+  TableNavigation = Navigation_2{[Id = "lighthouse_80_schools_summary", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+
+// ===== OUTPUT: NON-80% SCHOOLS SUMMARY =====
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_summary_other_schools_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared attendance_summary_other_schools = let
+  Source = base_client_attendance,
+  #"Filtered to non-80 schools" = Table.SelectRows(Source, each [is_80_school] = false), // Filter to schools requiring 60% attendance
+  #"Filter out specific locations" = Table.SelectRows(#"Filtered to non-80 schools", each [lighthouse_location_enrolling] <> "Highland" and [lighthouse_location_enrolling] <> "Teen Club"), // Exclude certain locations from summary
+  #"Removed duplicates" = Table.Distinct(#"Filter out specific locations", {"client_id"}), // Deduplicate clients
+  #"Count meeting threshold" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling"}, {
+    {"students_meeting_60", each List.Count(List.Select([meets_threshold], each _ = true)), Int64.Type},
+    {"total_students", each List.Count([client_id]), Int64.Type}
+  }), // Count students meeting 60% threshold per location
+  #"Added percentage" = Table.AddColumn(#"Count meeting threshold", "pct_meeting_threshold", each [students_meeting_60] / [total_students], Percentage.Type) // Calculate percentage meeting threshold
+in
+  #"Added percentage";
+
+shared attendance_summary_other_schools_DataDestination = let
+  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
+  TableNavigation = Navigation_2{[Id = "lighthouse_other_schools_summary", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;

@@ -156,9 +156,11 @@ shared base_client_attendance = let
     {"jcampus_school_name", type text},
     {"school_name", type text},
     {"attendance_rate", Percentage.Type}
-  }) // Ensure all columns have correct types
+  }), // Ensure all columns have correct types
+  // Nuclear option: Replace ALL error values in ALL columns with null
+  #"Replace errors" = Table.ReplaceErrorValues(#"Changed column type", List.Transform(Table.ColumnNames(#"Changed column type"), each {_, null}))
 in
-  #"Changed column type";
+  #"Replace errors";
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "client_attendance_detail_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared client_attendance_detail = 
   Table.RemoveColumns(base_client_attendance, {"last_name", "first_name"});

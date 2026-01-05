@@ -117,8 +117,8 @@ shared base_client_attendance = let
       [lighthouse_location_enrolling]), // Normalize school site names to match JCampus, otherwise use lighthouse location
   #"Added is_80_school" = Table.AddColumn(#"Added school_name", "is_80_school", each List.Contains(HighAttendanceSchools, [school_name])), // Flag if school requires 80% attendance (based on final school_name)
   #"Added required_threshold" = Table.AddColumn(#"Added is_80_school", "required_threshold", each if [is_80_school] then HighAttendanceThreshold else StandardAttendanceThreshold), // Set required threshold based on school type
-  #"Added attendance_rate" = Table.AddColumn(#"Added required_threshold", "attendance_rate", each [sessions_attended] / [sessions_possible], type number), // Calculate attendance rate
-  #"Added meets_threshold" = Table.AddColumn(#"Added attendance_rate", "meets_threshold", each [attendance_rate] >= [required_threshold]), // Flag if client meets their threshold
+  #"Added attendance_rate" = Table.AddColumn(#"Added required_threshold", "attendance_rate", each if [sessions_possible] = 0 then null else [sessions_attended] / [sessions_possible], type number), // Calculate attendance rate, null if no possible sessions
+  #"Added meets_threshold" = Table.AddColumn(#"Added attendance_rate", "meets_threshold", each if [attendance_rate] = null then false else [attendance_rate] >= [required_threshold]), // Flag if client meets their threshold
   #"Added attendance_flag" = Table.AddColumn(#"Added meets_threshold", "attendance_flag", each 
     if [attendance_rate] >= HighAttendanceThreshold then "80%+ GOOD"
     else if [attendance_rate] >= StandardAttendanceThreshold then "60%+ GOOD"

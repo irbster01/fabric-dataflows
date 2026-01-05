@@ -52,7 +52,6 @@ shared #"silver_lighthouse Lighthouse Matched with JCampus" = let
   #"Navigation 2" = #"Navigation 1"{[Id = "silver_lighthouse.Lighthouse Matched with JCampus", ItemKind = "Table"]}[Data] // Load matched data with JCampus school names
 in
   #"Navigation 2";
-<<<<<<< HEAD
 
 shared lh_dates = let
   Source = Lakehouse.Contents(null),
@@ -208,10 +207,3 @@ shared unmatched_clients_DataDestination = let
   TableNavigation = Navigation_2{[Id = "lighthouse_unmatched_clients_summary", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
-shared lighthouse_dates = let
-  Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "lighthouse_dates", ItemKind = "Table"]}[Data]
-in
-  #"Navigation 2";

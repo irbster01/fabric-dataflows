@@ -74,11 +74,11 @@ shared base_client_attendance = let
   #"Navigation 2" = #"Navigation 1"{[Id = "v_client_month_rollups", ItemKind = "View"]}[Data],
   #"Added custom" = Table.TransformColumnTypes(Table.AddColumn(#"Navigation 2", "today", each DateTime.Date(DateTimeZone.LocalNow())), {{"today", type datetime}}), // Add current date for tracking
   #"Added nine_week_period" = Table.AddColumn(#"Added custom", "nine_week_period", each 
-    if [month_date] >= NineWeekPeriods[FirstNineWeeks][StartDate] and [month_date] <= NineWeekPeriods[FirstNineWeeks][EndDate] then NineWeekPeriods[FirstNineWeeks][Name]
-    else if [month_date] >= NineWeekPeriods[SecondNineWeeks][StartDate] and [month_date] <= NineWeekPeriods[SecondNineWeeks][EndDate] then NineWeekPeriods[SecondNineWeeks][Name]
-    else if [month_date] >= NineWeekPeriods[ThirdNineWeeks][StartDate] and [month_date] <= NineWeekPeriods[ThirdNineWeeks][EndDate] then NineWeekPeriods[ThirdNineWeeks][Name]
-    else if [month_date] >= NineWeekPeriods[FourthNineWeeks][StartDate] and [month_date] <= NineWeekPeriods[FourthNineWeeks][EndDate] then NineWeekPeriods[FourthNineWeeks][Name]
-    else null), // Calculate which 9-week period each month_date falls into
+    if [service_month] >= NineWeekPeriods[FirstNineWeeks][StartDate] and [service_month] <= NineWeekPeriods[FirstNineWeeks][EndDate] then NineWeekPeriods[FirstNineWeeks][Name]
+    else if [service_month] >= NineWeekPeriods[SecondNineWeeks][StartDate] and [service_month] <= NineWeekPeriods[SecondNineWeeks][EndDate] then NineWeekPeriods[SecondNineWeeks][Name]
+    else if [service_month] >= NineWeekPeriods[ThirdNineWeeks][StartDate] and [service_month] <= NineWeekPeriods[ThirdNineWeeks][EndDate] then NineWeekPeriods[ThirdNineWeeks][Name]
+    else if [service_month] >= NineWeekPeriods[FourthNineWeeks][StartDate] and [service_month] <= NineWeekPeriods[FourthNineWeeks][EndDate] then NineWeekPeriods[FourthNineWeeks][Name]
+    else null), // Calculate which 9-week period each service_month falls into
   #"Filtered to nine week periods" = Table.SelectRows(#"Added nine_week_period", each [nine_week_period] <> null), // Keep only rows within defined 9-week periods
   #"Merged queries" = Table.NestedJoin(#"Filtered to nine week periods", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter), // Join to get registration details
   #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Merged queries", "raw_lighthouse_registration", {"app_date", "lighthouse_location_enrolling", "school_name"}, {"app_date", "lighthouse_location_enrolling", "school_name"}), // Expand registration fields

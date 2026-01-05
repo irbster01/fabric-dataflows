@@ -53,11 +53,14 @@ shared raw_sp_services = let
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
   raw_sp_services = #"Navigation 1"{[Id = "raw_sp_services", ItemKind = "Table"]}[Data],
-  #"Added nine_week_period" = Table.AddColumn(raw_sp_services, "nine_week_period", each 
-    if [service_date] >= #date(2025, 8, 13) and [service_date] <= #date(2025, 10, 17) then "1st 9 Weeks"
-    else if [service_date] >= #date(2025, 10, 20) and [service_date] <= #date(2025, 12, 17) then "2nd 9 Weeks"
-    else if [service_date] >= #date(2026, 1, 6) and [service_date] <= #date(2026, 3, 6) then "3rd 9 Weeks"
-    else if [service_date] >= #date(2026, 3, 16) and [service_date] <= #date(2026, 5, 21) then "4th 9 Weeks"
+  #"Removed errors" = Table.SelectRows(raw_sp_services, each not (try [service_date])[HasError] and not (try [client_id])[HasError]), // Remove rows with errors
+  #"Added nine_week_period" = Table.AddColumn(#"Removed errors", "nine_week_period", each 
+    let svc_date = [service_date] in
+    if svc_date = null then null
+    else if svc_date >= #date(2025, 8, 13) and svc_date <= #date(2025, 10, 17) then "1st 9 Weeks"
+    else if svc_date >= #date(2025, 10, 20) and svc_date <= #date(2025, 12, 17) then "2nd 9 Weeks"
+    else if svc_date >= #date(2026, 1, 6) and svc_date <= #date(2026, 3, 6) then "3rd 9 Weeks"
+    else if svc_date >= #date(2026, 3, 16) and svc_date <= #date(2026, 5, 21) then "4th 9 Weeks"
     else null, type text), // Assign each service to a 9-week period based on service_date
   #"Filtered to nine weeks" = Table.SelectRows(#"Added nine_week_period", each [nine_week_period] <> null) // Keep only services within defined 9-week periods
 in
@@ -111,14 +114,29 @@ shared base_client_attendance = let
       "Bethune/Oak Park"
     else 
       [lighthouse_location_enrolling]), // Normalize school site names to match JCampus, otherwise use lighthouse location
-  #"Added is_80_school" = Table.AddColumn(#"Added school_name", "is_80_school", each List.Contains(HighAttendanceSchools, [school_name]), type logical), // Flag if school requires 80% attendance (based on final school_name)
-  #"Added required_threshold" = Table.AddColumn(#"Added is_80_school", "required_threshold", each if [is_80_school] then HighAttendanceThreshold else StandardAttendanceThreshold, type number), // Set required threshold based on school type
-  #"Added attendance_rate" = Table.AddColumn(#"Added required_threshold", "attendance_rate", each if [sessions_possible] = 0 then null else [sessions_attended] / [sessions_possible], type number), // Calculate attendance rate, null if no possible sessions
-  #"Added meets_threshold" = Table.AddColumn(#"Added attendance_rate", "meets_threshold", each if [attendance_rate] = null then false else [attendance_rate] >= [required_threshold], type logical), // Flag if client meets their threshold
+  #"Added is_80_school" = Table.AddColumn(#"Added school_name", "is_80_school", each 
+    let school = try [school_name] otherwise null in
+    if school = null then false else List.Contains(HighAttendanceSchools, school), type logical), // Flag if school requires 80% attendance (based on final school_name)
+  #"Added required_threshold" = Table.AddColumn(#"Added is_80_school", "required_threshold", each 
+    let is80 = try [is_80_school] otherwise false in
+    if is80 then HighAttendanceThreshold else StandardAttendanceThreshold, type number), // Set required threshold based on school type
+  #"Added attendance_rate" = Table.AddColumn(#"Added required_threshold", "attendance_rate", each 
+    let 
+      attended = try [sessions_attended] otherwise 0,
+      possible = try [sessions_possible] otherwise 0
+    in
+      if possible = 0 or possible = null then null else attended / possible, type number), // Calculate attendance rate, null if no possible sessions
+  #"Added meets_threshold" = Table.AddColumn(#"Added attendance_rate", "meets_threshold", each 
+    let 
+      rate = try [attendance_rate] otherwise null,
+      threshold = try [required_threshold] otherwise 0.60
+    in
+      if rate = null then false else rate >= threshold, type logical), // Flag if client meets their threshold
   #"Added attendance_flag" = Table.AddColumn(#"Added meets_threshold", "attendance_flag", each 
-    if [attendance_rate] = null then "NO SESSIONS POSSIBLE"
-    else if [attendance_rate] >= HighAttendanceThreshold then "80%+ GOOD"
-    else if [attendance_rate] >= StandardAttendanceThreshold then "60%+ GOOD"
+    let rate = try [attendance_rate] otherwise null in
+    if rate = null then "NO SESSIONS POSSIBLE"
+    else if rate >= HighAttendanceThreshold then "80%+ GOOD"
+    else if rate >= StandardAttendanceThreshold then "60%+ GOOD"
     else "BELOW THRESHOLD", type text), // Create readable flag
   #"Changed column type" = Table.TransformColumnTypes(#"Added attendance_flag", {
     {"client_id", Int64.Type},

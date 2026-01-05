@@ -85,18 +85,17 @@ shared base_client_attendance = let
   #"Added sessions_possible" = Table.AddColumn(#"Merged with dates", "sessions_possible", each 
     let
       dates_table = [program_dates],
-      client_entry = [entry_date],
-      period_name = [nine_week_period]
+      client_entry = [entry_date]
     in
       if dates_table = null then 0
       else 
         Table.RowCount(
           Table.SelectRows(dates_table, each 
             [date] <> null and 
-            (client_entry = null or [date] >= client_entry) and
-            [nine_week_period] = period_name
+            [IsSessionDay] = true and
+            (client_entry = null or [date] >= client_entry)
           )
-        ), Int64.Type), // Count program dates on or after client's entry date within their 9-week period
+        ), Int64.Type), // Count session days on or after client's entry date
   #"Removed program_dates" = Table.RemoveColumns(#"Added sessions_possible", {"program_dates"}), // Clean up nested table
   #"Merged queries 1" = Table.NestedJoin(#"Removed program_dates", {"client_id"}, #"silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, "jcampus_match", JoinKind.LeftOuter), // Join to get JCampus school name
   #"Expanded jcampus_match" = Table.ExpandTableColumn(#"Merged queries 1", "jcampus_match", {"School Name"}, {"jcampus_school_name"}), // Expand JCampus school name

@@ -12,8 +12,8 @@ shared #"2526_lh_clients" = let
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
   #"2526_lh_clients" = #"Navigation 1"{[Id = "2526_lh_clients", ItemKind = "Table"]}[Data],
-  #"Removed errors" = Table.SelectRows(#"2526_lh_clients", each not (try [days_enrolled])[HasError]), // Remove rows with errors in days_enrolled
-  #"Filtered rows" = Table.SelectRows(#"Removed errors", each [days_enrolled] > MinimumDaysEnrolled) // Filter to clients enrolled more than minimum days
+  #"Removed errors" = Table.RemoveRowsWithErrors(#"2526_lh_clients", {"days_enrolled", "client_id"}), // Remove all rows with errors
+  #"Filtered rows" = Table.SelectRows(#"Removed errors", each [days_enrolled] <> null and [days_enrolled] > MinimumDaysEnrolled) // Filter to clients enrolled more than minimum days
 in
   #"Filtered rows";
 shared raw_lighthouse_registration = let
@@ -35,7 +35,7 @@ shared raw_sp_entries = let
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
   raw_sp_entries = #"Navigation 1"{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data],
-  #"Removed errors" = Table.SelectRows(raw_sp_entries, each not (try [client_id])[HasError] and not (try [program])[HasError]), // Remove rows with errors in key columns
+  #"Removed errors" = Table.RemoveRowsWithErrors(raw_sp_entries, {"client_id", "program", "entry_date", "exit_date"}), // Remove all rows with errors
   #"Filtered to programs" = Table.SelectRows(#"Removed errors", each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
   #"Grouped rows" = Table.Group(#"Filtered to programs", {"client_id"}, {{"entry_date", each List.Max([entry_date]), type nullable date}, {"exit_date", each List.Max([exit_date]), type nullable date}, {"program", each List.Max([program]), type nullable text}}), // Get most recent entry per client
   #"Filtered by date" = Table.SelectRows(#"Grouped rows", each [exit_date] = null or [exit_date] > EntryExitDateFilter) // Filter to recent entries/exits after grouping
@@ -53,11 +53,11 @@ shared raw_sp_services = let
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
   raw_sp_services = #"Navigation 1"{[Id = "raw_sp_services", ItemKind = "Table"]}[Data],
-  #"Removed errors" = Table.SelectRows(raw_sp_services, each not (try [service_date])[HasError] and not (try [client_id])[HasError]), // Remove rows with errors
-  #"Added nine_week_period" = Table.AddColumn(#"Removed errors", "nine_week_period", each 
+  #"Removed errors" = Table.RemoveRowsWithErrors(raw_sp_services, {"service_date", "client_id"}), // Remove all rows with errors
+  #"Filtered valid dates" = Table.SelectRows(#"Removed errors", each [service_date] <> null), // Keep only rows with valid dates
+  #"Added nine_week_period" = Table.AddColumn(#"Filtered valid dates", "nine_week_period", each 
     let svc_date = [service_date] in
-    if svc_date = null then null
-    else if svc_date >= #date(2025, 8, 13) and svc_date <= #date(2025, 10, 17) then "1st 9 Weeks"
+    if svc_date >= #date(2025, 8, 13) and svc_date <= #date(2025, 10, 17) then "1st 9 Weeks"
     else if svc_date >= #date(2025, 10, 20) and svc_date <= #date(2025, 12, 17) then "2nd 9 Weeks"
     else if svc_date >= #date(2026, 1, 6) and svc_date <= #date(2026, 3, 6) then "3rd 9 Weeks"
     else if svc_date >= #date(2026, 3, 16) and svc_date <= #date(2026, 5, 21) then "4th 9 Weeks"

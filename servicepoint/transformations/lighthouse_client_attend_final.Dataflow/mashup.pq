@@ -130,9 +130,10 @@ in
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "client_attendance_detail_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared client_attendance_detail = let
   client_attendance_detail = base_client_attendance,
-  #"Changed column type" = Table.TransformColumnTypes(client_attendance_detail, {{"is_80_school", type text}, {"required_threshold", type number}})
+  #"Changed column type" = Table.TransformColumnTypes(client_attendance_detail, {{"is_80_school", type text}, {"required_threshold", type number}, {"meets_threshold", type text}, {"attendance_flag", type text}, {"school_name", type text}}),
+  #"Removed columns" = Table.RemoveColumns(#"Changed column type", {"last_name", "first_name"})
 in
-  #"Changed column type";
+  #"Removed columns";
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_summary_80_schools_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared attendance_summary_80_schools = let
   Source = base_client_attendance,

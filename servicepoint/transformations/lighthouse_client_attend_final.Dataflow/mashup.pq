@@ -195,38 +195,3 @@ shared unmatched_clients = let
   #"Sorted by count" = Table.Sort(#"Grouped by location and period", {{"unmatched_count", Order.Descending}}) // Sort by highest unmatched count
 in
   #"Sorted by count";
-shared attendance_summary_80_schools_DataDestination = let
-  Pattern = Lakehouse.Contents(null),
-  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
-  TableNavigation = Navigation_2{[Id = "attendance_summary_80_schools", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared attendance_summary_other_schools_DataDestination = let
-  Pattern = Lakehouse.Contents(null),
-  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
-  TableNavigation = Navigation_2{[Id = "attendance_summary_other_schools", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared attendance_averages_by_location_DataDestination = let
-  Pattern = Lakehouse.Contents(null),
-  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
-  TableNavigation = Navigation_2{[Id = "attendance_averages_by_location", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared unmatched_clients_DataDestination = let
-  Pattern = Lakehouse.Contents(null),
-  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
-  TableNavigation = Navigation_2{[Id = "unmatched_clients", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared client_attendance_detail_DataDestination = let
-  Pattern = Lakehouse.Contents(null),
-  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
-  TableNavigation = Navigation_2{[Id = "client_attendance_detail", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;

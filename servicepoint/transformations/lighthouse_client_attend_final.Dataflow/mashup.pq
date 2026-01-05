@@ -58,8 +58,7 @@ shared raw_sp_services = let
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = LakehouseId]}[Data],
   #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_services", ItemKind = "Table"]}[Data],
-  #"Filtered rows" = Table.SelectRows(#"Navigation 2", each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")), // Filter to Lighthouse programs only
-  #"Added nine_week_period" = Table.AddColumn(#"Filtered rows", "nine_week_period", each 
+  #"Added nine_week_period" = Table.AddColumn(#"Navigation 2", "nine_week_period", each 
     if [service_date] >= NineWeekPeriods[FirstNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[FirstNineWeeks][EndDate] then NineWeekPeriods[FirstNineWeeks][Name]
     else if [service_date] >= NineWeekPeriods[SecondNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[SecondNineWeeks][EndDate] then NineWeekPeriods[SecondNineWeeks][Name]
     else if [service_date] >= NineWeekPeriods[ThirdNineWeeks][StartDate] and [service_date] <= NineWeekPeriods[ThirdNineWeeks][EndDate] then NineWeekPeriods[ThirdNineWeeks][Name]
@@ -80,7 +79,9 @@ in
 // ===== BASE ATTENDANCE CALCULATION =====
 shared base_client_attendance = let
   Source = raw_sp_services,
-  #"Grouped services" = Table.Group(Source, {"client_id", "nine_week_period"}, {{"sessions_attended", each Table.RowCount(_), Int64.Type}}), // Count services per client per 9-week period
+  #"Merged with entries to filter" = Table.NestedJoin(Source, {"client_id"}, raw_sp_entries, {"client_id"}, "entry_check", JoinKind.Inner), // Inner join to keep only Lighthouse clients
+  #"Removed entry_check" = Table.RemoveColumns(#"Merged with entries to filter", {"entry_check"}), // Remove the nested table, we just needed it for filtering
+  #"Grouped services" = Table.Group(#"Removed entry_check", {"client_id", "nine_week_period"}, {{"sessions_attended", each Table.RowCount(_), Int64.Type}}), // Count services per client per 9-week period
   #"Merged with demographics" = Table.NestedJoin(#"Grouped services", {"client_id"}, raw_sp_demographics, {"client_id"}, "demographics", JoinKind.LeftOuter), // Join to get client names
   #"Expanded demographics" = Table.ExpandTableColumn(#"Merged with demographics", "demographics", {"last_name", "first_name"}, {"last_name", "first_name"}),
   #"Merged with registration" = Table.NestedJoin(#"Expanded demographics", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "registration", JoinKind.LeftOuter), // Join to get lighthouse location

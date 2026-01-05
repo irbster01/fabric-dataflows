@@ -169,3 +169,23 @@ shared attendance_averages_by_school_DataDestination = let
   TableNavigation = Navigation_2{[Id = "lighthouse_attendance_averages_by_school", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
+
+// ===== OUTPUT: UNMATCHED CLIENTS =====
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "unmatched_clients_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared unmatched_clients = let
+  Source = base_client_attendance,
+  #"Filtered to unmatched" = Table.SelectRows(Source, each [jcampus_school_name] = null or [jcampus_school_name] = ""), // Filter to clients without JCampus school match
+  #"Removed duplicates" = Table.Distinct(#"Filtered to unmatched", {"client_id"}), // Deduplicate clients
+  #"Selected columns" = Table.SelectColumns(#"Removed duplicates", {"client_id", "client_first_name", "client_last_name", "lighthouse_location_enrolling", "sessions_attended", "sessions_possible", "attendance_rate"}), // Keep relevant columns for investigation
+  #"Grouped by location" = Table.Group(#"Selected columns", {"lighthouse_location_enrolling"}, {{"unmatched_count", each List.Count([client_id]), Int64.Type}}), // Count unmatched clients per lighthouse location
+  #"Sorted by count" = Table.Sort(#"Grouped by location", {{"unmatched_count", Order.Descending}}) // Sort by highest unmatched count
+in
+  #"Sorted by count";
+
+shared unmatched_clients_DataDestination = let
+  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = LakehouseId]}[Data],
+  TableNavigation = Navigation_2{[Id = "lighthouse_unmatched_clients_summary", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;

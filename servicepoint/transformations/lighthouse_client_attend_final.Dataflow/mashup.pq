@@ -203,7 +203,7 @@ shared unmatched_clients = let
   Source = base_client_attendance,
   #"Filtered to unmatched" = Table.SelectRows(Source, each [jcampus_school_name] = null or [jcampus_school_name] = ""), // Filter to clients without JCampus school match
   #"Removed duplicates" = Table.Distinct(#"Filtered to unmatched", {"client_id", "nine_week_period"}), // Deduplicate clients per period
-  #"Selected columns" = Table.SelectColumns(#"Removed duplicates", {"client_id", "client_first_name", "client_last_name", "lighthouse_location_enrolling", "nine_week_period", "sessions_attended", "sessions_possible", "attendance_rate"}), // Keep relevant columns for investigation
+  #"Selected columns" = Table.SelectColumns(#"Removed duplicates", {"client_id", "first_name", "last_name", "lighthouse_location_enrolling", "nine_week_period", "sessions_attended", "sessions_possible", "attendance_rate"}), // Keep relevant columns for investigation
   #"Grouped by location and period" = Table.Group(#"Selected columns", {"lighthouse_location_enrolling", "nine_week_period"}, {{"unmatched_count", each List.Count([client_id]), Int64.Type}}), // Count unmatched clients per lighthouse location and period
   #"Sorted by count" = Table.Sort(#"Grouped by location and period", {{"unmatched_count", Order.Descending}}) // Sort by highest unmatched count
 in

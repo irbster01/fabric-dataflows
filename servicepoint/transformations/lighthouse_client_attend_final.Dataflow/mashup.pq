@@ -77,7 +77,7 @@ shared base_client_attendance = let
   #"Merged with registration" = Table.NestedJoin(#"Expanded demographics", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "registration", JoinKind.LeftOuter), // Join to get lighthouse location
   #"Expanded registration" = Table.ExpandTableColumn(#"Merged with registration", "registration", {"lighthouse_location_enrolling"}, {"lighthouse_location_enrolling"}),
   #"Merged with entries" = Table.NestedJoin(#"Expanded registration", {"client_id"}, raw_sp_entries, {"client_id"}, "entry_data", JoinKind.LeftOuter), // Join to get entry and exit dates
-  #"Expanded entry_data" = Table.ExpandTableColumn(#"Merged with entries", "entry_data", {"Count", "exit_date"}, {"entry_date", "exit_date"}), // Count field has entry_date from grouped entries
+  #"Expanded entry_data" = Table.ExpandTableColumn(#"Merged with entries", "entry_data", {"entry_date", "exit_date"}, {"entry_date", "exit_date"}), // Expand entry and exit dates
   #"Merged with dates" = Table.NestedJoin(#"Expanded entry_data", {"nine_week_period"}, lh_dates, {"nine_week_period"}, "program_dates", JoinKind.LeftOuter), // Join to program dates calendar
   #"Added sessions_possible" = Table.AddColumn(#"Merged with dates", "sessions_possible", each 
     let

@@ -77,15 +77,16 @@ shared base_client_attendance = let
   #"Filtered to nine week periods" = Table.SelectRows(#"Added nine_week_period", each [nine_week_period] <> null), // Keep only rows within defined 9-week periods
   #"Merged queries" = Table.NestedJoin(#"Filtered to nine week periods", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "raw_lighthouse_registration", JoinKind.LeftOuter), // Join to get registration details
   #"Expanded raw_lighthouse_registration" = Table.ExpandTableColumn(#"Merged queries", "raw_lighthouse_registration", {"app_date", "lighthouse_location_enrolling", "school_name"}, {"app_date", "lighthouse_location_enrolling", "school_name"}), // Expand registration fields
-  #"Merged with entries" = Table.NestedJoin(#"Expanded raw_lighthouse_registration", {"client_id"}, raw_sp_entries, {"client_id"}, "entry_data", JoinKind.LeftOuter), // Join to get entry date
-  #"Expanded entry_data" = Table.ExpandTableColumn(#"Merged with entries", "entry_data", {"Count"}, {"entry_date"}), // Expand entry date (Count field contains entry_date from grouped entries)
+  #"Merged with entries" = Table.NestedJoin(#"Expanded raw_lighthouse_registration", {"client_id"}, raw_sp_entries, {"client_id"}, "entry_data", JoinKind.LeftOuter), // Join to get entry and exit dates
+  #"Expanded entry_data" = Table.ExpandTableColumn(#"Merged with entries", "entry_data", {"Count", "exit_date"}, {"entry_date", "exit_date"}), // Expand entry and exit dates (Count field contains entry_date from grouped entries)
   #"Removed columns" = Table.RemoveColumns(#"Expanded entry_data", {"max830", "max92", "max98", "max99"}), // Remove unused max columns - we'll calculate possible sessions from lh_dates instead
-  #"Grouped rows" = Table.Group(#"Removed columns", {"client_id", "client_last_name", "client_first_name", "lighthouse_location_enrolling", "nine_week_period", "entry_date"}, {{"sessions_attended", each List.Sum([Count]), type nullable number}}), // Sum attended sessions by client and period
+  #"Grouped rows" = Table.Group(#"Removed columns", {"client_id", "client_last_name", "client_first_name", "lighthouse_location_enrolling", "nine_week_period", "entry_date", "exit_date"}, {{"sessions_attended", each List.Sum([Count]), type nullable number}}), // Sum attended sessions by client and period
   #"Merged with dates" = Table.NestedJoin(#"Grouped rows", {"nine_week_period"}, lh_dates, {"nine_week_period"}, "program_dates", JoinKind.LeftOuter), // Join to program dates calendar
   #"Added sessions_possible" = Table.AddColumn(#"Merged with dates", "sessions_possible", each 
     let
       dates_table = [program_dates],
-      client_entry = [entry_date]
+      client_entry = [entry_date],
+      client_exit = [exit_date]
     in
       if dates_table = null then 0
       else 
@@ -93,9 +94,10 @@ shared base_client_attendance = let
           Table.SelectRows(dates_table, each 
             [date] <> null and 
             [IsSessionDay] = true and
-            (client_entry = null or [date] >= client_entry)
+            (client_entry = null or [date] >= client_entry) and
+            (client_exit = null or [date] <= client_exit)
           )
-        ), Int64.Type), // Count session days on or after client's entry date
+        ), Int64.Type), // Count session days between client's entry and exit dates
   #"Removed program_dates" = Table.RemoveColumns(#"Added sessions_possible", {"program_dates"}), // Clean up nested table
   #"Merged queries 1" = Table.NestedJoin(#"Removed program_dates", {"client_id"}, #"silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, "jcampus_match", JoinKind.LeftOuter), // Join to get JCampus school name
   #"Expanded jcampus_match" = Table.ExpandTableColumn(#"Merged queries 1", "jcampus_match", {"School Name"}, {"jcampus_school_name"}), // Expand JCampus school name

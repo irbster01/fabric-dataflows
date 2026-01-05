@@ -162,9 +162,11 @@ shared base_client_attendance = let
   #"Replace errors" = Table.ReplaceErrorValues(#"Changed column type", List.Transform(Table.ColumnNames(#"Changed column type"), each {_, null}))
 in
   #"Replace errors";
-[BindToDefaultDestination = true]
-shared client_attendance_detail = Table.RemoveColumns(base_client_attendance, {"last_name", "first_name"});
-[BindToDefaultDestination = true]
+shared client_attendance_detail = let
+  Source = base_client_attendance,
+  #"Select columns" = Table.SelectColumns(Source, {"client_id", "nine_week_period", "sessions_attended", "lighthouse_location_enrolling", "entry_date", "exit_date", "sessions_possible", "jcampus_school_name", "school_name", "is_80_school", "required_threshold", "attendance_rate", "meets_threshold", "attendance_flag"})
+in
+  #"Select columns";
 shared attendance_summary_80_schools = let
   Source = base_client_attendance,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true), // Filter to only 80% schools
@@ -176,7 +178,6 @@ shared attendance_summary_80_schools = let
   #"Added percentage" = Table.AddColumn(#"Count meeting threshold", "pct_meeting_threshold", each [students_meeting_80] / [total_students], Percentage.Type) // Calculate percentage meeting threshold
 in
   #"Added percentage";
-[BindToDefaultDestination = true]
 shared attendance_summary_other_schools = let
   Source = base_client_attendance,
   #"Filtered to non-80 schools" = Table.SelectRows(Source, each [is_80_school] = false), // Filter to locations requiring 60% attendance
@@ -191,7 +192,6 @@ shared attendance_summary_other_schools = let
   #"Filtered rows" = Table.SelectRows(#"Added percentage", each ([lighthouse_location_enrolling] <> null and [lighthouse_location_enrolling] <> "School Site - Judson"))
 in
   #"Filtered rows";
-[BindToDefaultDestination = true]
 shared attendance_averages_by_location = let
   Source = base_client_attendance,
   #"Removed duplicates" = Table.Distinct(Source, {"client_id", "nine_week_period"}), // Deduplicate clients per period
@@ -206,7 +206,6 @@ shared attendance_averages_by_location = let
   #"Filtered rows" = Table.SelectRows(#"Sorted by location", each ([lighthouse_location_enrolling] <> null and [lighthouse_location_enrolling] <> "School Site - Judson"))
 in
   #"Filtered rows";
-[BindToDefaultDestination = true]
 shared unmatched_clients = let
   Source = base_client_attendance,
   #"Filtered to unmatched" = Table.SelectRows(Source, each [jcampus_school_name] = null or [jcampus_school_name] = ""), // Filter to clients without JCampus school match
@@ -216,4 +215,3 @@ shared unmatched_clients = let
   #"Sorted by count" = Table.Sort(#"Grouped by location and period", {{"unmatched_count", Order.Descending}}) // Sort by highest unmatched count
 in
   #"Sorted by count";
-shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data];

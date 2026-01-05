@@ -1,12 +1,7 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-
-// ===== CONFIGURATION PARAMETERS =====
-// Dataflow last updated: 2026-01-05
 shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
 shared LakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910" meta [Description = "ServicePoint lakehouse ID"];
-
-// Reporting period configuration - 9 week periods
 shared NineWeekPeriods = [
   FirstNineWeeks = [StartDate = #date(2025, 8, 13), EndDate = #date(2025, 10, 17), Name = "1st 9 Weeks"],
   SecondNineWeeks = [StartDate = #date(2025, 10, 20), EndDate = #date(2025, 12, 17), Name = "2nd 9 Weeks"],
@@ -15,13 +10,9 @@ shared NineWeekPeriods = [
 ] meta [Description = "9-week period date ranges"];
 shared MinimumDaysEnrolled = 7 meta [Description = "Minimum days enrolled to be included in calculations"];
 shared EntryExitDateFilter = #date(2025, 9, 1) meta [Description = "Only include entries/exits after this date"];
-
-// Attendance threshold configuration
 shared HighAttendanceThreshold = 0.80 meta [Description = "Attendance threshold for 80% schools"];
 shared StandardAttendanceThreshold = 0.60 meta [Description = "Attendance threshold for non-80% schools"];
 shared HighAttendanceSchools = {"Bethune/Oak Park", "Broadmoor STEM", "Creswell Elementary"} meta [Description = "Schools requiring 80% attendance"];
-
-// ===== SOURCE DATA QUERIES =====
 shared #"2526_lh_clients" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],
@@ -30,7 +21,6 @@ shared #"2526_lh_clients" = let
   #"Filtered rows" = Table.SelectRows(#"Navigation 2", each [days_enrolled] > MinimumDaysEnrolled) // Filter to clients enrolled more than minimum days
 in
   #"Filtered rows";
-
 shared raw_lighthouse_registration = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],
@@ -38,7 +28,6 @@ shared raw_lighthouse_registration = let
   #"Navigation 2" = #"Navigation 1"{[Id = "raw_lighthouse_registration", ItemKind = "Table"]}[Data] // Load lighthouse registration data with location and school info
 in
   #"Navigation 2";
-
 shared raw_sp_demographics = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],
@@ -46,7 +35,6 @@ shared raw_sp_demographics = let
   #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_demographics", ItemKind = "Table"]}[Data] // Load ServicePoint demographics data
 in
   #"Navigation 2";
-
 shared raw_sp_entries = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],
@@ -57,7 +45,6 @@ shared raw_sp_entries = let
   #"Grouped rows" = Table.Group(#"Filtered rows 1", {"client_id"}, {{"Count", each List.Max([entry_date]), type nullable date}, {"exit_date", each List.Max([exit_date]), type nullable date}, {"program", each List.Max([program]), type nullable text}}) // Get most recent entry per client
 in
   #"Grouped rows";
-
 shared #"silver_lighthouse Lighthouse Matched with JCampus" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],
@@ -65,8 +52,6 @@ shared #"silver_lighthouse Lighthouse Matched with JCampus" = let
   #"Navigation 2" = #"Navigation 1"{[Id = "silver_lighthouse.Lighthouse Matched with JCampus", ItemKind = "Table"]}[Data] // Load matched data with JCampus school names
 in
   #"Navigation 2";
-
-// ===== BASE ATTENDANCE CALCULATION =====
 shared base_client_attendance = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = WorkspaceId]}[Data],
@@ -108,11 +93,8 @@ shared base_client_attendance = let
   #"Changed column type" = Table.TransformColumnTypes(#"Added attendance_flag", {{"attendance_rate", Percentage.Type}}) // Format attendance rate as percentage
 in
   #"Changed column type";
-
-// ===== OUTPUT: CLIENT-LEVEL DETAIL =====
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "client_attendance_detail_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared client_attendance_detail = base_client_attendance;
-
 shared client_attendance_detail_DataDestination = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
@@ -120,8 +102,6 @@ shared client_attendance_detail_DataDestination = let
   TableNavigation = Navigation_2{[Id = "lighthouse_client_attendance_detail", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
-
-// ===== OUTPUT: 80% SCHOOLS SUMMARY =====
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_summary_80_schools_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared attendance_summary_80_schools = let
   Source = base_client_attendance,
@@ -134,7 +114,6 @@ shared attendance_summary_80_schools = let
   #"Added percentage" = Table.AddColumn(#"Count meeting threshold", "pct_meeting_threshold", each [students_meeting_80] / [total_students], Percentage.Type) // Calculate percentage meeting threshold
 in
   #"Added percentage";
-
 shared attendance_summary_80_schools_DataDestination = let
   Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
@@ -142,8 +121,6 @@ shared attendance_summary_80_schools_DataDestination = let
   TableNavigation = Navigation_2{[Id = "lighthouse_80_schools_summary", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
-
-// ===== OUTPUT: NON-80% SCHOOLS SUMMARY =====
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_summary_other_schools_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared attendance_summary_other_schools = let
   Source = base_client_attendance,
@@ -157,7 +134,6 @@ shared attendance_summary_other_schools = let
   #"Added percentage" = Table.AddColumn(#"Count meeting threshold", "pct_meeting_threshold", each [students_meeting_60] / [total_students], Percentage.Type) // Calculate percentage meeting threshold
 in
   #"Added percentage";
-
 shared attendance_summary_other_schools_DataDestination = let
   Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
@@ -165,8 +141,6 @@ shared attendance_summary_other_schools_DataDestination = let
   TableNavigation = Navigation_2{[Id = "lighthouse_other_schools_summary", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
-
-// ===== OUTPUT: AVERAGE SESSIONS BY LIGHTHOUSE LOCATION =====
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "attendance_averages_by_location_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared attendance_averages_by_location = let
   Source = base_client_attendance,
@@ -180,7 +154,6 @@ shared attendance_averages_by_location = let
   #"Sorted by location" = Table.Sort(#"Added avg_attendance_rate", {{"lighthouse_location_enrolling", Order.Ascending}, {"nine_week_period", Order.Ascending}}) // Sort alphabetically by location and period
 in
   #"Sorted by location";
-
 shared attendance_averages_by_location_DataDestination = let
   Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
@@ -188,8 +161,6 @@ shared attendance_averages_by_location_DataDestination = let
   TableNavigation = Navigation_2{[Id = "lighthouse_attendance_averages_by_location", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
-
-// ===== OUTPUT: UNMATCHED CLIENTS =====
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "unmatched_clients_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared unmatched_clients = let
   Source = base_client_attendance,
@@ -200,7 +171,6 @@ shared unmatched_clients = let
   #"Sorted by count" = Table.Sort(#"Grouped by location and period", {{"unmatched_count", Order.Descending}}) // Sort by highest unmatched count
 in
   #"Sorted by count";
-
 shared unmatched_clients_DataDestination = let
   Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = WorkspaceId]}[Data],
@@ -208,3 +178,10 @@ shared unmatched_clients_DataDestination = let
   TableNavigation = Navigation_2{[Id = "lighthouse_unmatched_clients_summary", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
+shared lighthouse_dates = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "lighthouse_dates", ItemKind = "Table"]}[Data]
+in
+  #"Navigation 2";

@@ -79,23 +79,7 @@ shared lighthouse_attendance_detail = let
     else if [attendance_rate] >= StandardAttendanceThreshold then "60%+ GOOD"
     else "BELOW THRESHOLD", type text),
   // Select final columns
-  #"Select columns" = Table.SelectColumns(#"Added attendance_flag", {
-    "client_id",
-    "nine_week_period",
-    "first_name",
-    "last_name",
-    "lighthouse_location_enrolling",
-    "entry_date",
-    "exit_date",
-    "sessions_attended",
-    "sessions_possible",
-    "school_name",
-    "is_80_school",
-    "required_threshold",
-    "attendance_rate",
-    "meets_threshold",
-    "attendance_flag"
-  })
+  #"Select columns" = Table.SelectColumns(#"Added attendance_flag", {"sessions_attended", "sessions_possible", "client_id", "nine_week_period", "first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program", "school_name", "is_80_school", "required_threshold", "attendance_rate", "meets_threshold", "attendance_flag"})
 in
   #"Select columns";
 shared attendance_summary_80_schools = let

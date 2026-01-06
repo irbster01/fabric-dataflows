@@ -5,18 +5,6 @@
   "queryGroups": [],
   "documentLocale": "en-US",
   "queriesMetadata": {
-    "HighAttendanceThreshold": {
-      "queryId": "b5d08676-6c3b-45d8-9f53-5a9afa465283",
-      "queryName": "HighAttendanceThreshold"
-    },
-    "StandardAttendanceThreshold": {
-      "queryId": "01c42c8d-655c-48df-9c99-be4aa97e1304",
-      "queryName": "StandardAttendanceThreshold"
-    },
-    "HighAttendanceSchools": {
-      "queryId": "e7d413a0-b094-4a20-acfe-0a749ad1c7bd",
-      "queryName": "HighAttendanceSchools"
-    },
     "lighthouse_sessions_attended": {
       "queryId": "6a34a6ac-393c-40a2-95c7-1eb55c2a3993",
       "queryName": "lighthouse_sessions_attended"
@@ -28,11 +16,6 @@
     "lighthouse_client_master": {
       "queryId": "f57d0216-0d9a-45bf-ba68-5aea7cfc7c04",
       "queryName": "lighthouse_client_master"
-    },
-    "jcampus_match": {
-      "queryId": "72edc9c0-2a50-4a65-95d2-bc4ce11358c2",
-      "queryName": "jcampus_match",
-      "loadEnabled": false
     },
     "lighthouse_attendance_detail": {
       "queryId": "3976f68e-305c-49dc-9e63-f6aa0aa4c81f",
@@ -57,12 +40,6 @@
     "DefaultDestination": {
       "queryId": "f455401c-7143-49de-903d-2d208230d58c",
       "queryName": "DefaultDestination",
-      "isHidden": true,
-      "loadEnabled": false
-    },
-    "jcampus_match_DataDestination": {
-      "queryId": "225a580e-3e6a-40ac-8fd9-d5494e07c3b8",
-      "queryName": "jcampus_match_DataDestination",
       "isHidden": true,
       "loadEnabled": false
     }

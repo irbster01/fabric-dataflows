@@ -4,5 +4,28 @@
   "name": "stage1_clean_entries",
   "queryGroups": [],
   "documentLocale": "en-US",
-  "connections": []
+  "queriesMetadata": {
+    "raw_sp_entries": {
+      "queryId": "c0cbe97d-6c81-4fcd-95f8-015284bf4ad6",
+      "queryName": "raw_sp_entries"
+    },
+    "clean_lighthouse_entries": {
+      "queryId": "c4fdd9fe-1d93-48a2-a8ee-00c7acc55c7c",
+      "queryName": "clean_lighthouse_entries",
+      "loadEnabled": false
+    },
+    "clean_lighthouse_entries_DataDestination": {
+      "queryId": "06d6f494-55b8-4261-8442-a1138504e9e0",
+      "queryName": "clean_lighthouse_entries_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
 }

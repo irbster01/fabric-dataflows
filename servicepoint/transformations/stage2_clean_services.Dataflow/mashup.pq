@@ -1,6 +1,5 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-
 shared raw_sp_services = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -8,15 +7,14 @@ shared raw_sp_services = let
   raw_sp_services = #"Navigation 1"{[Id = "raw_sp_services", ItemKind = "Table"]}[Data]
 in
   raw_sp_services;
-
 shared clean_lighthouse_entries = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  clean_lighthouse_entries = #"Navigation 1"{[Id = "clean_lighthouse_entries", ItemKind = "Table"]}[Data]
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "clean_lighthouse_entries", ItemKind = "Table"]}[Data]
 in
-  clean_lighthouse_entries;
-
+  #"Navigation 3";
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "clean_lighthouse_services_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared clean_lighthouse_services = let
   Source = raw_sp_services,
   // Filter to valid service dates only
@@ -53,3 +51,10 @@ shared clean_lighthouse_services = let
   })
 in
   #"Changed types";
+shared clean_lighthouse_services_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "clean_lighthouse_services", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;

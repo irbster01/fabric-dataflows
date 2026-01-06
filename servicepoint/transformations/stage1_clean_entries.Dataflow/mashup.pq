@@ -1,6 +1,5 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-
 shared raw_sp_entries = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -8,7 +7,7 @@ shared raw_sp_entries = let
   raw_sp_entries = #"Navigation 1"{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data]
 in
   raw_sp_entries;
-
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "clean_lighthouse_entries_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared clean_lighthouse_entries = let
   Source = raw_sp_entries,
   // Filter to only Lighthouse programs
@@ -29,3 +28,10 @@ shared clean_lighthouse_entries = let
   })
 in
   #"Changed types";
+shared clean_lighthouse_entries_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "clean_lighthouse_entries", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;

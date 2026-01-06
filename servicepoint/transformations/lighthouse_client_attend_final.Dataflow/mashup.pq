@@ -78,15 +78,15 @@ shared base_client_attendance = let
   #"Removed entry_check" = Table.RemoveColumns(#"Merged with entries to filter", {"entry_check"}), // Remove the nested table, we just needed it for filtering
   #"Grouped services" = Table.Group(#"Removed entry_check", {"client_id", "nine_week_period"}, {{"sessions_attended", each Table.RowCount(_), Int64.Type}}), // Count services per client per 9-week period
   #"Merged with demographics" = Table.NestedJoin(#"Grouped services", {"client_id"}, raw_sp_demographics, {"client_id"}, "demographics", JoinKind.LeftOuter), // Join to get client names
-  #"Expanded demographics" = Table.AddColumn(#"Merged with demographics", "last_name", each try Table.First([demographics])[last_name] otherwise null, type nullable text),
-  #"Added first_name" = Table.AddColumn(#"Expanded demographics", "first_name", each try Table.First([demographics])[first_name] otherwise null, type nullable text),
+  #"Expanded demographics" = Table.AddColumn(#"Merged with demographics", "last_name", each try (try Table.First([demographics])[last_name] otherwise null) otherwise null),
+  #"Added first_name" = Table.AddColumn(#"Expanded demographics", "first_name", each try (try Table.First([demographics])[first_name] otherwise null) otherwise null),
   #"Removed demographics" = Table.RemoveColumns(#"Added first_name", {"demographics"}),
   #"Merged with registration" = Table.NestedJoin(#"Removed demographics", {"client_id"}, raw_lighthouse_registration, {"client_id"}, "registration", JoinKind.LeftOuter), // Join to get lighthouse location
-  #"Added lighthouse_location" = Table.AddColumn(#"Merged with registration", "lighthouse_location_enrolling", each try Table.First([registration])[lighthouse_location_enrolling] otherwise null, type nullable text),
+  #"Added lighthouse_location" = Table.AddColumn(#"Merged with registration", "lighthouse_location_enrolling", each try (try Table.First([registration])[lighthouse_location_enrolling] otherwise null) otherwise null),
   #"Removed registration" = Table.RemoveColumns(#"Added lighthouse_location", {"registration"}),
   #"Merged with entries" = Table.NestedJoin(#"Removed registration", {"client_id"}, raw_sp_entries, {"client_id"}, "entry_data", JoinKind.LeftOuter), // Join to get entry and exit dates
-  #"Added entry_date" = Table.AddColumn(#"Merged with entries", "entry_date", each try Table.First([entry_data])[entry_date] otherwise null, type nullable date),
-  #"Added exit_date" = Table.AddColumn(#"Added entry_date", "exit_date", each try Table.First([entry_data])[exit_date] otherwise null, type nullable date),
+  #"Added entry_date" = Table.AddColumn(#"Merged with entries", "entry_date", each try (try Table.First([entry_data])[entry_date] otherwise null) otherwise null),
+  #"Added exit_date" = Table.AddColumn(#"Added entry_date", "exit_date", each try (try Table.First([entry_data])[exit_date] otherwise null) otherwise null),
   #"Removed entry_data" = Table.RemoveColumns(#"Added exit_date", {"entry_data"}),
   #"Merged with dates" = Table.NestedJoin(#"Removed entry_data", {"nine_week_period"}, lh_dates, {"nine_week_period"}, "program_dates", JoinKind.LeftOuter), // Join to program dates calendar
   #"Added sessions_possible" = Table.AddColumn(#"Merged with dates", "sessions_possible", each 
@@ -107,7 +107,7 @@ shared base_client_attendance = let
         ) otherwise 0, Int64.Type), // Count session days between client's entry and exit dates within this 9-week period
   #"Removed program_dates" = Table.RemoveColumns(#"Added sessions_possible", {"program_dates"}), // Clean up nested table
   #"Merged queries 1" = Table.NestedJoin(#"Removed program_dates", {"client_id"}, #"silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, "jcampus_match", JoinKind.LeftOuter), // Join to get JCampus school name
-  #"Added jcampus_school_name" = Table.AddColumn(#"Merged queries 1", "jcampus_school_name", each try Table.First([jcampus_match])[School Name] otherwise null, type nullable text),
+  #"Added jcampus_school_name" = Table.AddColumn(#"Merged queries 1", "jcampus_school_name", each try (try Table.First([jcampus_match])[School Name] otherwise null) otherwise null),
   #"Removed jcampus_match" = Table.RemoveColumns(#"Added jcampus_school_name", {"jcampus_match"}),
   #"Added school_name" = Table.AddColumn(#"Removed jcampus_match", "school_name", each 
     if [jcampus_school_name] <> null and [jcampus_school_name] <> "" then 
@@ -164,27 +164,24 @@ in
   #"Replace errors";
 shared client_attendance_detail_v2 = let
   Source = base_client_attendance,
-  // Explicitly extract scalar values from each column to prevent any nested tables/records
-  #"Force scalar values" = Table.FromRecords(
-    Table.ToRecords(Source),
-    type table [
-      client_id = nullable Int64.Type,
-      nine_week_period = nullable text,
-      sessions_attended = nullable Int64.Type,
-      lighthouse_location_enrolling = nullable text,
-      entry_date = nullable date,
-      exit_date = nullable date,
-      sessions_possible = nullable Int64.Type,
-      jcampus_school_name = nullable text,
-      school_name = nullable text,
-      is_80_school = nullable logical,
-      required_threshold = nullable number,
-      attendance_rate = nullable number,
-      meets_threshold = nullable logical,
-      attendance_flag = nullable text
-    ]
-  ),
-  #"Select columns" = Table.SelectColumns(#"Force scalar values", {"client_id", "nine_week_period", "sessions_attended", "lighthouse_location_enrolling", "entry_date", "exit_date", "sessions_possible", "jcampus_school_name", "school_name", "is_80_school", "required_threshold", "attendance_rate", "meets_threshold", "attendance_flag"}),
+  // Select only the columns we need - this ensures no nested tables/records leak through
+  #"Select columns" = Table.SelectColumns(Source, {
+    "client_id", 
+    "nine_week_period", 
+    "sessions_attended", 
+    "lighthouse_location_enrolling", 
+    "entry_date", 
+    "exit_date", 
+    "sessions_possible", 
+    "jcampus_school_name", 
+    "school_name", 
+    "is_80_school", 
+    "required_threshold", 
+    "attendance_rate", 
+    "meets_threshold", 
+    "attendance_flag"
+  }),
+  // Replace ALL errors with null to handle any computation failures
   #"Replace all errors" = Table.ReplaceErrorValues(#"Select columns", List.Transform(Table.ColumnNames(#"Select columns"), each {_, null}))
 in
   #"Replace all errors";

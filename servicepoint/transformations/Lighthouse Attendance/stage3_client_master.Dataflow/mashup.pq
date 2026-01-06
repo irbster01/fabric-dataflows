@@ -38,12 +38,14 @@ in
   #"Grouped by client";
 shared lighthouse_client_master = let
   Source = clean_lighthouse_entries,
-  // Left join demographics
-  #"Merged with demographics" = Table.Join(Source, "client_id", demographics_deduped, "client_id", JoinKind.LeftOuter),
-  // Left join registration
-  #"Merged with registration" = Table.Join(#"Merged with demographics", "client_id", registration_deduped, "client_id", JoinKind.LeftOuter),
+  // Left join demographics using NestedJoin
+  #"Merged with demographics" = Table.NestedJoin(Source, {"client_id"}, demographics_deduped, {"client_id"}, "demographics", JoinKind.LeftOuter),
+  #"Expanded demographics" = Table.ExpandTableColumn(#"Merged with demographics", "demographics", {"first_name", "last_name"}, {"first_name", "last_name"}),
+  // Left join registration using NestedJoin
+  #"Merged with registration" = Table.NestedJoin(#"Expanded demographics", {"client_id"}, registration_deduped, {"client_id"}, "registration", JoinKind.LeftOuter),
+  #"Expanded registration" = Table.ExpandTableColumn(#"Merged with registration", "registration", {"lighthouse_location_enrolling"}, {"lighthouse_location_enrolling"}),
   // Select final columns
-  #"Select columns" = Table.SelectColumns(#"Merged with registration", {
+  #"Select columns" = Table.SelectColumns(#"Expanded registration", {
     "client_id",
     "first_name",
     "last_name",
@@ -55,8 +57,8 @@ shared lighthouse_client_master = let
   // Set types
   #"Changed types" = Table.TransformColumnTypes(#"Select columns", {
     {"client_id", Int64.Type},
-    {"client_first_name", type nullable text},
-    {"client_last_name", type nullable text},
+    {"first_name", type nullable text},
+    {"last_name", type nullable text},
     {"entry_date", type nullable date},
     {"exit_date", type nullable date},
     {"lighthouse_location_enrolling", type nullable text},

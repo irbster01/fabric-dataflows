@@ -1,0 +1,5 @@
+{
+  "name": "stage2_clean_services",
+  "description": "Filter services to lighthouse clients and valid dates, add nine_week_period",
+  "version": "1.0"
+}

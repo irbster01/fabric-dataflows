@@ -1,0 +1,5 @@
+{
+  "name": "stage1_clean_entries",
+  "description": "Deduplicate lighthouse entries - one row per client with max entry/exit dates",
+  "version": "1.0"
+}

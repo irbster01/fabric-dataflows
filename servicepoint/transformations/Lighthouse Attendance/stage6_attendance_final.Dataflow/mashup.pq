@@ -89,7 +89,27 @@ in
 shared attendance_summary_80_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true),
-  #"Removed duplicates" = Table.Distinct(#"Filtered to 80 schools", {"client_id", "nine_week_period"}),
+  // Filter to only students enrolled during each specific 9-week period
+  #"Filtered to enrolled" = Table.SelectRows(#"Filtered to 80 schools", each 
+    let
+      period = [nine_week_period],
+      entry = [entry_date],
+      exit_date = [exit_date],
+      period_start = if period = "1st 9 Weeks" then #date(2025, 8, 13)
+                     else if period = "2nd 9 Weeks" then #date(2025, 10, 20)
+                     else if period = "3rd 9 Weeks" then #date(2026, 1, 6)
+                     else if period = "4th 9 Weeks" then #date(2026, 3, 16)
+                     else null,
+      period_end = if period = "1st 9 Weeks" then #date(2025, 10, 17)
+                   else if period = "2nd 9 Weeks" then #date(2025, 12, 17)
+                   else if period = "3rd 9 Weeks" then #date(2026, 3, 6)
+                   else if period = "4th 9 Weeks" then #date(2026, 5, 21)
+                   else null
+    in
+      period_start <> null and
+      (entry = null or entry <= period_end) and
+      (exit_date = null or exit_date >= period_start)),
+  #"Removed duplicates" = Table.Distinct(#"Filtered to enrolled", {"client_id", "nine_week_period"}),
   #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"students_meeting_80", each List.Count(List.Select([meets_threshold], each _ = true)), Int64.Type},
     {"total_students", each Table.RowCount(_), Int64.Type}
@@ -105,7 +125,27 @@ shared attendance_summary_other_schools = let
     [lighthouse_location_enrolling] <> "Highland" and
     [lighthouse_location_enrolling] <> "Teen Club" and
     [lighthouse_location_enrolling] <> "School Site - Judson"),
-  #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
+  // Filter to only students enrolled during each specific 9-week period
+  #"Filtered to enrolled" = Table.SelectRows(#"Filtered out specific", each 
+    let
+      period = [nine_week_period],
+      entry = [entry_date],
+      exit_date = [exit_date],
+      period_start = if period = "1st 9 Weeks" then #date(2025, 8, 13)
+                     else if period = "2nd 9 Weeks" then #date(2025, 10, 20)
+                     else if period = "3rd 9 Weeks" then #date(2026, 1, 6)
+                     else if period = "4th 9 Weeks" then #date(2026, 3, 16)
+                     else null,
+      period_end = if period = "1st 9 Weeks" then #date(2025, 10, 17)
+                   else if period = "2nd 9 Weeks" then #date(2025, 12, 17)
+                   else if period = "3rd 9 Weeks" then #date(2026, 3, 6)
+                   else if period = "4th 9 Weeks" then #date(2026, 5, 21)
+                   else null
+    in
+      period_start <> null and
+      (entry = null or entry <= period_end) and
+      (exit_date = null or exit_date >= period_start)),
+  #"Removed duplicates" = Table.Distinct(#"Filtered to enrolled", {"client_id", "nine_week_period"}),
   #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"students_meeting_60", each List.Count(List.Select([meets_threshold], each _ = true)), Int64.Type},
     {"total_students", each Table.RowCount(_), Int64.Type}
@@ -119,7 +159,27 @@ shared attendance_averages_by_location = let
   #"Filtered out specific" = Table.SelectRows(Source, each
     [lighthouse_location_enrolling] <> null and
     [lighthouse_location_enrolling] <> "School Site - Judson"),
-  #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
+  // Filter to only students enrolled during each specific 9-week period
+  #"Filtered to enrolled" = Table.SelectRows(#"Filtered out specific", each 
+    let
+      period = [nine_week_period],
+      entry = [entry_date],
+      exit_date = [exit_date],
+      period_start = if period = "1st 9 Weeks" then #date(2025, 8, 13)
+                     else if period = "2nd 9 Weeks" then #date(2025, 10, 20)
+                     else if period = "3rd 9 Weeks" then #date(2026, 1, 6)
+                     else if period = "4th 9 Weeks" then #date(2026, 3, 16)
+                     else null,
+      period_end = if period = "1st 9 Weeks" then #date(2025, 10, 17)
+                   else if period = "2nd 9 Weeks" then #date(2025, 12, 17)
+                   else if period = "3rd 9 Weeks" then #date(2026, 3, 6)
+                   else if period = "4th 9 Weeks" then #date(2026, 5, 21)
+                   else null
+    in
+      period_start <> null and
+      (entry = null or entry <= period_end) and
+      (exit_date = null or exit_date >= period_start)),
+  #"Removed duplicates" = Table.Distinct(#"Filtered to enrolled", {"client_id", "nine_week_period"}),
   #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"avg_sessions_attended", each List.Average([sessions_attended]), type nullable number},
     {"avg_sessions_possible", each List.Average([sessions_possible]), type nullable number},

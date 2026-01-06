@@ -52,9 +52,11 @@ shared lighthouse_sessions_possible = let
     {"client_id", Int64.Type},
     {"nine_week_period", type text},
     {"sessions_possible", Int64.Type}
-  })
+  }),
+  // Remove rows where student wasn't enrolled (sessions_possible = 0)
+  #"Filtered enrolled" = Table.SelectRows(#"Changed types", each [sessions_possible] > 0)
 in
-  #"Changed types";
+  #"Filtered enrolled";
 shared lighthouse_sessions_possible_DataDestination = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

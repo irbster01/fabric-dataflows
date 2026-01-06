@@ -141,20 +141,6 @@ shared attendance_averages_by_location = let
   #"Filtered out specific" = Table.SelectRows(Source, each
     [lighthouse_location_enrolling] <> null and
     [lighthouse_location_enrolling] <> "School Site - Judson"),
-  // Filter to only students enrolled during each specific 9-week period
-  #"Filtered to enrolled" = Table.SelectRows(#"Filtered out specific", each 
-    let
-      period = [nine_week_period],
-      entry = [entry_date],
-      exit_date = [exit_date],
-      period_start = if period = "1st 9 Weeks" then #date(2025, 8, 13)
-                     else if period = "2nd 9 Weeks" then #date(2025, 10, 20)
-[BindToDefaultDestination = true]
-shared attendance_averages_by_location = let
-  Source = lighthouse_attendance_detail,
-  #"Filtered out specific" = Table.SelectRows(Source, each
-    [lighthouse_location_enrolling] <> null and
-    [lighthouse_location_enrolling] <> "School Site - Judson"),
   #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
   #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"avg_sessions_attended", each List.Average([sessions_attended]), type nullable number},

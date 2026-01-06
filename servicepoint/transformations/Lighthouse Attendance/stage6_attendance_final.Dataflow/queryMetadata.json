@@ -4,5 +4,57 @@
   "name": "stage6_attendance_final",
   "queryGroups": [],
   "documentLocale": "en-US",
-  "connections": []
+  "queriesMetadata": {
+    "HighAttendanceThreshold": {
+      "queryId": "b5d08676-6c3b-45d8-9f53-5a9afa465283",
+      "queryName": "HighAttendanceThreshold"
+    },
+    "StandardAttendanceThreshold": {
+      "queryId": "01c42c8d-655c-48df-9c99-be4aa97e1304",
+      "queryName": "StandardAttendanceThreshold"
+    },
+    "HighAttendanceSchools": {
+      "queryId": "e7d413a0-b094-4a20-acfe-0a749ad1c7bd",
+      "queryName": "HighAttendanceSchools"
+    },
+    "lighthouse_sessions_attended": {
+      "queryId": "6a34a6ac-393c-40a2-95c7-1eb55c2a3993",
+      "queryName": "lighthouse_sessions_attended"
+    },
+    "lighthouse_sessions_possible": {
+      "queryId": "93bd81fb-a262-4195-a35d-5b992efd9b82",
+      "queryName": "lighthouse_sessions_possible"
+    },
+    "lighthouse_client_master": {
+      "queryId": "f57d0216-0d9a-45bf-ba68-5aea7cfc7c04",
+      "queryName": "lighthouse_client_master"
+    },
+    "jcampus_match": {
+      "queryId": "72edc9c0-2a50-4a65-95d2-bc4ce11358c2",
+      "queryName": "jcampus_match"
+    },
+    "lighthouse_attendance_detail": {
+      "queryId": "3976f68e-305c-49dc-9e63-f6aa0aa4c81f",
+      "queryName": "lighthouse_attendance_detail"
+    },
+    "attendance_summary_80_schools": {
+      "queryId": "6b3b3bc1-5620-4452-a088-39fc365db718",
+      "queryName": "attendance_summary_80_schools"
+    },
+    "attendance_summary_other_schools": {
+      "queryId": "222188cb-df40-444f-9d5f-5b835b7214eb",
+      "queryName": "attendance_summary_other_schools"
+    },
+    "attendance_averages_by_location": {
+      "queryId": "c8b35a0f-592a-4213-b973-fa1461b04638",
+      "queryName": "attendance_averages_by_location"
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
 }

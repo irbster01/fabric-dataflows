@@ -1,16 +1,12 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-
-// Source: VOA_Nexus lakehouse
 shared lighthouse_client_master = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  lighthouse_client_master = #"Navigation 1"{[Id = "lighthouse_client_master", ItemKind = "Table"]}[Data]
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_client_master", ItemKind = "Table"]}[Data]
 in
-  lighthouse_client_master;
-
-// Source: ServicePoint lakehouse
+  #"Navigation 3";
 shared lighthouse_dates = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -18,8 +14,7 @@ shared lighthouse_dates = let
   lighthouse_dates = #"Navigation 1"{[Id = "lighthouse_dates", ItemKind = "Table"]}[Data]
 in
   lighthouse_dates;
-
-// Calculate possible sessions for each client for each period
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "lighthouse_sessions_possible_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared lighthouse_sessions_possible = let
   Source = lighthouse_client_master,
   // Cross join with distinct periods
@@ -60,3 +55,10 @@ shared lighthouse_sessions_possible = let
   })
 in
   #"Changed types";
+shared lighthouse_sessions_possible_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "lighthouse_sessions_possible", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;

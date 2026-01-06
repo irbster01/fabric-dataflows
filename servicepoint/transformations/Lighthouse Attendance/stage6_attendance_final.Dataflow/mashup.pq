@@ -1,37 +1,29 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-
-// Constants
 shared HighAttendanceThreshold = 0.80;
 shared StandardAttendanceThreshold = 0.60;
 shared HighAttendanceSchools = {"Bethune/Oak Park", "Broadmoor STEM", "Creswell Elementary"};
-
-// Source: VOA_Nexus lakehouse
 shared lighthouse_sessions_attended = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  lighthouse_sessions_attended = #"Navigation 1"{[Id = "lighthouse_sessions_attended", ItemKind = "Table"]}[Data]
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_sessions_attended", ItemKind = "Table"]}[Data]
 in
-  lighthouse_sessions_attended;
-
+  #"Navigation 3";
 shared lighthouse_sessions_possible = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  lighthouse_sessions_possible = #"Navigation 1"{[Id = "lighthouse_sessions_possible", ItemKind = "Table"]}[Data]
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_sessions_possible", ItemKind = "Table"]}[Data]
 in
-  lighthouse_sessions_possible;
-
+  #"Navigation 3";
 shared lighthouse_client_master = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  lighthouse_client_master = #"Navigation 1"{[Id = "lighthouse_client_master", ItemKind = "Table"]}[Data]
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_client_master", ItemKind = "Table"]}[Data]
 in
-  lighthouse_client_master;
-
-// Source: ServicePoint lakehouse
+  #"Navigation 3";
 shared jcampus_match = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -39,8 +31,6 @@ shared jcampus_match = let
   jcampus_match = #"Navigation 1"{[Id = "silver_lighthouse.Lighthouse Matched with JCampus", ItemKind = "Table"]}[Data]
 in
   jcampus_match;
-
-// Main attendance detail table
 shared lighthouse_attendance_detail = let
   // Join attended and possible
   #"Joined attended and possible" = Table.Join(lighthouse_sessions_attended, {"client_id", "nine_week_period"}, lighthouse_sessions_possible, {"client_id", "nine_week_period"}, JoinKind.FullOuter),
@@ -100,8 +90,6 @@ shared lighthouse_attendance_detail = let
   })
 in
   #"Select columns";
-
-// Summary for 80% schools
 shared attendance_summary_80_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true),
@@ -114,8 +102,6 @@ shared attendance_summary_80_schools = let
     [students_meeting_80] / [total_students], Percentage.Type)
 in
   #"Added percentage";
-
-// Summary for other schools
 shared attendance_summary_other_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to non-80 schools" = Table.SelectRows(Source, each [is_80_school] = false),
@@ -132,8 +118,6 @@ shared attendance_summary_other_schools = let
     [students_meeting_60] / [total_students], Percentage.Type)
 in
   #"Added percentage";
-
-// Average attendance by location
 shared attendance_averages_by_location = let
   Source = lighthouse_attendance_detail,
   #"Filtered out specific" = Table.SelectRows(Source, each

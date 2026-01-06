@@ -1,4 +1,4 @@
-[StagingDefinition = [Kind = "FastCopy"]]
+[DefaultOutputDestinationSettings = [DestinationDefinition = [Kind = "Reference", QueryName = "DefaultDestination", IsNewTarget = true], UpdateMethod = [Kind = "Replace"], DestinationTypeSettings = [Kind = "Table"]], StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
 shared clean_lighthouse_entries = let
   Source = Lakehouse.Contents(null),
@@ -21,6 +21,7 @@ shared raw_lighthouse_registration = let
   raw_lighthouse_registration = #"Navigation 1"{[Id = "raw_lighthouse_registration", ItemKind = "Table"]}[Data]
 in
   raw_lighthouse_registration;
+[BindToDefaultDestination = true]
 shared demographics_deduped = let
   Source = raw_sp_demographics,
   #"Grouped by client" = Table.Group(Source, {"client_id"}, {
@@ -29,6 +30,7 @@ shared demographics_deduped = let
   })
 in
   #"Grouped by client";
+[BindToDefaultDestination = true]
 shared registration_deduped = let
   Source = raw_lighthouse_registration,
   #"Grouped by client" = Table.Group(Source, {"client_id"}, {
@@ -36,6 +38,7 @@ shared registration_deduped = let
   })
 in
   #"Grouped by client";
+[BindToDefaultDestination = true]
 shared lighthouse_client_master = let
   Source = clean_lighthouse_entries,
   // Left join demographics using NestedJoin
@@ -66,3 +69,4 @@ shared lighthouse_client_master = let
   })
 in
   #"Changed types";
+shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data];

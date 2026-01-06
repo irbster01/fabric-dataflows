@@ -164,7 +164,27 @@ in
   #"Replace errors";
 shared client_attendance_detail_v2 = let
   Source = base_client_attendance,
-  #"Select columns" = Table.SelectColumns(Source, {"client_id", "nine_week_period", "sessions_attended", "lighthouse_location_enrolling", "entry_date", "exit_date", "sessions_possible", "jcampus_school_name", "school_name", "is_80_school", "required_threshold", "attendance_rate", "meets_threshold", "attendance_flag"}),
+  // Explicitly extract scalar values from each column to prevent any nested tables/records
+  #"Force scalar values" = Table.FromRecords(
+    Table.ToRecords(Source),
+    type table [
+      client_id = nullable Int64.Type,
+      nine_week_period = nullable text,
+      sessions_attended = nullable Int64.Type,
+      lighthouse_location_enrolling = nullable text,
+      entry_date = nullable date,
+      exit_date = nullable date,
+      sessions_possible = nullable Int64.Type,
+      jcampus_school_name = nullable text,
+      school_name = nullable text,
+      is_80_school = nullable logical,
+      required_threshold = nullable number,
+      attendance_rate = nullable number,
+      meets_threshold = nullable logical,
+      attendance_flag = nullable text
+    ]
+  ),
+  #"Select columns" = Table.SelectColumns(#"Force scalar values", {"client_id", "nine_week_period", "sessions_attended", "lighthouse_location_enrolling", "entry_date", "exit_date", "sessions_possible", "jcampus_school_name", "school_name", "is_80_school", "required_threshold", "attendance_rate", "meets_threshold", "attendance_flag"}),
   #"Replace all errors" = Table.ReplaceErrorValues(#"Select columns", List.Transform(Table.ColumnNames(#"Select columns"), each {_, null}))
 in
   #"Replace all errors";

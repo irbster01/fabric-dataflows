@@ -7,30 +7,34 @@ shared lighthouse_sessions_attended = let
   Source = Lakehouse.Contents(null),
   #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_sessions_attended", ItemKind = "Table"]}[Data]
+  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_sessions_attended", ItemKind = "Table"]}[Data],
+  #"Changed types" = Table.TransformColumnTypes(#"Navigation 3", {{"client_id", Int64.Type}})
 in
-  #"Navigation 3";
+  #"Changed types";
 shared lighthouse_sessions_possible = let
   Source = Lakehouse.Contents(null),
   #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_sessions_possible", ItemKind = "Table"]}[Data]
+  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_sessions_possible", ItemKind = "Table"]}[Data],
+  #"Changed types" = Table.TransformColumnTypes(#"Navigation 3", {{"client_id", Int64.Type}})
 in
-  #"Navigation 3";
+  #"Changed types";
 shared lighthouse_client_master = let
   Source = Lakehouse.Contents(null),
   #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_client_master", ItemKind = "Table"]}[Data]
+  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_client_master", ItemKind = "Table"]}[Data],
+  #"Changed types" = Table.TransformColumnTypes(#"Navigation 3", {{"client_id", Int64.Type}})
 in
-  #"Navigation 3";
+  #"Changed types";
 shared jcampus_match = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  jcampus_match = #"Navigation 1"{[Id = "silver_lighthouse.Lighthouse Matched with JCampus", ItemKind = "Table"]}[Data]
+  jcampus_match = #"Navigation 1"{[Id = "silver_lighthouse.Lighthouse Matched with JCampus", ItemKind = "Table"]}[Data],
+  #"Changed types" = Table.TransformColumnTypes(jcampus_match, {{"client_id", Int64.Type}})
 in
-  jcampus_match;
+  #"Changed types";
 shared lighthouse_attendance_detail = let
   // Join attended and possible using NestedJoin with FullOuter
   #"Merged attended and possible" = Table.NestedJoin(lighthouse_sessions_attended, {"client_id", "nine_week_period"}, lighthouse_sessions_possible, {"client_id", "nine_week_period"}, "possible", JoinKind.FullOuter),

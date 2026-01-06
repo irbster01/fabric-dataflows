@@ -96,7 +96,7 @@ in
 shared attendance_summary_80_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true),
-  #"Removed duplicates" = Table.Distinct(#"Filtered to 80 schools", {"client_id", "nine_week_period"}),
+  #"Removed duplicates" = Table.Distinct(#"Filtered to 80 schools", {"client_id", "nine_week_period", "lighthouse_location_enrolling"}),
   #"Met threshold only" = Table.SelectRows(#"Removed duplicates", each [meets_threshold] = true),
   #"Group met" = Table.Group(#"Met threshold only", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"students_meeting_80", each Table.RowCount(_), Int64.Type}
@@ -120,7 +120,7 @@ shared attendance_summary_other_schools = let
     [lighthouse_location_enrolling] <> "Teen Club" and
     [lighthouse_location_enrolling] <> "School Site - Judson" and
     [lighthouse_location_enrolling] <> null),
-  #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
+  #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period", "lighthouse_location_enrolling"}),
   #"Met threshold only" = Table.SelectRows(#"Removed duplicates", each [meets_threshold] = true),
   #"Group met" = Table.Group(#"Met threshold only", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"students_meeting_60", each Table.RowCount(_), Int64.Type}
@@ -141,7 +141,7 @@ shared attendance_averages_by_location = let
   #"Filtered out specific" = Table.SelectRows(Source, each
     [lighthouse_location_enrolling] <> null and
     [lighthouse_location_enrolling] <> "School Site - Judson"),
-  #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
+  #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period", "lighthouse_location_enrolling"}),
   #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"avg_sessions_attended", each List.Average(_[sessions_attended]), type nullable number},
     {"avg_sessions_possible", each List.Average(_[sessions_possible]), type nullable number},

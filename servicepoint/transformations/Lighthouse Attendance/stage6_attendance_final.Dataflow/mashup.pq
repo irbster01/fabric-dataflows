@@ -53,12 +53,18 @@ shared lighthouse_attendance_detail = let
   #"Added coalesced_period" = Table.AddColumn(#"Added coalesced_client_id", "coalesced_period", each if [nine_week_period] <> null then [nine_week_period] else [possible_nine_week_period], type nullable text),
   #"Removed original keys" = Table.RemoveColumns(#"Added coalesced_period", {"client_id", "nine_week_period", "possible_client_id", "possible_nine_week_period"}),
   #"Renamed coalesced" = Table.RenameColumns(#"Removed original keys", {{"coalesced_client_id", "client_id"}, {"coalesced_period", "nine_week_period"}}),
+  // Prepare client master - rename client_id to avoid duplicate
+  #"Client master renamed" = Table.RenameColumns(lighthouse_client_master, {{"client_id", "cm_client_id"}}),
   // Join with client master using Table.Join
-  #"Joined with client master" = Table.Join(#"Renamed coalesced", {"client_id"}, lighthouse_client_master, {"client_id"}, JoinKind.LeftOuter),
+  #"Joined with client master" = Table.Join(#"Renamed coalesced", {"client_id"}, #"Client master renamed", {"cm_client_id"}, JoinKind.LeftOuter),
+  #"Removed cm_client_id" = Table.RemoveColumns(#"Joined with client master", {"cm_client_id"}),
+  // Prepare jcampus - rename client_id to avoid duplicate
+  #"Jcampus renamed" = Table.RenameColumns(jcampus_match, {{"client_id", "jc_client_id"}}),
   // Join with JCampus using Table.Join
-  #"Joined with jcampus" = Table.Join(#"Joined with client master", {"client_id"}, jcampus_match, {"client_id"}, JoinKind.LeftOuter),
+  #"Joined with jcampus" = Table.Join(#"Removed cm_client_id", {"client_id"}, #"Jcampus renamed", {"jc_client_id"}, JoinKind.LeftOuter),
+  #"Removed jc_client_id" = Table.RemoveColumns(#"Joined with jcampus", {"jc_client_id"}),
   // Add school_name (normalize locations)
-  #"Added school_name" = Table.AddColumn(#"Joined with jcampus", "school_name", each
+  #"Added school_name" = Table.AddColumn(#"Removed jc_client_id", "school_name", each
     if [School Name] <> null and [School Name] <> "" then
       [School Name]
     else if [lighthouse_location_enrolling] = "School Site - Broadmoor" then

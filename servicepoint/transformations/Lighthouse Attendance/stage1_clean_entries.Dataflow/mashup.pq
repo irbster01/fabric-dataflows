@@ -15,9 +15,9 @@ shared clean_lighthouse_entries = let
     Text.Contains([program], "Lighthouse", Comparer.OrdinalIgnoreCase)),
   // Group by client_id to get one row per client with max entry/exit dates
   #"Grouped by client" = Table.Group(#"Filtered to lighthouse", {"client_id"}, {
-    {"entry_date", each List.Max([entry_date]), type nullable date},
-    {"exit_date", each List.Max([exit_date]), type nullable date},
-    {"program", each List.First([program]), type nullable text}
+    {"entry_date", each List.Max(_[entry_date]), type nullable date},
+    {"exit_date", each List.Max(_[exit_date]), type nullable date},
+    {"program", each List.First(_[program]), type nullable text}
   }),
   // Set explicit column types
   #"Changed types" = Table.TransformColumnTypes(#"Grouped by client", {

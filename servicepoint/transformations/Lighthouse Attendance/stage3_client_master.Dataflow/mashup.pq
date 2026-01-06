@@ -28,8 +28,8 @@ in
 shared demographics_deduped = let
   Source = raw_sp_demographics,
   #"Grouped by client" = Table.Group(Source, {"client_id"}, {
-    {"first_name", each List.First([client_first_name]), type nullable text},
-    {"last_name", each List.First([client_last_name]), type nullable text}
+    {"first_name", each List.First(_[client_first_name]), type nullable text},
+    {"last_name", each List.First(_[client_last_name]), type nullable text}
   })
 in
   #"Grouped by client";
@@ -37,7 +37,7 @@ in
 shared registration_deduped = let
   Source = raw_lighthouse_registration,
   #"Grouped by client" = Table.Group(Source, {"client_id"}, {
-    {"lighthouse_location_enrolling", each List.First([lighthouse_location_enrolling]), type nullable text}
+    {"lighthouse_location_enrolling", each List.First(_[lighthouse_location_enrolling]), type nullable text}
   })
 in
   #"Grouped by client";

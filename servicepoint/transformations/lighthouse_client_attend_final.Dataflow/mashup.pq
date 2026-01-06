@@ -1,4 +1,4 @@
-[DefaultOutputDestinationSettings = [DestinationDefinition = [Kind = "Reference", QueryName = "DefaultDestination", IsNewTarget = true], UpdateMethod = [Kind = "Replace"], DestinationTypeSettings = [Kind = "Table"]], StagingDefinition = [Kind = "FastCopy"]]
+[StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
 shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
 shared LakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910" meta [Description = "ServicePoint lakehouse ID"];
@@ -72,7 +72,6 @@ shared lh_dates = let
   lighthouse_dates = #"Navigation 1"{[Id = "lighthouse_dates", ItemKind = "Table"]}[Data] // Load lighthouse program operating dates calendar
 in
   lighthouse_dates;
-[BindToDefaultDestination = true]
 shared base_client_attendance = let
   Source = raw_sp_services,
   #"Merged with entries to filter" = Table.NestedJoin(Source, {"client_id"}, raw_sp_entries, {"client_id"}, "entry_check", JoinKind.Inner), // Inner join to keep only Lighthouse clients
@@ -108,8 +107,9 @@ shared base_client_attendance = let
         ) otherwise 0, Int64.Type), // Count session days between client's entry and exit dates within this 9-week period
   #"Removed program_dates" = Table.RemoveColumns(#"Added sessions_possible", {"program_dates"}), // Clean up nested table
   #"Merged queries 1" = Table.NestedJoin(#"Removed program_dates", {"client_id"}, #"silver_lighthouse Lighthouse Matched with JCampus", {"client_id"}, "jcampus_match", JoinKind.LeftOuter), // Join to get JCampus school name
-  #"Expanded jcampus_match" = Table.ExpandTableColumn(#"Merged queries 1", "jcampus_match", {"School Name"}, {"jcampus_school_name"}), // Expand JCampus school name
-  #"Added school_name" = Table.AddColumn(#"Expanded jcampus_match", "school_name", each 
+  #"Added jcampus_school_name" = Table.AddColumn(#"Merged queries 1", "jcampus_school_name", each try Table.First([jcampus_match])[School Name] otherwise null, type nullable text),
+  #"Removed jcampus_match" = Table.RemoveColumns(#"Added jcampus_school_name", {"jcampus_match"}),
+  #"Added school_name" = Table.AddColumn(#"Removed jcampus_match", "school_name", each 
     if [jcampus_school_name] <> null and [jcampus_school_name] <> "" then 
       [jcampus_school_name]
     else if [lighthouse_location_enrolling] = "School Site - Broadmoor" then 

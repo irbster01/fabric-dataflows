@@ -13,19 +13,19 @@ shared clean_lighthouse_entries = let
   Source = raw_sp_entries,
   // Filter to only Lighthouse programs
   #"Filtered to lighthouse" = Table.SelectRows(Source, each 
-    Text.Contains([program_name], "Lighthouse", Comparer.OrdinalIgnoreCase)),
+    Text.Contains([program], "Lighthouse", Comparer.OrdinalIgnoreCase)),
   // Group by client_id to get one row per client with max entry/exit dates
   #"Grouped by client" = Table.Group(#"Filtered to lighthouse", {"client_id"}, {
     {"entry_date", each List.Max([entry_date]), type nullable date},
     {"exit_date", each List.Max([exit_date]), type nullable date},
-    {"program_name", each List.First([program_name]), type nullable text}
+    {"program", each List.First([program]), type nullable text}
   }),
   // Set explicit column types
   #"Changed types" = Table.TransformColumnTypes(#"Grouped by client", {
     {"client_id", Int64.Type},
     {"entry_date", type nullable date},
     {"exit_date", type nullable date},
-    {"program_name", type nullable text}
+    {"program", type nullable text}
   })
 in
   #"Changed types";

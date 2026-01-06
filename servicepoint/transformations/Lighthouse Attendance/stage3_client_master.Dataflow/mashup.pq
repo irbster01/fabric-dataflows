@@ -4,23 +4,26 @@ shared clean_lighthouse_entries = let
   Source = Lakehouse.Contents(null),
   #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Id = "clean_lighthouse_entries", ItemKind = "Table"]}[Data]
+  #"Navigation 3" = #"Navigation 2"{[Id = "clean_lighthouse_entries", ItemKind = "Table"]}[Data],
+  #"Changed types" = Table.TransformColumnTypes(#"Navigation 3", {{"client_id", Int64.Type}})
 in
-  #"Navigation 3";
+  #"Changed types";
 shared raw_sp_demographics = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  raw_sp_demographics = #"Navigation 1"{[Id = "raw_sp_demographics", ItemKind = "Table"]}[Data]
+  raw_sp_demographics = #"Navigation 1"{[Id = "raw_sp_demographics", ItemKind = "Table"]}[Data],
+  #"Changed types" = Table.TransformColumnTypes(raw_sp_demographics, {{"client_id", Int64.Type}})
 in
-  raw_sp_demographics;
+  #"Changed types";
 shared raw_lighthouse_registration = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  raw_lighthouse_registration = #"Navigation 1"{[Id = "raw_lighthouse_registration", ItemKind = "Table"]}[Data]
+  raw_lighthouse_registration = #"Navigation 1"{[Id = "raw_lighthouse_registration", ItemKind = "Table"]}[Data],
+  #"Changed types" = Table.TransformColumnTypes(raw_lighthouse_registration, {{"client_id", Int64.Type}})
 in
-  raw_lighthouse_registration;
+  #"Changed types";
 [BindToDefaultDestination = true]
 shared demographics_deduped = let
   Source = raw_sp_demographics,

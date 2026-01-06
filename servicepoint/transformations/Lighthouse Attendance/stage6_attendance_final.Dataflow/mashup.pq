@@ -97,18 +97,12 @@ shared attendance_summary_80_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true),
   #"Removed duplicates" = Table.Distinct(#"Filtered to 80 schools", {"client_id", "nine_week_period"}),
-  #"Filter met threshold" = Table.SelectRows(#"Removed duplicates", each [meets_threshold] = true),
-  #"Group met threshold" = Table.Group(#"Filter met threshold", {"lighthouse_location_enrolling", "nine_week_period"}, {
-    {"students_meeting_80", each Table.RowCount(_), Int64.Type}
-  }),
-  #"Group all students" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
+  #"Grouped" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
+    {"students_meeting_80", each List.Count(List.Select(_[meets_threshold], each _ = true)), Int64.Type},
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
-  #"Merge counts" = Table.NestedJoin(#"Group all students", {"lighthouse_location_enrolling", "nine_week_period"}, #"Group met threshold", {"lighthouse_location_enrolling", "nine_week_period"}, "met", JoinKind.LeftOuter),
-  #"Expand met" = Table.ExpandTableColumn(#"Merge counts", "met", {"students_meeting_80"}, {"students_meeting_80"}),
-  #"Replace null" = Table.ReplaceValue(#"Expand met", null, 0, Replacer.ReplaceValue, {"students_meeting_80"}),
-  #"Added percentage" = Table.AddColumn(#"Replace null", "pct_meeting_threshold", each
-    [students_meeting_80] / [total_students], Percentage.Type)
+  #"Added percentage" = Table.AddColumn(#"Grouped", "pct_meeting_threshold", each
+    if [total_students] = 0 then 0 else [students_meeting_80] / [total_students], Percentage.Type)
 in
   #"Added percentage";
 [BindToDefaultDestination = true]
@@ -121,18 +115,12 @@ shared attendance_summary_other_schools = let
     [lighthouse_location_enrolling] <> "School Site - Judson" and
     [lighthouse_location_enrolling] <> null),
   #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
-  #"Filter met threshold" = Table.SelectRows(#"Removed duplicates", each [meets_threshold] = true),
-  #"Group met threshold" = Table.Group(#"Filter met threshold", {"lighthouse_location_enrolling", "nine_week_period"}, {
-    {"students_meeting_60", each Table.RowCount(_), Int64.Type}
-  }),
-  #"Group all students" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
+  #"Grouped" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
+    {"students_meeting_60", each List.Count(List.Select(_[meets_threshold], each _ = true)), Int64.Type},
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
-  #"Merge counts" = Table.NestedJoin(#"Group all students", {"lighthouse_location_enrolling", "nine_week_period"}, #"Group met threshold", {"lighthouse_location_enrolling", "nine_week_period"}, "met", JoinKind.LeftOuter),
-  #"Expand met" = Table.ExpandTableColumn(#"Merge counts", "met", {"students_meeting_60"}, {"students_meeting_60"}),
-  #"Replace null" = Table.ReplaceValue(#"Expand met", null, 0, Replacer.ReplaceValue, {"students_meeting_60"}),
-  #"Added percentage" = Table.AddColumn(#"Replace null", "pct_meeting_threshold", each
-    [students_meeting_60] / [total_students], Percentage.Type)
+  #"Added percentage" = Table.AddColumn(#"Grouped", "pct_meeting_threshold", each
+    if [total_students] = 0 then 0 else [students_meeting_60] / [total_students], Percentage.Type)
 in
   #"Added percentage";
 [BindToDefaultDestination = true]
@@ -148,7 +136,7 @@ shared attendance_averages_by_location = let
     {"student_count", each Table.RowCount(_), Int64.Type}
   }),
   #"Added avg_attendance_rate" = Table.AddColumn(#"Grouped by location and period", "avg_attendance_rate", each
-    [avg_sessions_attended] / [avg_sessions_possible], Percentage.Type),
+    if [avg_sessions_possible] = 0 or [avg_sessions_possible] = null then null else [avg_sessions_attended] / [avg_sessions_possible], Percentage.Type),
   #"Sorted" = Table.Sort(#"Added avg_attendance_rate", {
     {"lighthouse_location_enrolling", Order.Ascending},
     {"nine_week_period", Order.Ascending}

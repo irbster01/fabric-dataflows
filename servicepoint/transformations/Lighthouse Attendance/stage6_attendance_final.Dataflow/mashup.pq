@@ -97,7 +97,7 @@ shared attendance_summary_80_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true),
   #"Removed duplicates" = Table.Distinct(#"Filtered to 80 schools", {"client_id", "nine_week_period"}),
-  #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"school_name", "nine_week_period"}, {
+  #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"students_meeting_80", each List.Count(List.Select([meets_threshold], each _ = true)), Int64.Type},
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
@@ -109,11 +109,11 @@ shared attendance_summary_other_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to non-80 schools" = Table.SelectRows(Source, each [is_80_school] = false),
   #"Filtered out specific" = Table.SelectRows(#"Filtered to non-80 schools", each
-    [school_name] <> "Highland" and
-    [school_name] <> "Teen Club" and
-    [school_name] <> "School Site - Judson"),
+    [lighthouse_location_enrolling] <> "Highland" and
+    [lighthouse_location_enrolling] <> "Teen Club" and
+    [lighthouse_location_enrolling] <> "School Site - Judson"),
   #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
-  #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"school_name", "nine_week_period"}, {
+  #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"students_meeting_60", each List.Count(List.Select([meets_threshold], each _ = true)), Int64.Type},
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
@@ -124,10 +124,10 @@ in
 shared attendance_averages_by_location = let
   Source = lighthouse_attendance_detail,
   #"Filtered out specific" = Table.SelectRows(Source, each
-    [school_name] <> null and
-    [school_name] <> "School Site - Judson"),
+    [lighthouse_location_enrolling] <> null and
+    [lighthouse_location_enrolling] <> "School Site - Judson"),
   #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
-  #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"school_name", "nine_week_period"}, {
+  #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"avg_sessions_attended", each List.Average([sessions_attended]), type nullable number},
     {"avg_sessions_possible", each List.Average([sessions_possible]), type nullable number},
     {"student_count", each Table.RowCount(_), Int64.Type}
@@ -135,7 +135,7 @@ shared attendance_averages_by_location = let
   #"Added avg_attendance_rate" = Table.AddColumn(#"Grouped by location and period", "avg_attendance_rate", each
     [avg_sessions_attended] / [avg_sessions_possible], Percentage.Type),
   #"Sorted" = Table.Sort(#"Added avg_attendance_rate", {
-    {"school_name", Order.Ascending},
+    {"lighthouse_location_enrolling", Order.Ascending},
     {"nine_week_period", Order.Ascending}
   })
 in

@@ -32,14 +32,17 @@ shared jcampus_match = let
 in
   jcampus_match;
 shared lighthouse_attendance_detail = let
-  // Join attended and possible
-  #"Joined attended and possible" = Table.Join(lighthouse_sessions_attended, {"client_id", "nine_week_period"}, lighthouse_sessions_possible, {"client_id", "nine_week_period"}, JoinKind.FullOuter),
-  // Join with client master
-  #"Merged with client master" = Table.Join(#"Joined attended and possible", "client_id", lighthouse_client_master, "client_id", JoinKind.LeftOuter),
-  // Join with JCampus
-  #"Merged with jcampus" = Table.Join(#"Merged with client master", "client_id", jcampus_match, "client_id", JoinKind.LeftOuter),
+  // Join attended and possible using NestedJoin
+  #"Merged attended and possible" = Table.NestedJoin(lighthouse_sessions_attended, {"client_id", "nine_week_period"}, lighthouse_sessions_possible, {"client_id", "nine_week_period"}, "possible", JoinKind.FullOuter),
+  #"Expanded possible" = Table.ExpandTableColumn(#"Merged attended and possible", "possible", {"sessions_possible"}, {"sessions_possible"}),
+  // Join with client master using NestedJoin
+  #"Merged with client master" = Table.NestedJoin(#"Expanded possible", {"client_id"}, lighthouse_client_master, {"client_id"}, "client_master", JoinKind.LeftOuter),
+  #"Expanded client master" = Table.ExpandTableColumn(#"Merged with client master", "client_master", {"first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program"}, {"first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program"}),
+  // Join with JCampus using NestedJoin
+  #"Merged with jcampus" = Table.NestedJoin(#"Expanded client master", {"client_id"}, jcampus_match, {"client_id"}, "jcampus", JoinKind.LeftOuter),
+  #"Expanded jcampus" = Table.ExpandTableColumn(#"Merged with jcampus", "jcampus", {"School Name"}, {"School Name"}),
   // Add school_name (normalize locations)
-  #"Added school_name" = Table.AddColumn(#"Merged with jcampus", "school_name", each
+  #"Added school_name" = Table.AddColumn(#"Expanded jcampus", "school_name", each
     if [School Name] <> null and [School Name] <> "" then
       [School Name]
     else if [lighthouse_location_enrolling] = "School Site - Broadmoor" then

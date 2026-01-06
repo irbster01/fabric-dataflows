@@ -97,11 +97,17 @@ shared attendance_summary_80_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true),
   #"Removed duplicates" = Table.Distinct(#"Filtered to 80 schools", {"client_id", "nine_week_period"}),
-  #"Grouped" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
-    {"students_meeting_80", each List.Count(List.Select(Table.Column(_, "meets_threshold"), (x) => x = true)), Int64.Type},
+  #"Met threshold only" = Table.SelectRows(#"Removed duplicates", each [meets_threshold] = true),
+  #"Group met" = Table.Group(#"Met threshold only", {"lighthouse_location_enrolling", "nine_week_period"}, {
+    {"students_meeting_80", each Table.RowCount(_), Int64.Type}
+  }),
+  #"Group all" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
-  #"Added percentage" = Table.AddColumn(#"Grouped", "pct_meeting_threshold", each
+  #"Merge" = Table.NestedJoin(#"Group all", {"lighthouse_location_enrolling", "nine_week_period"}, #"Group met", {"lighthouse_location_enrolling", "nine_week_period"}, "met_data", JoinKind.LeftOuter),
+  #"Expand" = Table.ExpandTableColumn(#"Merge", "met_data", {"students_meeting_80"}, {"students_meeting_80"}),
+  #"Replace nulls" = Table.ReplaceValue(#"Expand", null, 0, Replacer.ReplaceValue, {"students_meeting_80"}),
+  #"Added percentage" = Table.AddColumn(#"Replace nulls", "pct_meeting_threshold", each
     if [total_students] = 0 then 0 else [students_meeting_80] / [total_students], Percentage.Type)
 in
   #"Added percentage";
@@ -115,11 +121,17 @@ shared attendance_summary_other_schools = let
     [lighthouse_location_enrolling] <> "School Site - Judson" and
     [lighthouse_location_enrolling] <> null),
   #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
-  #"Grouped" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
-    {"students_meeting_60", each List.Count(List.Select(Table.Column(_, "meets_threshold"), (x) => x = true)), Int64.Type},
+  #"Met threshold only" = Table.SelectRows(#"Removed duplicates", each [meets_threshold] = true),
+  #"Group met" = Table.Group(#"Met threshold only", {"lighthouse_location_enrolling", "nine_week_period"}, {
+    {"students_meeting_60", each Table.RowCount(_), Int64.Type}
+  }),
+  #"Group all" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
-  #"Added percentage" = Table.AddColumn(#"Grouped", "pct_meeting_threshold", each
+  #"Merge" = Table.NestedJoin(#"Group all", {"lighthouse_location_enrolling", "nine_week_period"}, #"Group met", {"lighthouse_location_enrolling", "nine_week_period"}, "met_data", JoinKind.LeftOuter),
+  #"Expand" = Table.ExpandTableColumn(#"Merge", "met_data", {"students_meeting_60"}, {"students_meeting_60"}),
+  #"Replace nulls" = Table.ReplaceValue(#"Expand", null, 0, Replacer.ReplaceValue, {"students_meeting_60"}),
+  #"Added percentage" = Table.AddColumn(#"Replace nulls", "pct_meeting_threshold", each
     if [total_students] = 0 then 0 else [students_meeting_60] / [total_students], Percentage.Type)
 in
   #"Added percentage";

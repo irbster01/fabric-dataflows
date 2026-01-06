@@ -59,3 +59,4 @@ Multi-stage dataflow pipeline for calculating lighthouse program attendance rate
 Run dataflows in sequence: Stage 1 → Stage 2 → Stage 3 → Stage 4 → Stage 5 → Stage 6
 
 Each stage writes to lakehouse, next stage reads from lakehouse tables.
+replac

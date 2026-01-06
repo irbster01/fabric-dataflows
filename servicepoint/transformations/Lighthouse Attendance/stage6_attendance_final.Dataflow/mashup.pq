@@ -98,7 +98,7 @@ shared attendance_summary_80_schools = let
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true),
   #"Removed duplicates" = Table.Distinct(#"Filtered to 80 schools", {"client_id", "nine_week_period"}),
   #"Grouped" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
-    {"students_meeting_80", each List.Count(List.Select(_[meets_threshold], each _ = true)), Int64.Type},
+    {"students_meeting_80", each List.Count(List.Select(Table.Column(_, "meets_threshold"), (x) => x = true)), Int64.Type},
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
   #"Added percentage" = Table.AddColumn(#"Grouped", "pct_meeting_threshold", each
@@ -116,7 +116,7 @@ shared attendance_summary_other_schools = let
     [lighthouse_location_enrolling] <> null),
   #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
   #"Grouped" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
-    {"students_meeting_60", each List.Count(List.Select(_[meets_threshold], each _ = true)), Int64.Type},
+    {"students_meeting_60", each List.Count(List.Select(Table.Column(_, "meets_threshold"), (x) => x = true)), Int64.Type},
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
   #"Added percentage" = Table.AddColumn(#"Grouped", "pct_meeting_threshold", each

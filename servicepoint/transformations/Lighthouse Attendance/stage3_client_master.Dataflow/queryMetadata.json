@@ -4,5 +4,37 @@
   "name": "stage3_client_master",
   "queryGroups": [],
   "documentLocale": "en-US",
-  "connections": []
+  "queriesMetadata": {
+    "clean_lighthouse_entries": {
+      "queryId": "209a7fc2-1265-4b38-803b-6b60433153a7",
+      "queryName": "clean_lighthouse_entries"
+    },
+    "raw_sp_demographics": {
+      "queryId": "cb544a80-8e20-4c1f-8321-e143cfc668a2",
+      "queryName": "raw_sp_demographics"
+    },
+    "raw_lighthouse_registration": {
+      "queryId": "776978e2-6ac8-43e0-ba67-4e8229227722",
+      "queryName": "raw_lighthouse_registration"
+    },
+    "demographics_deduped": {
+      "queryId": "31eb916a-0603-4788-b807-a9762c6fd410",
+      "queryName": "demographics_deduped"
+    },
+    "registration_deduped": {
+      "queryId": "3efbbe56-dfc8-4f73-bcbc-77a2aca79fd4",
+      "queryName": "registration_deduped"
+    },
+    "lighthouse_client_master": {
+      "queryId": "2c054e0d-05a7-4c30-89a8-390bac7e2fe8",
+      "queryName": "lighthouse_client_master"
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
 }

@@ -96,32 +96,18 @@ in
 shared attendance_summary_80_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true),
-  // Filter to only students enrolled during each specific 9-week period
-  #"Filtered to enrolled" = Table.SelectRows(#"Filtered to 80 schools", each 
-    let
-      period = [nine_week_period],
-      entry = [entry_date],
-      exit_date = [exit_date],
-      period_start = if period = "1st 9 Weeks" then #date(2025, 8, 13)
-                     else if period = "2nd 9 Weeks" then #date(2025, 10, 20)
-                     else if period = "3rd 9 Weeks" then #date(2026, 1, 6)
-                     else if period = "4th 9 Weeks" then #date(2026, 3, 16)
-                     else null,
-      period_end = if period = "1st 9 Weeks" then #date(2025, 10, 17)
-                   else if period = "2nd 9 Weeks" then #date(2025, 12, 17)
-                   else if period = "3rd 9 Weeks" then #date(2026, 3, 6)
-                   else if period = "4th 9 Weeks" then #date(2026, 5, 21)
-                   else null
-    in
-      period_start <> null and
-      (entry = null or entry <= period_end) and
-      (exit_date = null or exit_date >= period_start)),
-  #"Removed duplicates" = Table.Distinct(#"Filtered to enrolled", {"client_id", "nine_week_period"}),
-  #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
-    {"students_meeting_80", each List.Count(List.Select(Table.Column(_, "meets_threshold"), each _ = true)), Int64.Type},
+  #"Removed duplicates" = Table.Distinct(#"Filtered to 80 schools", {"client_id", "nine_week_period"}),
+  #"Filter met threshold" = Table.SelectRows(#"Removed duplicates", each [meets_threshold] = true),
+  #"Group met threshold" = Table.Group(#"Filter met threshold", {"lighthouse_location_enrolling", "nine_week_period"}, {
+    {"students_meeting_80", each Table.RowCount(_), Int64.Type}
+  }),
+  #"Group all students" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
-  #"Added percentage" = Table.AddColumn(#"Grouped by location and period", "pct_meeting_threshold", each
+  #"Merge counts" = Table.NestedJoin(#"Group all students", {"lighthouse_location_enrolling", "nine_week_period"}, #"Group met threshold", {"lighthouse_location_enrolling", "nine_week_period"}, "met", JoinKind.LeftOuter),
+  #"Expand met" = Table.ExpandTableColumn(#"Merge counts", "met", {"students_meeting_80"}, {"students_meeting_80"}),
+  #"Replace null" = Table.ReplaceValue(#"Expand met", null, 0, Replacer.ReplaceValue, {"students_meeting_80"}),
+  #"Added percentage" = Table.AddColumn(#"Replace null", "pct_meeting_threshold", each
     [students_meeting_80] / [total_students], Percentage.Type)
 in
   #"Added percentage";
@@ -132,37 +118,23 @@ shared attendance_summary_other_schools = let
   #"Filtered out specific" = Table.SelectRows(#"Filtered to non-80 schools", each
     [lighthouse_location_enrolling] <> "Highland" and
     [lighthouse_location_enrolling] <> "Teen Club" and
-    [lighthouse_location_enrolling] <> "School Site - Judson"),
-  // Filter to only students enrolled during each specific 9-week period
-  #"Filtered to enrolled" = Table.SelectRows(#"Filtered out specific", each 
-    let
-      period = [nine_week_period],
-      entry = [entry_date],
-      exit_date = [exit_date],
-      period_start = if period = "1st 9 Weeks" then #date(2025, 8, 13)
-                     else if period = "2nd 9 Weeks" then #date(2025, 10, 20)
-                     else if period = "3rd 9 Weeks" then #date(2026, 1, 6)
-                     else if period = "4th 9 Weeks" then #date(2026, 3, 16)
-                     else null,
-      period_end = if period = "1st 9 Weeks" then #date(2025, 10, 17)
-                   else if period = "2nd 9 Weeks" then #date(2025, 12, 17)
-                   else if period = "3rd 9 Weeks" then #date(2026, 3, 6)
-                   else if period = "4th 9 Weeks" then #date(2026, 5, 21)
-                   else null
-    in
-      period_start <> null and
-      (entry = null or entry <= period_end) and
-      (exit_date = null or exit_date >= period_start)),
-  #"Removed duplicates" = Table.Distinct(#"Filtered to enrolled", {"client_id", "nine_week_period"}),
-  #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
-    {"students_meeting_60", each List.Count(List.Select(Table.Column(_, "meets_threshold"), each _ = true)), Int64.Type},
+    [lighthouse_location_enrolling] <> "School Site - Judson" and
+    [lighthouse_location_enrolling] <> null),
+  #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
+  #"Filter met threshold" = Table.SelectRows(#"Removed duplicates", each [meets_threshold] = true),
+  #"Group met threshold" = Table.Group(#"Filter met threshold", {"lighthouse_location_enrolling", "nine_week_period"}, {
+    {"students_meeting_60", each Table.RowCount(_), Int64.Type}
+  }),
+  #"Group all students" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
-  #"Added percentage" = Table.AddColumn(#"Grouped by location and period", "pct_meeting_threshold", each
-    [students_meeting_60] / [total_students], Percentage.Type),
-  #"Filtered rows" = Table.SelectRows(#"Added percentage", each ([lighthouse_location_enrolling] <> null))
+  #"Merge counts" = Table.NestedJoin(#"Group all students", {"lighthouse_location_enrolling", "nine_week_period"}, #"Group met threshold", {"lighthouse_location_enrolling", "nine_week_period"}, "met", JoinKind.LeftOuter),
+  #"Expand met" = Table.ExpandTableColumn(#"Merge counts", "met", {"students_meeting_60"}, {"students_meeting_60"}),
+  #"Replace null" = Table.ReplaceValue(#"Expand met", null, 0, Replacer.ReplaceValue, {"students_meeting_60"}),
+  #"Added percentage" = Table.AddColumn(#"Replace null", "pct_meeting_threshold", each
+    [students_meeting_60] / [total_students], Percentage.Type)
 in
-  #"Filtered rows";
+  #"Added percentage";
 [BindToDefaultDestination = true]
 shared attendance_averages_by_location = let
   Source = lighthouse_attendance_detail,
@@ -177,22 +149,16 @@ shared attendance_averages_by_location = let
       exit_date = [exit_date],
       period_start = if period = "1st 9 Weeks" then #date(2025, 8, 13)
                      else if period = "2nd 9 Weeks" then #date(2025, 10, 20)
-                     else if period = "3rd 9 Weeks" then #date(2026, 1, 6)
-                     else if period = "4th 9 Weeks" then #date(2026, 3, 16)
-                     else null,
-      period_end = if period = "1st 9 Weeks" then #date(2025, 10, 17)
-                   else if period = "2nd 9 Weeks" then #date(2025, 12, 17)
-                   else if period = "3rd 9 Weeks" then #date(2026, 3, 6)
-                   else if period = "4th 9 Weeks" then #date(2026, 5, 21)
-                   else null
-    in
-      period_start <> null and
-      (entry = null or entry <= period_end) and
-      (exit_date = null or exit_date >= period_start)),
-  #"Removed duplicates" = Table.Distinct(#"Filtered to enrolled", {"client_id", "nine_week_period"}),
+[BindToDefaultDestination = true]
+shared attendance_averages_by_location = let
+  Source = lighthouse_attendance_detail,
+  #"Filtered out specific" = Table.SelectRows(Source, each
+    [lighthouse_location_enrolling] <> null and
+    [lighthouse_location_enrolling] <> "School Site - Judson"),
+  #"Removed duplicates" = Table.Distinct(#"Filtered out specific", {"client_id", "nine_week_period"}),
   #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
-    {"avg_sessions_attended", each List.Average(Table.Column(_, "sessions_attended")), type nullable number},
-    {"avg_sessions_possible", each List.Average(Table.Column(_, "sessions_possible")), type nullable number},
+    {"avg_sessions_attended", each List.Average([sessions_attended]), type nullable number},
+    {"avg_sessions_possible", each List.Average([sessions_possible]), type nullable number},
     {"student_count", each Table.RowCount(_), Int64.Type}
   }),
   #"Added avg_attendance_rate" = Table.AddColumn(#"Grouped by location and period", "avg_attendance_rate", each
@@ -203,4 +169,3 @@ shared attendance_averages_by_location = let
   })
 in
   #"Sorted";
-shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data];

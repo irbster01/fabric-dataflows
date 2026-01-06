@@ -32,11 +32,16 @@ shared jcampus_match = let
 in
   jcampus_match;
 shared lighthouse_attendance_detail = let
-  // Join attended and possible using NestedJoin
+  // Join attended and possible using NestedJoin with FullOuter
   #"Merged attended and possible" = Table.NestedJoin(lighthouse_sessions_attended, {"client_id", "nine_week_period"}, lighthouse_sessions_possible, {"client_id", "nine_week_period"}, "possible", JoinKind.FullOuter),
-  #"Expanded possible" = Table.ExpandTableColumn(#"Merged attended and possible", "possible", {"sessions_possible"}, {"sessions_possible"}),
+  #"Expanded possible" = Table.ExpandTableColumn(#"Merged attended and possible", "possible", {"client_id", "nine_week_period", "sessions_possible"}, {"possible_client_id", "possible_nine_week_period", "sessions_possible"}),
+  // Coalesce client_id and nine_week_period from both sides of FullOuter join
+  #"Added coalesced_client_id" = Table.AddColumn(#"Expanded possible", "coalesced_client_id", each if [client_id] <> null then [client_id] else [possible_client_id], type nullable number),
+  #"Added coalesced_period" = Table.AddColumn(#"Added coalesced_client_id", "coalesced_period", each if [nine_week_period] <> null then [nine_week_period] else [possible_nine_week_period], type nullable text),
+  #"Removed original keys" = Table.RemoveColumns(#"Added coalesced_period", {"client_id", "nine_week_period", "possible_client_id", "possible_nine_week_period"}),
+  #"Renamed coalesced" = Table.RenameColumns(#"Removed original keys", {{"coalesced_client_id", "client_id"}, {"coalesced_period", "nine_week_period"}}),
   // Join with client master using NestedJoin
-  #"Merged with client master" = Table.NestedJoin(#"Expanded possible", {"client_id"}, lighthouse_client_master, {"client_id"}, "client_master", JoinKind.LeftOuter),
+  #"Merged with client master" = Table.NestedJoin(#"Renamed coalesced", {"client_id"}, lighthouse_client_master, {"client_id"}, "client_master", JoinKind.LeftOuter),
   #"Expanded client master" = Table.ExpandTableColumn(#"Merged with client master", "client_master", {"first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program"}, {"first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program"}),
   // Join with JCampus using NestedJoin
   #"Merged with jcampus" = Table.NestedJoin(#"Expanded client master", {"client_id"}, jcampus_match, {"client_id"}, "jcampus", JoinKind.LeftOuter),

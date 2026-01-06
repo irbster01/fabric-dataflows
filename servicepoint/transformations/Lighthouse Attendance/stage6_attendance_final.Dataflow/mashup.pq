@@ -24,17 +24,23 @@ shared lighthouse_client_master = let
   #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
   #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_client_master", ItemKind = "Table"]}[Data],
-  #"Changed types" = Table.TransformColumnTypes(#"Navigation 3", {{"client_id", Int64.Type}})
+  #"Changed types" = Table.TransformColumnTypes(#"Navigation 3", {{"client_id", Int64.Type}}),
+  // Ensure one row per client_id
+  #"Deduped" = Table.Distinct(#"Changed types", {"client_id"})
 in
-  #"Changed types";
+  #"Deduped";
 shared jcampus_match = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
   jcampus_match = #"Navigation 1"{[Id = "silver_lighthouse.Lighthouse Matched with JCampus", ItemKind = "Table"]}[Data],
-  #"Changed types" = Table.TransformColumnTypes(jcampus_match, {{"client_id", Int64.Type}})
+  #"Changed types" = Table.TransformColumnTypes(jcampus_match, {{"client_id", Int64.Type}}),
+  // Dedupe to one row per client_id (take first School Name if multiple)
+  #"Grouped by client" = Table.Group(#"Changed types", {"client_id"}, {
+    {"School Name", each List.First([#"School Name"]), type nullable text}
+  })
 in
-  #"Changed types";
+  #"Grouped by client";
 [BindToDefaultDestination = true]
 shared lighthouse_attendance_detail = let
   // Join attended and possible using NestedJoin with FullOuter
@@ -83,8 +89,10 @@ shared lighthouse_attendance_detail = let
     else if [attendance_rate] >= HighAttendanceThreshold then "80%+ GOOD"
     else if [attendance_rate] >= StandardAttendanceThreshold then "60%+ GOOD"
     else "BELOW THRESHOLD", type text),
+  // Dedupe to one row per client per period per location (prevent join-induced duplicates)
+  #"Deduped detail" = Table.Distinct(#"Added attendance_flag", {"client_id", "nine_week_period", "lighthouse_location_enrolling"}),
   // Select final columns
-  #"Select columns" = Table.SelectColumns(#"Added attendance_flag", {"sessions_attended", "sessions_possible", "client_id", "nine_week_period", "first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program", "school_name", "is_80_school", "required_threshold", "attendance_rate", "meets_threshold", "attendance_flag"}),
+  #"Select columns" = Table.SelectColumns(#"Deduped detail", {"sessions_attended", "sessions_possible", "client_id", "nine_week_period", "first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program", "school_name", "is_80_school", "required_threshold", "attendance_rate", "meets_threshold", "attendance_flag"}),
   // Ensure numeric types
   #"Changed types" = Table.TransformColumnTypes(#"Select columns", {
     {"sessions_attended", Int64.Type},

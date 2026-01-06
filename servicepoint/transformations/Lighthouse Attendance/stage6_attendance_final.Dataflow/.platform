@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "stage6_attendance_final"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7c38addf-1698-a954-4d49-2d5fefe74e70"
+  }
+}

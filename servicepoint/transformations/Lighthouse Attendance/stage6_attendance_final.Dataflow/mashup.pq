@@ -29,6 +29,7 @@ shared lighthouse_client_master = let
   #"Deduped" = Table.Distinct(#"Changed types", {"client_id"})
 in
   #"Deduped";
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "jcampus_match_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared jcampus_match = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -37,7 +38,7 @@ shared jcampus_match = let
   #"Changed types" = Table.TransformColumnTypes(jcampus_match, {{"client_id", Int64.Type}}),
   // Dedupe to one row per client_id (take first School Name if multiple)
   #"Grouped by client" = Table.Group(#"Changed types", {"client_id"}, {
-    {"School Name", each List.First([#"School Name"]), type nullable text}
+    {"School Name", each List.First(_[#"School Name"]), type nullable text}
   })
 in
   #"Grouped by client";
@@ -164,3 +165,10 @@ shared attendance_averages_by_location = let
 in
   #"Sorted";
 shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data];
+shared jcampus_match_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "jcampus_match", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;

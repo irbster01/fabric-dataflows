@@ -186,8 +186,8 @@ shared attendance_averages_by_location = let
       (exit_date = null or exit_date >= period_start)),
   #"Removed duplicates" = Table.Distinct(#"Filtered to enrolled", {"client_id", "nine_week_period"}),
   #"Grouped by location and period" = Table.Group(#"Removed duplicates", {"lighthouse_location_enrolling", "nine_week_period"}, {
-    {"avg_sessions_attended", each List.Average([sessions_attended]), type nullable number},
-    {"avg_sessions_possible", each List.Average([sessions_possible]), type nullable number},
+    {"avg_sessions_attended", each List.Average(Table.Column(_, "sessions_attended")), type nullable number},
+    {"avg_sessions_possible", each List.Average(Table.Column(_, "sessions_possible")), type nullable number},
     {"student_count", each Table.RowCount(_), Int64.Type}
   }),
   #"Added avg_attendance_rate" = Table.AddColumn(#"Grouped by location and period", "avg_attendance_rate", each

@@ -1,4 +1,4 @@
-[StagingDefinition = [Kind = "FastCopy"]]
+[DefaultOutputDestinationSettings = [DestinationDefinition = [Kind = "Reference", QueryName = "DefaultDestination", IsNewTarget = true], UpdateMethod = [Kind = "Replace"], DestinationTypeSettings = [Kind = "Table"]], StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
 shared HighAttendanceThreshold = 0.80;
 shared StandardAttendanceThreshold = 0.60;
@@ -35,6 +35,7 @@ shared jcampus_match = let
   #"Changed types" = Table.TransformColumnTypes(jcampus_match, {{"client_id", Int64.Type}})
 in
   #"Changed types";
+[BindToDefaultDestination = true]
 shared lighthouse_attendance_detail = let
   // Join attended and possible using NestedJoin with FullOuter
   #"Merged attended and possible" = Table.NestedJoin(lighthouse_sessions_attended, {"client_id", "nine_week_period"}, lighthouse_sessions_possible, {"client_id", "nine_week_period"}, "possible", JoinKind.FullOuter),
@@ -86,6 +87,7 @@ shared lighthouse_attendance_detail = let
   #"Select columns" = Table.SelectColumns(#"Added attendance_flag", {"sessions_attended", "sessions_possible", "client_id", "nine_week_period", "first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program", "school_name", "is_80_school", "required_threshold", "attendance_rate", "meets_threshold", "attendance_flag"})
 in
   #"Select columns";
+[BindToDefaultDestination = true]
 shared attendance_summary_80_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to 80 schools" = Table.SelectRows(Source, each [is_80_school] = true),
@@ -118,6 +120,7 @@ shared attendance_summary_80_schools = let
     [students_meeting_80] / [total_students], Percentage.Type)
 in
   #"Added percentage";
+[BindToDefaultDestination = true]
 shared attendance_summary_other_schools = let
   Source = lighthouse_attendance_detail,
   #"Filtered to non-80 schools" = Table.SelectRows(Source, each [is_80_school] = false),
@@ -151,9 +154,11 @@ shared attendance_summary_other_schools = let
     {"total_students", each Table.RowCount(_), Int64.Type}
   }),
   #"Added percentage" = Table.AddColumn(#"Grouped by location and period", "pct_meeting_threshold", each
-    [students_meeting_60] / [total_students], Percentage.Type)
+    [students_meeting_60] / [total_students], Percentage.Type),
+  #"Filtered rows" = Table.SelectRows(#"Added percentage", each ([lighthouse_location_enrolling] <> null))
 in
-  #"Added percentage";
+  #"Filtered rows";
+[BindToDefaultDestination = true]
 shared attendance_averages_by_location = let
   Source = lighthouse_attendance_detail,
   #"Filtered out specific" = Table.SelectRows(Source, each
@@ -193,3 +198,4 @@ shared attendance_averages_by_location = let
   })
 in
   #"Sorted";
+shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data];

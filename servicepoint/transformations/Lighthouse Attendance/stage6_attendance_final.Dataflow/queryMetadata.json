@@ -35,19 +35,29 @@
     },
     "lighthouse_attendance_detail": {
       "queryId": "3976f68e-305c-49dc-9e63-f6aa0aa4c81f",
-      "queryName": "lighthouse_attendance_detail"
+      "queryName": "lighthouse_attendance_detail",
+      "loadEnabled": false
     },
     "attendance_summary_80_schools": {
       "queryId": "6b3b3bc1-5620-4452-a088-39fc365db718",
-      "queryName": "attendance_summary_80_schools"
+      "queryName": "attendance_summary_80_schools",
+      "loadEnabled": false
     },
     "attendance_summary_other_schools": {
       "queryId": "222188cb-df40-444f-9d5f-5b835b7214eb",
-      "queryName": "attendance_summary_other_schools"
+      "queryName": "attendance_summary_other_schools",
+      "loadEnabled": false
     },
     "attendance_averages_by_location": {
       "queryId": "c8b35a0f-592a-4213-b973-fa1461b04638",
-      "queryName": "attendance_averages_by_location"
+      "queryName": "attendance_averages_by_location",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "e8d97234-59a1-402a-b601-74a716be0e21",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
     }
   },
   "connections": [

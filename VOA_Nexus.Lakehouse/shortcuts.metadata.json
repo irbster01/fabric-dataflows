@@ -1,18 +1,90 @@
 [
   {
-    "name": "lighthouse_attendance_detail",
-    "path": "/Tables/lighthouse",
+    "name": "ssvfLa_tfa_efficiency",
+    "path": "/Tables/ssvf",
     "target": {
       "type": "OneLake",
       "oneLake": {
-        "path": "Tables/dbo/lighthouse_attendance_detail",
+        "path": "Tables/dbo/ssvfLa_tfa_efficiency",
         "itemId": "00000000-0000-0000-0000-000000000000",
         "workspaceId": "00000000-0000-0000-0000-000000000000"
       }
     }
   },
   {
-    "name": "attendance_summary_other_schools",
+    "name": "ssvfLa_exit_housedTiming",
+    "path": "/Tables/ssvf",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/ssvfLa_exit_housedTiming",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "ssvfLa_exit_housed",
+    "path": "/Tables/ssvf",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/ssvfLa_exit_housed",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "safeHaven_exit_destinations",
+    "path": "/Tables/safeHaven",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/safeHaven_exit_destinations",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "safeHaven_average_lengthOfStay",
+    "path": "/Tables/safeHaven",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/safeHaven_average_lengthOfStay",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "Risk Management Entries",
+    "path": "/Tables/org",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/Risk Management",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "Appended Proram Docs",
+    "path": "/Tables/org",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/Appended Proram Docs",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "Other Schools Attendance",
     "path": "/Tables/lighthouse",
     "target": {
       "type": "OneLake",
@@ -24,7 +96,31 @@
     }
   },
   {
-    "name": "attendance_summary_80_schools",
+    "name": "Average Attendance Rate by Site",
+    "path": "/Tables/lighthouse",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/attendance_averages_by_location",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "Attendance by Client",
+    "path": "/Tables/lighthouse",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/lighthouse_attendance_detail",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "80 Threshold Attendance",
     "path": "/Tables/lighthouse",
     "target": {
       "type": "OneLake",
@@ -36,12 +132,360 @@
     }
   },
   {
-    "name": "attendance_averages_by_location",
+    "name": "2nd 9 Aggregated Site Grades",
     "path": "/Tables/lighthouse",
     "target": {
       "type": "OneLake",
       "oneLake": {
-        "path": "Tables/dbo/attendance_averages_by_location",
+        "path": "Tables/dbo/2q_lh_grades",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "1st 9 Aggregated Site Grades",
+    "path": "/Tables/lighthouse",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/1q_lh_grades",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "gpd_positive_exits",
+    "path": "/Tables/gpd",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/gpd_positive_exits",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "gpd_income_exits",
+    "path": "/Tables/gpd",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/gpd_income_exits",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "gpd_exit_destinations",
+    "path": "/Tables/gpd",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/gpd_exit_destinations",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "tier1_ratio",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/tier1_ratio",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "first_9weeks_tier1",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/first_9weeks_tier1",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "cis_org_behavior_count",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_org_behavior_count",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "cis_org_attendance_count",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_org_attendance_count",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "cis_org_all_goals_count",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_org_all_goals_count",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "cis_org_academics_count",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_org_academics_count",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "cis_behavior_positive_count",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_behavior_positive_count",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "cis_academics_positive_count",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_academics_positive_count",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "Behavior Goal Clients JCampus",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_referrals_wJcampus_goalStudents",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "attendance_pos_wRaw_%",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/attendance_pos_wRaw_%",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "Attendance Students JCampus",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_attend_wJcampus_goalStudents",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "ALL Clients JCampus Referrals",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_referrals_wJcampus",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "ALL Clients JCampus Grades",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_grades_wJcampus",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "ALL Clients JCampus Attendance",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_attend_wJcampus",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "Acacemic Goal Students JCampus",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/cis_grades_wJcampus_goalStudents",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "2nd_9wks_positive_prog_withRaw_%",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/2nd_9wks_positive_prog_withRaw_%",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "1st_9wks_positive_prog_withRaw_%",
+    "path": "/Tables/cis",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/1st_9wks_positive_prog_withRaw_%",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "2025_household_internet",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/2025_household_internet",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "2025_health_ins",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/2025_health_ins",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "2025_choice_race",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/2025_choice_race",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "2025_choice_pcp",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/2025_choice_pcp",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "2025_choice_internet",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/2025_choice_internet",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "2025_choice_disability",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/2025_choice_disability",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "2025_choice_computer",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/2025_choice_computer",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "2025_choice_age",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/2025_choice_age",
         "itemId": "00000000-0000-0000-0000-000000000000",
         "workspaceId": "00000000-0000-0000-0000-000000000000"
       }

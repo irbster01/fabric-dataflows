@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "lighthouse_grades_transform"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "231fc0d7-ed02-b4fb-4caf-36994a3d8d77"
+  }
+}

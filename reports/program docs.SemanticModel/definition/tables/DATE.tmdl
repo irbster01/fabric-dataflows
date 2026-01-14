@@ -1,0 +1,91 @@
+table DATE
+	lineageTag: 9b69545e-5558-4c22-94b6-307fa714b199
+
+	column Date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 76358798-ebe7-4a97-ae92-3168a7240666
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: e9dc2f44-795a-42d3-9df3-098ce0ab29c8
+			defaultHierarchy: LocalDateTable_0c4fc5f6-c745-468a-a327-6fdc07318d62.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 50cc989a-ff55-4c4e-94e0-8fea7036996b
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: e3cf3c89-d13a-4def-99fc-c90572ed4960
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 148301a0-55c7-4448-9727-200d1685492f
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: a672fbdd-7907-40d2-9293-92b92025fb92
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: 6caf356e-d7c9-491b-a99e-a7b59d84e2e6
+		summarizeBy: none
+		sourceColumn: Month Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DATE = m
+		mode: import
+		source =
+				let
+				    StartDate = #date(2025, 1, 1),
+				    EndDate = #date(2030, 12, 31),
+				    DateList = List.Dates(StartDate, Duration.Days(EndDate - StartDate) + 1, #duration(1, 0, 0, 0)),
+				    DateTable = Table.FromList(DateList, Splitter.SplitByNothing(), {"Date"}),
+				    AddColumns = Table.TransformColumns(DateTable, {{"Date", each DateTime.Date(_), type date}}),
+				    Enriched = Table.TransformColumns(
+				        Table.AddColumn(
+				            Table.AddColumn(
+				                Table.AddColumn(
+				                    Table.AddColumn(
+				                        Table.AddColumn(AddColumns, "Year", each Date.Year([Date]), Int64.Type),
+				                        "Month", each Date.Month([Date]), Int64.Type),
+				                    "Day", each Date.Day([Date]), Int64.Type),
+				                "Quarter", each Date.QuarterOfYear([Date]), Int64.Type),
+				            "Month Name", each Date.ToText([Date], "MMMM"), type text),
+				        {"Date", each _, type date}
+				    )
+				in
+				    Enriched
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

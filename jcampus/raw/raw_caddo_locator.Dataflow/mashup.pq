@@ -16,9 +16,10 @@ shared caddo_student_locator = let
   #"Changed column type" = Table.TransformColumnTypes(#"Expanded table column", {{"Sch", Int64.Type}, {"School Abbr", type text}, {"Student Name", type text}, {"Last Name", type text}, {"First Name", type text}, {"Sex", type text}, {"GD", Int64.Type}, {"SIDNO", Int64.Type}, {"SASID", Int64.Type}, {"Special Codes", type text}, {"Custom Codes", type text}, {"Period 1", type text}, {"Period 2", type text}, {"Period 3", type text}, {"Period 4", type text}, {"Period 5", type text}, {"Period 6", type text}, {"Period 7", type text}, {"Period 8", type text}, {"Homeroom Teacher", type text}, {"Advisor", type text}, {"Counselor", type text}}),
   #"Removed other columns 1" = Table.SelectColumns(#"Changed column type", {"Student Name", "SIDNO", "SASID"}),
   #"Changed column type 1" = Table.TransformColumnTypes(#"Removed other columns 1", {{"SIDNO", type text}, {"SASID", type text}}),
-  #"Renamed columns" = Table.RenameColumns(#"Changed column type 1", {{"SIDNO", "sidno"}, {"SASID", "sasid"}, {"Student Name", "student_name"}})
+  #"Renamed columns" = Table.RenameColumns(#"Changed column type 1", {{"SIDNO", "sidno"}, {"SASID", "sasid"}, {"Student Name", "student_name"}}),
+  #"Removed duplicates" = Table.Distinct(#"Renamed columns", {"sidno", "sasid"})
 in
-  #"Renamed columns";
+  #"Removed duplicates";
 shared #"Sample file" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

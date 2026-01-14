@@ -1,0 +1,106 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "cis_jcampus_joins",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "caddo_jcampus cleaned_caddo_grades": {
+      "queryId": "2cc8762f-9226-4430-a536-75373f86e2b3",
+      "queryName": "caddo_jcampus cleaned_caddo_grades"
+    },
+    "cis_grades_wJcampus": {
+      "queryId": "9d4ca82a-74fc-4a76-8462-4e36ae52ef16",
+      "queryName": "cis_grades_wJcampus",
+      "loadEnabled": false
+    },
+    "cis_grades_wJcampus_DataDestination": {
+      "queryId": "d1139767-fe2a-4988-8c64-9817d623d32a",
+      "queryName": "cis_grades_wJcampus_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_attend_wJcampus": {
+      "queryId": "7639aa69-935f-47a1-a672-7719c4f9b4a2",
+      "queryName": "cis_attend_wJcampus",
+      "loadEnabled": false
+    },
+    "raw_caddo_daily_attend": {
+      "queryId": "94f3af0f-0f88-4ccf-8c3e-db912f79f912",
+      "queryName": "raw_caddo_daily_attend"
+    },
+    "raw_caddo_referrals": {
+      "queryId": "69094452-b7ce-4c1e-910c-a0562352f959",
+      "queryName": "raw_caddo_referrals"
+    },
+    "cis_referrals_wJcampus": {
+      "queryId": "5502406b-8668-4d9a-8b67-bc53c91d1fe7",
+      "queryName": "cis_referrals_wJcampus",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "b113e2ed-a610-4966-9eab-5fd901b42b69",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "raw_cisdm_clients": {
+      "queryId": "8510e189-76d7-46b4-9974-539e29d74b87",
+      "queryName": "raw_cisdm_clients",
+      "loadEnabled": false
+    },
+    "lighthouse_dates": {
+      "queryId": "c747d128-831e-4fa4-ada8-64b32ee09e8a",
+      "queryName": "lighthouse_dates",
+      "loadEnabled": false
+    },
+    "cis_grades_wJcampus_goalStudents": {
+      "queryId": "e1073682-5d8d-4566-9cde-1e5ddea2c89c",
+      "queryName": "cis_grades_wJcampus_goalStudents",
+      "loadEnabled": false
+    },
+    "raw_cisdm_progress_monitoring": {
+      "queryId": "dafd2294-5203-4b9d-817f-66daa4c67920",
+      "queryName": "raw_cisdm_progress_monitoring",
+      "loadEnabled": false
+    },
+    "cis_grades_wJcampus_goalStudents_DataDestination": {
+      "queryId": "9351d708-c7a1-4ba9-aad3-7bcb0650a27b",
+      "queryName": "cis_grades_wJcampus_goalStudents_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "cis_referrals_wJcampus_goalStudents": {
+      "queryId": "109ea02f-4189-4920-9296-efc40c54eb19",
+      "queryName": "cis_referrals_wJcampus_goalStudents",
+      "loadEnabled": false
+    },
+    "behavior_prog_monitor": {
+      "queryId": "3bd3c19b-9354-4119-873e-24e7ee70bcd1",
+      "queryName": "behavior_prog_monitor",
+      "loadEnabled": false
+    },
+    "attend_prog_monitor": {
+      "queryId": "2e712f6f-d834-4eed-8119-9a9ee4a2198b",
+      "queryName": "attend_prog_monitor",
+      "loadEnabled": false
+    },
+    "cis_attend_wJcampus_goalStudents": {
+      "queryId": "c66af17e-86f5-4537-a9d0-696dadc0b740",
+      "queryName": "cis_attend_wJcampus_goalStudents",
+      "loadEnabled": false
+    },
+    "caddo_attend_summary": {
+      "queryId": "fdf237c4-56f9-4c71-bf00-6539e6dcc329",
+      "queryName": "caddo_attend_summary",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

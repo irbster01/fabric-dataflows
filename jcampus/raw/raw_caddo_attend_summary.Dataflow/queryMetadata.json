@@ -1,0 +1,31 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_caddo_attend_summary",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "caddo_attend_summary": {
+      "queryId": "2d2cf909-0e00-45b3-8898-3a4b4ab503bc",
+      "queryName": "caddo_attend_summary",
+      "loadEnabled": false
+    },
+    "caddo_attend_summary_DataDestination": {
+      "queryId": "f96a7859-2645-45c5-96ee-d8c401931413",
+      "queryName": "caddo_attend_summary_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "raw_caddo_student_locator": {
+      "queryId": "f1d0cce8-3f7e-4bd8-bd01-90c454e792c9",
+      "queryName": "raw_caddo_student_locator"
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

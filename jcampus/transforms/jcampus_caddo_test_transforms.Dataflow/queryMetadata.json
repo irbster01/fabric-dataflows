@@ -23,6 +23,25 @@
       "queryName": "cis_dibels_DataDestination",
       "isHidden": true,
       "loadEnabled": false
+    },
+    "caddo_tests": {
+      "queryId": "53be4101-ca71-451b-93c7-f97e083e0cd6",
+      "queryName": "caddo_tests"
+    },
+    "cis_wDibels": {
+      "queryId": "910510e6-fb6c-4bec-ae1a-b847e87cc751",
+      "queryName": "cis_wDibels",
+      "loadEnabled": false
+    },
+    "raw_cisdm_progress_monitoring": {
+      "queryId": "52ff1ecf-18c4-438f-9107-a4046b8befaf",
+      "queryName": "raw_cisdm_progress_monitoring"
+    },
+    "cis_wDibels_DataDestination": {
+      "queryId": "00a4eeaf-719b-49b9-b3d9-b916a488dac6",
+      "queryName": "cis_wDibels_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
     }
   },
   "connections": [

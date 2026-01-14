@@ -1,0 +1,127 @@
+table cis_attend_wJcampus_goalStudents
+	lineageTag: 9ed653f0-2b31-42ec-9438-d810b844b69a
+
+	column school_name
+		dataType: string
+		lineageTag: 27ad1c1a-3815-4fc2-bdc4-5266d860786f
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: b85da30c-b54f-4d26-bf7f-0c25dedc8b7c
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_full_name
+		dataType: string
+		lineageTag: 9c86edb2-95cf-415d-b5ac-c4901cd8ab92
+		summarizeBy: none
+		sourceColumn: client_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal
+		dataType: string
+		lineageTag: 5352583c-f973-49cd-85e9-d916f0fe5f21
+		summarizeBy: none
+		sourceColumn: goal
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric
+		dataType: string
+		lineageTag: 483aff39-9c62-4808-990a-33d42b11c377
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline
+		dataType: double
+		lineageTag: aedd6b70-066d-4e9b-aebd-67c053548a12
+		summarizeBy: sum
+		sourceColumn: baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column target
+		dataType: int64
+		formatString: 0
+		lineageTag: d07355a3-1ac7-4475-ba6c-40ef9accc758
+		summarizeBy: sum
+		sourceColumn: target
+
+		annotation SummarizationSetBy = Automatic
+
+	column tardies
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e103f4a-bf09-460a-80e5-c6df78506bd9
+		summarizeBy: sum
+		sourceColumn: tardies
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal_narrative
+		dataType: string
+		lineageTag: 5e23978d-aeef-46dc-824c-4ce8603e5f6b
+		summarizeBy: none
+		sourceColumn: goal_narrative
+
+		annotation SummarizationSetBy = Automatic
+
+	column sasid
+		dataType: string
+		lineageTag: ae72d056-d33a-47de-86e4-38ce678bce70
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column unexcused
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a34ca97-0d45-474a-ba97-b7daad157128
+		summarizeBy: sum
+		sourceColumn: unexcused
+
+		annotation SummarizationSetBy = Automatic
+
+	column unexcused_flag
+		dataType: string
+		lineageTag: d46667e3-5a36-4175-9c82-837b21fbc1b7
+		summarizeBy: none
+		sourceColumn: unexcused_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column tardy_flag
+		dataType: string
+		lineageTag: 63f22817-9900-4c28-ae38-a1f8e6bac870
+		summarizeBy: none
+		sourceColumn: tardy_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition cis_attend_wJcampus_goalStudents = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "VOA_Nexus"),
+				    dbo_cis_attend_wJcampus_goalStudents = Source{[Schema="dbo",Item="cis_attend_wJcampus_goalStudents"]}[Data],
+				    #"Added Conditional Column" = Table.AddColumn(dbo_cis_attend_wJcampus_goalStudents, "unexcused_flag", each if [unexcused] > [target] then "BAD" else "GOOD"),
+				    #"Added Conditional Column1" = Table.AddColumn(#"Added Conditional Column", "tardy_flag", each if [tardies] > [target] then "BAD" else "GOOD")
+				in
+				    #"Added Conditional Column1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

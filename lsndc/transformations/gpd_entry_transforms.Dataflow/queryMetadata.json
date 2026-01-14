@@ -1,0 +1,94 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "gpd_entry_transforms",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "gpd_exit_destinations": {
+      "queryId": "d6b9e962-3843-48b2-ae1c-9b0449af36be",
+      "queryName": "gpd_exit_destinations",
+      "loadEnabled": false
+    },
+    "lsndc_exits": {
+      "queryId": "ff373594-5ba4-43e0-8053-f6c07950469f",
+      "queryName": "lsndc_exits"
+    },
+    "raw_lsndc_entries_DataDestination": {
+      "queryId": "00683200-4245-4839-9b59-ee1274aa975b",
+      "queryName": "raw_lsndc_entries_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "gpd_positive_exits": {
+      "queryId": "214cf33f-b35d-4908-946c-b17303cf9081",
+      "queryName": "gpd_positive_exits",
+      "loadEnabled": false
+    },
+    "gpd_income_exits": {
+      "queryId": "a4718b98-c4ca-4d44-bed6-08b4a919b790",
+      "queryName": "gpd_income_exits",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "ba67e07e-14b5-4cf8-9b74-71a1aea6a793",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "safeHaven_exit_destinations": {
+      "queryId": "a63d02c3-d9fc-44bb-82cf-18598b642136",
+      "queryName": "safeHaven_exit_destinations",
+      "loadEnabled": false
+    },
+    "safeHaven_average_lengthOfStay": {
+      "queryId": "6285bf9e-d3f0-4491-975d-258eee5ce5e1",
+      "queryName": "safeHaven_average_lengthOfStay",
+      "loadEnabled": false
+    },
+    "ssvfLa_exit_housedTiming": {
+      "queryId": "6a364376-46cf-4bf2-bf72-2405650c40f3",
+      "queryName": "ssvfLa_exit_housedTiming",
+      "loadEnabled": false
+    },
+    "ssvf_housed_staging": {
+      "queryId": "ee58b5a0-5374-4d86-b10a-596c9b441e41",
+      "queryName": "ssvf_housed_staging",
+      "loadEnabled": false
+    },
+    "ssvfLa_exit_housed": {
+      "queryId": "42b83d1e-8c43-4221-8879-bcc0f2dbcbb8",
+      "queryName": "ssvfLa_exit_housed",
+      "loadEnabled": false
+    },
+    "raw_lsndc_services": {
+      "queryId": "2d7236ac-1005-4b29-bcf1-ba55abcd5271",
+      "queryName": "raw_lsndc_services",
+      "loadEnabled": false
+    },
+    "ssvfLa_tfa_efficiency": {
+      "queryId": "3fe5a6ea-9a77-4871-89c1-74a99b89f4bd",
+      "queryName": "ssvfLa_tfa_efficiency",
+      "loadEnabled": false
+    },
+    "safeHaven_average_lengthOfStay_DataDestination": {
+      "queryId": "d9a4e59d-f051-43dc-8517-167c1bce4dc7",
+      "queryName": "safeHaven_average_lengthOfStay_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "safeHaven_exit_destinations_DataDestination": {
+      "queryId": "739873a9-b405-40de-af3f-6f28f6d0d94b",
+      "queryName": "safeHaven_exit_destinations_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

@@ -24,8 +24,7 @@ shared caddo_daily_attend = let
   #"Removed columns 3" = Table.RemoveColumns(#"Renamed columns 3", {"HLT Description"}),
   #"Changed column type 1" = Table.TransformColumnTypes(#"Removed columns 3", {{"sidno", type text}, {"sasid", type text}}),
   #"Sorted rows" = Table.Sort(#"Changed column type 1", {{"attend_date", Order.Descending}}),
-  #"Renamed columns 4" = Table.RenameColumns(#"Sorted rows", {{"O", "checkout"}}),
-  #"Removed duplicates" = Table.Distinct(#"Renamed columns 4")
+  #"Removed duplicates" = Table.Distinct(#"Sorted rows")
 in
   #"Removed duplicates";
 shared #"Sample file" = let

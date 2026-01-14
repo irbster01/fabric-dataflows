@@ -33,9 +33,10 @@ shared lighthouse_attendance_detail = let
   // Join client_master
   #"Merged client" = Table.NestedJoin(#"Fill nulls", {"client_id"}, lighthouse_client_master, {"client_id"}, "client_data", JoinKind.LeftOuter),
   #"Expanded client" = Table.ExpandTableColumn(#"Merged client", "client_data", {"first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program"}, {"first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program"}),
+  #"Subtracted from column" = Table.TransformColumns(#"Expanded client", {{"sessions_possible", each _ - 1, Int64.Type}}),
   
   // Add calculated columns
-  #"Add rate" = Table.AddColumn(#"Expanded client", "attendance_rate", each if [sessions_possible] = 0 or [sessions_possible] = null then null else [sessions_attended] / [sessions_possible], Percentage.Type),
+  #"Add rate" = Table.AddColumn(#"Subtracted from column", "attendance_rate", each if [sessions_possible] = 0 or [sessions_possible] = null then null else [sessions_attended] / [sessions_possible], Percentage.Type),
   
   #"Add is_80" = Table.AddColumn(#"Add rate", "is_80_school", each 
     [lighthouse_location_enrolling] = "Bethune/Oak Park" or 
@@ -69,7 +70,6 @@ shared attendance_summary_other_schools = let
     [is_80_school] = false and 
     [lighthouse_location_enrolling] <> null and
     [lighthouse_location_enrolling] <> "Highland" and
-    [lighthouse_location_enrolling] <> "Teen Club" and
     [lighthouse_location_enrolling] <> "School Site - Judson"),
   #"Grouped" = Table.Group(#"Filtered", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"total_students", each Table.RowCount(_), Int64.Type},

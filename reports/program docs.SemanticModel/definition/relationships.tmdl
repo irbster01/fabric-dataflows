@@ -1,0 +1,20 @@
+relationship e9dc2f44-795a-42d3-9df3-098ce0ab29c8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DATE.Date
+	toColumn: LocalDateTable_0c4fc5f6-c745-468a-a327-6fdc07318d62.Date
+
+relationship ca711696-30df-41fa-9c33-e2e37385256f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Appended Proram Docs'.'Date modified'
+	toColumn: LocalDateTable_fef53fc5-c5de-4bf1-8a62-8fd672e82059.Date
+
+relationship 7007d170-5fb2-4583-b19d-1ba9e63af3d5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Appended Proram Docs'.Modified
+	toColumn: LocalDateTable_ec7cc695-2553-430b-81d1-9ab8276d2140.Date
+
+relationship 75460462-d132-465f-b6c3-cc516d7dac8d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Appended Proram Docs'.RevisionDate
+	toColumn: LocalDateTable_e92badd6-331c-4796-8185-0dd60306311c.Date
+

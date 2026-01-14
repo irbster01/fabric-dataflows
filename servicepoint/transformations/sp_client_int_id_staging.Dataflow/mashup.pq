@@ -1,5 +1,6 @@
-[StagingDefinition = [Kind = "FastCopy"]]
+[DefaultOutputDestinationSettings = [DestinationDefinition = [Kind = "Reference", QueryName = "DefaultDestination", IsNewTarget = true], UpdateMethod = [Kind = "Replace"], DestinationTypeSettings = [Kind = "Table"]], StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw_sp_clients_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared raw_sp_clients = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -38,7 +39,7 @@ in
 shared #"Lighthouse Matched with JCampus" = let
   Source = Table.NestedJoin(raw_sp_clients, {"int_id"}, #"Caddo Census 2526", {"int_id"}, "Caddo Census 2526", JoinKind.LeftOuter),
   #"Expanded Caddo Census 2527" = Table.ExpandTableColumn(Source, "Caddo Census 2526", {"Student Name", "SIDNO", "School", "Year", "School Name"}, {"Student Name", "SIDNO", "School", "Year", "School Name"}),
-  #"Merged queries" = Table.NestedJoin(#"Expanded Caddo Census 2527", {"client_id"}, raw_sp_entries, {"client_id"}, "raw_sp_entries", JoinKind.LeftOuter),
+  #"Merged queries" = Table.NestedJoin(#"Expanded Caddo Census 2527", {"client_id"}, sp_matched_wJCampus, {"client_id"}, "raw_sp_entries", JoinKind.LeftOuter),
   #"Expanded raw_sp_entries" = Table.ExpandTableColumn(#"Merged queries", "raw_sp_entries", {"entry_date", "exit_date", "program"}, {"entry_date", "exit_date", "program"}),
   #"Filtered rows" = Table.SelectRows(#"Expanded raw_sp_entries", each [exit_date] > #date(2025, 8, 1) or [exit_date] = null),
   #"Filtered rows 1" = Table.SelectRows(#"Filtered rows", each ([program] = "VOANLA 4002 -The LightHouse - School Sites" or [program] = "VOANLA 4080 -The LightHouse - Community Sites" or [program] = "VOANLA 4080a - Teen Club")),
@@ -47,13 +48,17 @@ shared #"Lighthouse Matched with JCampus" = let
   #"Removed duplicates" = Table.Distinct(#"Removed columns", {"client_id"})
 in
   #"Removed duplicates";
-shared raw_sp_entries = let
+shared sp_matched_wJCampus = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data]
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data],
+  #"Merged queries" = Table.NestedJoin(#"Navigation 2", {"client_id"}, raw_sp_clients_wIntID, {"client_id"}, "raw_sp_clients_wIntID", JoinKind.Inner),
+  #"Expanded raw_sp_clients_wIntID 1" = Table.ExpandTableColumn(#"Merged queries", "raw_sp_clients_wIntID", {"client_first_name", "client_last_name", "client_dob", "int_id"}, {"client_first_name", "client_last_name", "client_dob", "int_id"}),
+  #"Merged queries 1" = Table.NestedJoin(#"Expanded raw_sp_clients_wIntID 1", {"int_id"}, #"Caddo Census 2526", {"int_id"}, "Caddo Census 2526", JoinKind.Inner),
+  #"Expanded Caddo Census 2526" = Table.ExpandTableColumn(#"Merged queries 1", "Caddo Census 2526", {"SIDNO", "Grade", "Year", "School Name"}, {"SIDNO", "Grade", "Year", "School Name"})
 in
-  #"Navigation 2";
+  #"Expanded Caddo Census 2526";
 shared #"Lighthouse Matched with JCampus_DataDestination" = let
   Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -61,3 +66,29 @@ shared #"Lighthouse Matched with JCampus_DataDestination" = let
   TableNavigation = Navigation_2{[Id = "Lighthouse Matched with JCampus", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
+shared raw_sp_clients_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "raw_sp_clients_wIntID", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared raw_sp_clients_wIntID = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_clients_wIntID", ItemKind = "Table"]}[Data]
+in
+  #"Navigation 2";
+[BindToDefaultDestination = true]
+shared choice_wJcampus_data = let
+  Source = sp_matched_wJCampus,
+  #"Filtered rows" = Table.SelectRows(Source, each ([program] = "VOANLA 8110 - Choice Neighborhoods"))
+in
+  #"Filtered rows";
+shared DefaultDestination = let
+  Source = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data]
+in
+  #"Navigation 2";

@@ -1,0 +1,376 @@
+table cis_grades_wJcampus_goalStudents
+	lineageTag: 49f34ec2-5b0c-4b06-bf42-f4c51c12da09
+
+	column school_name
+		dataType: string
+		lineageTag: c7f2af2b-8d4f-497d-9255-52e53d5feaa1
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: 2327968e-cd8a-427b-b064-71e6ab32b89e
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_full_name
+		dataType: string
+		lineageTag: db4bfa8b-a134-434d-9c5e-7b095d4363fe
+		summarizeBy: none
+		sourceColumn: client_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_dob
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e512fcd1-157b-41d6-a152-dbf76cb7fde1
+		summarizeBy: none
+		sourceColumn: client_dob
+
+		variation Variation
+			isDefault
+			relationship: 2e97ffc2-413a-4c45-b872-3854825f2477
+			defaultHierarchy: LocalDateTable_8be146d9-15a3-47fe-bb35-063a672c1cf2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column entry_start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 27344ef5-5cfd-4e95-817b-f911b910a650
+		summarizeBy: none
+		sourceColumn: entry_start_date
+
+		variation Variation
+			isDefault
+			relationship: 340a7726-5c6b-4cae-adc8-e8b17ee10f24
+			defaultHierarchy: LocalDateTable_a2396bd6-e854-433c-b7ae-b937c10ca68f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column first_cis_enrollment_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: eae9220b-b866-46f7-b59a-9b229912e6d1
+		summarizeBy: none
+		sourceColumn: first_cis_enrollment_date
+
+		variation Variation
+			isDefault
+			relationship: d68ce44f-82d8-474c-9fb2-518a5beedeec
+			defaultHierarchy: LocalDateTable_31b97d5a-c35a-4c5b-9b69-e006f4b556ec.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column sasid
+		dataType: string
+		lineageTag: aa8f693a-cce0-4cc8-8788-5c0d7f9327cf
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Enrollment_Exit Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 99338048-1b6e-4494-8b9b-5f34c14cf93c
+		summarizeBy: none
+		sourceColumn: Enrollment_Exit Date
+
+		variation Variation
+			isDefault
+			relationship: b6d160f4-2a9d-4abd-af05-820990531e6a
+			defaultHierarchy: LocalDateTable_424b9ec7-e0f1-40fc-9588-8e8cc787b3db.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column grade
+		dataType: int64
+		formatString: 0
+		lineageTag: 2cd6184a-9b46-40f6-b34b-8f48ccf8f775
+		summarizeBy: sum
+		sourceColumn: grade
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 9fca1357-f794-468c-957a-fd7911d7ddc2
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column dob
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d5715466-4951-4221-b75c-92950d10307d
+		summarizeBy: none
+		sourceColumn: dob
+
+		variation Variation
+			isDefault
+			relationship: c3a5cd9d-648c-4edd-b8df-7654f1a1c65b
+			defaultHierarchy: LocalDateTable_afc6ef73-2596-46d5-9383-b7312d1244d5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'school_name.1'
+		dataType: string
+		lineageTag: 492624cf-af5e-44da-a7ed-49527a266274
+		summarizeBy: none
+		sourceColumn: school_name.1
+
+		annotation SummarizationSetBy = Automatic
+
+	column course
+		dataType: string
+		lineageTag: 653f64b5-8794-4154-9e4b-eec3939612e6
+		summarizeBy: none
+		sourceColumn: course
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1st_9_weeks
+		dataType: string
+		lineageTag: 99c9adfe-ccc2-4125-8932-40dc15c33120
+		summarizeBy: none
+		sourceColumn: 1st_9_weeks
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1st_9_GPA
+		dataType: double
+		lineageTag: 82e4c518-221b-4eb1-a788-c48fc58ae779
+		summarizeBy: sum
+		sourceColumn: 1st_9_GPA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 2nd_9_weeks
+		dataType: string
+		lineageTag: 2c93c92c-5d04-40ab-b3b0-c0b3493ddfd4
+		summarizeBy: none
+		sourceColumn: 2nd_9_weeks
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2nd_9_GPA
+		dataType: double
+		lineageTag: e96ed80b-b9f6-4db6-9a85-f5694e7c2d30
+		summarizeBy: sum
+		sourceColumn: 2nd_9_GPA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 3rd_9_weeks
+		dataType: string
+		lineageTag: f0881b8e-d85f-4b89-8e0e-71519997b039
+		summarizeBy: none
+		sourceColumn: 3rd_9_weeks
+
+		annotation SummarizationSetBy = Automatic
+
+	column 3rd_9_gpa
+		dataType: double
+		lineageTag: be55706f-96d5-4542-90cd-b28951b41a01
+		summarizeBy: sum
+		sourceColumn: 3rd_9_gpa
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 4th_9_weeks
+		dataType: string
+		lineageTag: 19011bf8-7605-4389-9439-942063ba5fd5
+		summarizeBy: none
+		sourceColumn: 4th_9_weeks
+
+		annotation SummarizationSetBy = Automatic
+
+	column iep_status
+		dataType: string
+		lineageTag: cca75901-4f40-4c2f-8da0-3c0b569804f8
+		summarizeBy: none
+		sourceColumn: iep_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 504_status
+		dataType: string
+		lineageTag: 8f396421-0dfd-42b7-a931-92c63ea31c38
+		summarizeBy: none
+		sourceColumn: 504_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column lep_status
+		dataType: string
+		lineageTag: 70978bb2-a8de-44d0-961e-b5a3b39f425a
+		summarizeBy: none
+		sourceColumn: lep_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column short_name_academics
+		dataType: string
+		lineageTag: f5b0ac70-d6fa-4cd6-98c6-1c9bc74fffbb
+		summarizeBy: none
+		sourceColumn: short_name_academics
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1st_9_grade_value
+		dataType: double
+		lineageTag: abda0efd-b3f0-4a4c-b7aa-0a9f294be298
+		summarizeBy: sum
+		sourceColumn: 1st_9_grade_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 2nd_9_grade_value
+		dataType: double
+		lineageTag: d945e827-610f-4361-b045-a6a054a64298
+		summarizeBy: sum
+		sourceColumn: 2nd_9_grade_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 1st_9_letter_grade
+		dataType: string
+		lineageTag: 216059e6-70b0-498f-b50d-465e651bc39d
+		summarizeBy: none
+		sourceColumn: 1st_9_letter_grade
+
+		annotation SummarizationSetBy = Automatic
+
+	column entry_nine_weeks
+		dataType: string
+		lineageTag: 6798b5ef-2b9d-4a3f-833c-8c3f85e6ebb5
+		summarizeBy: none
+		sourceColumn: entry_nine_weeks
+
+		annotation SummarizationSetBy = Automatic
+
+	column exit_nine_weeks
+		dataType: string
+		lineageTag: 686780c5-8a6e-4d4e-8fe0-1e0b3dc8bb03
+		summarizeBy: none
+		sourceColumn: exit_nine_weeks
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_manager
+		dataType: string
+		lineageTag: 2e4970ee-04f3-41f3-a60b-a06ab6e355a2
+		summarizeBy: none
+		sourceColumn: case_manager
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal
+		dataType: string
+		lineageTag: 2fddb358-fac3-40ce-b8a3-f92c20d97ed1
+		summarizeBy: none
+		sourceColumn: goal
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric
+		dataType: string
+		lineageTag: b84010f6-0bef-434f-b3e7-549c41b1fa68
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline
+		dataType: double
+		lineageTag: 14462a44-f2c7-4af6-926d-f336da0f55b3
+		summarizeBy: sum
+		sourceColumn: baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column target
+		dataType: int64
+		formatString: 0
+		lineageTag: c87c1b09-b07d-437c-b502-97c5055b7022
+		summarizeBy: sum
+		sourceColumn: target
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 30ce1e70-8bbd-4e34-91c9-36dcb4ee227d
+		summarizeBy: none
+		sourceColumn: baseline_date
+
+		variation Variation
+			isDefault
+			relationship: fb719ef2-cbe4-4cc2-833f-dc1f7d455cf5
+			defaultHierarchy: LocalDateTable_57e489da-da5e-4826-b905-fcecffb581c4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 1st9_flag
+		dataType: string
+		lineageTag: d70a2c4b-af06-4cc9-b40f-645fe3ca209a
+		summarizeBy: none
+		sourceColumn: 1st9_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2nd9_flag
+		dataType: string
+		lineageTag: aa506cd3-33cc-4731-994a-6df2fabece26
+		summarizeBy: none
+		sourceColumn: 2nd9_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition cis_grades_wJcampus_goalStudents = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "VOA_Nexus"),
+				    dbo_cis_grades_wJcampus_goalStudents = Source{[Schema="dbo",Item="cis_grades_wJcampus_goalStudents"]}[Data],
+				    #"Added Conditional Column" = Table.AddColumn(dbo_cis_grades_wJcampus_goalStudents, "1st9_flag", each if [1st_9_grade_value] < [target] then "BAD" else if [1st_9_grade_value] = null then "NOGRADE" else "GOOD"),
+				    #"Added Conditional Column1" = Table.AddColumn(#"Added Conditional Column", "2nd9_flag", each if [2nd_9_grade_value] < [target] then "BAD" else if [2nd_9_grade_value] = null then "NOGRADE" else "GOOD")
+				in
+				    #"Added Conditional Column1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

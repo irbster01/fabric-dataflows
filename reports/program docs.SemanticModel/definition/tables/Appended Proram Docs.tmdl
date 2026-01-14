@@ -1,0 +1,104 @@
+table 'Appended Proram Docs'
+	lineageTag: f461c93d-d32a-46e3-94e4-c16d2ea8c2c1
+
+	column Name
+		dataType: string
+		lineageTag: 8a538fb1-f629-434e-a790-7bc831bc62d6
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date modified'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a18eaa52-df9f-4ec6-90d4-fc79a6065b07
+		summarizeBy: none
+		sourceColumn: Date modified
+
+		variation Variation
+			isDefault
+			relationship: ca711696-30df-41fa-9c33-e2e37385256f
+			defaultHierarchy: LocalDateTable_fef53fc5-c5de-4bf1-8a62-8fd672e82059.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Modified
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f030fc3b-6946-4378-90f6-ea116b7bf21c
+		summarizeBy: none
+		sourceColumn: Modified
+
+		variation Variation
+			isDefault
+			relationship: 7007d170-5fb2-4583-b19d-1ba9e63af3d5
+			defaultHierarchy: LocalDateTable_ec7cc695-2553-430b-81d1-9ab8276d2140.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionValue
+		dataType: string
+		lineageTag: 24d9228f-ff3b-46db-8334-7de657c69563
+		summarizeBy: none
+		sourceColumn: DivisionValue
+
+		annotation SummarizationSetBy = Automatic
+
+	column RevisionDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: f67d8612-357e-48a9-9e86-0af6d57328fa
+		summarizeBy: none
+		sourceColumn: RevisionDate
+
+		variation Variation
+			isDefault
+			relationship: 75460462-d132-465f-b6c3-cc516d7dac8d
+			defaultHierarchy: LocalDateTable_e92badd6-331c-4796-8185-0dd60306311c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DocumentationTypeValue
+		dataType: string
+		lineageTag: fc0cd423-f3e6-4463-9c41-0b48c44c33dd
+		summarizeBy: none
+		sourceColumn: DocumentationTypeValue
+
+		annotation SummarizationSetBy = Automatic
+
+	column Details
+		dataType: string
+		lineageTag: b28d56b5-ccd5-40fe-a525-fb35eccb9afb
+		summarizeBy: none
+		sourceColumn: Details
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Folder Path'
+		dataType: string
+		lineageTag: 277eca6c-9fe2-47fd-841c-16d1ecf79f1d
+		summarizeBy: none
+		sourceColumn: Folder Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column programs
+		dataType: string
+		lineageTag: 16db22d9-1f21-4cc3-96f0-4e0289d14914
+		summarizeBy: none
+		sourceColumn: programs
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Appended Proram Docs' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "VOA_Nexus"),
+				    #"dbo_Appended Proram Docs" = Source{[Schema="dbo",Item="Appended Proram Docs"]}[Data]
+				in
+				    #"dbo_Appended Proram Docs"
+

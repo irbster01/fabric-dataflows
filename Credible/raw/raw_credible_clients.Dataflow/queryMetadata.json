@@ -16,16 +16,6 @@
       "isHidden": true,
       "loadEnabled": false
     },
-    "raw_credible_clients-warehouse": {
-      "queryId": "a2cb1d22-790e-464c-9aed-8fbd5787ff3b",
-      "queryName": "raw_credible_clients-warehouse"
-    },
-    "raw_credible_clients-warehouse_DataDestination": {
-      "queryId": "3b98e47a-a4d2-477b-a074-58ee22f678c4",
-      "queryName": "raw_credible_clients-warehouse_DataDestination",
-      "isHidden": true,
-      "loadEnabled": false
-    },
     "raw_credible_clients_DataDestination": {
       "queryId": "ca384d20-4a40-4a75-b19f-68fb6621c3f5",
       "queryName": "raw_credible_clients_DataDestination",

@@ -1,0 +1,320 @@
+table cis_referrals_wJcampus_goalStudents
+	lineageTag: 32777e2e-9ba0-4a2c-b8b4-73585742b146
+
+	column sasid
+		dataType: string
+		lineageTag: b149b67b-c15b-4fae-9800-2d826dcefe41
+		summarizeBy: none
+		sourceColumn: sasid
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: string
+		lineageTag: 7c7be130-7c47-40ac-ad5d-1f574200977c
+		summarizeBy: none
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_full_name
+		dataType: string
+		lineageTag: 386b21a3-e257-427a-90f5-47cd3e3eb5d3
+		summarizeBy: none
+		sourceColumn: client_full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_name
+		dataType: string
+		lineageTag: 661d1148-63c8-40ad-b825-d1870a170a59
+		summarizeBy: none
+		sourceColumn: school_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal
+		dataType: string
+		lineageTag: 5c66ba46-0989-482b-b806-22013224a740
+		summarizeBy: none
+		sourceColumn: goal
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric
+		dataType: string
+		lineageTag: b80275ac-b80b-4bbc-a1de-6887486ba60e
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline
+		dataType: double
+		lineageTag: 538c034d-27bb-4d53-9be6-212c03f9d918
+		summarizeBy: sum
+		sourceColumn: baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column target
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c683fd1-04d0-469b-b2e4-3860dfe453ba
+		summarizeBy: sum
+		sourceColumn: target
+
+		annotation SummarizationSetBy = Automatic
+
+	column referrals
+		dataType: double
+		lineageTag: 5513195c-95b5-4c97-a537-828cee2731fb
+		summarizeBy: sum
+		sourceColumn: referrals
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column entry_start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7f2610a7-d11e-473c-ad74-dfdf13c29c23
+		summarizeBy: none
+		sourceColumn: entry_start_date
+
+		variation Variation
+			isDefault
+			relationship: 7203b54d-053a-491e-8c11-1389c471a3f2
+			defaultHierarchy: LocalDateTable_a6e95f1a-7b02-4986-9a2c-ded5541a168d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Enrollment_Exit Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e1f5812f-5c8b-480d-9cad-290d0d7d0fa0
+		summarizeBy: none
+		sourceColumn: Enrollment_Exit Date
+
+		variation Variation
+			isDefault
+			relationship: b712570d-346e-4258-9aa4-20104bc1acb9
+			defaultHierarchy: LocalDateTable_a1dbe3e9-95e5-4084-a303-45a5f0896a7b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column entry_nine_weeks
+		dataType: string
+		lineageTag: 76016566-12cc-4441-81e0-06e70318cdb3
+		summarizeBy: none
+		sourceColumn: entry_nine_weeks
+
+		annotation SummarizationSetBy = Automatic
+
+	column exit_nine_weeks
+		dataType: string
+		lineageTag: 87bd1b0a-759e-4b45-b2fd-1b258255460b
+		summarizeBy: none
+		sourceColumn: exit_nine_weeks
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_manager
+		dataType: string
+		lineageTag: 94ddf117-60fc-45b0-a370-3a69de63186d
+		summarizeBy: none
+		sourceColumn: case_manager
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2e7df812-bcf5-4f42-a294-ea1b2465b627
+		summarizeBy: none
+		sourceColumn: baseline_date
+
+		variation Variation
+			isDefault
+			relationship: a3a921ef-07bf-47b5-a543-b1cfba5e6ce4
+			defaultHierarchy: LocalDateTable_6cb4fdfd-bf0e-49da-b862-11fb9a20d7f6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column baseline_report_period
+		dataType: string
+		lineageTag: 55526396-6b29-40a4-a8fc-8679bb1192d8
+		summarizeBy: none
+		sourceColumn: baseline_report_period
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_set_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f4b351aa-46de-42c1-b7c5-bcc85d57f654
+		summarizeBy: none
+		sourceColumn: target_set_date
+
+		variation Variation
+			isDefault
+			relationship: 39f74515-bee7-4237-86ac-d3e093572e1e
+			defaultHierarchy: LocalDateTable_f49fa1ae-3365-4aa2-a348-79c9eaa3740e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column grading_period
+		dataType: string
+		lineageTag: ab1d4634-e03a-4388-8d68-3e6e52ccf198
+		summarizeBy: none
+		sourceColumn: grading_period
+
+		annotation SummarizationSetBy = Automatic
+
+	column grading_period_progress
+		dataType: string
+		lineageTag: 1be706d6-0418-4915-9d41-e0dadc84d6e7
+		summarizeBy: none
+		sourceColumn: grading_period_progress
+
+		annotation SummarizationSetBy = Automatic
+
+	column nonNumeric_value
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e29e7a5-d969-4ab3-8d0f-7d5c27b2b673
+		summarizeBy: sum
+		sourceColumn: nonNumeric_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric_value
+		dataType: int64
+		formatString: 0
+		lineageTag: 3bf2c04e-9f6f-44eb-8853-9597655565d6
+		summarizeBy: sum
+		sourceColumn: metric_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_in_report_prd
+		dataType: string
+		lineageTag: b8bfadf4-2986-4412-ac0b-6248a833e73a
+		summarizeBy: none
+		sourceColumn: days_in_report_prd
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_progress
+		dataType: string
+		lineageTag: bd78de9b-0a36-459a-8cff-615ae617bb3b
+		summarizeBy: none
+		sourceColumn: latest_progress
+
+		annotation SummarizationSetBy = Automatic
+
+	column progress_notes
+		dataType: string
+		lineageTag: 2366d4c3-9057-493f-a0d4-e4adf0764710
+		summarizeBy: none
+		sourceColumn: progress_notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column goal_narrative
+		dataType: string
+		lineageTag: e821e734-b9b8-4880-8f54-06f49f9d9f24
+		summarizeBy: none
+		sourceColumn: goal_narrative
+
+		annotation SummarizationSetBy = Automatic
+
+	column entry_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9400a982-2a58-4936-9b99-1040f1fb6fc6
+		summarizeBy: none
+		sourceColumn: entry_date
+
+		variation Variation
+			isDefault
+			relationship: 9fd64c6a-938d-4408-b6ef-3dfd15e3794c
+			defaultHierarchy: LocalDateTable_fcb11b68-14e9-4abd-b701-83261fe922e0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column exit_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d2857979-5107-4395-b4e3-794f07d6dfc8
+		summarizeBy: none
+		sourceColumn: exit_date
+
+		variation Variation
+			isDefault
+			relationship: 5c8ebb0b-fbb7-492d-b31b-64e7f00cbbf5
+			defaultHierarchy: LocalDateTable_c0bd14ab-8b31-4e42-9f67-ae323f4f8482.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column enrollment_status
+		dataType: string
+		lineageTag: 929ae5f4-3628-4326-ad8a-d1f9c32eec9a
+		summarizeBy: none
+		sourceColumn: enrollment_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column school_year
+		dataType: string
+		lineageTag: a40504b0-ef4c-4b9a-ab7b-f368090cc0d6
+		summarizeBy: none
+		sourceColumn: school_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column attendance_type
+		dataType: string
+		lineageTag: 1cbcc69c-990c-4ef3-a40d-46bd14d4119b
+		summarizeBy: none
+		sourceColumn: attendance_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column ref_flag
+		dataType: string
+		lineageTag: 9f3b7243-9dac-4917-9566-1f933a6a410c
+		summarizeBy: none
+		sourceColumn: ref_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition cis_referrals_wJcampus_goalStudents = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("nzrmcoc5w6tebmq3bkxbdeohga-y7eucqqylblezera7l3de5axoa.datawarehouse.fabric.microsoft.com", "VOA_Nexus"),
+				    dbo_cis_referrals_wJcampus_goalStudents = Source{[Schema="dbo",Item="cis_referrals_wJcampus_goalStudents"]}[Data],
+				    #"Added Conditional Column" = Table.AddColumn(dbo_cis_referrals_wJcampus_goalStudents, "ref_flag", each if [referrals] > [target] then "BAD" else "GOOD")
+				in
+				    #"Added Conditional Column"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

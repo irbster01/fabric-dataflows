@@ -7,7 +7,8 @@
   "queriesMetadata": {
     "raw_sp_clients": {
       "queryId": "8e17e17f-9e32-4f5b-9487-4c4d2435b96d",
-      "queryName": "raw_sp_clients"
+      "queryName": "raw_sp_clients",
+      "loadEnabled": false
     },
     "Caddo Census 2526": {
       "queryId": "309ba99a-2260-47c7-a6fe-c9f7443c0117",
@@ -18,13 +19,34 @@
       "queryName": "Lighthouse Matched with JCampus",
       "loadEnabled": false
     },
-    "raw_sp_entries": {
+    "sp_matched_wJCampus": {
       "queryId": "72c553a2-c70f-4992-aeca-94f70e9ea704",
-      "queryName": "raw_sp_entries"
+      "queryName": "sp_matched_wJCampus"
     },
     "Lighthouse Matched with JCampus_DataDestination": {
       "queryId": "5e6fd96a-13f3-4d92-ba9c-8ea384bf1992",
       "queryName": "Lighthouse Matched with JCampus_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "raw_sp_clients_DataDestination": {
+      "queryId": "7a4e06fd-70de-4897-9f52-36b3fcc9790a",
+      "queryName": "raw_sp_clients_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "raw_sp_clients_wIntID": {
+      "queryId": "99e803b5-c590-4246-9a43-694ca86a9707",
+      "queryName": "raw_sp_clients_wIntID"
+    },
+    "choice_wJcampus_data": {
+      "queryId": "26b70dff-1d28-4aef-b91c-89e77ff6f354",
+      "queryName": "choice_wJcampus_data",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "1c8f7fe8-9d43-441c-b395-7f772ff40a6f",
+      "queryName": "DefaultDestination",
       "isHidden": true,
       "loadEnabled": false
     }

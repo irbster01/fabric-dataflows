@@ -6,59 +6,26 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Aggregated Behavior Goals","Aggregated Attendance Goals","cis cis_org_all_goals_count","Aggregated Academic Goals","cis cis_dibels","cis cis_client_list","cis cis_behavior_positive_count","cis cis_academics_positive_count","Attendance - Positive Progress by School","All Goals - Any Progress by School","All Goals - Positive Progress","cis_academics_goal_clients","ProgMon - Attendance Detail","ProgMon - Behavior","cis tier1_aggregate","raw_cisdm_accred_case_manage","cis aggregated_planned_supports_good","cis aggregated_all_planned_supports","cis planned_support_detail","cis leadership_support_counter","caddo_jcampus 2526 1st_9_student_gpas","Grades - Client Grade Breakdown","cis cis_active_client_gpa","Attendance JCampus - Active CIS Clients","cis cis_active_client_referrals","Aggregated Any Goals","cis cis_tardies_by_student","staging tardies","stagine unexcused"]
+annotation PBI_QueryOrder = ["cis_grades_wJcampus_goalStudents","cis_referrals_wJcampus_goalStudents","cis_attend_wJcampus_goalStudents"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-ref table 'Aggregated Behavior Goals'
-ref table 'Aggregated Attendance Goals'
-ref table 'cis cis_org_all_goals_count'
-ref table 'Aggregated Academic Goals'
-ref table 'cis cis_dibels'
-ref table 'cis cis_client_list'
-ref table 'cis cis_behavior_positive_count'
-ref table 'cis cis_academics_positive_count'
-ref table 'Attendance - Positive Progress by School'
-ref table 'All Goals - Any Progress by School'
-ref table 'All Goals - Positive Progress'
-ref table cis_academics_goal_clients
 ref table DateTableTemplate_763a018f-9cc8-470d-bb59-07aa37f35a9c
-ref table LocalDateTable_3ee59b59-7b0f-449d-a0c7-77889065155d
-ref table LocalDateTable_51c0ac74-1bc6-45a5-bcd4-84eb2e1e5f9b
-ref table LocalDateTable_8ada483f-98a9-4cfb-bd37-88c9c66e2be9
-ref table LocalDateTable_b6bcd101-3cfd-4361-8e82-e5f04bb4c721
-ref table LocalDateTable_75344f5e-aac4-4e41-8f23-3c33b9148e60
-ref table 'ProgMon - Attendance Detail'
-ref table LocalDateTable_38c986f2-252a-48c0-b744-84bd2273f22d
-ref table LocalDateTable_569c32c1-9567-43e0-bf93-32e28db75b0f
-ref table LocalDateTable_f6725728-78dd-4b87-a4f2-36c207e85b6c
-ref table LocalDateTable_d87dcb2d-63e2-4434-9c30-e3c109b4401b
-ref table LocalDateTable_597a7e3c-f157-4082-a7c7-6e91939d3d43
-ref table 'ProgMon - Behavior'
-ref table LocalDateTable_4a6dd238-7bad-4bcf-ad58-3d0310919039
-ref table LocalDateTable_06c81a66-3c8c-4d9e-87d0-340ad398921e
-ref table LocalDateTable_e4263b0b-37a5-4da2-8710-61a1624176c2
-ref table LocalDateTable_08e00fc9-a553-42cd-9a97-f0a3e0e87c25
-ref table LocalDateTable_e009049c-06ab-4bf9-91e0-11c9b141f68a
-ref table 'cis tier1_aggregate'
-ref table raw_cisdm_accred_case_manage
-ref table 'cis aggregated_planned_supports_good'
-ref table 'cis aggregated_all_planned_supports'
-ref table 'cis planned_support_detail'
-ref table LocalDateTable_f1ee05ad-51ba-41d6-b824-fef1404d67b2
-ref table LocalDateTable_477a5801-96de-4b65-928b-5206170f4df6
-ref table LocalDateTable_6f82ad38-1e9a-4613-a457-6d2482bf46fc
-ref table LocalDateTable_2f6a0df0-bcd3-4f3e-9883-9a04db063811
-ref table 'cis leadership_support_counter'
-ref table 'caddo_jcampus 2526 1st_9_student_gpas'
-ref table 'Grades - Client Grade Breakdown'
-ref table 'cis cis_active_client_gpa'
-ref table 'Attendance JCampus - Active CIS Clients'
-ref table 'cis cis_active_client_referrals'
-ref table 'Aggregated Any Goals'
-ref table 'cis cis_tardies_by_student'
-ref table 'staging tardies'
-ref table 'stagine unexcused'
+ref table cis_grades_wJcampus_goalStudents
+ref table LocalDateTable_8be146d9-15a3-47fe-bb35-063a672c1cf2
+ref table LocalDateTable_a2396bd6-e854-433c-b7ae-b937c10ca68f
+ref table LocalDateTable_31b97d5a-c35a-4c5b-9b69-e006f4b556ec
+ref table LocalDateTable_424b9ec7-e0f1-40fc-9588-8e8cc787b3db
+ref table LocalDateTable_afc6ef73-2596-46d5-9383-b7312d1244d5
+ref table LocalDateTable_57e489da-da5e-4826-b905-fcecffb581c4
+ref table cis_referrals_wJcampus_goalStudents
+ref table LocalDateTable_a6e95f1a-7b02-4986-9a2c-ded5541a168d
+ref table LocalDateTable_a1dbe3e9-95e5-4084-a303-45a5f0896a7b
+ref table LocalDateTable_6cb4fdfd-bf0e-49da-b862-11fb9a20d7f6
+ref table LocalDateTable_f49fa1ae-3365-4aa2-a348-79c9eaa3740e
+ref table LocalDateTable_fcb11b68-14e9-4abd-b701-83261fe922e0
+ref table LocalDateTable_c0bd14ab-8b31-4e42-9f67-ae323f4f8482
+ref table cis_attend_wJcampus_goalStudents
 
 ref cultureInfo en-US
 

@@ -1,0 +1,61 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_lighthouse_grades",
+  "queryGroups": [
+    {
+      "id": "34314d4c-5578-4aab-bab3-44b2d791c073",
+      "name": "Transform file from Lighthouse Grades"
+    },
+    {
+      "id": "18b55af2-81b5-4423-9b83-9b0be4119d0c",
+      "name": "Helper queries",
+      "parentId": "34314d4c-5578-4aab-bab3-44b2d791c073"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "Lighthouse Grades": {
+      "queryId": "0e8124ac-5a7c-47a1-ba22-e2b5ebf1b3e0",
+      "queryName": "Lighthouse Grades",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "f4049a8c-d3f2-4ab3-ae2b-8766937528e7",
+      "queryName": "Sample file",
+      "queryGroupId": "18b55af2-81b5-4423-9b83-9b0be4119d0c",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "f5ea3850-ce09-49da-8266-623e48062c93",
+      "queryName": "Parameter",
+      "queryGroupId": "18b55af2-81b5-4423-9b83-9b0be4119d0c",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "fb52fdc9-0f7f-4f1b-a8d8-6f1bb242a070",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "34314d4c-5578-4aab-bab3-44b2d791c073",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "34be75f5-e867-4898-9f3a-bd5629daa73f",
+      "queryName": "Transform file",
+      "queryGroupId": "18b55af2-81b5-4423-9b83-9b0be4119d0c",
+      "loadEnabled": false
+    },
+    "Lighthouse Grades_DataDestination": {
+      "queryId": "57ad50d0-3409-46be-a032-aaa9dda1d45f",
+      "queryName": "Lighthouse Grades_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

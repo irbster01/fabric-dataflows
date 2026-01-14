@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "gpd_entry_transforms"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2e61fe6d-fb03-afd7-4a5b-7f64d1b81b1c"
+  }
+}

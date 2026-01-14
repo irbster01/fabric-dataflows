@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_caddo_attend_summary"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "33f132f5-655f-9343-4f7f-81453139adb2"
+  }
+}

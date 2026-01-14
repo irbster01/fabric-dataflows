@@ -1,0 +1,3352 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "4.1.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.87
+			          }
+			        },
+			        {
+			          "moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        }
+			      ]
+			    },
+			    "date.date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "ConceptualProperty": "Date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "date": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.date.date_hierarchy": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "VariationSource": "Date",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "date hierarchy": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.date.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "VariationSource": "Date",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "moment year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "period year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.date.quarter": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "VariationSource": "Date",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Quarter"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.833
+			          }
+			        },
+			        {
+			          "qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.818
+			          }
+			        },
+			        {
+			          "moment quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "period quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.date.month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "VariationSource": "Date",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "moment month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "period month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.date.day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "VariationSource": "Date",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "moment day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "period day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "ConceptualProperty": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "date.month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "ConceptualProperty": "Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        }
+			      ]
+			    },
+			    "date.day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "ConceptualProperty": "Day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "day": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "date.quarter": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "ConceptualProperty": "Quarter"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.818
+			          }
+			        }
+			      ]
+			    },
+			    "date.month_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "DATE",
+			          "ConceptualProperty": "Month Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "month name": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "month nickname": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "month title": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "month label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "month tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "mth name": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        }
+			      ]
+			    },
+			    "appended_proram_doc": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "appended proram doc": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "appended_proram_doc.name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "ConceptualProperty": "Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "name": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "title": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        }
+			      ],
+			      "NameType": "Name"
+			    },
+			    "appended_proram_doc.date_modified": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "ConceptualProperty": "Date modified"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "date modified": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "moment modified": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "period modified": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.date_modified.date_hierarchy": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "Date modified",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "date hierarchy modified": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date hierarchy": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.date_modified.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "Date modified",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "year modified": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date modified year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date modified yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "yr modified": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "moment modified year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "period modified year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.date_modified.quarter": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "Date modified",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Quarter"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "quarter modified": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date modified quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date modified qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.846
+			          }
+			        },
+			        {
+			          "qtr modified": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.833
+			          }
+			        },
+			        {
+			          "qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.818
+			          }
+			        },
+			        {
+			          "moment modified quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "period modified quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.date_modified.month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "Date modified",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "month modified": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date modified month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date modified mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "mth modified": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "moment modified month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "period modified month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.date_modified.day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "Date modified",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "day modified": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date modified day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "moment modified day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "period modified day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.modified": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "ConceptualProperty": "Modified"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "modified": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "adapted": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "altered": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "changed": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "improved": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "revised": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "reformed": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "adjusted": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "amended": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "customized": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "tailored": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.modified.date_hierarchy": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "Modified",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "modified date hierarchy": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date hierarchy": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "hierarchy": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.modified.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "Modified",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "modified year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "modified yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.modified.quarter": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "Modified",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Quarter"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "modified quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "modified qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.833
+			          }
+			        },
+			        {
+			          "qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.818
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.modified.month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "Modified",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "modified month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "modified mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.modified.day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "Modified",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "modified day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "day": {
+			            "State": "Generated"
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.division_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "ConceptualProperty": "DivisionValue"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "division value": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "DivisionValue": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "value": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "division assessment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "assessment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "division worth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "division price": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "division cost": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "division charge": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "division rate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "worth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "price": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "cost": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "Division": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appended_proram_doc.revision_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "ConceptualProperty": "RevisionDate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "revision date": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "RevisionDate": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "revision moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "revision period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.revision_date.date_hierarchy": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "RevisionDate",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "revision date hierarchy": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date hierarchy": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.revision_date.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "RevisionDate",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "revision year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "revision date year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "revision date yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "revision yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "revision moment year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "revision period year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.revision_date.quarter": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "RevisionDate",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Quarter"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "revision quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "revision date quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "revision date qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.846
+			          }
+			        },
+			        {
+			          "revision qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.833
+			          }
+			        },
+			        {
+			          "qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.818
+			          }
+			        },
+			        {
+			          "revision moment quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "revision period quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.revision_date.month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "RevisionDate",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "revision month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "revision date month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "revision date mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "revision mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "revision moment month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "revision period month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.revision_date.day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "VariationSource": "RevisionDate",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "revision day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "revision date day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "revision moment day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "revision period day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "appended_proram_doc.documentation_type_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "ConceptualProperty": "DocumentationTypeValue"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "documentation type value": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "DocumentationTypeValue": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "value": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "type value": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "documentation category value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "documentation genre value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "documentation manner value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "documentation variety value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "category value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "genre value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "manner value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "variety value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "documentation brand value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "documentation class value": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "Type": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appended_proram_doc.detail": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "ConceptualProperty": "Details"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "detail": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "aspect": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "element": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "fact": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "part": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "feature": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "point": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "factor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "facet": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "unit": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "taskforce": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        }
+			      ]
+			    },
+			    "appended_proram_doc.folder_path": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appended Proram Docs",
+			          "ConceptualProperty": "Folder Path"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "folder path": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "path": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "folder pathway": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "folder footpath": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "pathway": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "footpath": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "folder trail": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "folder track": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "folder route": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "trail": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "track": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "route": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
+			    "appended_proram_doc_revision_date_date_hierarchy_has_appended_proram_doc_revision_date_month": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.revision_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.revision_date.month": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.revision_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.revision_date.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "revision_date_hierarchies_have_revision_months"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_revision_date_date_hierarchy_has_appended_proram_doc_revision_date_quarter": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.revision_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.revision_date.quarter": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date.quarter"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.revision_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.revision_date.quarter"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "revision_date_hierarchies_have_revision_quarters"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_revision_date_date_hierarchy_has_appended_proram_doc_revision_date_year": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.revision_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.revision_date.year": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.revision_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.revision_date.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "revision_date_hierarchies_have_revision_years"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_revision_date_has_date_hierarchy": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.revision_date": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date"
+			          }
+			        },
+			        "appended_proram_doc.revision_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date.date_hierarchy"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.revision_date"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.revision_date.date_hierarchy"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "revision_dates_have_revision_date_hierarchies"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_modified_date_hierarchy_has_appended_proram_doc_modified_day": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.modified.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.modified.day": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.modified.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.modified.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "modified_date_hierarchies_have_modified_days"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_modified_date_hierarchy_has_appended_proram_doc_modified_month": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.modified.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.modified.month": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.modified.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.modified.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "modified_date_hierarchies_have_modified_months"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_modified_date_hierarchy_has_appended_proram_doc_modified_quarter": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.modified.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.modified.quarter": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified.quarter"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.modified.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.modified.quarter"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "modified_date_hierarchies_have_modified_quarters"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_modified_date_hierarchy_has_appended_proram_doc_modified_year": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.modified.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.modified.year": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.modified.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.modified.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "modified_date_hierarchies_have_modified_years"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_modified_has_date_hierarchy": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.modified": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified"
+			          }
+			        },
+			        "appended_proram_doc.modified.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified.date_hierarchy"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.modified"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.modified.date_hierarchy"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "modified_have_modified_date_hierarchies"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_date_modified_date_hierarchy_has_appended_proram_doc_date_modified_day": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.date_modified.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.date_modified.day": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.date_modified.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.date_modified.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "date_hierarchy_modified_have_day_modified"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_date_modified_date_hierarchy_has_appended_proram_doc_date_modified_month": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.date_modified.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.date_modified.month": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.date_modified.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.date_modified.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "date_hierarchy_modified_have_month_modified"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_date_modified_date_hierarchy_has_appended_proram_doc_date_modified_quarter": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.date_modified.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.date_modified.quarter": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified.quarter"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.date_modified.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.date_modified.quarter"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "date_hierarchy_modified_have_quarter_modified"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_date_modified_date_hierarchy_has_appended_proram_doc_date_modified_year": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.date_modified.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.date_modified.year": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.date_modified.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.date_modified.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "date_hierarchy_modified_have_year_modified"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_date_modified_has_date_hierarchy": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.date_modified": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified"
+			          }
+			        },
+			        "appended_proram_doc.date_modified.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified.date_hierarchy"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.date_modified"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.date_modified.date_hierarchy"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "date_modified_have_date_hierarchy_modified"
+			        }
+			      ]
+			    },
+			    "date_date_date_hierarchy_has_date_date_day": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.date.date_hierarchy"
+			          }
+			        },
+			        "date.date.day": {
+			          "Target": {
+			            "Entity": "date.date.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "date.date.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "date_hierarchies_have_days"
+			        }
+			      ]
+			    },
+			    "date_date_date_hierarchy_has_date_date_month": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.date.date_hierarchy"
+			          }
+			        },
+			        "date.date.month": {
+			          "Target": {
+			            "Entity": "date.date.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "date.date.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "date_hierarchies_have_months"
+			        }
+			      ]
+			    },
+			    "date_date_date_hierarchy_has_date_date_quarter": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.date.date_hierarchy"
+			          }
+			        },
+			        "date.date.quarter": {
+			          "Target": {
+			            "Entity": "date.date.quarter"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "date.date.quarter"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "date_hierarchies_have_quarters"
+			        }
+			      ]
+			    },
+			    "date_date_date_hierarchy_has_date_date_year": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.date.date_hierarchy"
+			          }
+			        },
+			        "date.date.year": {
+			          "Target": {
+			            "Entity": "date.date.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "date.date.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "date_hierarchies_have_years"
+			        }
+			      ]
+			    },
+			    "date_date_has_date_hierarchy": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date.date": {
+			          "Target": {
+			            "Entity": "date.date"
+			          }
+			        },
+			        "date.date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "date.date.date_hierarchy"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date.date"
+			            },
+			            "Object": {
+			              "Role": "date.date.date_hierarchy"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dates_have_date_hierarchies"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_has_folder_path": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc": {
+			          "Target": {
+			            "Entity": "appended_proram_doc"
+			          }
+			        },
+			        "appended_proram_doc.folder_path": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.folder_path"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.folder_path"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "appended_proram_docs_have_folder_paths"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_has_detail": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc": {
+			          "Target": {
+			            "Entity": "appended_proram_doc"
+			          }
+			        },
+			        "appended_proram_doc.detail": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.detail"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.detail"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "appended_proram_docs_have_details"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_has_documentation_type_value": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc": {
+			          "Target": {
+			            "Entity": "appended_proram_doc"
+			          }
+			        },
+			        "appended_proram_doc.documentation_type_value": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.documentation_type_value"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.documentation_type_value"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "appended_proram_docs_have_documentation_type_values"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_has_revision_date": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc": {
+			          "Target": {
+			            "Entity": "appended_proram_doc"
+			          }
+			        },
+			        "appended_proram_doc.revision_date": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.revision_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "appended_proram_docs_have_revision_dates"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_has_division_value": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc": {
+			          "Target": {
+			            "Entity": "appended_proram_doc"
+			          }
+			        },
+			        "appended_proram_doc.division_value": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.division_value"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.division_value"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "appended_proram_docs_have_division_values"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_has_modified": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc": {
+			          "Target": {
+			            "Entity": "appended_proram_doc"
+			          }
+			        },
+			        "appended_proram_doc.modified": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.modified"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "appended_proram_docs_have_modified"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_has_date_modified": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc": {
+			          "Target": {
+			            "Entity": "appended_proram_doc"
+			          }
+			        },
+			        "appended_proram_doc.date_modified": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.date_modified"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "appended_proram_docs_have_date_modified"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_has_name": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc": {
+			          "Target": {
+			            "Entity": "appended_proram_doc"
+			          }
+			        },
+			        "appended_proram_doc.name": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.name"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.name"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "appended_proram_docs_have_names"
+			        },
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "appended_proram_doc"
+			            },
+			            "Name": {
+			              "Role": "appended_proram_doc.name"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "names_are_names_IDs_of_appended_proram_docs"
+			        }
+			      ]
+			    },
+			    "date_has_month_name": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.month_name": {
+			          "Target": {
+			            "Entity": "date.month_name"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.month_name"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dates_have_month_names"
+			        }
+			      ]
+			    },
+			    "date_has_quarter": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.quarter": {
+			          "Target": {
+			            "Entity": "date.quarter"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.quarter"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dates_have_quarters"
+			        }
+			      ]
+			    },
+			    "date_has_day": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.day": {
+			          "Target": {
+			            "Entity": "date.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dates_have_days"
+			        }
+			      ]
+			    },
+			    "date_has_month": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.month": {
+			          "Target": {
+			            "Entity": "date.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dates_have_months"
+			        }
+			      ]
+			    },
+			    "date_has_year": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.year": {
+			          "Target": {
+			            "Entity": "date.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dates_have_years"
+			        }
+			      ]
+			    },
+			    "date_has_date": {
+			      "Binding": {
+			        "ConceptualEntity": "DATE"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "date": {
+			          "Target": {
+			            "Entity": "date"
+			          }
+			        },
+			        "date.date": {
+			          "Target": {
+			            "Entity": "date.date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "date"
+			            },
+			            "Object": {
+			              "Role": "date.date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dates_have_dates"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_is_modified_on_modified": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc": {
+			          "Target": {
+			            "Entity": "appended_proram_doc"
+			          }
+			        },
+			        "appended_proram_doc.modified": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.modified"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "When": {
+			          "Role": "appended_proram_doc.modified"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Verb": {
+			            "Verbs": [
+			              {
+			                "modify": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "appended_proram_doc"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.9,
+			          "ID": "appended_proram_docs_are_modified_on_modified"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_is_modified_on_date_modified": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc": {
+			          "Target": {
+			            "Entity": "appended_proram_doc"
+			          }
+			        },
+			        "appended_proram_doc.date_modified": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.date_modified"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "When": {
+			          "Role": "appended_proram_doc.date_modified"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Verb": {
+			            "Verbs": [
+			              {
+			                "modify": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "appended_proram_doc"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.9,
+			          "ID": "appended_proram_docs_are_modified_on_date_modified"
+			        }
+			      ]
+			    },
+			    "appended_proram_doc_revision_date_date_hierarchy_has_appended_proram_doc_revision_date_day": {
+			      "Binding": {
+			        "ConceptualEntity": "Appended Proram Docs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "appended_proram_doc.revision_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date.date_hierarchy"
+			          }
+			        },
+			        "appended_proram_doc.revision_date.day": {
+			          "Target": {
+			            "Entity": "appended_proram_doc.revision_date.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "appended_proram_doc.revision_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "appended_proram_doc.revision_date.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "revision_date_hierarchies_have_revision_days"
+			        }
+			      ]
+			    }
+			  },
+			  "Agents": {
+			    "Internal": {
+			      "Version": "1.1.0"
+			    }
+			  }
+			}
+		contentType: json
+

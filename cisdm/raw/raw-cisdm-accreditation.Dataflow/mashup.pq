@@ -1,14 +1,8 @@
 [StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-
-// ===== CONFIGURATION PARAMETERS =====
-// Update these values to point to different data sources or school years
 shared SchoolYear = "2526 CIS" meta [Description = "School year folder (e.g., '2526 CIS' for 2025-2026)"];
 shared WorkspaceId = "4241c9c7-5818-4c56-9220-faf632741770" meta [Description = "Fabric workspace ID"];
 shared LakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea" meta [Description = "Lakehouse ID"];
-
-// ===== SHARED HELPER FUNCTIONS =====
-// Reusable function to navigate to the Accreditation folder
 shared GetAccreditationFolder = () => 
   let
     ConnectToLakehouse = Lakehouse.Contents(null),
@@ -19,9 +13,6 @@ shared GetAccreditationFolder = () =>
     NavigateToAccreditationFolder = NavigateToSchoolYearFolder{[Name = "Accreditation"]}[Content]
   in
     NavigateToAccreditationFolder;
-
-// ===== DATA QUERIES =====
-
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "Accreditation_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared student_drilldown = let
   Source = Lakehouse.Contents(null), // Connect to lakehouse
@@ -115,9 +106,10 @@ shared tier1_accred = let
   #"Renamed columns 2" = Table.RenameColumns(#"Removed columns 2", {{"Total School Enrollment", "school_enrollment"}, {"# of Basic Needs #(lf)Entries (whole-school)", "num_school_basic_needs"}, {"Basic Needs - #(lf)Total Students Served (duplicated)", "total_served_dupe"}, {"Basic Needs- #(lf)Avg Served", "avg_served"}, {"Basic Needs - #(lf)Min Served #(lf)(by any one resource)", "min_served"}, {"Basic Needs - #(lf)Max Served #(lf)(by any one resource)", "max_served"}, {"# of Tier I #(lf)Supports", "num_tier1_supports"}, {"Tier I - #(lf)Total Students Served#(lf) (duplicated)", "total_students_dupe"}, {"Tier I - #(lf)Avg Served", "tier1_avg_served"}, {"Tier I - #(lf)Min Served #(lf)(at any one support)", "tier1_min_served"}, {"Tier I - #(lf)Max Served #(lf)(at any one support)", "tier1_max_served"}, {"# of Tier I and #(lf)Basic Needs/Resources#(lf) combined", "num_tier1_and_needs"}}),
   #"Replaced value" = Table.ReplaceValue(#"Renamed columns 2", "-", 0, Replacer.ReplaceValue, {"avg_served"}),
   #"Replaced value 1" = Table.ReplaceValue(#"Replaced value", "-", 0, Replacer.ReplaceValue, {"tier1_avg_served"}),
-  #"Changed column type 2" = Table.TransformColumnTypes(#"Replaced value 1", {{"avg_served", type number}, {"tier1_avg_served", type number}})
+  #"Changed column type 2" = Table.TransformColumnTypes(#"Replaced value 1", {{"avg_served", type number}, {"tier1_avg_served", type number}}),
+  #"Filtered rows 1" = Table.SelectRows(#"Changed column type 2", each ([school_enrollment] <> null))
 in
-  #"Changed column type 2";
+  #"Filtered rows 1";
 shared #"Sample file (2)" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -214,5 +206,63 @@ shared raw_cisdm_accred_site_coord_DataDestination = let
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
   TableNavigation = Navigation_2{[Id = "raw_cisdm_accred_site_coord", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "first_9weeks_tier1_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared first_9weeks_tier1 = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "Files", ItemKind = "Folder"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Name = "2526 CIS"]}[Content],
+  #"Navigation 4" = #"Navigation 3"{[Name = "Accreditation"]}[Content],
+  #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
+  #"Filtered rows" = Table.SelectRows(#"Expanded Attributes", each ([Name] = "10.27.2025 Accreditation.xlsx")),
+  #"Filtered hidden files" = Table.SelectRows(#"Filtered rows", each [Attributes]?[Hidden]? <> true),
+  #"Invoke custom function" = Table.AddColumn(#"Filtered hidden files", "Transform file (3)", each #"Transform file (3)"([Content])),
+  #"Removed other columns" = Table.SelectColumns(#"Invoke custom function", {"Transform file (3)"}),
+  #"Expanded table column" = Table.ExpandTableColumn(#"Removed other columns", "Transform file (3)", Table.ColumnNames(#"Transform file (3)"(#"Sample file (3)"))),
+  #"Changed column type" = Table.TransformColumnTypes(#"Expanded table column", {{"Column1", type text}, {"Column2", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}, {"Column7", type text}, {"Column8", type text}}),
+  #"Removed top rows" = Table.Skip(#"Changed column type", 1),
+  #"Promoted headers" = Table.PromoteHeaders(#"Removed top rows", [PromoteAllScalars = true]),
+  #"Removed bottom rows" = Table.RemoveLastN(#"Promoted headers", 2),
+  #"Filtered rows 1" = Table.SelectRows(#"Removed bottom rows", each ([#"School Model "] = "CIS Model")),
+  #"Replaced value" = Table.ReplaceValue(#"Filtered rows 1", "-", 0, Replacer.ReplaceValue, {"Tier I - #(lf)Avg Served"}),
+  #"Changed column type 1" = Table.TransformColumnTypes(#"Replaced value", {{"Basic Needs - #(lf)Total Students Served (duplicated)", Int64.Type}, {"# of Basic Needs #(lf)Entries (whole-school)", Int64.Type}, {"Total School Enrollment", Int64.Type}, {"Basic Needs- #(lf)Avg Served", type number}, {"Basic Needs - #(lf)Min Served #(lf)(by any one resource)", type number}, {"Basic Needs - #(lf)Max Served #(lf)(by any one resource)", type number}, {"# of Tier I #(lf)Supports", type number}, {"Tier I - #(lf)Total Students Served#(lf) (duplicated)", type number}, {"Tier I - #(lf)Avg Served", type number}, {"Tier I - #(lf)Min Served #(lf)(at any one support)", type number}, {"Tier I - #(lf)Max Served #(lf)(at any one support)", type number}, {"# of Tier I and #(lf)Basic Needs/Resources#(lf) combined", type number}, {"Site ID", Int64.Type}})
+in
+  #"Changed column type 1";
+shared #"Sample file (3)" = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "Files", ItemKind = "Folder"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Name = "2526 CIS"]}[Content],
+  #"Navigation 4" = #"Navigation 3"{[Name = "Accreditation"]}[Content],
+  #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
+  #"Filtered rows" = Table.SelectRows(#"Expanded Attributes", each [Name] = "10.27.2025 Accreditation.xlsx"),
+  #"Filtered hidden files" = Table.SelectRows(#"Filtered rows", each [Attributes]?[Hidden]? <> true),
+  #"Navigation 5" = #"Filtered hidden files"{0}[Content]
+in
+  #"Navigation 5";
+shared #"Parameter (3)" = let
+  #"Parameter (3)" = #"Sample file (3)" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type binary, BinaryIdentifier = #"Sample file (3)"]
+in
+  #"Parameter (3)";
+shared #"Transform Sample file (3)" = let
+  Source = Excel.Workbook(#"Parameter (3)", null, true),
+  Navigation = Source{[Item = "Accreditation Tier I", Kind = "Sheet"]}[Data]
+in
+  Navigation;
+[FunctionQueryBinding = "{""exemplarFormulaName"":""Transform Sample file (3)""}"]
+shared #"Transform file (3)" = (#"Parameter (3)" as binary) => let
+  Source = Excel.Workbook(#"Parameter (3)", null, true),
+  Navigation = Source{[Item = "Accreditation Tier I", Kind = "Sheet"]}[Data]
+in
+  Navigation;
+shared first_9weeks_tier1_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  TableNavigation = Navigation_2{[Id = "first_9weeks_tier1", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;

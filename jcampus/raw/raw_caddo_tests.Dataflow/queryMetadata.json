@@ -2,16 +2,50 @@
   "formatVersion": "202502",
   "computeEngineSettings": {},
   "name": "raw_caddo_tests",
-  "queryGroups": [],
+  "queryGroups": [
+    {
+      "id": "124a0f1d-a9ef-4997-8aea-4bcae8f31ca7",
+      "name": "Transform file from caddo_tests (2)"
+    },
+    {
+      "id": "d0f7c3eb-526e-47b4-9c30-ab3d831531b4",
+      "name": "Helper queries",
+      "parentId": "124a0f1d-a9ef-4997-8aea-4bcae8f31ca7"
+    }
+  ],
   "documentLocale": "en-US",
   "queriesMetadata": {
     "caddo_tests": {
-      "queryId": "9fb45c7d-12e5-469b-8b9c-370d9e846741",
+      "queryId": "d55f6845-b82a-4858-83bd-2ba7356e8a0b",
       "queryName": "caddo_tests",
       "loadEnabled": false
     },
+    "Sample file": {
+      "queryId": "fb6a8836-e118-4c8d-8fbd-e47884a675ab",
+      "queryName": "Sample file",
+      "queryGroupId": "d0f7c3eb-526e-47b4-9c30-ab3d831531b4",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "7068542d-71e8-4810-999f-624a6bad20ad",
+      "queryName": "Parameter",
+      "queryGroupId": "d0f7c3eb-526e-47b4-9c30-ab3d831531b4",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "9c4032c4-8545-4737-9046-13c555a4db90",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "124a0f1d-a9ef-4997-8aea-4bcae8f31ca7",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "e680ac03-9b07-40c0-93a2-eb70cba6c615",
+      "queryName": "Transform file",
+      "queryGroupId": "d0f7c3eb-526e-47b4-9c30-ab3d831531b4",
+      "loadEnabled": false
+    },
     "caddo_tests_DataDestination": {
-      "queryId": "59efedc3-a13c-4e4e-b2e0-59f566acb847",
+      "queryId": "98008cbb-4854-4d79-966e-117bc704b700",
       "queryName": "caddo_tests_DataDestination",
       "isHidden": true,
       "loadEnabled": false

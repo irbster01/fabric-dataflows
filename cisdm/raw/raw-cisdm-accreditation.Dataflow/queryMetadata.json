@@ -21,10 +21,36 @@
       "id": "82bf05fc-6d64-40c7-ba2b-71e1344d4d90",
       "name": "Helper queries (2)",
       "parentId": "cbba18d0-1d57-4e66-85b9-7f10e8eca91e"
+    },
+    {
+      "id": "1c4a136f-6f9d-49c2-9eb6-4af207c696dd",
+      "name": "Transform file from tier1_accred (2)"
+    },
+    {
+      "id": "010fd619-b636-49d0-82ce-24cd98d23f53",
+      "name": "Helper queries (3)",
+      "parentId": "1c4a136f-6f9d-49c2-9eb6-4af207c696dd"
     }
   ],
   "documentLocale": "en-US",
   "queriesMetadata": {
+    "SchoolYear": {
+      "queryId": "ce1283d5-6dae-4026-909f-487ed10820f6",
+      "queryName": "SchoolYear"
+    },
+    "WorkspaceId": {
+      "queryId": "637d78ea-bf95-4467-987d-b5d13a13e402",
+      "queryName": "WorkspaceId"
+    },
+    "LakehouseId": {
+      "queryId": "55122180-cca0-406a-88ee-d14d0f47f96f",
+      "queryName": "LakehouseId"
+    },
+    "GetAccreditationFolder": {
+      "queryId": "47cbfb30-7efe-4ef3-939d-d8cea4529211",
+      "queryName": "GetAccreditationFolder",
+      "loadEnabled": false
+    },
     "student_drilldown": {
       "queryId": "ff421ed6-32a0-4a89-baf4-75716692caca",
       "queryName": "student_drilldown",
@@ -114,6 +140,41 @@
     "raw_cisdm_accred_site_coord_DataDestination": {
       "queryId": "1201836d-3046-4201-a93c-c1ce79606611",
       "queryName": "raw_cisdm_accred_site_coord_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "first_9weeks_tier1": {
+      "queryId": "146b50da-d38f-4965-ae91-ce4123ee8268",
+      "queryName": "first_9weeks_tier1",
+      "loadEnabled": false
+    },
+    "Sample file (3)": {
+      "queryId": "8bbef010-1fd8-4c38-a1c9-8eacb7a9a951",
+      "queryName": "Sample file (3)",
+      "queryGroupId": "010fd619-b636-49d0-82ce-24cd98d23f53",
+      "loadEnabled": false
+    },
+    "Parameter (3)": {
+      "queryId": "287fbab5-4f95-4d43-8a09-eb78a3c6b5ca",
+      "queryName": "Parameter (3)",
+      "queryGroupId": "010fd619-b636-49d0-82ce-24cd98d23f53",
+      "loadEnabled": false
+    },
+    "Transform Sample file (3)": {
+      "queryId": "bbfd6e98-d3bb-49d9-97af-3218c661213c",
+      "queryName": "Transform Sample file (3)",
+      "queryGroupId": "1c4a136f-6f9d-49c2-9eb6-4af207c696dd",
+      "loadEnabled": false
+    },
+    "Transform file (3)": {
+      "queryId": "fa93507d-2c9b-4b45-bd83-b5f97522bd01",
+      "queryName": "Transform file (3)",
+      "queryGroupId": "010fd619-b636-49d0-82ce-24cd98d23f53",
+      "loadEnabled": false
+    },
+    "first_9weeks_tier1_DataDestination": {
+      "queryId": "03a5bf01-e67d-4812-af9f-bdbaa96ad930",
+      "queryName": "first_9weeks_tier1_DataDestination",
       "isHidden": true,
       "loadEnabled": false
     }

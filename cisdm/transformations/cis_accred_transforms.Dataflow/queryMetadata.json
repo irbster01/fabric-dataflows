@@ -1,0 +1,51 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "cis_accred_transforms",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_tier1_accred": {
+      "queryId": "de628e16-26f4-46f4-b531-40e7fa6722b7",
+      "queryName": "raw_tier1_accred"
+    },
+    "tier1_ratio": {
+      "queryId": "c5cd3012-3150-475a-acee-27ac3258c899",
+      "queryName": "tier1_ratio",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "805f3666-6ad1-4790-ae5f-6c94ffabaade",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "raw_cisdm_accred_case_manage": {
+      "queryId": "be14433d-bc9c-40fb-82ec-911f0917bd88",
+      "queryName": "raw_cisdm_accred_case_manage",
+      "loadEnabled": false
+    },
+    "raw_cisdm_accred_drilldown": {
+      "queryId": "a1967530-afc5-4b78-8939-286f93683484",
+      "queryName": "raw_cisdm_accred_drilldown",
+      "loadEnabled": false
+    },
+    "raw_cisdm_accred_site_coord": {
+      "queryId": "515f3f72-cd64-4554-afee-be3a468a8fd7",
+      "queryName": "raw_cisdm_accred_site_coord",
+      "loadEnabled": false
+    },
+    "first_9weeks_tier1": {
+      "queryId": "6ac81b0b-22c0-4a5a-a986-18e046629279",
+      "queryName": "first_9weeks_tier1",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "raw_program_documentation",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "Behavioral Health Docs": {
+      "queryId": "e0e00d72-c769-4cda-8953-b146d7e401b8",
+      "queryName": "Behavioral Health Docs",
+      "loadEnabled": false
+    },
+    "CF Docs": {
+      "queryId": "8c57b08e-c08d-4da4-a8d4-c51ea8846385",
+      "queryName": "CF Docs",
+      "loadEnabled": false
+    },
+    "Disability Docs": {
+      "queryId": "694efe04-e7b3-4f49-b40a-8a74c84679d1",
+      "queryName": "Disability Docs",
+      "loadEnabled": false
+    },
+    "Case Management Docs": {
+      "queryId": "11f58bf7-4722-496d-b366-05e27908d4eb",
+      "queryName": "Case Management Docs",
+      "loadEnabled": false
+    },
+    "Housing Services Docs": {
+      "queryId": "ed588a1e-8cfe-4206-83fa-b2c2dd0cc110",
+      "queryName": "Housing Services Docs",
+      "loadEnabled": false
+    },
+    "HUD Operations Docs": {
+      "queryId": "42442352-77a5-45d0-b361-c4ab90c38891",
+      "queryName": "HUD Operations Docs",
+      "loadEnabled": false
+    },
+    "Veterans Docs": {
+      "queryId": "b910b118-94ed-4a68-9f7f-cf517124d4f7",
+      "queryName": "Veterans Docs",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "069730f9-8128-43e4-8fa0-db7e803d32bf",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "Appended Proram Docs": {
+      "queryId": "4660cbd4-77ba-475d-b7a0-6499238ef265",
+      "queryName": "Appended Proram Docs",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://voanorthlaorg.sharepoint.com/sites/TheVOAHub",
+      "kind": "SharePoint",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"6e8ca9cf-55c4-485f-98fe-dbd34dbcc0ef\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

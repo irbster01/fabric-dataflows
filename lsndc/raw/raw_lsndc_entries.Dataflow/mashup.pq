@@ -11,7 +11,8 @@ shared lsndc_entries = let
   #"Navigation 4" = #"Navigation 3"{[Name = "lsndc_entries"]}[Content],
   #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
   #"Filtered hidden files" = Table.SelectRows(#"Expanded Attributes", each [Attributes]?[Hidden]? <> true),
-  #"Invoke custom function" = Table.AddColumn(#"Filtered hidden files", "Transform file", each #"Transform file"([Content])),
+  #"Filtered rows" = Table.SelectRows(#"Filtered hidden files", let latest = List.Max(#"Filtered hidden files"[Date modified]) in each [Date modified] = latest),
+  #"Invoke custom function" = Table.AddColumn(#"Filtered rows", "Transform file", each #"Transform file"([Content])),
   #"Removed other columns" = Table.SelectColumns(#"Invoke custom function", {"Transform file"}),
   #"Expanded table column" = Table.ExpandTableColumn(#"Removed other columns", "Transform file", Table.ColumnNames(#"Transform file"(#"Sample file"))),
   #"Changed column type" = Table.TransformColumnTypes(#"Expanded table column", {{"Client ID", type text}, {"First Name", type text}, {"Last Name", type text}, {"Entry Date", type date}, {"Entry Exit ID", Int64.Type}, {"Exit Date", type date}, {"Provider", type text}}),
@@ -20,9 +21,33 @@ shared lsndc_entries = let
   #"Removed duplicates" = Table.Distinct(#"Changed column type 1", {"entry_id"}),
   #"Added suffix" = Table.TransformColumns(#"Removed duplicates", {{"client_id", each _ & "-LS", type text}}),
   #"Replaced value" = Table.ReplaceValue(#"Added suffix", "VOANLA 3033 – SSVF VASH RRH", "VOANLA 3033 - SSVF VASH RRH", Replacer.ReplaceValue, {"program"}),
-  #"Extracted text after delimiter" = Table.TransformColumns(#"Replaced value", {{"program", each Text.AfterDelimiter(_, "- ", 0), type text}})
+  #"Extracted text after delimiter" = Table.TransformColumns(#"Replaced value", {{"program", each Text.AfterDelimiter(_, "- ", 0), type text}}),
+
+  // ---- added step ----
+  #"Added exit_quarter" = Table.AddColumn(
+      #"Extracted text after delimiter",
+      "exit_quarter",
+      each
+        if [exit_date] = null then null
+        else
+          let m = Date.Month(Date.From([exit_date]))
+          in
+            if m >= 7 and m <= 9 then "Q1"
+            else if m >= 10 and m <= 12 then "Q2"
+            else if m >= 1 and m <= 3 then "Q3"
+            else "Q4",
+      type text
+  ),
+  Custom = Table.TransformColumnTypes(Table.AddColumn(#"Added exit_quarter", "entry_quarter", each if [entry_date] = null then null
+        else
+          let m = Date.Month(Date.From([entry_date]))
+          in
+            if m >= 7 and m <= 9 then "Q1"
+            else if m >= 10 and m <= 12 then "Q2"
+            else if m >= 1 and m <= 3 then "Q3"
+            else "Q4"), {{"entry_quarter", type text}})
 in
-  #"Extracted text after delimiter";
+  Custom;
 shared #"Sample file" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

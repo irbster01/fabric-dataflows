@@ -1,4 +1,4 @@
-[StagingDefinition = [Kind = "FastCopy"]]
+[DefaultOutputDestinationSettings = [DestinationDefinition = [Kind = "Reference", QueryName = "DefaultDestination", IsNewTarget = true], UpdateMethod = [Kind = "Replace"], DestinationTypeSettings = [Kind = "Table"]], StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
 shared raw_cisdm_progress_monitoring = let
   Source = Lakehouse.Contents(null),
@@ -125,34 +125,6 @@ shared cis_academics_positive_count = let
   #"Filtered rows 1" = Table.SelectRows(#"Renamed columns 1", each [positive_percentage] <= 1)
 in
   #"Filtered rows 1";
-shared #"positive_prog_withRaw_%_DataDestination" = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_positive_prog_withRaw_%", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared #"attendance_pos_wRaw_%_DataDestination" = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_attendance_pos_wRaw_%", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared cis_behavior_positive_count_DataDestination = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_behavior_positive_count", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared cis_academics_positive_count_DataDestination = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_academics_positive_count", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "cis_org_all_goals_count_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared cis_org_all_goals_count = let
   Source = Table.NestedJoin(cis_positive_progress, {"school_name", "grading_period"}, cis_prog_count_bySchool, {"school_name", "grading_period"}, "cis_prog_count_bySchool", JoinKind.Inner),
@@ -225,27 +197,6 @@ shared cis_org_academics_count = let
   #"Renamed columns 2" = Table.RenameColumns(#"Changed column type 1", {{"Division", "positive_percentage"}})
 in
   #"Renamed columns 2";
-shared cis_org_attendance_count_DataDestination = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_org_attendance_count", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared cis_org_behavior_count_DataDestination = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_org_behavior_count", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared cis_org_academics_count_DataDestination = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_org_academics_count", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "cis_academics_goal_clients_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared cis_academics_goal_clients = let
   Source = Lakehouse.Contents(null),
@@ -273,34 +224,6 @@ shared cis_behavior_goal_clients = let
   #"Filtered rows" = Table.SelectRows(#"Navigation 2", each ([goal] = "Improve School Behavior"))
 in
   #"Filtered rows";
-shared cis_behavior_goal_clients_DataDestination = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_behavior_goal_clients", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared cis_attendance_goal_clients_DataDestination = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_attendance_goal_clients", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared cis_academics_goal_clients_DataDestination = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_academics_goal_clients", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
-shared cis_org_all_goals_count_DataDestination = let
-  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  TableNavigation = Navigation_2{[Id = "cis_org_all_goals_count", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "1st_9wks_positive_prog_withRaw_%_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared #"1st_9wks_positive_prog_withRaw_%" = let
   Source = #"positive_prog_withRaw_%",
@@ -319,17 +242,100 @@ shared NavigationQuery = let
   #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data]
 in
   #"Navigation 1";
+shared DefaultDestination = let
+  Source = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data]
+in
+  #"Navigation 2";
+shared #"attendance_pos_wRaw_%_DataDestination" = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "attendance_pos_wRaw_%", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared cis_behavior_positive_count_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "cis_behavior_positive_count", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared cis_academics_positive_count_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "cis_academics_positive_count", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared cis_org_all_goals_count_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "cis_org_all_goals_count", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared cis_org_attendance_count_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "cis_org_attendance_count", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared cis_org_behavior_count_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "cis_org_behavior_count", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared cis_org_academics_count_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "cis_org_academics_count", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared cis_academics_goal_clients_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "cis_academics_goal_clients", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared cis_attendance_goal_clients_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "cis_attendance_goal_clients", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared cis_behavior_goal_clients_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "cis_behavior_goal_clients", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
 shared #"1st_9wks_positive_prog_withRaw_%_DataDestination" = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
   TableNavigation = Navigation_2{[Id = "1st_9wks_positive_prog_withRaw_%", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
 shared #"2nd_9wks_positive_prog_withRaw_%_DataDestination" = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
   TableNavigation = Navigation_2{[Id = "2nd_9wks_positive_prog_withRaw_%", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared #"positive_prog_withRaw_%_DataDestination" = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "positive_prog_withRaw_%", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;

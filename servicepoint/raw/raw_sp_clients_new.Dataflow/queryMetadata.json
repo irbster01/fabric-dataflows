@@ -20,6 +20,15 @@
       "id": "a50a2bcd-de8d-49bf-9835-47a2a21c063b",
       "name": "Helper queries (2)",
       "parentId": "00759262-985b-454f-9c97-17a71dcc2787"
+    },
+    {
+      "id": "d3421d1f-8598-404a-8131-c0c32add36b0",
+      "name": "Transform file from Sample file"
+    },
+    {
+      "id": "1cf65797-90b0-403a-8e3f-c5ca66393c9a",
+      "name": "Helper queries (3)",
+      "parentId": "d3421d1f-8598-404a-8131-c0c32add36b0"
     }
   ],
   "documentLocale": "en-US",
@@ -81,6 +90,30 @@
       "queryId": "e432ddd8-86b5-49cc-808f-356230ff2713",
       "queryName": "Clients_DataDestination",
       "isHidden": true,
+      "loadEnabled": false
+    },
+    "Sample file (3)": {
+      "queryId": "1dff5ad0-e90e-454f-97d4-98ae1189003e",
+      "queryName": "Sample file (3)",
+      "queryGroupId": "1cf65797-90b0-403a-8e3f-c5ca66393c9a",
+      "loadEnabled": false
+    },
+    "Parameter (3)": {
+      "queryId": "27fe0ca8-01d5-45fe-ab6b-9d990c21e742",
+      "queryName": "Parameter (3)",
+      "queryGroupId": "1cf65797-90b0-403a-8e3f-c5ca66393c9a",
+      "loadEnabled": false
+    },
+    "Transform Sample file (3)": {
+      "queryId": "9f405f46-6772-4895-aaf4-2efb45317b49",
+      "queryName": "Transform Sample file (3)",
+      "queryGroupId": "d3421d1f-8598-404a-8131-c0c32add36b0",
+      "loadEnabled": false
+    },
+    "Transform file (3)": {
+      "queryId": "3ed9f2f3-55e5-4c15-acee-9379044ff2ce",
+      "queryName": "Transform file (3)",
+      "queryGroupId": "1cf65797-90b0-403a-8e3f-c5ca66393c9a",
       "loadEnabled": false
     }
   },

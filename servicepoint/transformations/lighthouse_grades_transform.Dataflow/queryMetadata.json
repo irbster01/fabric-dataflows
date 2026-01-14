@@ -1,0 +1,44 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "lighthouse_grades_transform",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "clean_lighthouse_entries": {
+      "queryId": "691768fe-32b3-41f8-bbc2-a19a549c2c3d",
+      "queryName": "clean_lighthouse_entries"
+    },
+    "lighthouse_client_master": {
+      "queryId": "5f30e6c1-d8ab-479a-adc2-228221730a71",
+      "queryName": "lighthouse_client_master"
+    },
+    "raw_ligthouse_grades": {
+      "queryId": "ca063c06-61ef-432c-8751-18c6a12dffca",
+      "queryName": "raw_ligthouse_grades"
+    },
+    "1q_lh_grades": {
+      "queryId": "d38f93b0-25fd-41d5-95a8-0f884ecee184",
+      "queryName": "1q_lh_grades",
+      "loadEnabled": false
+    },
+    "2q_lh_grades": {
+      "queryId": "e651ea4a-37c8-4640-b4c5-d5972fbcc1cb",
+      "queryName": "2q_lh_grades",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "55458d62-cb13-4d43-9ddb-fdc42c1bacb8",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

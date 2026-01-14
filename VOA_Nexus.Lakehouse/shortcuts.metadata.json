@@ -396,6 +396,42 @@
     }
   },
   {
+    "name": "choice_wJcampus_data",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/choice_wJcampus_data",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "choice_client_grade_breakout",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/choice_client_grade_breakout",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "choice_client_gpas",
+    "path": "/Tables/choice",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/choice_client_gpas",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
     "name": "2025_household_internet",
     "path": "/Tables/choice",
     "target": {

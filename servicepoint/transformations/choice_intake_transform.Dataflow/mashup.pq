@@ -325,3 +325,23 @@ shared #"2025_6mo_employed_DataDestination" = let
   TableNavigation = Navigation_2{[Id = "2025_6mo_employed", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
+[BindToDefaultDestination = true]
+shared raw_choice_households = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_choice_households", ItemKind = "Table"]}[Data]
+in
+  #"Navigation 2";
+shared household_counter = let
+  Source = active_intakes,
+  #"Merged queries" = Table.NestedJoin(Source, {"client_id"}, raw_choice_households, {"client_id"}, "raw_choice_households", JoinKind.Inner),
+  #"Expanded raw_choice_households" = Table.ExpandTableColumn(#"Merged queries", "raw_choice_households", {"date_added", "date_updated", "household_id", "program", "left_household", "joined_household", "hoh_flag", "relationship"}, {"date_added", "date_updated", "household_id.1", "program", "left_household", "joined_household", "hoh_flag", "relationship.1"}),
+  #"Grouped rows" = Table.Group(#"Expanded raw_choice_households", {"program"}, {{"Count", each List.Count(List.Distinct([client_id])), Int64.Type}})
+in
+  #"Grouped rows";
+shared #"4q_2025_newJobs" = let
+  Source = #"2025_employment_refTable",
+  #"Filtered rows" = Table.SelectRows(Source, each [employment_start_date] >= #date(2025, 10, 1) and [employment_start_date] <= #date(2025, 12, 31))
+in
+  #"Filtered rows";

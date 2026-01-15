@@ -127,6 +127,21 @@
       "queryName": "2025_6mo_employed_DataDestination",
       "isHidden": true,
       "loadEnabled": false
+    },
+    "raw_choice_households": {
+      "queryId": "6da1fc3e-b4b4-4589-abc5-50f144d13cfd",
+      "queryName": "raw_choice_households",
+      "loadEnabled": false
+    },
+    "household_counter": {
+      "queryId": "b8ed376e-43ad-4be1-8362-7e5b37532132",
+      "queryName": "household_counter",
+      "loadEnabled": false
+    },
+    "4q_2025_newJobs": {
+      "queryId": "1a543260-d824-4fa8-abe3-c1801ec7a780",
+      "queryName": "4q_2025_newJobs",
+      "loadEnabled": false
     }
   },
   "connections": [

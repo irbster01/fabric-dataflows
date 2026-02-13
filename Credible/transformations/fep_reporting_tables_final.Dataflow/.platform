@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "fep_reporting_tables_final"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "436b2f87-6abf-94e6-4112-1c38befebc1b"
+  }
+}

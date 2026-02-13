@@ -1,4 +1,4 @@
-[StagingDefinition = [Kind = "FastCopy"]]
+[DefaultOutputDestinationSettings = [DestinationDefinition = [Kind = "Reference", QueryName = "DefaultDestination", IsNewTarget = true], UpdateMethod = [Kind = "Replace"], DestinationTypeSettings = [Kind = "Table"]], StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
 shared #"Sample file" = let
   Source = Lakehouse.Contents(null),
@@ -35,26 +35,69 @@ shared #"Transform file" = (Parameter as binary) => let
   #"Promoted headers" = Table.PromoteHeaders(Navigation, [PromoteAllScalars = true])
 in
   #"Promoted headers";
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "Clients_DataDestination", IsNewTarget = false], Settings = [Kind = "Manual", AllowCreation = false, ColumnSettings = [Mappings = {[SourceColumnName = "client_id", DestinationColumnName = "client_id"], [SourceColumnName = "client_first_name", DestinationColumnName = "client_first_name"], [SourceColumnName = "client_last_name", DestinationColumnName = "client_last_name"], [SourceColumnName = "dob", DestinationColumnName = "client_dob"]}], DynamicSchema = false, UpdateMethod = [Kind = "Replace"], TypeSettings = [Kind = "Table"]]]}]
-shared Clients = let
+[BindToDefaultDestination = true]
+shared raw_sp_clients = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[Id = "Files", ItemKind = "Folder"]}[Data],
   #"Navigation 3" = #"Navigation 2"{[Name = "ServicePoint"]}[Content],
   #"Navigation 4" = #"Navigation 3"{[Name = "Clients"]}[Content],
-  #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
-  #"Filtered rows" = Table.SelectRows(#"Expanded Attributes", let latest = List.Max(#"Expanded Attributes"[Date modified]) in each [Date modified] = latest),
+  #"Expanded Attributes" = Table.ExpandRecordColumn(
+    #"Navigation 4",
+    "Attributes",
+    {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"},
+    {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}
+  ),
+  #"Filtered rows" = Table.SelectRows(
+    #"Expanded Attributes",
+    let latest = List.Max(#"Expanded Attributes"[Date modified]) in each [Date modified] = latest
+  ),
   #"Filtered hidden files" = Table.SelectRows(#"Filtered rows", each [Attributes]?[Hidden]? <> true),
   #"Invoke custom function" = Table.AddColumn(#"Filtered hidden files", "Transform file (2)", each #"Transform file (2)"([Content])),
   #"Removed other columns" = Table.SelectColumns(#"Invoke custom function", {"Transform file (2)"}),
-  #"Expanded table column" = Table.ExpandTableColumn(#"Removed other columns", "Transform file (2)", Table.ColumnNames(#"Transform file (2)"(#"Sample file (2)"))),
-  #"Changed column type" = Table.TransformColumnTypes(#"Expanded table column", {{"Client ID", Int64.Type}, {"First Name", type text}, {"Last Name", type text}, {"Date of Birth", type date}}),
+  #"Expanded table column" = Table.ExpandTableColumn(
+    #"Removed other columns",
+    "Transform file (2)",
+    Table.ColumnNames(#"Transform file (2)"(#"Sample file (2)"))
+  ),
+  #"Changed column type" = Table.TransformColumnTypes(
+    #"Expanded table column",
+    {{"Client ID", Int64.Type}, {"First Name", type text}, {"Last Name", type text}, {"Date of Birth", type date}}
+  ),
   #"Renamed columns" = Table.RenameColumns(#"Changed column type", {{"Client ID", "client_id"}}),
   #"Changed column type 1" = Table.TransformColumnTypes(#"Renamed columns", {{"client_id", type text}}),
-  #"Renamed columns 1" = Table.RenameColumns(#"Changed column type 1", {{"First Name", "client_first_name"}, {"Last Name", "client_last_name"}, {"Date of Birth", "dob"}})
+  #"Renamed columns 1" = Table.RenameColumns(
+    #"Changed column type 1",
+    {{"First Name", "client_first_name"}, {"Last Name", "client_last_name"}, {"Date of Birth", "dob"}}
+  ),
+
+  // INTERNAL ID: first 4 letters of first name + full last name + DOB as int (YYYYMMDD); uppercase; no spaces/special chars
+  #"Added internal id" = Table.AddColumn(
+    #"Renamed columns 1",
+    "internal_id",
+    each
+      let
+        f = [client_first_name],
+        l = [client_last_name],
+        d = [dob],
+
+        // keep only A-Z/a-z/0-9 (drops spaces + special chars)
+        fClean = if f = null then "" else Text.Select(f, {"A".."Z","a".."z","0".."9"}),
+        lClean = if l = null then "" else Text.Select(l, {"A".."Z","a".."z","0".."9"}),
+
+        f4 = Text.Start(Text.Upper(fClean), 4),
+        lUp = Text.Upper(lClean),
+
+        // YYYYMMDD as integer, then to text for concatenation
+        dobInt = if d = null then null else Int64.From(Number.FromText(Date.ToText(d, "yyyyMMdd"))),
+        dobTxt = if dobInt = null then "" else Text.From(dobInt)
+      in
+        f4 & lUp & dobTxt,
+    type text
+  )
 in
-  #"Renamed columns 1";
+  #"Added internal id";
 shared #"Sample file (2)" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -83,13 +126,6 @@ shared #"Transform file (2)" = (#"Parameter (2)" as binary) => let
   #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true])
 in
   #"Promoted headers";
-shared Clients_DataDestination = let
-  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  TableNavigation = Navigation_2{[Id = "raw_sp_clients", ItemKind = "Table"]}[Data]
-in
-  TableNavigation;
 shared #"Sample file (3)" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -116,3 +152,4 @@ shared #"Transform file (3)" = (#"Parameter (3)" as binary) => let
   Source = Csv.Document(#"Parameter (3)", [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None])
 in
   Source;
+shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data];

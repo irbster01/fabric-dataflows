@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_desoto_attendance_summary"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c0bb4c07-ee67-86fc-4b35-8900995331d8"
+  }
+}

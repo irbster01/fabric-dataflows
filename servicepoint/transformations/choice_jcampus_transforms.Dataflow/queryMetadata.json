@@ -63,6 +63,21 @@
       "queryId": "ea761982-870f-4485-a5c3-6eaf0cb333c1",
       "queryName": "choice_actRef",
       "loadEnabled": false
+    },
+    "choice_seniors": {
+      "queryId": "7191c4d3-c732-4ffe-932c-25fd4694d4f1",
+      "queryName": "choice_seniors",
+      "loadEnabled": false
+    },
+    "choice_chronic_absentee_matches": {
+      "queryId": "143b8cb4-125c-4cd9-a8ab-b70a135dd8dd",
+      "queryName": "choice_chronic_absentee_matches",
+      "loadEnabled": false
+    },
+    "raw_caddo_chronic_absentee": {
+      "queryId": "f183f323-09c8-451a-8d54-fae54273c264",
+      "queryName": "raw_caddo_chronic_absentee",
+      "loadEnabled": false
     }
   },
   "connections": [

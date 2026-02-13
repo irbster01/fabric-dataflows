@@ -95,3 +95,25 @@ shared choice_actRef = let
   #"Changed column type 1" = Table.TransformColumnTypes(#"Inserted conditional column 2", {{"eng_flag", type text}, {"read_flag", type text}, {"math_flag", type text}})
 in
   #"Changed column type 1";
+shared choice_seniors = let
+  Source = choice_wJcampus_data,
+  #"Filtered rows" = Table.SelectRows(Source, each ([Grade] = 12))
+in
+  #"Filtered rows";
+shared choice_chronic_absentee_matches = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "choice_wJcampus_data", ItemKind = "Table"]}[Data],
+  #"Merged queries" = Table.NestedJoin(#"Navigation 2", {"SIDNO"}, raw_caddo_chronic_absentee, {"sidno"}, "raw_caddo_chronic_absentee", JoinKind.Inner),
+  #"Expanded raw_caddo_chronic_absentee" = Table.ExpandTableColumn(#"Merged queries", "raw_caddo_chronic_absentee", {"days_enrolled", "days_missed"}, {"days_enrolled", "days_missed"})
+in
+  #"Expanded raw_caddo_chronic_absentee";
+[BindToDefaultDestination = true]
+shared raw_caddo_chronic_absentee = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_caddo_chronic_absentee", ItemKind = "Table"]}[Data]
+in
+  #"Navigation 2";

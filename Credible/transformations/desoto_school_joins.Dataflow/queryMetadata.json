@@ -1,0 +1,108 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "desoto_school_joins",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "desoto_attendance_summary": {
+      "queryId": "358b05cf-b52f-40a6-bd2d-29f94d8b2df4",
+      "queryName": "desoto_attendance_summary"
+    },
+    "raw_jcampus_desoto_census": {
+      "queryId": "93ef4f64-2df9-4cc5-af6a-34cbbbfe10b1",
+      "queryName": "raw_jcampus_desoto_census"
+    },
+    "raw_jcampus_desoto_referrals": {
+      "queryId": "83b76204-c1ef-4a8a-a50c-24685f92b89e",
+      "queryName": "raw_jcampus_desoto_referrals"
+    },
+    "API - Billing": {
+      "queryId": "0d5b850d-2f3c-4cad-a65c-f933416cab14",
+      "queryName": "API - Billing"
+    },
+    "active_desoto_clients": {
+      "queryId": "4e671b33-fe1e-414a-ae08-5317b4fa067f",
+      "queryName": "active_desoto_clients"
+    },
+    "API - Clients (Updated)": {
+      "queryId": "604f983b-bf48-45ac-ae7c-d64b9adcd785",
+      "queryName": "API - Clients (Updated)"
+    },
+    "census_wVOA_flag": {
+      "queryId": "9159afb1-8e3a-4355-a25d-ba2704deacbc",
+      "queryName": "census_wVOA_flag"
+    },
+    "whole_desoto_totalReferrals_table": {
+      "queryId": "f35410ac-9812-44c5-8600-e51e3c832082",
+      "queryName": "whole_desoto_totalReferrals_table"
+    },
+    "whole_desoto_major_table": {
+      "queryId": "37227819-3ad8-4e92-b248-f4f8d318b4d2",
+      "queryName": "whole_desoto_major_table"
+    },
+    "whole_desoto_suspension_table": {
+      "queryId": "5bd784f9-1953-416a-9bf8-129b6aa5aed7",
+      "queryName": "whole_desoto_suspension_table"
+    },
+    "voa_desoto_referral_table": {
+      "queryId": "563878f1-ed63-4f18-80ef-15c0c8fe8e84",
+      "queryName": "voa_desoto_referral_table"
+    },
+    "voa_desoto_attendanceSum_table": {
+      "queryId": "5511c631-8566-41ee-a83a-adac915868ee",
+      "queryName": "voa_desoto_attendanceSum_table"
+    },
+    "whole_desoto_attendanceSum_table": {
+      "queryId": "97f4a7b8-0ab0-45da-bb8b-b0f662cae650",
+      "queryName": "whole_desoto_attendanceSum_table"
+    },
+    "complete_attendance_and_referral_table": {
+      "queryId": "f32c755f-86a8-495f-87f6-7109198109a1",
+      "queryName": "complete_attendance_and_referral_table",
+      "loadEnabled": false
+    },
+    "complete_attendance_and_referral_table_DataDestination": {
+      "queryId": "ecba2c29-1c43-4c0a-b6c7-992edff4268d",
+      "queryName": "complete_attendance_and_referral_table_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "nonactive_and_active_staging_table": {
+      "queryId": "6a379d1c-a171-4d29-8efa-3ef351ced843",
+      "queryName": "nonactive_and_active_staging_table"
+    },
+    "service_counts_by_month": {
+      "queryId": "9b5c51a4-a032-4b91-bf47-34125f02286f",
+      "queryName": "service_counts_by_month"
+    },
+    "voa_status_fact_table": {
+      "queryId": "7a014af6-c356-450b-85ad-1389badb648e",
+      "queryName": "voa_status_fact_table",
+      "loadEnabled": false
+    },
+    "last_crisis_staging": {
+      "queryId": "b92a4f6e-385f-436a-bac4-25475dbf9014",
+      "queryName": "last_crisis_staging"
+    },
+    "voa_status_fact_table_DataDestination": {
+      "queryId": "c152cc20-194a-4987-8551-5d8e90f17eaa",
+      "queryName": "voa_status_fact_table_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    },
+    {
+      "path": "PowerPlatformDataflows",
+      "kind": "PowerPlatformDataflows",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"79a22923-b06f-491f-b6b7-c55e6d054614\"}"
+    }
+  ],
+  "fastCombine": true
+}

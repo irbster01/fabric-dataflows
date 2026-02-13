@@ -208,12 +208,7 @@ shared #"2025_health_ins" = let
   #"Grouped rows" = Table.Group(Source, {"health_ins"}, {{"Count", each List.Count(List.Distinct([client_id])), Int64.Type}})
 in
   #"Grouped rows";
-shared DefaultDestination = let
-  Source = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data]
-in
-  #"Navigation 2";
+[BindToDefaultDestination = true]
 shared #"2025_employment_refTable" = let
     Source = #"2025_intake_refTable",
     #"Removed other columns" =
@@ -325,7 +320,6 @@ shared #"2025_6mo_employed_DataDestination" = let
   TableNavigation = Navigation_2{[Id = "2025_6mo_employed", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
-[BindToDefaultDestination = true]
 shared raw_choice_households = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -340,8 +334,28 @@ shared household_counter = let
   #"Grouped rows" = Table.Group(#"Expanded raw_choice_households", {"program"}, {{"Count", each List.Count(List.Distinct([client_id])), Int64.Type}})
 in
   #"Grouped rows";
+[BindToDefaultDestination = true]
 shared #"4q_2025_newJobs" = let
   Source = #"2025_employment_refTable",
   #"Filtered rows" = Table.SelectRows(Source, each [employment_start_date] >= #date(2025, 10, 1) and [employment_start_date] <= #date(2025, 12, 31))
 in
   #"Filtered rows";
+shared DefaultDestination = let
+  Source = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data]
+in
+  #"Navigation 2";
+shared raw_sp_clients = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_clients", ItemKind = "Table"]}[Data]
+in
+  #"Navigation 2";
+shared #"active_intakes (2)" = let
+  Source = active_intakes,
+  #"Merged queries" = Table.NestedJoin(Source, {"client_id"}, raw_sp_clients, {"client_id"}, "raw_sp_clients", JoinKind.Inner),
+  #"Expanded raw_sp_clients" = Table.ExpandTableColumn(#"Merged queries", "raw_sp_clients", {"internal_id"}, {"internal_id"})
+in
+  #"Expanded raw_sp_clients";

@@ -59,3 +59,28 @@ shared #"raw-credible-services_DataDestination" = let
   TableNavigation = Navigation_2{[Id = "raw_credible_services", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw-credible-services (2)_DataDestination", IsNewTarget = false], Settings = [Kind = "Manual", AllowCreation = false, ColumnSettings = [Mappings = {[SourceColumnName = "service_id", DestinationColumnName = "service_id"], [SourceColumnName = "client_id", DestinationColumnName = "client_id"], [SourceColumnName = "employee_id", DestinationColumnName = "employee_id"], [SourceColumnName = "service_type", DestinationColumnName = "service_type"], [SourceColumnName = "service_status", DestinationColumnName = "service_status"], [SourceColumnName = "duration", DestinationColumnName = "duration"], [SourceColumnName = "client_first_name", DestinationColumnName = "client_first_name"], [SourceColumnName = "client_last_name", DestinationColumnName = "client_last_name"], [SourceColumnName = "emp_name", DestinationColumnName = "emp_name"], [SourceColumnName = "rate", DestinationColumnName = "rate"], [SourceColumnName = "units", DestinationColumnName = "units"], [SourceColumnName = "signature_datetime", DestinationColumnName = "signature_datetime"], [SourceColumnName = "appr_date", DestinationColumnName = "appr_date"], [SourceColumnName = "program_id", DestinationColumnName = "program_id"], [SourceColumnName = "non_billable", DestinationColumnName = "non_billable"], [SourceColumnName = "contract_rate", DestinationColumnName = "contract_rate"], [SourceColumnName = "ins_paid_amount", DestinationColumnName = "ins_paid_amount"], [SourceColumnName = "ins_due", DestinationColumnName = "ins_due"], [SourceColumnName = "is_late", DestinationColumnName = "is_late"], [SourceColumnName = "manual_update_to_modifier", DestinationColumnName = "manual_update_to_modifier"], [SourceColumnName = "auth_id", DestinationColumnName = "auth_id"], [SourceColumnName = "manual_redx", DestinationColumnName = "manual_redx"], [SourceColumnName = "manual_redx_note", DestinationColumnName = "manual_redx_note"], [SourceColumnName = "appr", DestinationColumnName = "appr"], [SourceColumnName = "cotherapist", DestinationColumnName = "cotherapist"], [SourceColumnName = "comb_primary", DestinationColumnName = "comb_primary"], [SourceColumnName = "comb_secondary", DestinationColumnName = "comb_secondary"], [SourceColumnName = "comb_units", DestinationColumnName = "comb_units"], [SourceColumnName = "comb_rate", DestinationColumnName = "comb_rate"], [SourceColumnName = "episode_id", DestinationColumnName = "episode_id"], [SourceColumnName = "delayed_reason_code", DestinationColumnName = "delayed_reason_code"], [SourceColumnName = "service_date", DestinationColumnName = "service_date"]}], DynamicSchema = false, UpdateMethod = [Kind = "Replace"], TypeSettings = [Kind = "Table"]]]}]
+shared #"raw-credible-services (2)" = let
+  Source = #"raw-credible-services",
+  #"Changed column type" = Table.TransformColumnTypes(Source, {{"contract_rate", type text}, {"ins_paid_amount", type text}, {"ins_due", type text}, {"rate", type number}, {"comb_units", type text}, {"comb_rate", type text}}),
+  #"Merged queries" = Table.NestedJoin(#"Changed column type", {"client_id"}, raw_credible_clients, {"Client ID"}, "raw_credible_clients", JoinKind.LeftOuter),
+  #"Expanded raw_credible_clients" = Table.ExpandTableColumn(#"Merged queries", "raw_credible_clients", {"Client Name"}, {"Client Name"}),
+  #"Inserted text after delimiter" = Table.AddColumn(#"Expanded raw_credible_clients", "Text after delimiter", each Text.AfterDelimiter([Client Name], ", ", 0), type text),
+  #"Extracted text before delimiter" = Table.TransformColumns(#"Inserted text after delimiter", {{"Client Name", each Text.BeforeDelimiter(_, ",", 0), type text}}),
+  #"Renamed columns" = Table.RenameColumns(#"Extracted text before delimiter", {{"Client Name", "client_last_name"}, {"Text after delimiter", "client_first_name"}})
+in
+  #"Renamed columns";
+shared raw_credible_clients = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_credible_clients", ItemKind = "Table"]}[Data]
+in
+  #"Navigation 2";
+shared #"raw-credible-services (2)_DataDestination" = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "raw_credible_services", ItemKind = "Table"]}[Data]
+in
+  TableNavigation;

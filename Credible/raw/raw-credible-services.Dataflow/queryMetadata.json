@@ -42,6 +42,21 @@
       "queryName": "raw-credible-services_DataDestination",
       "isHidden": true,
       "loadEnabled": false
+    },
+    "raw-credible-services (2)": {
+      "queryId": "c8bafc00-ffd7-4691-98ed-3f5e4c30b149",
+      "queryName": "raw-credible-services (2)",
+      "loadEnabled": false
+    },
+    "raw_credible_clients": {
+      "queryId": "38671ad7-e4a5-4f19-9926-8f33a26df5a9",
+      "queryName": "raw_credible_clients"
+    },
+    "raw-credible-services (2)_DataDestination": {
+      "queryId": "229ce0a2-689c-4d03-9ad4-ee5722b6cee1",
+      "queryName": "raw-credible-services (2)_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
     }
   },
   "connections": [
@@ -60,5 +75,6 @@
       "kind": "Warehouse",
       "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"678f10d1-b794-4318-8152-4c973a8dc9fa\"}"
     }
-  ]
+  ],
+  "fastCombine": true
 }

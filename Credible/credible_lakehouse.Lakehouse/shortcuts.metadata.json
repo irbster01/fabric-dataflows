@@ -1,5 +1,65 @@
 [
   {
+    "name": "SERVICE",
+    "path": "/Tables/stateReporting",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/SERVICE",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "HEADER",
+    "path": "/Tables/stateReporting",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/HEADER",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "EPISODE",
+    "path": "/Tables/stateReporting",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/EPISODE",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "CLIENTS",
+    "path": "/Tables/stateReporting",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/CLIENTS",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "ASSESSMENT",
+    "path": "/Tables/stateReporting",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/ASSESSMENT",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
     "name": "monthly_supervision_totals",
     "path": "/Tables/silver",
     "target": {

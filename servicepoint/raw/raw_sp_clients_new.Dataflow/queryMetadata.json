@@ -57,9 +57,9 @@
       "queryGroupId": "b3c9b7b1-28dc-4079-bd8e-32e3c340e0cd",
       "loadEnabled": false
     },
-    "Clients": {
+    "raw_sp_clients": {
       "queryId": "8bf60b53-fdd3-4a05-a0ef-ac04dde1ee33",
-      "queryName": "Clients",
+      "queryName": "raw_sp_clients",
       "loadEnabled": false
     },
     "Sample file (2)": {
@@ -86,12 +86,6 @@
       "queryGroupId": "a50a2bcd-de8d-49bf-9835-47a2a21c063b",
       "loadEnabled": false
     },
-    "Clients_DataDestination": {
-      "queryId": "e432ddd8-86b5-49cc-808f-356230ff2713",
-      "queryName": "Clients_DataDestination",
-      "isHidden": true,
-      "loadEnabled": false
-    },
     "Sample file (3)": {
       "queryId": "1dff5ad0-e90e-454f-97d4-98ae1189003e",
       "queryName": "Sample file (3)",
@@ -114,6 +108,12 @@
       "queryId": "3ed9f2f3-55e5-4c15-acee-9379044ff2ce",
       "queryName": "Transform file (3)",
       "queryGroupId": "1cf65797-90b0-403a-8e3f-c5ca66393c9a",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "5a7ac39e-1513-4f3a-b386-57347364018d",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
       "loadEnabled": false
     }
   },

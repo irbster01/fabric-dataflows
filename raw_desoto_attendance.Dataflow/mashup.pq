@@ -29,7 +29,8 @@ shared desoto_daily_attend = let
   #"Removed columns 6" = Table.RemoveColumns(#"Renamed columns 5", {"ECode"}),
   #"Renamed columns 6" = Table.RenameColumns(#"Removed columns 6", {{"OReason", "out_reason"}, {"IReason", "in_reason"}}),
   #"Removed duplicates" = Table.Distinct(#"Renamed columns 6", {"student_name", "sidno", "sasid", "sis_school", "grade", "gender", "date", "out_reason", "in_reason", "full", "half", "tardy_out", "unexcused", "ytd_absent"}),
-  #"Renamed columns 7" = Table.RenameColumns(#"Removed duplicates", {{"Date modified", "date_report_generated"}})
+  #"Sorted rows" = Table.Sort(#"Removed duplicates", {{"out_reason", Order.Descending}}),
+  #"Renamed columns 7" = Table.RenameColumns(#"Sorted rows", {{"Date modified", "date_report_generated"}})
 in
   #"Renamed columns 7";
 shared #"Sample file" = let

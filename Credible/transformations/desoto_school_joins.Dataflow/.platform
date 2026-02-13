@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "desoto_school_joins"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b8d54d6a-71a0-a6fa-4d4a-0418591ae914"
+  }
+}

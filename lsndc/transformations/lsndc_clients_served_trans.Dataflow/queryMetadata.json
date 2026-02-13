@@ -1,0 +1,44 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "lsndc_clients_served_trans",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_lsndc_services": {
+      "queryId": "6a95ba7e-37e1-4bd8-9977-b587d83bc5bd",
+      "queryName": "raw_lsndc_services"
+    },
+    "raw_lsndc_entries": {
+      "queryId": "f899a903-b457-4d0f-a28d-67405001a6a2",
+      "queryName": "raw_lsndc_entries"
+    },
+    "raw_lsndc_entries (2)": {
+      "queryId": "dadd1aaa-f2d4-4bcc-8564-c7590b261a7f",
+      "queryName": "raw_lsndc_entries (2)"
+    },
+    "lsndc_exits": {
+      "queryId": "9e0dc6f2-ee08-4c7a-a5ad-f67c7d69abe6",
+      "queryName": "lsndc_exits"
+    },
+    "raw_lsndc_entries (3)": {
+      "queryId": "53db5f71-ae39-47b3-9146-31a6ecea32a6",
+      "queryName": "raw_lsndc_entries (3)"
+    },
+    "raw_lsndc_entries (4)": {
+      "queryId": "bd7caa9b-ba16-4a56-b889-a08740583fec",
+      "queryName": "raw_lsndc_entries (4)"
+    },
+    "raw_lsndc_entries (5)": {
+      "queryId": "47f7eede-466d-4130-aa03-4db9397a615b",
+      "queryName": "raw_lsndc_entries (5)"
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

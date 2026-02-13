@@ -47,7 +47,7 @@
           {
             "activity": "credible services transforms",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -73,7 +73,7 @@
           {
             "activity": "pipe-credible-assess-assign",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -98,7 +98,7 @@
           {
             "activity": "pipe-credible-eligibility",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -123,7 +123,7 @@
           {
             "activity": "credible active client transforms",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -148,7 +148,7 @@
           {
             "activity": "employee supervision",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -199,7 +199,7 @@
           {
             "activity": "credible services transforms",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -224,7 +224,7 @@
           {
             "activity": "credible brs",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -254,7 +254,7 @@
           {
             "activity": "raw_credible_fep_assessment",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -327,7 +327,7 @@
           {
             "activity": "bh overview model refresh",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -357,7 +357,7 @@
           {
             "activity": "new supe refresh",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -387,7 +387,7 @@
           {
             "activity": "clinician dash",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -402,7 +402,7 @@
           {
             "activity": "raw_credible_clients",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -432,7 +432,7 @@
           {
             "activity": "pipe-credible-services",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -485,9 +485,9 @@
         "name": "admin dash refresh",
         "dependsOn": [
           {
-            "activity": "license expirations",
+            "activity": "desoto school joins",
             "dependencyConditions": [
-              "Succeeded"
+              "Completed"
             ]
           }
         ]
@@ -517,6 +517,31 @@
         "dependsOn": [
           {
             "activity": "desoto clin dash",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "b8d54d6a-71a0-a6fa-4d4a-0418591ae914",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "desoto school joins",
+        "dependsOn": [
+          {
+            "activity": "license expirations",
             "dependencyConditions": [
               "Completed"
             ]

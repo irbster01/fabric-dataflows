@@ -26,6 +26,14 @@
       "queryName": "BH New Referrals_DataDestination",
       "isHidden": true,
       "loadEnabled": false
+    },
+    "Client Referral (2)": {
+      "queryId": "11475631-c6f5-4dac-8627-59d76a795acb",
+      "queryName": "Client Referral (2)"
+    },
+    "Client Referral (3)": {
+      "queryId": "4dacdd07-2ce2-47c1-80c6-866fa54d1b47",
+      "queryName": "Client Referral (3)"
     }
   },
   "connections": [

@@ -15,6 +15,28 @@
       "queryName": "Risk Management_DataDestination",
       "isHidden": true,
       "loadEnabled": false
+    },
+    "risk_zero_counter": {
+      "queryId": "d2ab856a-ef48-42b9-9e37-754e1ae28ce2",
+      "queryName": "risk_zero_counter",
+      "loadEnabled": false
+    },
+    "risk_zero_counter_DataDestination": {
+      "queryId": "60289b1e-27c6-4097-9864-8594edcfba99",
+      "queryName": "risk_zero_counter_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "division_average_by_item": {
+      "queryId": "e6fd16ab-9b1e-471d-a5b4-258b615f8841",
+      "queryName": "division_average_by_item",
+      "loadEnabled": false
+    },
+    "division_average_by_item_DataDestination": {
+      "queryId": "25519de8-8d16-451a-a777-6b78ea0c7ce4",
+      "queryName": "division_average_by_item_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
     }
   },
   "connections": [

@@ -90,6 +90,29 @@
       "queryName": "voa_status_fact_table_DataDestination",
       "isHidden": true,
       "loadEnabled": false
+    },
+    "whole_desoto_suspension_table (2)": {
+      "queryId": "45efd789-6c2c-4d49-8d4e-3d77581e7a4a",
+      "queryName": "whole_desoto_suspension_table (2)"
+    },
+    "complete_attendance_and_referral_table (2)": {
+      "queryId": "dbfdace7-d44e-4c19-8296-b96171e00cbc",
+      "queryName": "complete_attendance_and_referral_table (2)"
+    },
+    "staging_worlita_tracker_table": {
+      "queryId": "a53c1850-2d33-426e-874f-6860ca098553",
+      "queryName": "staging_worlita_tracker_table"
+    },
+    "active_worlita_tracker_table": {
+      "queryId": "7a7c3292-3de9-45ae-a9de-096f59edaa82",
+      "queryName": "active_worlita_tracker_table",
+      "loadEnabled": false
+    },
+    "active_worlita_tracker_table_DataDestination": {
+      "queryId": "6035537d-4bff-4c80-9ab3-9b3fd82ea7ee",
+      "queryName": "active_worlita_tracker_table_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
     }
   },
   "connections": [

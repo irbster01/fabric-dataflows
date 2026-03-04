@@ -1,0 +1,50 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "lighthouse_enroll_service_check",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "clean_lighthouse_entries": {
+      "queryId": "45231003-8ed1-4773-97ee-bafe4f9adaa0",
+      "queryName": "clean_lighthouse_entries"
+    },
+    "clean_lighthouse_services": {
+      "queryId": "a9b90b17-dca2-4153-aca2-e585280de0c0",
+      "queryName": "clean_lighthouse_services"
+    },
+    "raw_sp_clients_wIntID": {
+      "queryId": "bdb37264-a7ad-436d-b080-fe5cea10df06",
+      "queryName": "raw_sp_clients_wIntID"
+    },
+    "raw_lighthouse_registration": {
+      "queryId": "90c6a38e-ea1a-4429-871b-4ab714e7bb79",
+      "queryName": "raw_lighthouse_registration"
+    },
+    "entry_client_merge": {
+      "queryId": "2b24a9f2-9207-42a0-9e35-64f430811105",
+      "queryName": "entry_client_merge"
+    },
+    "active_clients_last_service_date": {
+      "queryId": "6ad0eb66-6b6b-44d2-87d3-ec5146c0c207",
+      "queryName": "active_clients_last_service_date"
+    },
+    "stage_last_service_date": {
+      "queryId": "22cf86ae-9416-47cb-b124-2710a1729e25",
+      "queryName": "stage_last_service_date"
+    },
+    "raw_sp_clients": {
+      "queryId": "9207e8fe-597d-4b2f-99a6-3e5bdaf19c24",
+      "queryName": "raw_sp_clients"
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

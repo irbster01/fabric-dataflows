@@ -15,7 +15,7 @@ shared #"Sample file" = let
   #"Expanded table column" = Table.ExpandTableColumn(#"Removed other columns", "Transform file (3)", Table.ColumnNames(#"Transform file (3)"(#"Sample file (3)"))),
   #"Changed column type" = Table.TransformColumnTypes(#"Expanded table column", {{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}}),
   #"Promoted headers" = Table.PromoteHeaders(#"Changed column type", [PromoteAllScalars = true]),
-  #"Changed column type 1" = Table.TransformColumnTypes(#"Promoted headers", {{"Date of Birth", type date}})
+  #"Changed column type 1" = Table.TransformColumnTypes(#"Promoted headers", {{"Date of Birth", type date}, {"Client ID", Int64.Type}})
 in
   #"Changed column type 1";
 shared Parameter = let
@@ -35,7 +35,7 @@ shared #"Transform file" = (Parameter as binary) => let
   #"Promoted headers" = Table.PromoteHeaders(Navigation, [PromoteAllScalars = true])
 in
   #"Promoted headers";
-[BindToDefaultDestination = true]
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw_sp_clients_DataDestination", IsNewTarget = false], Settings = [Kind = "Manual", AllowCreation = false, ColumnSettings = [Mappings = {[SourceColumnName = "client_id", DestinationColumnName = "client_id"], [SourceColumnName = "client_first_name", DestinationColumnName = "client_first_name"], [SourceColumnName = "client_last_name", DestinationColumnName = "client_last_name"], [SourceColumnName = "dob", DestinationColumnName = "client_dob"], [SourceColumnName = "int_id", DestinationColumnName = "int_id"]}], DynamicSchema = false, UpdateMethod = [Kind = "Replace"], TypeSettings = [Kind = "Table"]]]}]
 shared raw_sp_clients = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -75,7 +75,7 @@ shared raw_sp_clients = let
   // INTERNAL ID: first 4 letters of first name + full last name + DOB as int (YYYYMMDD); uppercase; no spaces/special chars
   #"Added internal id" = Table.AddColumn(
     #"Renamed columns 1",
-    "internal_id",
+    "int_id",
     each
       let
         f = [client_first_name],
@@ -152,4 +152,11 @@ shared #"Transform file (3)" = (#"Parameter (3)" as binary) => let
   Source = Csv.Document(#"Parameter (3)", [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None])
 in
   Source;
-shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data];
+shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data];
+shared raw_sp_clients_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "raw_sp_clients", ItemKind = "Table"]}[Data]
+in
+  TableNavigation;

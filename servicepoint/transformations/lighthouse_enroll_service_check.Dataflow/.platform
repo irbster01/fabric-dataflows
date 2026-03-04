@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Dataflow",
-    "displayName": "raw_sp_lighthouse_reg"
+    "displayName": "lighthouse_enroll_service_check"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "38ddbcd8-188a-aaca-4dc4-368c5e8efbe0"
+    "logicalId": "75edfb28-739a-b4b8-4d50-f48d4cfeb5e5"
   }
 }

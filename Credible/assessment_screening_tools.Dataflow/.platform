@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Dataflow",
-    "displayName": "transform-lsndc-client"
+    "displayName": "assessment_screening_tools"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "99582cbc-e7f8-aa40-48f9-8d6b9edd6502"
+    "logicalId": "44aa238a-72f5-bfda-47fc-4b003ab75b24"
   }
 }

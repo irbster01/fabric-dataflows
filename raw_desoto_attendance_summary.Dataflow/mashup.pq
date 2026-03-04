@@ -10,7 +10,8 @@ shared desoto_attendance_summary = let
   #"Navigation 4" = #"Navigation 3"{[Name = "desoto_attendance_summary"]}[Content],
   #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
   #"Filtered hidden files" = Table.SelectRows(#"Expanded Attributes", each [Attributes]?[Hidden]? <> true),
-  #"Invoke custom function" = Table.AddColumn(#"Filtered hidden files", "Transform file", each #"Transform file"([Content])),
+  #"Filtered rows" = Table.SelectRows(#"Filtered hidden files", let latest = List.Max(#"Filtered hidden files"[Date modified]) in each [Date modified] = latest),
+  #"Invoke custom function" = Table.AddColumn(#"Filtered rows", "Transform file", each #"Transform file"([Content])),
   #"Removed other columns" = Table.SelectColumns(#"Invoke custom function", {"Transform file"}),
   #"Expanded table column" = Table.ExpandTableColumn(#"Removed other columns", "Transform file", Table.ColumnNames(#"Transform file"(#"Sample file"))),
   #"Changed column type" = Table.TransformColumnTypes(#"Expanded table column", {{"Sch", Int64.Type}, {"School Name", type text}, {"Student Name", type text}, {"DOB", type date}, {"Special Codes", type text}, {"Custom Codes", type text}, {"F", Int64.Type}, {"H", Int64.Type}, {"O", Int64.Type}, {"U", Int64.Type}, {"S", Int64.Type}, {"E", Int64.Type}, {"ND", Int64.Type}, {"OP", type text}, {"D Pres", type number}, {"P Pres", type number}, {"SIDNO", Int64.Type}, {"GD", Int64.Type}})

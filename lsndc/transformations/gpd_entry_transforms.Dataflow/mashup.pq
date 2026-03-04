@@ -159,9 +159,16 @@ shared ssvfLa_exit_housedTiming = let
   #"Changed column type" = Table.TransformColumnTypes(#"Removed columns", {{"positive", type number}}),
   #"Inserted division" = Table.AddColumn(#"Changed column type", "Division", each [positive] / [true_total], type number),
   #"Changed column type 1" = Table.TransformColumnTypes(#"Inserted division", {{"Division", Percentage.Type}}),
-  #"Renamed columns" = Table.RenameColumns(#"Changed column type 1", {{"Division", "percentage"}})
+  #"Renamed columns" = Table.RenameColumns(#"Changed column type 1", {{"Division", "percentage"}}),
+  #"Extracted text range" = Table.TransformColumns(#"Renamed columns", {{"program", each Text.Middle(_, 0, 4), type text}}),
+  #"Grouped rows 1" = Table.Group(#"Extracted text range", {"program", "exit_quarter"}, {{"positive", each List.Sum([positive]), type nullable number}, {"total", each List.Sum([true_total]), type nullable number}}),
+  #"Inserted division 1" = Table.AddColumn(#"Grouped rows 1", "Division", each [positive] / [total], type number),
+  #"Changed column type 2" = Table.TransformColumnTypes(#"Inserted division 1", {{"Division", Percentage.Type}}),
+  #"Renamed columns 1" = Table.RenameColumns(#"Changed column type 2", {{"Division", "pos_perc"}}),
+  #"Inserted conditional column 1" = Table.AddColumn(#"Renamed columns 1", "achieved", each if [pos_perc] >= 0.75 then true else false),
+  #"Changed column type 3" = Table.TransformColumnTypes(#"Inserted conditional column 1", {{"achieved", type logical}})
 in
-  #"Renamed columns";
+  #"Changed column type 3";
 shared ssvf_housed_staging = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -187,7 +194,7 @@ shared ssvf_housed_staging = let
   #"Renamed columns" = Table.RenameColumns(#"Grouped rows", {{"positive", "stage_pos"}, {"total", "stage_total"}})
 in
   #"Renamed columns";
-[BindToDefaultDestination = true]
+[Description = "Veterans will exit directly to permanent housing 70% of the time", BindToDefaultDestination = true]
 shared ssvfLa_exit_housed = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -212,9 +219,16 @@ shared ssvfLa_exit_housed = let
   #"Changed column type" = Table.TransformColumnTypes(#"Grouped rows", {{"positive", type number}}),
   #"Inserted division" = Table.AddColumn(#"Changed column type", "Division", each [positive] / [total], type number),
   #"Renamed columns" = Table.RenameColumns(#"Inserted division", {{"Division", "percentage"}}),
-  #"Changed column type 1" = Table.TransformColumnTypes(#"Renamed columns", {{"percentage", Percentage.Type}})
+  #"Changed column type 1" = Table.TransformColumnTypes(#"Renamed columns", {{"percentage", Percentage.Type}}),
+  #"Extracted text range" = Table.TransformColumns(#"Changed column type 1", {{"program", each Text.Middle(_, 0, 4), type text}}),
+  #"Grouped rows 1" = Table.Group(#"Extracted text range", {"program", "exit_quarter"}, {{"positive", each List.Sum([positive]), type nullable number}, {"total", each List.Sum([total]), type nullable number}}),
+  #"Inserted division 1" = Table.AddColumn(#"Grouped rows 1", "Division", each [positive] / [total], type number),
+  #"Renamed columns 1" = Table.RenameColumns(#"Inserted division 1", {{"Division", "pos_perc"}}),
+  #"Changed column type 2" = Table.TransformColumnTypes(#"Renamed columns 1", {{"pos_perc", Percentage.Type}}),
+  #"Inserted conditional column" = Table.AddColumn(#"Changed column type 2", "achieved", each if [pos_perc] >= 0.7 then true else false),
+  #"Changed column type 3" = Table.TransformColumnTypes(#"Inserted conditional column", {{"achieved", type logical}})
 in
-  #"Changed column type 1";
+  #"Changed column type 3";
 shared raw_lsndc_services = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -224,7 +238,7 @@ shared raw_lsndc_services = let
   #"Extracted text after delimiter" = Table.TransformColumns(#"Grouped rows", {{"program", each Text.AfterDelimiter(_, "- ", 0), type text}})
 in
   #"Extracted text after delimiter";
-[BindToDefaultDestination = true]
+[Description = "Eligible HP clients entering the program will be provided temporary financial assistance within 30 days of program entry 85% of the time.", BindToDefaultDestination = true]
 shared ssvfLa_tfa_efficiency = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -268,5 +282,132 @@ shared safeHaven_exit_destinations_DataDestination = let
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
   TableNavigation = Navigation_2{[Id = "safeHaven_exit_destinations", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared #"safeHaven_exit_destinations (2)" = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "0a6e0b32-26e7-4e4e-891d-833423d2e910"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_lsndc_entries", ItemKind = "Table"]}[Data],
+  #"Filtered rows" = Table.SelectRows(#"Navigation 2", each ([program] = "Safe Haven")),
+  #"Filtered rows 1" = Table.SelectRows(#"Filtered rows", each [exit_date] >= #date(2025, 7, 1) and [exit_date] <= #date(2026, 6, 30)),
+  #"Merged queries" = Table.NestedJoin(#"Filtered rows 1", {"entry_id"}, lsndc_exits, {"entry_id"}, "lsndc_exits", JoinKind.LeftOuter),
+  #"Expanded lsndc_exits" = Table.ExpandTableColumn(#"Merged queries", "lsndc_exits", {"exit_destination", "reason_forLeaving", "income_flag", "monthly_income", "nonCash_flag"}, {"exit_destination", "reason_forLeaving", "income_flag", "monthly_income", "nonCash_flag"}),
+
+  #"Added days_between" = Table.AddColumn(
+      #"Expanded lsndc_exits",
+      "days_between",
+      each
+        if [entry_date] = null or [exit_date] = null then null
+        else Duration.Days(Date.From([exit_date]) - Date.From([entry_date])),
+      Int64.Type
+  ),
+  #"Filtered rows 2" = Table.SelectRows(#"Added days_between", each [days_between] > 14),
+  #"Added custom" = Table.TransformColumnTypes(Table.AddColumn(#"Filtered rows 2", "counter", each 1), {{"counter", type number}})
+in
+  #"Added custom";
+shared raw_sp_entries = let
+    // Capture "today" once so every row uses the same value
+    Today = Date.From(DateTime.LocalNow()),
+
+    Source = Lakehouse.Contents(null),
+    Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+    #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+    #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_entries", ItemKind = "Table"]}[Data],
+
+    // Optional but recommended: force date types
+    #"Changed Type" = Table.TransformColumnTypes(
+        #"Navigation 2",
+        {
+            {"entry_date", type date},
+            {"exit_date", type date}
+        }
+    ),
+
+    // Keep your program filter, but allow null exit_date rows
+    // and only exclude the specific exit date 2025-05-20
+    #"Filtered rows" = Table.SelectRows(
+        #"Changed Type",
+        each
+            (
+                [program] = "VOANLA - SUDS" or
+                [program] = "VOANLA 3003 - Safe Haven" or
+                [program] = "VOANLA 3035 - SSVF Arkansas - Homeless Prev" or
+                [program] = "VOANLA 3035 - SSVF Arkansas - Rapid Re-Housing"
+            )
+            and
+            (
+                [exit_date] = null or [exit_date] <> #date(2025, 5, 20)
+            )
+    ),
+
+    // Days between entry and exit; if exit is null, use Today
+    #"Added Days Between" = Table.AddColumn(
+        #"Filtered rows",
+        "days_between",
+        each
+            let
+                EntryDate = [entry_date],
+                EndDate = if [exit_date] = null then Today else [exit_date]
+            in
+                if EntryDate = null then null else Duration.Days(EndDate - EntryDate),
+        Int64.Type
+    )
+
+in
+    #"Added Days Between";
+shared raw_sp_services = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_services", ItemKind = "Table"]}[Data],
+  #"Grouped rows" = Table.Group(#"Navigation 2", {"client_id"}, {{"Count", each List.Max([service_date]), type nullable date}})
+in
+  #"Grouped rows";
+shared #"raw_sp_entries (2)" = let
+  Source = raw_sp_entries
+in
+  Source;
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "raw_lsndc_entries_DataDestination (2)", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared raw_lsndc_entries = let
+    // Capture "today" once so all rows use the same value
+    Today = Date.From(DateTime.LocalNow()),
+
+    Source = Lakehouse.Contents(null),
+    Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+    #"Navigation 1" = Navigation{[lakehouseId = "0a6e0b32-26e7-4e4e-891d-833423d2e910"]}[Data],
+    #"Navigation 2" = #"Navigation 1"{[Id = "raw_lsndc_entries", ItemKind = "Table"]}[Data],
+
+    // Recommended: ensure both columns are date type
+    #"Changed Type" = Table.TransformColumnTypes(
+        #"Navigation 2",
+        {
+            {"entry_date", type date},
+            {"exit_date", type date}
+        }
+    ),
+
+    // Add days_between: use exit_date, or Today if exit_date is null
+    #"Added Days Between" = Table.AddColumn(
+        #"Changed Type",
+        "days_between",
+        each
+            let
+                EntryDate = [entry_date],
+                EndDate = if [exit_date] = null then Today else [exit_date]
+            in
+                if EntryDate = null then null else Duration.Days(EndDate - EntryDate),
+        Int64.Type
+    ),
+  #"Filtered rows" = Table.SelectRows(#"Added Days Between", each ([program] = "SSVF Homeless Prevention" or [program] = "SSVF Rapid Re-Housing")),
+  #"Sorted rows" = Table.Sort(#"Filtered rows", {{"days_between", Order.Descending}})
+
+in
+    #"Sorted rows";
+shared #"raw_lsndc_entries_DataDestination (2)" = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "0a6e0b32-26e7-4e4e-891d-833423d2e910"]}[Data],
+  TableNavigation = Navigation_2{[Id = "lsndc_los", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;

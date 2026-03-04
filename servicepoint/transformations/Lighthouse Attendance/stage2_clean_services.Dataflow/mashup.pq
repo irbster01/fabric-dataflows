@@ -11,9 +11,10 @@ shared clean_lighthouse_entries = let
   Source = Lakehouse.Contents(null),
   #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Id = "clean_lighthouse_entries", ItemKind = "Table"]}[Data]
+  #"Navigation 3" = #"Navigation 2"{[Id = "clean_lighthouse_entries", ItemKind = "Table"]}[Data],
+  #"Changed column type" = Table.TransformColumnTypes(#"Navigation 3", {{"client_id", type text}})
 in
-  #"Navigation 3";
+  #"Changed column type";
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "clean_lighthouse_services_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared clean_lighthouse_services = let
   Source = raw_sp_services,
@@ -48,9 +49,10 @@ shared clean_lighthouse_services = let
     {"service_date", type date},
     {"nine_week_period", type text},
     {"service_id", Int64.Type}
-  })
+  }),
+  #"Sorted rows" = Table.Sort(#"Changed types", {{"service_date", Order.Descending}})
 in
-  #"Changed types";
+  #"Sorted rows";
 shared clean_lighthouse_services_DataDestination = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

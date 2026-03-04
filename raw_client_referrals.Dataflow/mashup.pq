@@ -35,3 +35,20 @@ shared #"BH New Referrals_DataDestination" = let
   TableNavigation = Navigation_2{[Id = "new_bh_referrals", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
+shared #"Client Referral (2)" = let
+  Source = #"Client Referral",
+  #"Added custom" = Table.TransformColumnTypes(Table.AddColumn(Source, "control", each "VOA"), {{"control", type text}}),
+  #"Inserted merged column" = Table.AddColumn(#"Added custom", "full_name", each Text.Combine({[client_last_name], [client_first_name]}, ", "), type text),
+  #"Filtered rows" = Table.SelectRows(#"Inserted merged column", each [referral_date] > #datetime(2024, 7, 1, 0, 0, 0) and [referral_date] <= #datetime(2025, 6, 30, 0, 0, 0)),
+  #"Filtered rows 1" = Table.SelectRows(#"Filtered rows", each ([referral_program] <> "Housing" and [referral_program] <> "Lighthouse")),
+  #"Grouped rows" = Table.Group(#"Filtered rows 1", {"control"}, {{"Count", each List.Count(List.Distinct([full_name])), Int64.Type}})
+in
+  #"Grouped rows";
+shared #"Client Referral (3)" = let
+  Source = #"Client Referral",
+  #"Added custom" = Table.TransformColumnTypes(Table.AddColumn(Source, "control", each "VOA"), {{"control", type text}}),
+  #"Inserted merged column" = Table.AddColumn(#"Added custom", "full_name", each Text.Combine({[client_last_name], [client_first_name]}, ", "), type text),
+  #"Filtered rows" = Table.SelectRows(#"Inserted merged column", each [referral_date] > #datetime(2025, 8, 31, 0, 0, 0)),
+  #"Grouped rows" = Table.Group(#"Filtered rows", {"referral_program"}, {{"Count", each List.Count(List.Distinct([full_name])), Int64.Type}})
+in
+  #"Grouped rows";

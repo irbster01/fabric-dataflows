@@ -111,8 +111,14 @@
       "loadEnabled": false
     },
     "DefaultDestination": {
-      "queryId": "5a7ac39e-1513-4f3a-b386-57347364018d",
+      "queryId": "135ab5b2-0b18-42d2-92ad-2b46aa774bd6",
       "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "raw_sp_clients_DataDestination": {
+      "queryId": "aaa30b03-ff99-4bcc-8a90-b13b344060b0",
+      "queryName": "raw_sp_clients_DataDestination",
       "isHidden": true,
       "loadEnabled": false
     }

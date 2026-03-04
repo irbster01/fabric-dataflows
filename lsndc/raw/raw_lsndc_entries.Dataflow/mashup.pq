@@ -23,9 +23,24 @@ shared lsndc_entries = let
   #"Replaced value" = Table.ReplaceValue(#"Added suffix", "VOANLA 3033 – SSVF VASH RRH", "VOANLA 3033 - SSVF VASH RRH", Replacer.ReplaceValue, {"program"}),
   #"Extracted text after delimiter" = Table.TransformColumns(#"Replaced value", {{"program", each Text.AfterDelimiter(_, "- ", 0), type text}}),
 
+  // ---- added step: length_of_service (days) ----
+  #"Added length_of_service" = Table.AddColumn(
+      #"Extracted text after delimiter",
+      "length_of_service",
+      each
+        if [entry_date] = null then null
+        else
+          let
+            startDate = Date.From([entry_date]),
+            endDate = if [exit_date] = null then Date.From(DateTime.LocalNow()) else Date.From([exit_date])
+          in
+            Duration.Days(endDate - startDate),
+      Int64.Type
+  ),
+
   // ---- added step ----
   #"Added exit_quarter" = Table.AddColumn(
-      #"Extracted text after delimiter",
+      #"Added length_of_service",
       "exit_quarter",
       each
         if [exit_date] = null then null
@@ -38,16 +53,28 @@ shared lsndc_entries = let
             else "Q4",
       type text
   ),
-  Custom = Table.TransformColumnTypes(Table.AddColumn(#"Added exit_quarter", "entry_quarter", each if [entry_date] = null then null
-        else
-          let m = Date.Month(Date.From([entry_date]))
-          in
-            if m >= 7 and m <= 9 then "Q1"
-            else if m >= 10 and m <= 12 then "Q2"
-            else if m >= 1 and m <= 3 then "Q3"
-            else "Q4"), {{"entry_quarter", type text}})
+  Custom = Table.TransformColumnTypes(
+      Table.AddColumn(
+          #"Added exit_quarter",
+          "entry_quarter",
+          each
+            if [entry_date] = null then null
+            else
+              let m = Date.Month(Date.From([entry_date]))
+              in
+                if m >= 7 and m <= 9 then "Q1"
+                else if m >= 10 and m <= 12 then "Q2"
+                else if m >= 1 and m <= 3 then "Q3"
+                else "Q4"
+      ),
+      {{"entry_quarter", type text}}
+  ),
+  #"Renamed columns 1" = Table.RenameColumns(Custom, {{"client_id", "voa_client_id"}}),
+  #"Inserted text before delimiter" = Table.AddColumn(#"Renamed columns 1", "Text before delimiter", each Text.BeforeDelimiter([voa_client_id], "-", 0), type text),
+  #"Renamed columns 2" = Table.RenameColumns(#"Inserted text before delimiter", {{"Text before delimiter", "client_id"}}),
+  #"Reordered columns" = Table.ReorderColumns(#"Renamed columns 2", {"client_id", "voa_client_id", "client_first_name", "client_last_name", "entry_date", "entry_id", "exit_date", "program", "length_of_service", "exit_quarter", "entry_quarter"})
 in
-  Custom;
+  #"Reordered columns";
 shared #"Sample file" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

@@ -18,9 +18,10 @@ shared raw_jcampus_desoto_census = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "raw_jcampus_desoto_census", ItemKind = "Table"]}[Data]
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_jcampus_desoto_census", ItemKind = "Table"]}[Data],
+  #"Sorted rows" = Table.Sort(#"Navigation 2", {{"sidno", Order.Descending}})
 in
-  #"Navigation 2";
+  #"Sorted rows";
 shared raw_jcampus_desoto_referrals = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -334,9 +335,10 @@ shared voa_status_fact_table = let
   #"Expanded API - Clients (Updated)" = Table.ExpandTableColumn(#"Merged queries 1", "API - Clients (Updated)", {"Int ID"}, {"Int ID"}),
   #"Merged queries 2" = Table.NestedJoin(#"Expanded API - Clients (Updated)", {"Int ID"}, raw_jcampus_desoto_census, {"int_id"}, "raw_jcampus_desoto_census", JoinKind.LeftOuter),
   #"Expanded raw_jcampus_desoto_census" = Table.ExpandTableColumn(#"Merged queries 2", "raw_jcampus_desoto_census", {"sidno", "school_name"}, {"sidno", "school_name"}),
-  #"Removed columns 3" = Table.RemoveColumns(#"Expanded raw_jcampus_desoto_census", {"Int ID"})
+  #"Removed columns 3" = Table.RemoveColumns(#"Expanded raw_jcampus_desoto_census", {"Int ID"}),
+  #"Sorted rows 1" = Table.Sort(#"Removed columns 3", {{"Referral Date", Order.Descending}})
 in
-    #"Removed columns 3";
+    #"Sorted rows 1";
 shared last_crisis_staging = let
   Source = #"API - Billing",
   #"Filtered rows" = Table.SelectRows(Source, each ([Service Type] = "Crisis Follow-Up" or [Service Type] = "Crisis Intervention")),
@@ -348,5 +350,47 @@ shared voa_status_fact_table_DataDestination = let
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   Navigation_2 = Navigation_1{[lakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a"]}[Data],
   TableNavigation = Navigation_2{[Id = "voa_status_fact_table", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared #"whole_desoto_suspension_table (2)" = let
+  Source = whole_desoto_suspension_table,
+  #"Filtered rows" = Table.SelectRows(Source, each ([school_name] = "Mansfield Middle School") and ([student_name] = "Rankin, Zy`Kerria Na`Shawn"))
+in
+  #"Filtered rows";
+shared #"complete_attendance_and_referral_table (2)" = let
+  Source = complete_attendance_and_referral_table,
+  #"Filtered rows" = Table.SelectRows(Source, each ([School Name] = "Mansfield Middle School") and ([Student Name] = "Rankin, Zy`Kerria N."))
+in
+  #"Filtered rows";
+shared staging_worlita_tracker_table = let
+  Source = voa_status_fact_table,
+  #"Merged queries" = Table.NestedJoin(Source, {"Client ID"}, #"API - Clients (Updated)", {"Client ID"}, "API - Clients (Updated)", JoinKind.LeftOuter),
+  #"Expanded API - Clients (Updated)" = Table.ExpandTableColumn(#"Merged queries", "API - Clients (Updated)", {"Client Name", "Diagnosis 1"}, {"Client Name", "Diagnosis 1"}),
+  #"Removed columns" = Table.RemoveColumns(#"Expanded API - Clients (Updated)", {"Client ID", "Program ID", "Date Episode Updated", "Date Episode Created", "Discharge Location", "status_desc"}),
+  #"Reordered columns" = Table.ReorderColumns(#"Removed columns", {"Client Name", "Diagnosis 1", "Episode Status", "Assessment Date", "Admission Date", "Length of Stay", "closed_date", "Discharge Outcome", "Referral Date", "Referred By", "Referred Source", "last_crisis", "sidno", "school_name"}),
+  #"Replaced value" = Table.ReplaceValue(#"Reordered columns", "CLOSED", "Discharged / Closed", Replacer.ReplaceValue, {"Episode Status"}),
+  #"Removed duplicates" = Table.Distinct(#"Replaced value"),
+  #"Merged queries 1" = Table.NestedJoin(#"Removed duplicates", {"sidno"}, complete_attendance_and_referral_table, {"SIDNO"}, "complete_attendance_and_referral_table", JoinKind.LeftOuter),
+  #"Expanded complete_attendance_and_referral_table" = Table.ExpandTableColumn(#"Merged queries 1", "complete_attendance_and_referral_table", {"voa_flag", "full", "half", "check_out", "unexcused", "suspensions", "excused", "doc_excused", "d_pres", "p_pres", "total_referrals", "major_referrals", "suspensions1", "weighted_referrals", "weighted_suspensions", "needs_scale", "90_flag", "Client ID", "Assessment Date", "Admission Date", "Program ID", "Length of Stay", "closed_date", "Discharge Outcome", "Discharge Location", "Referral Date", "Referred By", "Referred Source", "status_desc", "last_crisis"}, {"voa_flag", "full", "half", "check_out", "unexcused", "suspensions", "excused", "doc_excused", "d_pres", "p_pres", "total_referrals", "major_referrals", "suspensions1", "weighted_referrals", "weighted_suspensions", "needs_scale", "90_flag", "Client ID", "Assessment Date.1", "Admission Date.1", "Program ID", "Length of Stay.1", "closed_date.1", "Discharge Outcome.1", "Discharge Location", "Referral Date.1", "Referred By.1", "Referred Source.1", "status_desc", "last_crisis.1"}),
+  #"Removed columns 1" = Table.RemoveColumns(#"Expanded complete_attendance_and_referral_table", {"Client ID", "Assessment Date.1", "Admission Date.1", "Program ID", "Length of Stay.1", "closed_date.1", "Discharge Outcome.1", "Discharge Location", "Referral Date.1", "Referred By.1", "Referred Source.1", "last_crisis.1"}),
+  #"Removed duplicates 1" = Table.Distinct(#"Removed columns 1"),
+  #"Removed columns 2" = Table.RemoveColumns(#"Removed duplicates 1", {"status_desc"}),
+  #"Removed duplicates 2" = Table.Distinct(#"Removed columns 2", {"Episode ID"})
+in
+  #"Removed duplicates 2";
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "active_worlita_tracker_table_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared active_worlita_tracker_table = let
+  Source = staging_worlita_tracker_table,
+  #"Removed columns" = Table.RemoveColumns(Source, {"voa_flag"}),
+  #"Filtered rows" = Table.SelectRows(#"Removed columns", each ([Episode Status] = "ACTIVE" or [Episode Status] = "Enrolled" or [Episode Status] = "Pro Bono" or [Episode Status] = "Psych Ther")),
+  #"Reordered columns" = Table.ReorderColumns(#"Filtered rows", {"sidno", "Episode ID", "Client Name", "Diagnosis 1", "Episode Status", "Assessment Date", "Admission Date", "Length of Stay", "closed_date", "Discharge Outcome", "Referral Date", "Referred By", "Referred Source", "last_crisis", "school_name", "full", "half", "check_out", "unexcused", "suspensions", "excused", "doc_excused", "d_pres", "p_pres", "total_referrals", "major_referrals", "suspensions1", "weighted_referrals", "weighted_suspensions", "needs_scale", "90_flag"}),
+  #"Removed columns 1" = Table.RemoveColumns(#"Reordered columns", {"Episode ID"})
+in
+  #"Removed columns 1";
+shared active_worlita_tracker_table_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a"]}[Data],
+  TableNavigation = Navigation_2{[Id = "active_worlita_tracker_table", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;

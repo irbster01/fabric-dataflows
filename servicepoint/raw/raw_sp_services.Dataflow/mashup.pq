@@ -18,9 +18,10 @@ shared sp_services_table = let
   #"Renamed columns" = Table.RenameColumns(#"Removed duplicates", {{"Last Name", "client_last_name"}, {"First Name", "client_first_name"}, {"Client ID", "client_id"}, {"Service Start Date", "service_date"}, {"Provider Specific Service", "service_type"}, {"Number of Units", "units"}, {"User Creating", "user"}, {"Provider Creating", "program_creating"}, {"Service ID", "service_id"}}),
   #"Changed column type 1" = Table.TransformColumnTypes(#"Renamed columns", {{"client_id", type text}}),
   #"Inserted start of month" = Table.AddColumn(#"Changed column type 1", "Start of month", each Date.StartOfMonth([service_date]), type nullable date),
-  #"Renamed columns 1" = Table.RenameColumns(#"Inserted start of month", {{"Start of month", "service_month"}})
+  #"Renamed columns 1" = Table.RenameColumns(#"Inserted start of month", {{"Start of month", "service_month"}}),
+  #"Sorted rows" = Table.Sort(#"Renamed columns 1", {{"service_date", Order.Descending}})
 in
-  #"Renamed columns 1";
+  #"Sorted rows";
 shared #"Sample file" = let
   Source = Lakehouse.Contents(null),
   #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

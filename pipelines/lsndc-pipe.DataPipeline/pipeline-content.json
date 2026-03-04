@@ -170,31 +170,6 @@
         ]
       },
       {
-        "type": "RefreshDataflow",
-        "typeProperties": {
-          "dataflowId": "db9569e7-76b4-9fe6-4efc-db28386acc64",
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
-          "notifyOption": "NoNotification",
-          "dataflowType": "DataflowFabric"
-        },
-        "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "ssvf_extension",
-        "dependsOn": [
-          {
-            "activity": "Wait1_copy2",
-            "dependencyConditions": [
-              "Completed"
-            ]
-          }
-        ]
-      },
-      {
         "type": "Wait",
         "typeProperties": {
           "waitTimeInSeconds": 20
@@ -277,7 +252,7 @@
         "name": "Wait1_copy5",
         "dependsOn": [
           {
-            "activity": "ssvf_extension",
+            "activity": "Wait1_copy2",
             "dependencyConditions": [
               "Completed"
             ]

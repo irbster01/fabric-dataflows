@@ -24,9 +24,10 @@ shared punches = let
   #"Renamed columns 2" = Table.RenameColumns(#"Removed columns 2", {{"Date", "date"}, {"In Punch", "punch_in"}, {"Out Punch", "punch_out"}, {"Hours", "hours"}}),
   #"Removed columns 3" = Table.RemoveColumns(#"Renamed columns 2", {"Worked Department", "Deduction", "Pay Item", "Daily Note"}),
   #"Renamed columns 3" = Table.RenameColumns(#"Removed columns 3", {{"Exceptions", "exceptions"}, {"Earnings Code", "earning_code"}}),
-  #"Changed column type 2" = Table.TransformColumnTypes(#"Renamed columns 3", {{"punch_in", type datetime}, {"punch_out", type datetime}})
+  #"Changed column type 2" = Table.TransformColumnTypes(#"Renamed columns 3", {{"punch_in", type datetime}, {"punch_out", type datetime}}),
+  #"Sorted rows" = Table.Sort(#"Changed column type 2", {{"date", Order.Descending}})
 in
-  #"Changed column type 2";
+  #"Sorted rows";
 shared #"Sample file (2)" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -86,9 +87,10 @@ shared #"FEP Punches" = let
   #"Removed columns 3" = Table.RemoveColumns(#"Renamed columns 2", {"Worked Department", "Deduction", "Pay Item", "Daily Note"}),
   #"Renamed columns 3" = Table.RenameColumns(#"Removed columns 3", {{"Exceptions", "exceptions"}, {"Earnings Code", "earning_code"}}),
   #"Changed column type 2" = Table.TransformColumnTypes(#"Renamed columns 3", {{"punch_in", type datetime}, {"punch_out", type datetime}}),
-  #"Filtered rows" = Table.SelectRows(#"Changed column type 2", each ([employee_name] = "Allyson Ebey" or [employee_name] = "Brittney Dukes" or [employee_name] = "Claire Shidler" or [employee_name] = "Elizabeth Luent" or [employee_name] = "Jacinta Lafleur" or [employee_name] = "Justin Davis" or [employee_name] = "Kelley Baker" or [employee_name] = "Kristal Poland" or [employee_name] = "Michelle Merello" or [employee_name] = "Russell Irby" or [employee_name] = "Tammy Polke" or [employee_name] = "Tina Hall"))
+  #"Filtered rows" = Table.SelectRows(#"Changed column type 2", each ([employee_name] = "Allyson Ebey" or [employee_name] = "Brittney Dukes" or [employee_name] = "Claire Shidler" or [employee_name] = "Elizabeth Luent" or [employee_name] = "Jacinta Lafleur" or [employee_name] = "Justin Davis" or [employee_name] = "Kati Peters" or [employee_name] = "Kelley Baker" or [employee_name] = "Kristal Poland" or [employee_name] = "Michelle Merello" or [employee_name] = "Russell Irby" or [employee_name] = "Tammy Polke" or [employee_name] = "Tina Hall")),
+  #"Sorted rows" = Table.Sort(#"Filtered rows", {{"date", Order.Descending}})
 in
-  #"Filtered rows";
+  #"Sorted rows";
 shared #"FEP Punches_DataDestination" = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

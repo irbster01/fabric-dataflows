@@ -53,35 +53,6 @@
         ]
       },
       {
-        "type": "InvokePipeline",
-        "typeProperties": {
-          "parameters": {},
-          "waitOnCompletion": true,
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
-          "pipelineId": "68d9c2d2-9675-b9d8-4dca-e91fdcef678d",
-          "operationType": "InvokeFabricPipeline"
-        },
-        "externalReferences": {
-          "connection": "d96ef0f0-f246-4fa4-941f-01e0f45bb101"
-        },
-        "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "accounting pipe",
-        "dependsOn": [
-          {
-            "activity": "Delay7",
-            "dependencyConditions": [
-              "Completed"
-            ]
-          }
-        ]
-      },
-      {
         "type": "Wait",
         "typeProperties": {
           "waitTimeInSeconds": 60
@@ -353,7 +324,7 @@
         "name": "referral pipe",
         "dependsOn": [
           {
-            "activity": "accounting pipe",
+            "activity": "Delay7",
             "dependencyConditions": [
               "Completed"
             ]

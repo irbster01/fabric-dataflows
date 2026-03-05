@@ -48,9 +48,10 @@ shared fep_employees = let
   #"Navigation 1" = Navigation{[lakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[Id = "raw_fep_punches", ItemKind = "Table"]}[Data],
   #"Removed other columns" = Table.SelectColumns(#"Navigation 2", {"employee_name"}),
-  #"Removed duplicates" = Table.Distinct(#"Removed other columns", {"employee_name"})
+  #"Removed duplicates" = Table.Distinct(#"Removed other columns", {"employee_name"}),
+  #"Inserted conditional column" = Table.AddColumn(#"Removed duplicates", "hourly_rate", each if Text.Contains([employee_name], "Tina") then 32.51 else if Text.Contains([employee_name], "Tammy") then 19.8 else if Text.Contains([employee_name], "Russell") then 26.97 else if Text.Contains([employee_name], "Allyson") then 31.25 else if Text.Contains([employee_name], "Kristal") then 32.51 else if Text.Contains([employee_name], "Luent") then 25 else if Text.Contains([employee_name], "Kati") then 22.07 else if Text.Contains([employee_name], "Jacinta") then 30.29 else if Text.Contains([employee_name], "Claire") then 22.11 else "")
 in
-  #"Removed duplicates";
+  #"Inserted conditional column";
 shared #"Sep 14 to Sep 27" = let
   Source = Table.Combine({raw_fep_punches, raw_credible_services}),
   #"Replaced value" = Table.ReplaceValue(Source, null, 0, Replacer.ReplaceValue, {"Count"}),
@@ -143,5 +144,141 @@ shared #"Appended FEP Billing_DataDestination" = let
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   Navigation_2 = Navigation_1{[lakehouseId = "fccbdcf0-4c42-431d-8e07-ae4b00bda780"]}[Data],
   TableNavigation = Navigation_2{[Id = "october_fep_billing", ItemKind = "Table"]}?[Data]?
+in
+  TableNavigation;
+shared puch_ref_table = let
+  Source = Table.Combine({raw_fep_punches, raw_credible_services})
+in
+  Source;
+[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "dynamic_fep_admin_time_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
+shared dynamic_fep_admin_time = let
+  // ===== Pay period ranges from Accounting (add an index for sorting) =====
+  PayPeriodsBase =
+    #table(
+      type table [pay_period_start = date, pay_period_end = date, pay_period = text],
+      {
+        { #date(2025,12,21), #date(2026, 1, 3), "12/21/2025-1/03/2026" },
+        { #date(2026, 1, 4), #date(2026, 1,17), "1/4/2026-1/17/2026" },
+        { #date(2026, 1,18), #date(2026, 1,31), "1/18/2026-1/31/2026" },
+        { #date(2026, 2, 1), #date(2026, 2,14), "2/1/2026-2/14/2026" }
+      }
+    ),
+
+  PayPeriods =
+    Table.AddIndexColumn(
+      PayPeriodsBase,
+      "pay_period_idx",
+      1,
+      1,
+      Int64.Type
+    ),
+
+  // ===== Your existing combine + cleanup =====
+  Source = Table.Combine({raw_fep_punches, raw_credible_services}),
+  #"Replaced value" = Table.ReplaceValue(Source, null, 0, Replacer.ReplaceValue, {"Count"}),
+  #"Replaced value 1" = Table.ReplaceValue(#"Replaced value", null, 0, Replacer.ReplaceValue, {"service_hours"}),
+  #"Replaced value 2" = Table.ReplaceValue(#"Replaced value 1", "Management and General", "EPICenter", Replacer.ReplaceValue, {"dept"}),
+  #"Replaced value 3" = Table.ReplaceValue(#"Replaced value 2", "BehavioralHealth-Youth(Desoto)", "EPICenter", Replacer.ReplaceValue, {"dept"}),
+  #"Replaced value 4" = Table.ReplaceValue(#"Replaced value 3", "Behavioral Health-Youth(Caddo)", "EPICenter", Replacer.ReplaceValue, {"dept"}),
+
+  // Ensure date is date
+  #"Typed date" = Table.TransformColumns(#"Replaced value 4", {{"date", each Date.From(_), type date}}),
+
+  // ===== Assign pay period by range match (return record with pay_period + idx) =====
+  #"Added pay period record" =
+    Table.AddColumn(
+      #"Typed date",
+      "pp",
+      (r) =>
+        let
+          d = r[date],
+          hit = Table.SelectRows(PayPeriods, each d >= [pay_period_start] and d <= [pay_period_end])
+        in
+          if Table.RowCount(hit) = 0 then
+            null
+          else
+            [
+              pay_period = hit{0}[pay_period],
+              pay_period_idx = hit{0}[pay_period_idx]
+            ],
+      type record
+    ),
+
+  #"Expanded pp" = Table.ExpandRecordColumn(#"Added pay period record", "pp", {"pay_period", "pay_period_idx"}, {"pay_period", "pay_period_idx"}),
+
+  // Optional: drop rows that aren't inside your provided periods
+  #"Filtered to pay periods" = Table.SelectRows(#"Expanded pp", each [pay_period] <> null),
+
+  // ===== Your grouping, but include pay_period_idx so sort is stable =====
+  #"Grouped rows" =
+    Table.Group(
+      #"Filtered to pay periods",
+      {"emp_name", "pay_period", "pay_period_idx", "date", "dept"},
+      {
+        {"punch_hours", each List.Sum([Count]), type nullable number},
+        {"service_hours", each List.Sum([service_hours]), type nullable number}
+      }
+    ),
+
+  #"Grouped rows 1" =
+    Table.Group(
+      #"Grouped rows",
+      {"emp_name", "pay_period", "pay_period_idx"},
+      {
+        {"punch_hours", each List.Sum([punch_hours]), type nullable number},
+        {"service_hours", each List.Sum([service_hours]), type nullable number}
+      }
+    ),
+
+  #"Filtered rows 1" = Table.SelectRows(#"Grouped rows 1", each ([emp_name] <> "Justin Davis")),
+  #"Inserted conditional column" = Table.AddColumn(#"Filtered rows 1", "fep_flag", each if [punch_hours] = 0 then "CHECK DEPT" else "FEP"),
+  #"Inserted subtraction" = Table.AddColumn(#"Inserted conditional column", "invoice_hours", each [punch_hours] - [service_hours], type number),
+
+  #"Filtered rows 2" = Table.SelectRows(#"Inserted subtraction", each ([emp_name] <> "W. Justin Davis")),
+
+  #"Inserted conditional column 1" =
+    Table.AddColumn(
+      #"Filtered rows 2",
+      "admin_adjust",
+      each if Text.Contains([emp_name], "Tammy") then 9 else if Text.Contains([emp_name], "Russell") then 9 else null
+    ),
+
+  #"Inserted conditional column 2" =
+    Table.AddColumn(
+      #"Inserted conditional column 1",
+      "inv",
+      each if [admin_adjust] = 9 then 9 else [invoice_hours]
+    ),
+
+  #"Removed columns" = Table.RemoveColumns(#"Inserted conditional column 2", {"admin_adjust", "invoice_hours"}),
+  #"Renamed columns 1" = Table.RenameColumns(#"Removed columns", {{"inv", "invoice_hours"}}),
+
+  #"Reordered columns" =
+    Table.ReorderColumns(
+      #"Renamed columns 1",
+      {"emp_name", "pay_period", "pay_period_idx", "punch_hours", "service_hours", "invoice_hours", "fep_flag"}
+    ),
+
+  #"Filtered rows" = Table.SelectRows(#"Reordered columns", each ([emp_name] <> "Michelle Merello")),
+  #"Merged queries" = Table.NestedJoin(#"Filtered rows", {"emp_name"}, fep_employees, {"employee_name"}, "fep_employees", JoinKind.LeftOuter),
+  #"Expanded fep_employees" = Table.ExpandTableColumn(#"Merged queries", "fep_employees", {"hourly_rate"}, {"hourly_rate"}),
+
+  #"Reordered columns 1" =
+    Table.ReorderColumns(
+      #"Expanded fep_employees",
+      {"emp_name", "pay_period", "pay_period_idx", "punch_hours", "service_hours", "invoice_hours", "hourly_rate", "fep_flag"}
+    ),
+
+  // ===== Final: sort by employee then pay period (by idx) =====
+  #"Sorted rows" = Table.Sort(#"Reordered columns 1", {{"emp_name", Order.Ascending}, {"pay_period_idx", Order.Ascending}}),
+  #"Removed columns 1" = Table.RemoveColumns(#"Sorted rows", {"fep_flag"}),
+  #"Changed column type" = Table.TransformColumnTypes(#"Removed columns 1", {{"hourly_rate", Currency.Type}, {"invoice_hours", type number}, {"pay_period_idx", Int64.Type}, {"pay_period", type text}})
+in
+  #"Changed column type";
+shared dynamic_fep_admin_time_DataDestination = let
+  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "fccbdcf0-4c42-431d-8e07-ae4b00bda780"]}[Data],
+  TableNavigation = Navigation_2{[Id = "dynamic_fep_admin_time", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;

@@ -146,17 +146,19 @@ shared ASSESSMENT = let
   #"Changed column type" = Table.TransformColumnTypes(#"Removed columns 1", {{"arrests_update", type date}, {"assess_dt", type date}, {"arrests", type text}, {"disability_2", type text}, {"disability_3", type text}, {"disability_4", type text}, {"disability_5", type text}, {"drug_1", type text}, {"drug_2", type text}, {"drug_1_update", type date}, {"drug_2_update", type date}, {"drug_3", type text}, {"drug_3_updat", type date}, {"drug_1_age", type text}, {"drug_2_age", type text}, {"drug_3_ag", type text}, {"drug_1_freq", type text}, {"drug_1_freq_update", type date}, {"drug_2_freq", type text}, {"drug_2_freq_update", type date}, {"drug_3_freq_updat", type date}, {"drug_1_rte_update", type date}, {"drug_2_rte_update", type date}, {"drug_3_rte_updat", type date}, {"dx_primary", type text}, {"dx_sec", type text}, {"encounters", type text}, {"encounters_update", type date}, {"episode_uid", type text}, {"school_absence", type text}, {"school_absence_update", type date}, {"school_enrollment", type text}, {"school_suspension", type text}, {"school_enroll_update", type date}, {"school_susp_update", type date}, {"sp_date", type date}, {"sp_smi", type text}, {"dx_3", type text}, {"dx_4", type text}, {"drug_3_rte", type text}}),
   #"Extracted text range" = Table.TransformColumns(#"Changed column type", {{"rev_timein", each Text.Middle(Text.From(_), 0, 10), type text}}),
   #"Changed column type 1" = Table.TransformColumnTypes(#"Extracted text range", {{"rev_timein", type date}, {"region", type text}, {"disability_1", type text}, {"cp_drugs", type text}, {"assess_type", type text}, {"cp_alcohol", type text}}),
+  #"Sorted rows 1" = Table.Sort(#"Changed column type 1", {{"rev_timein", Order.Descending}}),
   // ONE STEP: make every column name ALL CAPS
   #"Uppercased column names" = Table.RenameColumns(
-      #"Changed column type 1",
+      #"Sorted rows 1",
       List.Transform(
-        Table.ColumnNames(#"Changed column type 1"),
+        Table.ColumnNames(#"Sorted rows 1"),
         (c) => {c, Text.Upper(c)}
       ),
       MissingField.Ignore
     ),
   #"Transform columns" = Table.TransformColumnTypes(#"Uppercased column names", {{"DRUG_3_FREQ", type text}, {"DRUG_1_RTE", type text}, {"DRUG_2_RTE", type text}}),
-  #"Replace errors" = Table.ReplaceErrorValues(#"Transform columns", {{"DRUG_3_FREQ", null}, {"DRUG_1_RTE", null}, {"DRUG_2_RTE", null}}),
+  #"Sorted rows" = Table.Sort(#"Transform columns", {{"ARRESTS_UPDATE", Order.Descending}}),
+  #"Replace errors" = Table.ReplaceErrorValues(#"Sorted rows", {{"DRUG_3_FREQ", null}, {"DRUG_1_RTE", null}, {"DRUG_2_RTE", null}}),
   #"Merged queries" = Table.NestedJoin(#"Replace errors", {"EPISODE_UID"}, #"episode-controller", {"Episode ID"}, "API - Episodes", JoinKind.Inner),
   // Use REV_TIMEIN as the date controller for filling blank dates
   #"Inserted conditional column 1" = Table.AddColumn(#"Merged queries", "arrests-update-fixed", each if [ARRESTS_UPDATE] = null then [REV_TIMEIN] else [ARRESTS_UPDATE]),
@@ -295,9 +297,10 @@ shared ASSESSMENT = let
   #"Replace errors 1" = Table.ReplaceErrorValues(#"Transform columns 1", {{"DRUG_2", null}, {"DRUG_3", null}, {"DRUG_1_AGE", null}, {"DRUG_3_AGE", null}}),
   
   // Final cleanup: convert any remaining "null" text to actual null
-  #"Final null cleanup" = Table.ReplaceValue(#"Replace errors 1", "null", null, Replacer.ReplaceValue, Table.ColumnNames(#"Replace errors 1"))
+  #"Final null cleanup" = Table.ReplaceValue(#"Replace errors 1", "null", null, Replacer.ReplaceValue, Table.ColumnNames(#"Replace errors 1")),
+  #"Replaced value 2" = Table.ReplaceValue(#"Final null cleanup", null, "98", Replacer.ReplaceValue, {"DRUG_1_AGE"})
 in
-  #"Final null cleanup";
+  #"Replaced value 2";
 [BindToDefaultDestination = true]
 shared EPISODE = let
   Source = PowerPlatform.Dataflows([]),
@@ -332,12 +335,10 @@ shared EPISODE = let
   #"Expanded client gender" = Table.ExpandTableColumn(#"Merged with clients", "ClientData", {"SEX"}, {"CLIENT_SEX"}),
 
   // WOMAN_DEP: 1=Yes (woman w/dependents), 2=No (woman w/o dependents), 3=Not applicable (male)
-  // Must be done here while CLIENT_SEX is still available
-  // Also check for text "null" since source data may have that instead of actual null
   #"Fix WOMAN_DEP early" = Table.AddColumn(#"Expanded client gender", "WOMAN_DEP_FIXED", each 
       if [WOMAN_DEP] <> null and [WOMAN_DEP] <> "null" and [WOMAN_DEP] <> "" then [WOMAN_DEP] 
       else if [CLIENT_SEX] = "M" then "3" 
-      else "2"),  // Default to "2" for females or when gender unknown
+      else "2"),
   #"Remove old WOMAN_DEP early" = Table.RemoveColumns(#"Fix WOMAN_DEP early", {"WOMAN_DEP"}, MissingField.Ignore),
   #"Rename WOMAN_DEP early" = Table.RenameColumns(#"Remove old WOMAN_DEP early", {{"WOMAN_DEP_FIXED", "WOMAN_DEP"}}),
   #"Remove CLIENT_SEX early" = Table.RemoveColumns(#"Rename WOMAN_DEP early", {"CLIENT_SEX"}, MissingField.Ignore),
@@ -369,9 +370,23 @@ shared EPISODE = let
       )
   ),
 
-  // Fill blank date fields with INTERVIEW_DT
-  #"Fix CONT_DT" = Table.AddColumn(#"Cleaned nulls", "cont-dt-fix", each if [CONT_DT] = null then [INTERVIEW_DT] else [CONT_DT]),
-  #"Remove CONT_DT" = Table.RemoveColumns(#"Fix CONT_DT", {"CONT_DT"}),
+  // Bring DATE11 over from source so it can drive CONT_DT
+  #"Added DATE11 from source" = Table.AddColumn(
+      #"Cleaned nulls",
+      "DATE11_TEMP",
+      each try Record.Field(#"Remove CLIENT_SEX early"{[EPISODE_UID = [EPISODE_UID]]}, "DATE11") otherwise null,
+      type any
+  ),
+
+  // CONT_DT priority: DATE11 -> existing CONT_DT -> INTERVIEW_DT
+  #"Fix CONT_DT" = Table.AddColumn(
+      #"Added DATE11 from source",
+      "cont-dt-fix",
+      each if [DATE11_TEMP] <> null then [DATE11_TEMP]
+           else if [CONT_DT] <> null then [CONT_DT]
+           else [INTERVIEW_DT]
+  ),
+  #"Remove CONT_DT" = Table.RemoveColumns(#"Fix CONT_DT", {"CONT_DT", "DATE11_TEMP"}, MissingField.Ignore),
   #"Rename CONT_DT" = Table.RenameColumns(#"Remove CONT_DT", {{"cont-dt-fix", "CONT_DT"}}),
 
   #"Fix ED_LEVEL_UPDATE" = Table.AddColumn(#"Rename CONT_DT", "ed-level-update-fix", each if [ED_LEVEL_UPDATE] = null then [INTERVIEW_DT] else [ED_LEVEL_UPDATE]),
@@ -408,7 +423,6 @@ shared EPISODE = let
   #"Default PROGRAM_TYPE_2" = Table.ReplaceValue(#"Default EPISODE_AGENCY_NAME", null, "19", Replacer.ReplaceValue, {"PROGRAM_TYPE_2"}),
   #"Default PROGRAM_TYPE_3" = Table.ReplaceValue(#"Default PROGRAM_TYPE_2", null, "28", Replacer.ReplaceValue, {"PROGRAM_TYPE_3"}),
   #"Default PROGRAM_TYPE_4" = Table.ReplaceValue(#"Default PROGRAM_TYPE_3", null, "32", Replacer.ReplaceValue, {"PROGRAM_TYPE_4"}),
-  // Additional required field defaults
   #"Default FREQ_ATTEND" = Table.ReplaceValue(#"Default PROGRAM_TYPE_4", null, "7", Replacer.ReplaceValue, {"FREQ_ATTEND"}),
   #"Default MARITAL_STATUS" = Table.ReplaceValue(#"Default FREQ_ATTEND", null, "1", Replacer.ReplaceValue, {"MARITAL_STATUS"}),
   #"Default METHADONE" = Table.ReplaceValue(#"Default MARITAL_STATUS", null, "2", Replacer.ReplaceValue, {"METHADONE"}),
@@ -453,9 +467,20 @@ shared EPISODE = let
   #"Replaced value 3" = Table.ReplaceValue(#"Replaced value 2", "1516", "01", Replacer.ReplaceValue, {"RES_TYPE"}),
   #"Replaced value 4" = Table.ReplaceValue(#"Replaced value 3", "1514", "03", Replacer.ReplaceValue, {"RES_TYPE"}),
   #"Replaced value 5" = Table.ReplaceValue(#"Replaced value 4", "1520", "03", Replacer.ReplaceValue, {"RES_TYPE"}),
-  #"Replaced value 6" = Table.ReplaceValue(#"Replaced value 5", "1513", "03", Replacer.ReplaceValue, {"RES_TYPE"})
+  #"Replaced value 6" = Table.ReplaceValue(#"Replaced value 5", "1513", "03", Replacer.ReplaceValue, {"RES_TYPE"}),
+  #"Replaced value 7" = Table.ReplaceValue(#"Replaced value 6", "1331", "5", Replacer.ReplaceValue, {"ADDICTIONTYPE"}),
+  #"Replaced value 8" = Table.ReplaceValue(#"Replaced value 7", null, "1", Replacer.ReplaceValue, {"DISPOSITION"}),
+  #"Replaced value 9" = Table.ReplaceValue(#"Replaced value 8", null, "1", Replacer.ReplaceValue, {"PRIOR_MH"}),
+  #"Replaced value 10" = Table.ReplaceValue(#"Replaced value 9", null, "4", Replacer.ReplaceValue, {"LEGAL_STATUS"}),
+  #"Replaced value 11" = Table.ReplaceValue(#"Replaced value 10", "0", "00", Replacer.ReplaceValue, {"PRIOR_TX_EPISODES"}),
+  #"Inserted conditional column" = Table.AddColumn(#"Replaced value 11", "wom_cont", each if [CLUID] = "3349" then 3 else if [CLUID] = "4291" then 3 else if [CLUID] = "6127" then 3 else if [CLUID] = "6573" then 1 else if [CLUID] = "6667" then 3 else if [CLUID] = "6676" then 3 else if [CLUID] = "6688" then 3 else if [CLUID] = "7049" then 3 else ""),
+  #"Reordered columns 1" = Table.ReorderColumns(#"Inserted conditional column", {"ADDICTIONTYPE", "EPISODE_AGENCY_UID", "ASSIGN_PV", "CLUID", "CONT_DT", "CONT_RES", "DC_DATE", "DISPOSITION", "ED_LEVEL", "ED_LEVEL_UPDATE", "EMPL_ST", "EMPL_STATUS_UPDATE", "FREQ_ATTEND", "EPISODE_UID", "FREQ_ATTEND_UPDATE", "HSE_COMP", "INTERVIEW_DT", "LEGAL_STATUS", "MARITAL_STATUS", "MARITAL_STATUS_UPDATE", "METHADONE", "SERV_PROGRAM", "PREGNANT", "PRIMARY_TARGET_GROUP", "PRIOR_MH", "PRIOR_TX_EPISODES", "PROGRAM_TYPE", "REF_SRCE", "RES_TYPE", "RES_TYPE_UPDATE", "TERMTYPE", "EPISODE_START_DATE", "wom_cont", "WOMAN_DEP", "NUM_DEP_CHILD", "REGION", "EPISODE_AGENCY_NAME", "PROGRAM_TYPE_2", "PROGRAM_TYPE_3", "PROGRAM_TYPE_4"}),
+  #"Removed columns" = Table.RemoveColumns(#"Reordered columns 1", {"WOMAN_DEP"}),
+  #"Renamed columns" = Table.RenameColumns(#"Removed columns", {{"wom_cont", "WOMAN_DEP"}}),
+  #"Replaced value 12" = Table.ReplaceValue(#"Renamed columns", "1504", "02", Replacer.ReplaceValue, {"HSE_COMP"}),
+  #"Changed column type" = Table.TransformColumnTypes(#"Replaced value 12", {{"WOMAN_DEP", type text}})
 in
-  #"Replaced value 6";
+  #"Changed column type";
 shared #"episode-controller" = let
   Source = PowerPlatform.Dataflows([]),
   #"Navigation 1" = Source{[Id = "Workspaces"]}[Data],
@@ -504,7 +529,7 @@ shared SERVICE = let
       Text.Contains([SERVICE], "FEP")),
 
   // Filter by date range
-  #"Filtered by date" = Table.SelectRows(#"Filtered rows", each [SERV_DATE] >= #date(2025, 9, 1) and [SERV_DATE] <= #date(2026, 1, 23)),
+  #"Filtered by date" = Table.SelectRows(#"Filtered rows", each [SERV_DATE] >= #date(2026, 1, 24) and [SERV_DATE] <= #date(2026, 3, 5)),
 
   // Map SERVICE names to codes
   // BUN* = H2022, CPST = H0036, PSR = H2017, Assessment* = 90792, Psychotherapy* = 90834
@@ -603,3 +628,42 @@ shared DefaultDestination = let
   #"Navigation 2" = #"Navigation 1"{[lakehouseId = "74be8ffb-fa88-4278-9a30-358e88a4f13a"]}[Data]
 in
   #"Navigation 2";
+[BindToDefaultDestination = true]
+shared ClientsNew = let
+  Source = Xml.Tables(Web.Contents("https://reportservices.crediblebh.com/reports/ExportService.asmx/ExportDataSet?connection=N6wxVSQqPQ90HFOKAHmM!4HkQk7KeoTxbDm6GvoVakMDpuCQwjSxuu7oMphvGM2rwInok!fmgrI7uTDkpqZkAg__&start_date=&end_date=&custom_param1=&custom_param2=&custom_param3=")),
+  #"Filtered rows" = Table.SelectRows(Source, each ([Name] = "urn:schemas-microsoft-com:xml-diffgram-v1")),
+  #"Expanded Table" = Table.ExpandTableColumn(#"Filtered rows", "Table", {"Name", "Table"}, {"Name.1", "Table.1"}),
+  #"Expanded Table.1" = Table.ExpandTableColumn(#"Expanded Table", "Table.1", {"Name", "Table"}, {"Name.2", "Table"}),
+  #"Expanded Table 1" = Table.ExpandTableColumn(#"Expanded Table.1", "Table", {"Name", "Table"}, {"Name.3", "Table.1"}),
+  #"Expanded Table.1 1" = Table.ExpandTableColumn(#"Expanded Table 1", "Table.1", {"Name", "Table"}, {"Name.4", "Table"}),
+  #"Expanded Table 2" = Table.ExpandTableColumn(#"Expanded Table.1 1", "Table", {"CITY", "CLUID", "IRS_DEP_NUM", "DOB", "ETHNICITY", "GENDER", "HEALTH_INS", "HEALTH_INS_SEC", "HH_INCOME_1", "HH_INCOME_2", "HH_INCOME_3", "HH_INCOME_4", "HH_INCOME_5", "HH_INCOME_6", "HH_INCOME_7", "HH_INCOME_8", "INC_OTHER", "INC_PUBA", "INC_SSRR", "INC_WAGE", "LANGUAGE1", "MONTHLY_INCOME", "NAME_F", "NAME_L", "NAME_M", "NAME_S", "PARISH", "RACE", "RACE2", "RACE3", "RACE4", "SEXUAL_ORIENTATION", "PAY_SOURCE_1", "PAY_SOURCE_2", "PAY_SOURCE_3", "SSN", "VA_ELIG", "VA_ST", "ZIP", "REGION", "SS_from_Profile", "urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata"}, {"CITY", "CLUID", "IRS_DEP_NUM", "DOB", "ETHNICITY", "GENDER", "HEALTH_INS", "HEALTH_INS_SEC", "HH_INCOME_1", "HH_INCOME_2", "HH_INCOME_3", "HH_INCOME_4", "HH_INCOME_5", "HH_INCOME_6", "HH_INCOME_7", "HH_INCOME_8", "INC_OTHER", "INC_PUBA", "INC_SSRR", "INC_WAGE", "LANGUAGE1", "MONTHLY_INCOME", "NAME_F", "NAME_L", "NAME_M", "NAME_S", "PARISH", "RACE", "RACE2", "RACE3", "RACE4", "SEXUAL_ORIENTATION", "PAY_SOURCE_1", "PAY_SOURCE_2", "PAY_SOURCE_3", "SSN", "VA_ELIG", "VA_ST", "ZIP", "REGION", "SS_from_Profile", "urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata"}),
+  #"Removed columns" = Table.RemoveColumns(#"Expanded Table 2", {"Name", "Name.1", "Name.2", "Name.3", "Name.4"}),
+  #"Expanded SS_from_Profile" = Table.ExpandTableColumn(#"Removed columns", "SS_from_Profile", {"Element:Text"}, {"Element:Text"}),
+  #"Removed columns 1" = Table.RemoveColumns(#"Expanded SS_from_Profile", {"urn:schemas-microsoft-com:xml-diffgram-v1", "urn:schemas-microsoft-com:xml-msdata"}),
+  #"Changed column type" = Table.TransformColumnTypes(#"Removed columns 1", {{"HEALTH_INS", type text}, {"CITY", type text}, {"CLUID", type text}, {"IRS_DEP_NUM", type text}, {"DOB", type date}, {"ETHNICITY", type text}, {"GENDER", type text}, {"HEALTH_INS_SEC", type text}, {"HH_INCOME_1", type text}, {"HH_INCOME_2", type text}, {"HH_INCOME_3", type text}, {"HH_INCOME_4", type text}, {"HH_INCOME_5", type text}, {"HH_INCOME_6", type text}, {"HH_INCOME_7", type text}, {"HH_INCOME_8", type text}, {"INC_OTHER", type text}, {"INC_PUBA", type text}, {"INC_SSRR", type text}, {"INC_WAGE", type text}, {"LANGUAGE1", type text}, {"MONTHLY_INCOME", type number}}),
+  #"Expanded NAME_M" = Table.ExpandTableColumn(#"Changed column type", "NAME_M", {"Element:Text"}, {"Element:Text.1"}),
+  #"Renamed columns" = Table.RenameColumns(#"Expanded NAME_M", {{"Element:Text.1", "NAME_M"}}),
+  #"Changed column type 1" = Table.TransformColumnTypes(#"Renamed columns", {{"NAME_M", type text}, {"NAME_S", type text}, {"PARISH", type text}, {"RACE", type text}, {"RACE2", type text}, {"RACE3", type text}, {"RACE4", type text}, {"SEXUAL_ORIENTATION", type text}, {"PAY_SOURCE_1", type text}, {"PAY_SOURCE_2", type text}, {"PAY_SOURCE_3", type text}, {"SSN", type text}, {"VA_ELIG", type text}, {"VA_ST", type text}, {"REGION", type text}, {"ZIP", Int64.Type}, {"Element:Text", type text}}),
+  #"Merged queries" = Table.NestedJoin(#"Changed column type 1", {"CLUID"}, #"episode-controller", {"Client ID"}, "episode-controller", JoinKind.Inner),
+  #"Replaced value" = Table.ReplaceValue(#"Merged queries", "Shreveport, LA", "Shreveport", Replacer.ReplaceValue, {"CITY"}),
+  #"Replaced value 1" = Table.ReplaceValue(#"Replaced value", "Medicaid", "04", Replacer.ReplaceValue, {"HEALTH_INS"}),
+  #"Replaced value 2" = Table.ReplaceValue(#"Replaced value 1", "None", "06", Replacer.ReplaceValue, {"HEALTH_INS"}),
+  #"Replaced value 3" = Table.ReplaceValue(#"Replaced value 2", "None", "01", Replacer.ReplaceValue, {"HH_INCOME_1"}),
+  #"Replaced value 4" = Table.ReplaceValue(#"Replaced value 3", "Wages/Salary", "02", Replacer.ReplaceValue, {"HH_INCOME_1"}),
+  #"Replaced value 5" = Table.ReplaceValue(#"Replaced value 4", "Other (unemployment, workers comp, child support or other income received on a regular basis)", "08", Replacer.ReplaceValue, {"HH_INCOME_1"}),
+  #"Replaced value 6" = Table.ReplaceValue(#"Replaced value 5", "SSI, TANF, or other public assistance", "07", Replacer.ReplaceValue, {"HH_INCOME_1"}),
+  #"Replaced value 7" = Table.ReplaceValue(#"Replaced value 6", null, "06", Replacer.ReplaceValue, {"HEALTH_INS_SEC"}),
+  #"Replaced value 8" = Table.ReplaceValue(#"Replaced value 7", null, "01", Replacer.ReplaceValue, {"HH_INCOME_2"}),
+  #"Replaced value 9" = Table.ReplaceValue(#"Replaced value 8", null, "01", Replacer.ReplaceValue, {"HH_INCOME_3"}),
+  #"Replaced value 10" = Table.ReplaceValue(#"Replaced value 9", null, "01", Replacer.ReplaceValue, {"HH_INCOME_4"}),
+  #"Replaced value 11" = Table.ReplaceValue(#"Replaced value 10", null, "01", Replacer.ReplaceValue, {"HH_INCOME_5"}),
+  #"Replaced value 12" = Table.ReplaceValue(#"Replaced value 11", null, "01", Replacer.ReplaceValue, {"HH_INCOME_6"}),
+  #"Replaced value 13" = Table.ReplaceValue(#"Replaced value 12", null, "01", Replacer.ReplaceValue, {"HH_INCOME_7"}),
+  #"Replaced value 14" = Table.ReplaceValue(#"Replaced value 13", null, "01", Replacer.ReplaceValue, {"HH_INCOME_8"}),
+  #"Replaced value 15" = Table.ReplaceValue(#"Replaced value 14", null, "0", Replacer.ReplaceValue, {"INC_OTHER"}),
+  #"Replaced value 16" = Table.ReplaceValue(#"Replaced value 15", null, "0", Replacer.ReplaceValue, {"INC_SSRR"}),
+  #"Removed columns 2" = Table.RemoveColumns(#"Replaced value 16", {"Element:Text", "episode-controller"}),
+  #"Replaced value 17" = Table.ReplaceValue(#"Removed columns 2", null, "2", Replacer.ReplaceValue, {"VA_ELIG"}),
+  #"Changed column type 2" = Table.TransformColumnTypes(#"Replaced value 17", {{"NAME_F", type text}, {"NAME_L", type text}})
+in
+  #"Changed column type 2";

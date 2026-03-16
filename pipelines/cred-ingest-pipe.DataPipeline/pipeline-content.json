@@ -547,6 +547,36 @@
             ]
           }
         ]
+      },
+      {
+        "type": "PBISemanticModelRefresh",
+        "typeProperties": {
+          "method": "post",
+          "groupId": "2e078b2f-481a-42df-8fee-6d81b3c2dac1",
+          "datasetId": "bf6a9c65-f3d4-44da-ace7-487315ed5cd5",
+          "commitMode": "Transactional",
+          "waitOnCompletion": true,
+          "operationType": "SemanticModelRefresh"
+        },
+        "externalReferences": {
+          "connection": "52140cb6-76f7-4f57-93bd-931ea7d737b0"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "new team view",
+        "dependsOn": [
+          {
+            "activity": "admin dash refresh",
+            "dependencyConditions": [
+              "Completed"
+            ]
+          }
+        ]
       }
     ]
   }

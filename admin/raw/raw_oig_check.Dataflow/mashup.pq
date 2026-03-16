@@ -23,7 +23,9 @@ shared exclusions = let
   #"Expanded table column" = Table.ExpandTableColumn(#"Removed other columns", "Transform file", Table.ColumnNames(#"Transform file"(#"Sample file"))),
   #"Changed column type" = Table.TransformColumnTypes(#"Expanded table column", {{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}, {"Column7", type text}, {"Column8", type text}, {"Column9", type text}, {"Column10", type text}, {"Column11", type text}, {"Column12", type text}, {"Column13", type text}, {"Column14", type text}, {"Column15", type text}, {"Column16", type text}, {"Column17", type text}, {"Column18", type text}}),
   #"Promoted headers" = Table.PromoteHeaders(#"Changed column type", [PromoteAllScalars = true]),
-  #"Renamed columns" = Table.RenameColumns(#"Promoted headers", {{"LASTNAME", "last_name"}, {"FIRSTNAME", "first_name"}, {"MIDNAME", "middle_name"}, {"BUSNAME", "business_name"}}),
+  #"Renamed columns 3" = Table.RenameColumns(#"Promoted headers", {{"12/31/2025 5:03:14 PM", "date_modified"}, {"25", "report_year"}, {"January", "report_month"}}),
+  #"Changed column type 6" = Table.TransformColumnTypes(#"Renamed columns 3", {{"report_month", type text}}),
+  #"Renamed columns" = Table.RenameColumns(#"Changed column type 6", {{"LASTNAME", "last_name"}, {"FIRSTNAME", "first_name"}, {"MIDNAME", "middle_name"}, {"BUSNAME", "business_name"}}),
   #"Sorted rows" = Table.Sort(#"Renamed columns", {{"business_name", Order.Descending}}),
   #"Renamed columns 1" = Table.RenameColumns(#"Sorted rows", {{"GENERAL", "general"}, {"SPECIALTY", "speciality"}, {"UPIN", "upin"}, {"NPI", "npi"}, {"DOB", "dob"}, {"ADDRESS", "street_address"}, {"CITY", "city"}, {"STATE", "state"}, {"ZIP", "zip"}, {"EXCLTYPE", "excl_type"}, {"EXCLDATE", "excl_date"}, {"REINDATE", "rein_date"}, {"WAIVERDATE", "waiver_date"}, {"WVRSTATE", "waiver_state"}}),
   #"Replaced value" = Table.ReplaceValue(#"Renamed columns 1", "00000000", "", Replacer.ReplaceValue, {"rein_date"}),
@@ -32,13 +34,16 @@ shared exclusions = let
   #"Inserted merged column" = Table.AddColumn(#"Changed column type 1", "full_name", each Text.Combine({[last_name], [first_name]}, ", "), type text),
   #"Reordered columns" = Table.ReorderColumns(#"Inserted merged column", {"full_name", "last_name", "first_name", "middle_name", "business_name", "general", "speciality", "upin", "npi", "dob", "street_address", "city", "state", "zip", "excl_type", "excl_date", "rein_date", "waiver_date", "waiver_state"}),
   #"Replaced value 2" = Table.ReplaceValue(#"Reordered columns", ", ", "", Replacer.ReplaceValue, {"full_name"}),
-  #"Changed column type 4" = Table.TransformColumnTypes(#"Replaced value 2", {{"January", type text}}),
-  #"Added a Flag to Catch Errors" = Table.AddColumn(#"Changed column type 4", "error_flag", each try [excl_date] otherwise "Error"),
+  #"Added a Flag to Catch Errors" = Table.AddColumn(#"Replaced value 2", "error_flag", each try [excl_date] otherwise "Error"),
   #"Filtered out Header Rows" = Table.SelectRows(#"Added a Flag to Catch Errors", each ([error_flag] <> "Error")),
-  #"Filtered rows" = Table.SelectRows(#"Filtered out Header Rows", each Text.Contains([full_name], "LAST")),
-  #"Cleaned up Error Flag Column" = Table.RemoveColumns(#"Filtered rows", {"error_flag"})
+  #"Cleaned up Error Flag Column" = Table.RemoveColumns(#"Filtered out Header Rows", {"error_flag"}),
+  #"Filtered rows 1" = Table.SelectRows(#"Cleaned up Error Flag Column", each [last_name] <> ""),
+  Custom = Table.AddColumn(#"Filtered rows 1", "firstName_lettersOnly", each Text.Select([first_name],{"A".."Z","a".."z"})),
+  #"Custom 1" = Table.AddColumn(#"Custom", "lastName_lettersOnly", each Text.Select([last_name],{"A".."Z","a".."z"})),
+  #"Removed errors" = Table.RemoveRowsWithErrors(#"Custom 1", {"waiver_date"}),
+  #"Changed column type 5" = Table.TransformColumnTypes(#"Removed errors", {{"firstName_lettersOnly", type text}, {"lastName_lettersOnly", type text}})
 in
-  #"Cleaned up Error Flag Column";
+  #"Changed column type 5";
 shared #"Sample file" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -71,3 +76,25 @@ shared exclusions_DataDestination = let
   TableNavigation = Navigation_2{[Id = "raw_oig_exclusions", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;
+shared #"dbo_1 Employees" = let
+  Source = Lakehouse.Contents(null),
+  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "fccbdcf0-4c42-431d-8e07-ae4b00bda780"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "dbo_1.Employees", ItemKind = "Table"]}[Data],
+  #"Filtered rows" = Table.SelectRows(#"Navigation 2", each ([department] = "Behavioral Health- Adults" or [department] = "Behavioral Health-Youth(Caddo)" or [department] = "BehavioralHealth-Youth(Desoto)" or [department] = "NOW Waiver" or [department] = "VA Housing")),
+  Custom = Table.AddColumn(#"Filtered rows", "firstName_lettersOnly", each Text.Select([firstName],{"A".."Z","a".."z"})),
+  #"Uppercased text" = Table.TransformColumns(Custom, {{"firstName_lettersOnly", each Text.Upper(Text.From(_)), type nullable text}}),
+  #"Custom 1" = Table.AddColumn(#"Uppercased text", "lastName_lettersOnly", each Text.Select([lastName],{"A".."Z","a".."z"})),
+  #"Uppercased text 1" = Table.TransformColumns(#"Custom 1", {{"lastName_lettersOnly", each Text.Upper(Text.From(_)), type nullable text}})
+
+in
+  #"Uppercased text 1";
+shared Merge = let
+  Source = Table.NestedJoin(exclusions, {"lastName_lettersOnly", "firstName_lettersOnly"}, #"dbo_1 Employees", {"lastName_lettersOnly", "firstName_lettersOnly"}, "dbo_1 Employees", JoinKind.Inner),
+  #"Expanded dbo_1 Employees 1" = Table.ExpandTableColumn(Source, "dbo_1 Employees", {"id", "employeeNumber", "firstName", "middleName", "lastName", "email", "position", "jobTitle", "department", "departmentId", "workLocation", "managerId", "managerName", "status", "hireDate", "terminationDate", "flsaStatus", "employmentType", "lastSyncedAt", "isActive", "managerEmployeeNumber", "ssn", "dateOfBirth", "entraObjectId", "firstName_lettersOnly", "lastName_lettersOnly"}, {"id", "employeeNumber", "firstName", "middleName", "lastName", "email", "position", "jobTitle", "department", "departmentId", "workLocation", "managerId", "managerName", "status", "hireDate", "terminationDate", "flsaStatus", "employmentType", "lastSyncedAt", "isActive", "managerEmployeeNumber", "ssn", "dateOfBirth", "entraObjectId", "firstName_lettersOnly.1", "lastName_lettersOnly.1"})
+in
+  #"Expanded dbo_1 Employees 1";
+shared #"Merge (2)" = let
+  Source = Merge
+in
+  Source;

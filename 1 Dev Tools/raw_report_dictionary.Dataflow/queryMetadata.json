@@ -1,0 +1,34 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "raw_report_dictionary",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_report_dictionary": {
+      "queryId": "e273a3e2-011a-4279-bcc7-7f1b9d7938a9",
+      "queryName": "raw_report_dictionary",
+      "loadEnabled": false
+    },
+    "raw_report_dictionary_DataDestination": {
+      "queryId": "a886b7a1-0b15-424a-a63d-6b71275ce8a3",
+      "queryName": "raw_report_dictionary_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://voanorthlaorg.sharepoint.com/sites/TheVOAHub/Management/Operational%20Improvement%20Team/QA%20Manager/!%20Dev%20tools/report%20dictionary.xlsx",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"fbc4ce67-b902-4d30-984d-dd67c5a4c262\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

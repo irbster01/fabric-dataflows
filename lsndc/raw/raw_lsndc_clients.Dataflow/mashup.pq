@@ -51,7 +51,7 @@ shared #"Transform file" = (Parameter as binary) => let
 in
   #"Promoted headers";
 shared lsndc_clients_DataDestination = let
-  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
+  Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false, HierarchicalNavigation = null]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   Navigation_2 = Navigation_1{[lakehouseId = "0a6e0b32-26e7-4e4e-891d-833423d2e910"]}[Data],
   TableNavigation = Navigation_2{[Id = "raw_lsndc_clients", ItemKind = "Table"]}?[Data]?

@@ -31,8 +31,26 @@ shared desoto_census = let
   #"Changed column type 1" = Table.TransformColumnTypes(#"Extracted text range", {{"dob - Copy", Int64.Type}}),
   #"Uppercased text" = Table.TransformColumns(#"Changed column type 1", {{"Text before delimiter", each Text.Upper(_), type text}}),
   #"Uppercased text 1" = Table.TransformColumns(#"Uppercased text", {{"Text after delimiter", each Text.Upper(_), type text}}),
-  #"Inserted conditional column" = Table.AddColumn(#"Uppercased text 1", "school_name", each if [school_id] = 4 then "Logansport High School" else if [school_id] = 7 then "Mansfield High School" else if [school_id] = 10 then "Stanley High School" else if [school_id] = 12 then "North Desoto High School" else if [school_id] = 14 then "North Desoto Lower Elementary" else if [school_id] = 19 then "Mansfield Elementary" else if [school_id] = 17 then "North Desoto Middle School" else if [school_id] = 23 then "North Desoto Upper Elementary" else if [school_id] = 20 then "Mansfield Middle School" else ""),
-  #"Merged columns" = Table.CombineColumns(Table.TransformColumnTypes(#"Inserted conditional column", {{"dob - Copy", type text}}), {"Text before delimiter", "Text after delimiter", "dob - Copy"}, Combiner.CombineTextByDelimiter("", QuoteStyle.None), "int_id"),
+  #"Renamed columns 3" = Table.RenameColumns(#"Uppercased text 1", {{"Text before delimiter", "last"}, {"Text after delimiter", "first"}}),
+  #"Custom 2" =  Table.TransformColumns(
+    #"Renamed columns 3",
+    {
+        "last",
+        each Text.Select(_, {"0".."9","A".."Z","a".."z"}),
+        type text
+    }
+)
+,
+  #"Custom 1" = Table.TransformColumns(
+    #"Custom 2",
+    {
+        "first",
+        each Text.Select(_, {"0".."9","A".."Z","a".."z"}),
+        type text
+    }
+),
+  #"Inserted conditional column" = Table.AddColumn(#"Custom 1", "school_name", each if [school_id] = 4 then "Logansport High School" else if [school_id] = 7 then "Mansfield High School" else if [school_id] = 10 then "Stanley High School" else if [school_id] = 12 then "North Desoto High School" else if [school_id] = 14 then "North Desoto Lower Elementary" else if [school_id] = 19 then "Mansfield Elementary" else if [school_id] = 17 then "North Desoto Middle School" else if [school_id] = 23 then "North Desoto Upper Elementary" else if [school_id] = 20 then "Mansfield Middle School" else ""),
+  #"Merged columns" = Table.CombineColumns(Table.TransformColumnTypes(#"Inserted conditional column", {{"dob - Copy", type text}}), {"first", "last", "dob - Copy"}, Combiner.CombineTextByDelimiter("", QuoteStyle.None), "int_id"),
   #"Changed column type 2" = Table.TransformColumnTypes(#"Merged columns", {{"school_name", type text}}),
   #"Sorted rows" = Table.Sort(#"Changed column type 2", {{"student_name", Order.Descending}})
 in

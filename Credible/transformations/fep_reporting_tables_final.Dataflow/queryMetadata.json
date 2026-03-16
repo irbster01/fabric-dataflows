@@ -39,6 +39,11 @@
       "queryName": "DefaultDestination",
       "isHidden": true,
       "loadEnabled": false
+    },
+    "ClientsNew": {
+      "queryId": "cc82e638-c56c-4f73-a6cf-cb0114386e21",
+      "queryName": "ClientsNew",
+      "loadEnabled": false
     }
   },
   "connections": [

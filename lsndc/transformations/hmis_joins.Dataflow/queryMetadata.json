@@ -1,0 +1,84 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "hmis_joins",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "blank_sex": {
+      "queryId": "cd73bb6d-9a62-4342-a9fc-1856fa4d37c5",
+      "queryName": "blank_sex",
+      "loadEnabled": false
+    },
+    "client_control_table": {
+      "queryId": "dbb99976-a698-4f57-85f8-fe6500a2904e",
+      "queryName": "client_control_table",
+      "loadEnabled": false
+    },
+    "employment_blank": {
+      "queryId": "49050666-ac4f-4ee7-92cc-c196c480f040",
+      "queryName": "employment_blank",
+      "loadEnabled": false
+    },
+    "last_grade_blank": {
+      "queryId": "4bae3db5-1f30-4575-b790-112dbb989b62",
+      "queryName": "last_grade_blank",
+      "loadEnabled": false
+    },
+    "ssn_blank": {
+      "queryId": "ff182270-a252-4b92-8580-80338c8a3100",
+      "queryName": "ssn_blank",
+      "loadEnabled": false
+    },
+    "ssn_incomplete": {
+      "queryId": "9987a9f1-0153-489e-972b-162fe2d32211",
+      "queryName": "ssn_incomplete",
+      "loadEnabled": false
+    },
+    "appended_deficiency_table": {
+      "queryId": "cddb4381-4261-4019-b29d-2355405c05fa",
+      "queryName": "appended_deficiency_table",
+      "loadEnabled": false
+    },
+    "appended_deficiency_table_DataDestination": {
+      "queryId": "1ed2e059-ed17-4069-a2c0-c0678f7680c5",
+      "queryName": "appended_deficiency_table_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "blank_vamc": {
+      "queryId": "364c530a-baf8-4e41-a789-0028df8a2bca",
+      "queryName": "blank_vamc",
+      "loadEnabled": false
+    },
+    "blank_vet_status": {
+      "queryId": "b5fcdf95-6369-40d3-8905-8215598a08ef",
+      "queryName": "blank_vet_status",
+      "loadEnabled": false
+    },
+    "blank_coc": {
+      "queryId": "308713bb-573b-4191-b14d-d928b0c1a67d",
+      "queryName": "blank_coc",
+      "loadEnabled": false
+    },
+    "blank_dv": {
+      "queryId": "8832fa9c-0d8d-433f-a01d-55495c2e2329",
+      "queryName": "blank_dv",
+      "loadEnabled": false
+    },
+    "blank_income": {
+      "queryId": "4b5a1154-cb8b-493f-a5bb-35220af7d766",
+      "queryName": "blank_income",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

@@ -6,18 +6,14 @@ shared raw_sp_clients = let
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[Id = "raw_sp_clients", ItemKind = "Table"]}[Data],
-  #"Inserted text range" = Table.AddColumn(#"Navigation 2", "Text range", each Text.Middle([client_first_name], 0, 4), type text),
-  #"Duplicated column" = Table.DuplicateColumn(#"Inserted text range", "client_dob", "client_dob - Copy"),
-  #"Changed column type" = Table.TransformColumnTypes(#"Duplicated column", {{"client_dob - Copy", Int64.Type}}),
-  #"Uppercased text" = Table.TransformColumns(#"Changed column type", {{"Text range", each Text.Upper(_), type text}}),
-  #"Trimmed text" = Table.TransformColumns(#"Uppercased text", {{"Text range", each Text.Trim(_), type text}}),
-  #"Cleaned text" = Table.TransformColumns(#"Trimmed text", {{"Text range", each Text.Clean(_), type text}}),
-  #"Duplicated column 1" = Table.DuplicateColumn(#"Cleaned text", "client_last_name", "client_last_name - Copy"),
-  #"Uppercased text 1" = Table.TransformColumns(#"Duplicated column 1", {{"client_last_name - Copy", each Text.Upper(_), type nullable text}}),
-  #"Merged columns" = Table.CombineColumns(Table.TransformColumnTypes(#"Uppercased text 1", {{"client_dob - Copy", type text}}), {"client_last_name - Copy", "Text range", "client_dob - Copy"}, Combiner.CombineTextByDelimiter("", QuoteStyle.None), "int_id"),
-  #"Removed duplicates" = Table.Distinct(#"Merged columns", {"client_id", "int_id"})
+  #"Renamed columns" = Table.RenameColumns(#"Navigation 2", {{"internal_id", "int_id"}}),
+  #"Extracted text range" = Table.TransformColumns(#"Renamed columns", {{"int_id", each Text.Middle(_, 4, 50), type text}}),
+  #"Duplicated column" = Table.DuplicateColumn(#"Extracted text range", "client_first_name", "client_first_name - Copy"),
+  #"Uppercased text" = Table.TransformColumns(#"Duplicated column", {{"client_first_name - Copy", each Text.Upper(_), type nullable text}}),
+  #"Merged columns" = Table.CombineColumns(#"Uppercased text", {"client_first_name - Copy", "int_id"}, Combiner.CombineTextByDelimiter("", QuoteStyle.None), "int_id (2)"),
+  #"Renamed columns 1" = Table.RenameColumns(#"Merged columns", {{"int_id (2)", "int_id"}})
 in
-  #"Removed duplicates";
+  #"Renamed columns 1";
 shared #"Caddo Census 2526" = let
   Source = PowerPlatform.Dataflows([]),
   #"Navigation 1" = Source{[Id = "Workspaces"]}[Data],

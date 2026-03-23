@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "cis needs assessment aggregates"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "94589ccd-ab0f-aa54-4d6a-b786f973b44e"
+  }
+}

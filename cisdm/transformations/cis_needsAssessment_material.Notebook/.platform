@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "cis_needsAssessment_material"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4f321593-6628-b0c5-49fa-8834540f682a"
+  }
+}

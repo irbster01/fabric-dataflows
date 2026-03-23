@@ -192,6 +192,330 @@
     }
   },
   {
+    "name": "weaknesses_aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/weaknesses_aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "weaknesses",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/weaknesses",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "training when aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/training when aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "training when",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/training when",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "training time aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/training time aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "training time",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/training time",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "training length aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/training length aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "training length",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/training length",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "training freq aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/training freq aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "training freq",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/training freq",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "strengths_needs_assessment",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/strengths_needs_assessment",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "strengths_aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/strengths_aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "relevance_aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/relevance_aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "relevance",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/relevance",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "needs_assessment",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/needs_assessment",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "learning style aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/learning style aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "learning style",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/learning style",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "learn best aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/learn best aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "learn best",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/learn best",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "knowledge_aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/knowledge_aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "knowledge",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/knowledge",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "confidence_aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/confidence_aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "confidence providing aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/confidence providing aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "confidence providing",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/confidence providing",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "confidence",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/confidence",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "access aggregated",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/access aggregated",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
+    "name": "access",
+    "path": "/Tables/cisNeedsAssessment",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/dbo/access",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  {
     "name": "tier1_ratio",
     "path": "/Tables/cis",
     "target": {

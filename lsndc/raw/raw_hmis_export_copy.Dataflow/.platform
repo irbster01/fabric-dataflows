@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "raw_hmis_export_copy"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0a4122bb-9d0a-845e-4706-0bed781b9834"
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "raw_needs_assessment_results",
+  "queryGroups": [
+    {
+      "id": "44a37318-eda6-44d2-b81a-922f62fafe01",
+      "name": "Transform file from needs_assessment"
+    },
+    {
+      "id": "b3567775-55fc-4695-9748-b3540db5f793",
+      "name": "Helper queries",
+      "parentId": "44a37318-eda6-44d2-b81a-922f62fafe01"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "needs_assessment": {
+      "queryId": "104a3670-1262-43f1-b3da-79b95babf67e",
+      "queryName": "needs_assessment",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "97e4cc9c-9c6e-4d07-9ad7-b5c9db658c0d",
+      "queryName": "Sample file",
+      "queryGroupId": "b3567775-55fc-4695-9748-b3540db5f793",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "ca94051c-3b80-4717-9db9-4d6e1636a675",
+      "queryName": "Parameter",
+      "queryGroupId": "b3567775-55fc-4695-9748-b3540db5f793",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "4073ef79-75da-40c4-b5b2-9841429365ad",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "44a37318-eda6-44d2-b81a-922f62fafe01",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "ffe60f2a-ac0c-4de7-8ece-02369dcf71df",
+      "queryName": "Transform file",
+      "queryGroupId": "b3567775-55fc-4695-9748-b3540db5f793",
+      "loadEnabled": false
+    },
+    "strengths": {
+      "queryId": "3b367e2e-bd89-4001-986f-857402f0de5e",
+      "queryName": "strengths",
+      "loadEnabled": false
+    },
+    "strengths_DataDestination": {
+      "queryId": "9b1c339d-bde3-493a-a2fb-5a9584aea67e",
+      "queryName": "strengths_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "weaknesses": {
+      "queryId": "e4f70515-eff6-40c5-9dd3-0782330d4037",
+      "queryName": "weaknesses",
+      "loadEnabled": false
+    },
+    "strengths_aggregated": {
+      "queryId": "45ad527b-6db7-4c73-8081-d6c293cbc358",
+      "queryName": "strengths_aggregated",
+      "loadEnabled": false
+    },
+    "weaknesses_aggregated": {
+      "queryId": "d0abbf69-24ef-47a0-b296-f74025d58dd3",
+      "queryName": "weaknesses_aggregated",
+      "loadEnabled": false
+    },
+    "confidence": {
+      "queryId": "a17f15d6-b963-456f-9ef2-2987f8f41606",
+      "queryName": "confidence",
+      "loadEnabled": false
+    },
+    "confidence_aggregated": {
+      "queryId": "901c001d-3530-411c-9ef1-a128800ae385",
+      "queryName": "confidence_aggregated",
+      "loadEnabled": false
+    },
+    "knowledge": {
+      "queryId": "3a7acb74-a3d4-402e-aa57-47aa312e037c",
+      "queryName": "knowledge",
+      "loadEnabled": false
+    },
+    "relevance": {
+      "queryId": "2668311b-e547-47c9-87e9-7aecbbc3eabf",
+      "queryName": "relevance",
+      "loadEnabled": false
+    },
+    "relevance_aggregated": {
+      "queryId": "06729722-73a9-4cd2-9bee-ae097a93e5f4",
+      "queryName": "relevance_aggregated",
+      "loadEnabled": false
+    },
+    "knowledge_aggregated": {
+      "queryId": "998a5e85-01f6-4987-861e-5b20e7fcdcb4",
+      "queryName": "knowledge_aggregated",
+      "loadEnabled": false
+    },
+    "confidence providing": {
+      "queryId": "d9c7ceaa-31c7-45de-996a-23f00775a725",
+      "queryName": "confidence providing",
+      "loadEnabled": false
+    },
+    "confidence providing aggregated": {
+      "queryId": "c1cf953b-20ca-44e5-87c8-fa37914bc11b",
+      "queryName": "confidence providing aggregated",
+      "loadEnabled": false
+    },
+    "learning_style": {
+      "queryId": "0649f47a-6912-42f8-9db4-d54debee4bb0",
+      "queryName": "learning_style",
+      "loadEnabled": false
+    },
+    "learning_style_aggregated": {
+      "queryId": "2ee6a3b0-7ee9-4794-ab49-6634dfa5a661",
+      "queryName": "learning_style_aggregated",
+      "loadEnabled": false
+    },
+    "learn_best": {
+      "queryId": "427a9d85-ada5-4640-a5c7-f825f8fb86cb",
+      "queryName": "learn_best",
+      "loadEnabled": false
+    },
+    "learn_best_aggregated": {
+      "queryId": "5073ffd1-adfe-4eb8-935f-983440ce7298",
+      "queryName": "learn_best_aggregated",
+      "loadEnabled": false
+    },
+    "training_when": {
+      "queryId": "8eac3995-d66d-4b3a-b6fa-abdc9894c9fe",
+      "queryName": "training_when",
+      "loadEnabled": false
+    },
+    "training_when_aggregated": {
+      "queryId": "cc935c3a-bdf8-4fea-85cf-f4f86cfbedc1",
+      "queryName": "training_when_aggregated",
+      "loadEnabled": false
+    },
+    "training_freq": {
+      "queryId": "d2fc91e7-bb88-48dc-8009-23aff0769ab5",
+      "queryName": "training_freq",
+      "loadEnabled": false
+    },
+    "training_freq_aggregated": {
+      "queryId": "918c81a7-65bc-4d47-b447-1d3dd1d6a21e",
+      "queryName": "training_freq_aggregated",
+      "loadEnabled": false
+    },
+    "training_time": {
+      "queryId": "83d0a1f3-57b3-46c2-b221-990412fb8f4b",
+      "queryName": "training_time",
+      "loadEnabled": false
+    },
+    "training_time_aggregated": {
+      "queryId": "f084899a-dbba-4e20-84cd-8fcf125cd9d4",
+      "queryName": "training_time_aggregated",
+      "loadEnabled": false
+    },
+    "training length": {
+      "queryId": "ec12ec2e-cd4e-4bcb-9b2e-6001ef2222c5",
+      "queryName": "training length",
+      "loadEnabled": false
+    },
+    "training_length_aggregated": {
+      "queryId": "646c75b5-c86a-49d7-9aee-a9cabccb57ca",
+      "queryName": "training_length_aggregated",
+      "loadEnabled": false
+    },
+    "access": {
+      "queryId": "e365b9af-5946-4431-9ea2-c7370d7a0b7e",
+      "queryName": "access",
+      "loadEnabled": false
+    },
+    "access_aggregated": {
+      "queryId": "08671ebc-8620-48e3-9d6a-b15a071204d9",
+      "queryName": "access_aggregated",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "0c586366-f86d-4cc9-b789-218682a12795",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "self_care": {
+      "queryId": "05a86c05-ba8e-4c42-817c-86a307604f3b",
+      "queryName": "self_care",
+      "loadEnabled": false
+    },
+    "self_care_aggregated": {
+      "queryId": "f9e9c58a-50c5-4abb-9d4f-dbd5ecd31680",
+      "queryName": "self_care_aggregated",
+      "loadEnabled": false
+    },
+    "define_success": {
+      "queryId": "3f0d30ae-cefc-49e5-a192-389c3103b332",
+      "queryName": "define_success",
+      "loadEnabled": false
+    },
+    "define_success_aggregated": {
+      "queryId": "78d56f0c-de12-4c7e-9ed6-83526e401f3c",
+      "queryName": "define_success_aggregated",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

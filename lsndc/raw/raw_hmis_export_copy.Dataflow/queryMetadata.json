@@ -1,0 +1,423 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "raw_hmis_export",
+  "queryGroups": [
+    {
+      "id": "ed744c6d-bebb-4cc8-a83c-bdb65ec3ba7b",
+      "name": "Transform file from hmis_client"
+    },
+    {
+      "id": "457abcd6-8fc2-46dc-92a5-bc450b1b7211",
+      "name": "Helper queries",
+      "parentId": "ed744c6d-bebb-4cc8-a83c-bdb65ec3ba7b"
+    },
+    {
+      "id": "c9608cd7-6e03-48fd-a6de-e613ae74341d",
+      "name": "Transform file from hmis_checks (2)",
+      "order": 1
+    },
+    {
+      "id": "23e55833-4fdb-47f1-b8fb-7d64d97a5226",
+      "name": "Helper queries (2)",
+      "parentId": "c9608cd7-6e03-48fd-a6de-e613ae74341d"
+    },
+    {
+      "id": "ddffcdb1-f627-4a96-994c-6076ea5fd025",
+      "name": "Transform file from hmis_exit",
+      "order": 2
+    },
+    {
+      "id": "eff1bc0b-0424-4b1d-bdfb-aa7d59ea1019",
+      "name": "Helper queries (3)",
+      "parentId": "ddffcdb1-f627-4a96-994c-6076ea5fd025"
+    },
+    {
+      "id": "ab03e945-e11f-474f-ac19-44ee11d8b570",
+      "name": "Transform file from hmis_checks (3)",
+      "order": 3
+    },
+    {
+      "id": "f99f36b3-d2bd-4247-a073-84bb08587d8f",
+      "name": "Helper queries (4)",
+      "parentId": "ab03e945-e11f-474f-ac19-44ee11d8b570"
+    },
+    {
+      "id": "c29911b3-c8de-4b20-9339-6f978d0050ed",
+      "name": "Transform file from hmis_checks (4)",
+      "order": 4
+    },
+    {
+      "id": "ab596059-0149-4fc8-a6b3-fa3542ea77c8",
+      "name": "Helper queries (5)",
+      "parentId": "c29911b3-c8de-4b20-9339-6f978d0050ed"
+    },
+    {
+      "id": "1481c2b7-ee45-4cad-8c1a-fcfc3a688f8b",
+      "name": "Transform file from hmis_employment",
+      "order": 5
+    },
+    {
+      "id": "8a9a9d3d-49b9-43d7-b9d8-42fee20dff37",
+      "name": "Helper queries (6)",
+      "parentId": "1481c2b7-ee45-4cad-8c1a-fcfc3a688f8b"
+    },
+    {
+      "id": "bbd02ee2-3c13-43b3-b868-55046e996308",
+      "name": "Transform file from hmis_disabilities",
+      "order": 6
+    },
+    {
+      "id": "7e275744-7439-4dab-bb59-ee0cdcc046e9",
+      "name": "Helper queries (7)",
+      "parentId": "bbd02ee2-3c13-43b3-b868-55046e996308"
+    },
+    {
+      "id": "ee5b9ac0-c252-4df1-9714-a98098318ab1",
+      "name": "Transform file from hmis_checks (5)"
+    },
+    {
+      "id": "685f5658-a67c-46dc-8c42-c5b956d33672",
+      "name": "Helper queries (8)",
+      "parentId": "ee5b9ac0-c252-4df1-9714-a98098318ab1"
+    }
+  ],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "hmis_checks": {
+      "queryId": "ec6ecbee-0ea3-47e7-b2e7-f23403e21c06",
+      "queryName": "hmis_checks",
+      "loadEnabled": false
+    },
+    "hmis_client": {
+      "queryId": "62ce97ec-2dbd-42dd-80b5-f459e563a4ef",
+      "queryName": "hmis_client",
+      "loadEnabled": false
+    },
+    "Sample file": {
+      "queryId": "8087c90a-5d48-4f9a-a34f-94d0acf319be",
+      "queryName": "Sample file",
+      "queryGroupId": "457abcd6-8fc2-46dc-92a5-bc450b1b7211",
+      "loadEnabled": false
+    },
+    "Parameter": {
+      "queryId": "5b34c80d-5c56-4a4c-a5b3-afedd07295b3",
+      "queryName": "Parameter",
+      "queryGroupId": "457abcd6-8fc2-46dc-92a5-bc450b1b7211",
+      "loadEnabled": false
+    },
+    "Transform Sample file": {
+      "queryId": "0c979bb2-e5c0-4460-834b-4d17897b958d",
+      "queryName": "Transform Sample file",
+      "queryGroupId": "ed744c6d-bebb-4cc8-a83c-bdb65ec3ba7b",
+      "loadEnabled": false
+    },
+    "Transform file": {
+      "queryId": "98718288-8069-4ded-b8fe-7a4f7a4d5c23",
+      "queryName": "Transform file",
+      "queryGroupId": "457abcd6-8fc2-46dc-92a5-bc450b1b7211",
+      "loadEnabled": false
+    },
+    "hmis_enrollment": {
+      "queryId": "8abc6f5f-bcea-4469-868b-c440d6a2fce1",
+      "queryName": "hmis_enrollment"
+    },
+    "Sample file (2)": {
+      "queryId": "e3f4dcc8-452f-46c7-b50d-b1feb58dc8b9",
+      "queryName": "Sample file (2)",
+      "queryGroupId": "23e55833-4fdb-47f1-b8fb-7d64d97a5226",
+      "loadEnabled": false
+    },
+    "Parameter (2)": {
+      "queryId": "8c9dc160-bf4f-483a-9ad2-984b7edd1668",
+      "queryName": "Parameter (2)",
+      "queryGroupId": "23e55833-4fdb-47f1-b8fb-7d64d97a5226",
+      "loadEnabled": false
+    },
+    "Transform Sample file (2)": {
+      "queryId": "76bc4937-0a9d-4767-ad13-10938fd320d5",
+      "queryName": "Transform Sample file (2)",
+      "queryGroupId": "c9608cd7-6e03-48fd-a6de-e613ae74341d",
+      "loadEnabled": false
+    },
+    "Transform file (2)": {
+      "queryId": "7b711dbe-fe4d-479b-b177-3b6e3d347927",
+      "queryName": "Transform file (2)",
+      "queryGroupId": "23e55833-4fdb-47f1-b8fb-7d64d97a5226",
+      "loadEnabled": false
+    },
+    "hmis_exit": {
+      "queryId": "94c14940-be15-4be9-93bb-93cdbcf623a0",
+      "queryName": "hmis_exit"
+    },
+    "Sample file (3)": {
+      "queryId": "961da328-7bf0-49d3-8139-47df9ea78d73",
+      "queryName": "Sample file (3)",
+      "queryGroupId": "eff1bc0b-0424-4b1d-bdfb-aa7d59ea1019",
+      "loadEnabled": false
+    },
+    "Parameter (3)": {
+      "queryId": "bceff7a4-6a03-4299-986e-a5ff7f79bdf8",
+      "queryName": "Parameter (3)",
+      "queryGroupId": "eff1bc0b-0424-4b1d-bdfb-aa7d59ea1019",
+      "loadEnabled": false
+    },
+    "Transform Sample file (3)": {
+      "queryId": "6ce5a5a3-154b-4017-ada4-6e4dd8db4cd0",
+      "queryName": "Transform Sample file (3)",
+      "queryGroupId": "ddffcdb1-f627-4a96-994c-6076ea5fd025",
+      "loadEnabled": false
+    },
+    "Transform file (3)": {
+      "queryId": "7fade433-1aa6-4da3-88bc-6ec14241578a",
+      "queryName": "Transform file (3)",
+      "queryGroupId": "eff1bc0b-0424-4b1d-bdfb-aa7d59ea1019",
+      "loadEnabled": false
+    },
+    "hmis_healthdv": {
+      "queryId": "03c710fa-446b-4070-95fe-e9a903e7d018",
+      "queryName": "hmis_healthdv"
+    },
+    "Sample file (4)": {
+      "queryId": "2af8ff07-44e4-45d3-b736-682085b2725b",
+      "queryName": "Sample file (4)",
+      "queryGroupId": "f99f36b3-d2bd-4247-a073-84bb08587d8f",
+      "loadEnabled": false
+    },
+    "Parameter (4)": {
+      "queryId": "b839190f-7e5b-47af-a967-01c7af1eb0ef",
+      "queryName": "Parameter (4)",
+      "queryGroupId": "f99f36b3-d2bd-4247-a073-84bb08587d8f",
+      "loadEnabled": false
+    },
+    "Transform Sample file (4)": {
+      "queryId": "d6f47c3a-7fd6-4d34-8310-c7a5cc10e204",
+      "queryName": "Transform Sample file (4)",
+      "queryGroupId": "ab03e945-e11f-474f-ac19-44ee11d8b570",
+      "loadEnabled": false
+    },
+    "Transform file (4)": {
+      "queryId": "33713221-bc91-4ac8-bb0c-133ccd4addfc",
+      "queryName": "Transform file (4)",
+      "queryGroupId": "f99f36b3-d2bd-4247-a073-84bb08587d8f",
+      "loadEnabled": false
+    },
+    "hmis_income": {
+      "queryId": "a12463c8-28c8-401c-be5d-f05d4ff17506",
+      "queryName": "hmis_income"
+    },
+    "Sample file (5)": {
+      "queryId": "bb64c07d-4cfa-4e72-9b9d-441144b7d8ec",
+      "queryName": "Sample file (5)",
+      "queryGroupId": "ab596059-0149-4fc8-a6b3-fa3542ea77c8",
+      "loadEnabled": false
+    },
+    "Parameter (5)": {
+      "queryId": "e9e08f1a-ddb0-41b6-a5ac-b54941ffd206",
+      "queryName": "Parameter (5)",
+      "queryGroupId": "ab596059-0149-4fc8-a6b3-fa3542ea77c8",
+      "loadEnabled": false
+    },
+    "Transform Sample file (5)": {
+      "queryId": "a1cdbe85-177a-4494-ad61-c0135fa989b1",
+      "queryName": "Transform Sample file (5)",
+      "queryGroupId": "c29911b3-c8de-4b20-9339-6f978d0050ed",
+      "loadEnabled": false
+    },
+    "Transform file (5)": {
+      "queryId": "05c886a2-a23a-45d0-9215-e935cad669e4",
+      "queryName": "Transform file (5)",
+      "queryGroupId": "ab596059-0149-4fc8-a6b3-fa3542ea77c8",
+      "loadEnabled": false
+    },
+    "hmis_employment": {
+      "queryId": "545fdb9f-f45d-40b9-8312-5c0f6acc68b8",
+      "queryName": "hmis_employment"
+    },
+    "Sample file (6)": {
+      "queryId": "63fc4ec3-af41-40be-a812-8920ceec4744",
+      "queryName": "Sample file (6)",
+      "queryGroupId": "8a9a9d3d-49b9-43d7-b9d8-42fee20dff37",
+      "loadEnabled": false
+    },
+    "Parameter (6)": {
+      "queryId": "bd5426f5-b92a-4178-bec2-39c712720a6a",
+      "queryName": "Parameter (6)",
+      "queryGroupId": "8a9a9d3d-49b9-43d7-b9d8-42fee20dff37",
+      "loadEnabled": false
+    },
+    "Transform Sample file (6)": {
+      "queryId": "da980e0f-5162-454c-acd0-36498612e0fa",
+      "queryName": "Transform Sample file (6)",
+      "queryGroupId": "1481c2b7-ee45-4cad-8c1a-fcfc3a688f8b",
+      "loadEnabled": false
+    },
+    "Transform file (6)": {
+      "queryId": "4c7a3fe7-11f7-4935-bf8f-cbce8313d74c",
+      "queryName": "Transform file (6)",
+      "queryGroupId": "8a9a9d3d-49b9-43d7-b9d8-42fee20dff37",
+      "loadEnabled": false
+    },
+    "hmis_disabilities": {
+      "queryId": "e432d16a-e7be-41fa-8e4b-f5d70d98fca5",
+      "queryName": "hmis_disabilities"
+    },
+    "Sample file (7)": {
+      "queryId": "3ecfb33a-8797-4a76-82c2-403f1e340959",
+      "queryName": "Sample file (7)",
+      "queryGroupId": "7e275744-7439-4dab-bb59-ee0cdcc046e9",
+      "loadEnabled": false
+    },
+    "Parameter (7)": {
+      "queryId": "204b08ec-c47c-4c34-8cf8-35e0d50a4a53",
+      "queryName": "Parameter (7)",
+      "queryGroupId": "7e275744-7439-4dab-bb59-ee0cdcc046e9",
+      "loadEnabled": false
+    },
+    "Transform Sample file (7)": {
+      "queryId": "0431b9c2-7d36-426e-8390-d3f7e12b5b55",
+      "queryName": "Transform Sample file (7)",
+      "queryGroupId": "bbd02ee2-3c13-43b3-b868-55046e996308",
+      "loadEnabled": false
+    },
+    "Transform file (7)": {
+      "queryId": "c773d970-e3a8-4d0a-8a14-62e99489b20a",
+      "queryName": "Transform file (7)",
+      "queryGroupId": "7e275744-7439-4dab-bb59-ee0cdcc046e9",
+      "loadEnabled": false
+    },
+    "raw_lsndc_clients": {
+      "queryId": "99fdd393-3be8-43b9-b315-ade309f686d9",
+      "queryName": "raw_lsndc_clients"
+    },
+    "client_control_table": {
+      "queryId": "a6db9e71-d633-40f7-8a82-6921d1fc0c7c",
+      "queryName": "client_control_table",
+      "loadEnabled": false
+    },
+    "sec_client_control_table": {
+      "queryId": "cac2fb5d-7dd1-4ec7-91e6-38a046f580e8",
+      "queryName": "sec_client_control_table",
+      "loadEnabled": false
+    },
+    "hmis_client_flag": {
+      "queryId": "cbea56b7-7d8a-441c-b400-5759bb115d54",
+      "queryName": "hmis_client_flag"
+    },
+    "blank_sex": {
+      "queryId": "f2bf485d-1172-4988-9af6-e7dc109d7d7a",
+      "queryName": "blank_sex",
+      "loadEnabled": false
+    },
+    "ssn_check": {
+      "queryId": "12d296c8-3724-44c7-a1b9-e7429326b8e7",
+      "queryName": "ssn_check"
+    },
+    "ssn_blank": {
+      "queryId": "b26b3afa-4642-40ac-90d8-2a6a0707f58e",
+      "queryName": "ssn_blank",
+      "loadEnabled": false
+    },
+    "ssn_incomplete": {
+      "queryId": "f8c17187-c6ce-4f20-9f6c-1c0e90faa432",
+      "queryName": "ssn_incomplete",
+      "loadEnabled": false
+    },
+    "employment_blank": {
+      "queryId": "98885d27-ac53-4f51-a72c-9e6bdbf973e2",
+      "queryName": "employment_blank",
+      "loadEnabled": false
+    },
+    "last_grade_blank": {
+      "queryId": "da4e73a7-d22a-4743-a711-d8556c9ba314",
+      "queryName": "last_grade_blank",
+      "loadEnabled": false
+    },
+    "employment_blank_DataDestination": {
+      "queryId": "5476608e-8db9-42ad-bac2-ade5fb60be29",
+      "queryName": "employment_blank_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "1dbece99-93d1-4bb0-bcd3-0db9a172448c",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "blank_dv": {
+      "queryId": "902256ee-0954-4553-84a5-7b8ba7a54c52",
+      "queryName": "blank_dv",
+      "loadEnabled": false
+    },
+    "blank_dv_DataDestination": {
+      "queryId": "5bfd3212-7f70-4088-aee2-5f93f0925d79",
+      "queryName": "blank_dv_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "blank_vamc": {
+      "queryId": "c20beafb-fe4a-4343-9323-b57b6e20bad0",
+      "queryName": "blank_vamc",
+      "loadEnabled": false
+    },
+    "blank_coc": {
+      "queryId": "0f1f8538-f774-4ea8-af67-25eda9164970",
+      "queryName": "blank_coc",
+      "loadEnabled": false
+    },
+    "blank_vet_status": {
+      "queryId": "4608f1ae-78c2-4bd2-bb75-515d15e8b893",
+      "queryName": "blank_vet_status",
+      "loadEnabled": false
+    },
+    "hmis_enrollment (2)": {
+      "queryId": "f27d60ca-1969-43f6-978d-5b96eb8c4d17",
+      "queryName": "hmis_enrollment (2)",
+      "loadEnabled": false
+    },
+    "hmis_event": {
+      "queryId": "0eeee26c-cf26-4ca2-bf40-11ac2a1d759e",
+      "queryName": "hmis_event",
+      "loadEnabled": false
+    },
+    "Sample file (8)": {
+      "queryId": "9ec6f912-432d-4553-84d0-ed14b76e6a9e",
+      "queryName": "Sample file (8)",
+      "queryGroupId": "685f5658-a67c-46dc-8c42-c5b956d33672",
+      "loadEnabled": false
+    },
+    "Parameter (8)": {
+      "queryId": "604f61fb-d003-4649-9f98-e29835a18960",
+      "queryName": "Parameter (8)",
+      "queryGroupId": "685f5658-a67c-46dc-8c42-c5b956d33672",
+      "loadEnabled": false
+    },
+    "Transform Sample file (8)": {
+      "queryId": "0fbaea08-3623-464f-a239-9759b6c40ef0",
+      "queryName": "Transform Sample file (8)",
+      "queryGroupId": "ee5b9ac0-c252-4df1-9714-a98098318ab1",
+      "loadEnabled": false
+    },
+    "Transform file (8)": {
+      "queryId": "eb3ef0ee-ccc0-442d-9bbb-a72bbb02e44e",
+      "queryName": "Transform file (8)",
+      "queryGroupId": "685f5658-a67c-46dc-8c42-c5b956d33672",
+      "loadEnabled": false
+    },
+    "blank_income": {
+      "queryId": "6d45ea8f-4cfd-4c0c-9239-da25f12814ef",
+      "queryName": "blank_income",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

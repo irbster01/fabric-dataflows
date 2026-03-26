@@ -7,18 +7,22 @@
   "queryGroups": [],
   "documentLocale": "en-US",
   "queriesMetadata": {
-    "raw_sp_entries": {
+    "raw_sp_services": {
       "queryId": "4d0a1ed0-129a-47ef-9db1-91629b58879f",
-      "queryName": "raw_sp_entries"
+      "queryName": "raw_sp_services"
     },
-    "test1_clean_lighthouse_entries": {
+    "clean_lighthouse_entries": {
       "queryId": "9d49d834-47e3-4ab3-971e-ddb99d5954b0",
-      "queryName": "test1_clean_lighthouse_entries",
+      "queryName": "clean_lighthouse_entries"
+    },
+    "stage2_clean_lighthouse_services": {
+      "queryId": "d823fccb-9511-4f82-9d47-6bea8e0e0d41",
+      "queryName": "stage2_clean_lighthouse_services",
       "loadEnabled": false
     },
-    "test1_clean_lighthouse_entries_DataDestination": {
-      "queryId": "04b2a8a3-9169-4104-ac2f-d44ae513777a",
-      "queryName": "test1_clean_lighthouse_entries_DataDestination",
+    "stage2_clean_lighthouse_services_DataDestination": {
+      "queryId": "71c989f6-2cf5-44a8-b4f5-9c202dddc505",
+      "queryName": "stage2_clean_lighthouse_services_DataDestination",
       "isHidden": true,
       "loadEnabled": false
     }

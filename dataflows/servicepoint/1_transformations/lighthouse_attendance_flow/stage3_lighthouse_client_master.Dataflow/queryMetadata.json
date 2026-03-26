@@ -1,39 +1,41 @@
 {
   "formatVersion": "202502",
-  "computeEngineSettings": {},
-  "name": "stage3_client_master",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "stage3_lighthouse_client_master",
   "queryGroups": [],
   "documentLocale": "en-US",
   "queriesMetadata": {
     "clean_lighthouse_entries": {
-      "queryId": "209a7fc2-1265-4b38-803b-6b60433153a7",
+      "queryId": "7e48a84b-5877-49c7-98cb-0864aba845ed",
       "queryName": "clean_lighthouse_entries"
     },
     "raw_sp_demographics": {
-      "queryId": "cb544a80-8e20-4c1f-8321-e143cfc668a2",
+      "queryId": "90c79f54-a2b0-4b8c-926f-e7ed36f8a1ec",
       "queryName": "raw_sp_demographics"
     },
     "raw_lighthouse_registration": {
-      "queryId": "776978e2-6ac8-43e0-ba67-4e8229227722",
+      "queryId": "e54c9d70-d050-4cc6-984d-69e836b19fc9",
       "queryName": "raw_lighthouse_registration"
     },
     "stage3_demographics_deduped": {
-      "queryId": "31eb916a-0603-4788-b807-a9762c6fd410",
+      "queryId": "7c2c47d4-3885-4608-8224-62571e0993dc",
       "queryName": "stage3_demographics_deduped",
       "loadEnabled": false
     },
     "stage3_registration_deduped": {
-      "queryId": "3efbbe56-dfc8-4f73-bcbc-77a2aca79fd4",
+      "queryId": "8876a08c-b0d3-4112-81a0-a48b24bee0c7",
       "queryName": "stage3_registration_deduped",
       "loadEnabled": false
     },
     "stage3_lighthouse_client_master": {
-      "queryId": "2c054e0d-05a7-4c30-89a8-390bac7e2fe8",
+      "queryId": "9bd58835-163c-435c-b837-e7f68f7acf17",
       "queryName": "stage3_lighthouse_client_master",
       "loadEnabled": false
     },
     "DefaultDestination": {
-      "queryId": "2ed64ddc-d954-4f04-9d5b-76dbf0299b54",
+      "queryId": "90541227-1262-4f7d-9e95-95fb2cd2ff1a",
       "queryName": "DefaultDestination",
       "isHidden": true,
       "loadEnabled": false

@@ -1,21 +1,23 @@
 {
   "formatVersion": "202502",
-  "computeEngineSettings": {},
-  "name": "stage4_sessions_attended",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "stage4_lighthouse_sessions_attended",
   "queryGroups": [],
   "documentLocale": "en-US",
   "queriesMetadata": {
     "clean_lighthouse_services": {
-      "queryId": "95882aae-c244-4f72-96bd-fe717caaa149",
+      "queryId": "c0350cf6-419c-4eb4-ac69-86d4a11756a4",
       "queryName": "clean_lighthouse_services"
     },
     "stage4_lighthouse_sessions_attended": {
-      "queryId": "09540e09-10de-4513-93f1-6f2b95b071ca",
+      "queryId": "19e01b48-e335-42cd-80cb-3dd681ec30d6",
       "queryName": "stage4_lighthouse_sessions_attended",
       "loadEnabled": false
     },
     "DefaultDestination": {
-      "queryId": "a1e32aba-82a1-4b28-b5af-4fa446554839",
+      "queryId": "18b12dd5-59f1-40f1-a899-207276aad177",
       "queryName": "DefaultDestination",
       "isHidden": true,
       "loadEnabled": false

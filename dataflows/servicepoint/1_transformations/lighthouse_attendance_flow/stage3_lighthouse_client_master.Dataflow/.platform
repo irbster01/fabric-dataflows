@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Dataflow",
-    "displayName": "stage5_sessions_possible"
+    "displayName": "stage3_lighthouse_client_master"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "4e114ae2-2792-ae3e-4a9e-7075b8dc3111"
+    "logicalId": "49ee2f96-2e80-bc3c-4aac-cebd485bee4d"
   }
 }

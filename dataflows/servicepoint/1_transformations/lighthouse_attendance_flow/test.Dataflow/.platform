@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Dataflow",
-    "displayName": "stage2_clean_services"
+    "displayName": "test"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "2a6fe62f-8e35-b946-4b61-2f113c7d6202"
+    "logicalId": "1bbd0f92-2974-a4de-4430-971c49c522c3"
   }
 }

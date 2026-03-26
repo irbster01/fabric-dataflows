@@ -19,9 +19,10 @@ shared raw_lighthouse_registration = let
   Source = Lakehouse.Contents(null),
   #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Id = "raw_lighthouse_registration", ItemKind = "Table"]}[Data]
+  #"Navigation 3" = #"Navigation 2"{[Id = "raw_lighthouse_registration", ItemKind = "Table"]}[Data],
+  #"Changed column type" = Table.TransformColumnTypes(#"Navigation 3", {{"client_id", Int64.Type}})
 in
-  #"Navigation 3";
+  #"Changed column type";
 [BindToDefaultDestination = true]
 shared stage3_demographics_deduped = let
   Source = raw_sp_demographics,

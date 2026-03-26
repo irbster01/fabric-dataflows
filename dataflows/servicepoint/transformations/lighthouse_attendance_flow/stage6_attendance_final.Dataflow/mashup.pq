@@ -2,27 +2,27 @@
 section Section1;
 shared lighthouse_sessions_attended = let
   Source = Lakehouse.Contents(null),
-  Nav1 = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Nav2 = Nav1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  Nav3 = Nav2{[Id = "lighthouse_sessions_attended", ItemKind = "Table"]}[Data]
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "stage4_lighthouse_sessions_attended", ItemKind = "Table"]}[Data]
 in
-  Nav3;
+  #"Navigation 3";
 shared lighthouse_sessions_possible = let
   Source = Lakehouse.Contents(null),
-  Nav1 = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Nav2 = Nav1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  Nav3 = Nav2{[Id = "lighthouse_sessions_possible", ItemKind = "Table"]}[Data]
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "stage5_lighthouse_sessions_possible", ItemKind = "Table"]}[Data]
 in
-  Nav3;
+  #"Navigation 3";
 shared lighthouse_client_master = let
   Source = Lakehouse.Contents(null),
-  Nav1 = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Nav2 = Nav1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  Nav3 = Nav2{[Id = "lighthouse_client_master", ItemKind = "Table"]}[Data]
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "stage3_lighthouse_client_master", ItemKind = "Table"]}[Data]
 in
-  Nav3;
+  #"Navigation 3";
 [BindToDefaultDestination = true]
-shared lighthouse_attendance_detail = let
+shared stage6_lighthouse_attendance_detail = let
   Source = lighthouse_sessions_possible,
   
   // Join sessions_attended
@@ -49,23 +49,25 @@ shared lighthouse_attendance_detail = let
   #"Add meets" = Table.AddColumn(#"Add is_80", "meets_threshold", each 
     if [attendance_rate] = null then false
     else if [is_80_school] then [attendance_rate] >= 0.80
-    else [attendance_rate] >= 0.60, type logical)
+    else [attendance_rate] >= 0.60, type logical),
+  #"Filtered rows" = Table.SelectRows(#"Add meets", each ([nine_week_period] <> null))
 in
-  #"Add meets";
+  #"Filtered rows";
 [BindToDefaultDestination = true]
-shared attendance_summary_80_schools = let
-  Source = lighthouse_attendance_detail,
-  #"Filtered" = Table.SelectRows(Source, each [is_80_school] = true and [lighthouse_location_enrolling] <> null),
+shared stage6_attendance_summary_80_schools = let
+  Source = stage6_lighthouse_attendance_detail,
+  #"Filtered" = Table.SelectRows(Source, each [is_80_school] = true),
   #"Grouped" = Table.Group(#"Filtered", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"total_students", each Table.RowCount(_), Int64.Type},
     {"students_meeting_80", each Table.RowCount(Table.SelectRows(_, each [meets_threshold] = true)), Int64.Type}
   }),
-  #"Add pct" = Table.AddColumn(#"Grouped", "pct_meeting_threshold", each if [total_students] = 0 then 0 else [students_meeting_80] / [total_students], Percentage.Type)
+  #"Add pct" = Table.AddColumn(#"Grouped", "pct_meeting_threshold", each if [total_students] = 0 then 0 else [students_meeting_80] / [total_students], Percentage.Type),
+  #"Filtered rows" = Table.SelectRows(#"Add pct", each ([nine_week_period] <> null))
 in
-  #"Add pct";
+  #"Filtered rows";
 [BindToDefaultDestination = true]
-shared attendance_summary_other_schools = let
-  Source = lighthouse_attendance_detail,
+shared stage6_attendance_summary_other_schools = let
+  Source = stage6_lighthouse_attendance_detail,
   #"Filtered" = Table.SelectRows(Source, each 
     [is_80_school] = false and 
     [lighthouse_location_enrolling] <> null and
@@ -79,15 +81,16 @@ shared attendance_summary_other_schools = let
 in
   #"Add pct";
 [BindToDefaultDestination = true]
-shared attendance_averages_by_location = let
-  Source = lighthouse_attendance_detail,
+shared stage6_attendance_averages_by_location = let
+  Source = stage6_lighthouse_attendance_detail,
   #"Filtered" = Table.SelectRows(Source, each [lighthouse_location_enrolling] <> null and [lighthouse_location_enrolling] <> "School Site - Judson"),
   #"Grouped" = Table.Group(#"Filtered", {"lighthouse_location_enrolling", "nine_week_period"}, {
     {"avg_sessions_attended", each List.Average(_[sessions_attended]), type number},
     {"avg_sessions_possible", each List.Average(_[sessions_possible]), type number},
     {"student_count", each Table.RowCount(_), Int64.Type}
   }),
-  #"Add avg rate" = Table.AddColumn(#"Grouped", "avg_attendance_rate", each if [avg_sessions_possible] = 0 or [avg_sessions_possible] = null then null else [avg_sessions_attended] / [avg_sessions_possible], Percentage.Type)
+  #"Add avg rate" = Table.AddColumn(#"Grouped", "avg_attendance_rate", each if [avg_sessions_possible] = 0 or [avg_sessions_possible] = null then null else [avg_sessions_attended] / [avg_sessions_possible], Percentage.Type),
+  #"Filtered rows" = Table.SelectRows(#"Add avg rate", each ([nine_week_period] <> null))
 in
-  #"Add avg rate";
-shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data];
+  #"Filtered rows";
+shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data];

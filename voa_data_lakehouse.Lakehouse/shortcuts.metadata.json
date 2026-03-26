@@ -1,0 +1,62 @@
+[
+  {
+    "name": "servicepoint",
+    "path": "/Files",
+    "target": {
+      "type": "OneDriveSharePoint",
+      "oneDriveSharePoint": {
+        "connectionId": "6e8ca9cf-55c4-485f-98fe-dbd34dbcc0ef",
+        "location": "https://voanorthlaorg.sharepoint.com",
+        "subpath": "/sites/TheVOAHub/Management/Operational Improvement Team/QA Manager/!! Lakehouse/servicepoint"
+      }
+    }
+  },
+  {
+    "name": "paycor",
+    "path": "/Files",
+    "target": {
+      "type": "OneDriveSharePoint",
+      "oneDriveSharePoint": {
+        "connectionId": "6e8ca9cf-55c4-485f-98fe-dbd34dbcc0ef",
+        "location": "https://voanorthlaorg.sharepoint.com",
+        "subpath": "/sites/TheVOAHub/Management/Operational Improvement Team/QA Manager/!! Lakehouse/paycor"
+      }
+    }
+  },
+  {
+    "name": "lsndc",
+    "path": "/Files",
+    "target": {
+      "type": "OneDriveSharePoint",
+      "oneDriveSharePoint": {
+        "connectionId": "6e8ca9cf-55c4-485f-98fe-dbd34dbcc0ef",
+        "location": "https://voanorthlaorg.sharepoint.com",
+        "subpath": "/sites/TheVOAHub/Management/Operational Improvement Team/QA Manager/!! Lakehouse/lsndc"
+      }
+    }
+  },
+  {
+    "name": "cis",
+    "path": "/Files",
+    "target": {
+      "type": "OneDriveSharePoint",
+      "oneDriveSharePoint": {
+        "connectionId": "6e8ca9cf-55c4-485f-98fe-dbd34dbcc0ef",
+        "location": "https://voanorthlaorg.sharepoint.com",
+        "subpath": "/sites/TheVOAHub/Management/Operational Improvement Team/QA Manager/!! Lakehouse/cis"
+      }
+    }
+  },
+  {
+    "name": "caddo_jcampus",
+    "path": "/Files",
+    "target": {
+      "type": "OneDriveSharePoint",
+      "oneDriveSharePoint": {
+        "connectionId": "6e8ca9cf-55c4-485f-98fe-dbd34dbcc0ef",
+        "location": "https://voanorthlaorg.sharepoint.com",
+        "subpath": "/sites/TheVOAHub/Management/Operational Improvement Team/QA Manager/!! Lakehouse/caddo_jcampus"
+      }
+    }
+  }
+]

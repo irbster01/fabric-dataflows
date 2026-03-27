@@ -44,9 +44,9 @@
       "queryGroupId": "95056265-f720-4efc-9a83-c2581bc57d71",
       "loadEnabled": false
     },
-    "caddo_grades_export_DataDestination": {
-      "queryId": "cea707dd-dbdc-448c-a85d-cabf0659a880",
-      "queryName": "caddo_grades_export_DataDestination",
+    "DefaultDestination": {
+      "queryId": "c275b42f-009f-4224-a8a3-a0442bf67b66",
+      "queryName": "DefaultDestination",
       "isHidden": true,
       "loadEnabled": false
     }

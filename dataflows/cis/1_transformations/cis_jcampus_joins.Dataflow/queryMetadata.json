@@ -27,21 +27,17 @@
     },
     "raw_caddo_daily_attend": {
       "queryId": "94f3af0f-0f88-4ccf-8c3e-db912f79f912",
-      "queryName": "raw_caddo_daily_attend"
+      "queryName": "raw_caddo_daily_attend",
+      "loadEnabled": false
     },
     "raw_caddo_referrals": {
       "queryId": "69094452-b7ce-4c1e-910c-a0562352f959",
-      "queryName": "raw_caddo_referrals"
+      "queryName": "raw_caddo_referrals",
+      "loadEnabled": false
     },
     "cis_referrals_wJcampus": {
       "queryId": "5502406b-8668-4d9a-8b67-bc53c91d1fe7",
       "queryName": "cis_referrals_wJcampus",
-      "loadEnabled": false
-    },
-    "DefaultDestination": {
-      "queryId": "b113e2ed-a610-4966-9eab-5fd901b42b69",
-      "queryName": "DefaultDestination",
-      "isHidden": true,
       "loadEnabled": false
     },
     "raw_cisdm_clients": {
@@ -93,6 +89,12 @@
     "caddo_attend_summary": {
       "queryId": "fdf237c4-56f9-4c71-bf00-6539e6dcc329",
       "queryName": "caddo_attend_summary",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "bf96f118-03ca-4905-9854-d9614118ed07",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
       "loadEnabled": false
     }
   },

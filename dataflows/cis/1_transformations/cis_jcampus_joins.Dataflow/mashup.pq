@@ -2,11 +2,11 @@
 section Section1;
 shared #"caddo_jcampus cleaned_caddo_grades" = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "caddo_jcampus.cleaned_caddo_grades", ItemKind = "Table"]}[Data]
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "cleaned_caddo_grades", ItemKind = "Table"]}[Data]
 in
-  #"Navigation 2";
+  #"Navigation 3";
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "cis_grades_wJcampus_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared cis_grades_wJcampus = let
   Source = Lakehouse.Contents(null),
@@ -125,6 +125,7 @@ shared cis_attend_wJcampus = let
   )
 in
   #"Added Nine Weeks (Exit)";
+[BindToDefaultDestination = true]
 shared raw_caddo_daily_attend = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -139,6 +140,7 @@ shared raw_caddo_daily_attend = let
   #"Sorted rows" = Table.Sort(#"Grouped rows", {{"tardies", Order.Descending}})
 in
   #"Sorted rows";
+[BindToDefaultDestination = true]
 shared raw_caddo_referrals = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -190,7 +192,7 @@ shared cis_referrals_wJcampus = let
   )
 in
   #"Added Nine Weeks (Exit)";
-shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data];
+[BindToDefaultDestination = true]
 shared raw_cisdm_clients = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -276,6 +278,7 @@ shared cis_grades_wJcampus_goalStudents = let
   #"Expanded raw_cisdm_progress_monitoring" = Table.ExpandTableColumn(#"Merged queries", "raw_cisdm_progress_monitoring", {"case_manager", "goal", "metric", "baseline", "target", "baseline_date"}, {"case_manager", "goal", "metric", "baseline", "target", "baseline_date"})
 in
   #"Expanded raw_cisdm_progress_monitoring";
+[BindToDefaultDestination = true]
 shared raw_cisdm_progress_monitoring = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -337,6 +340,7 @@ shared cis_referrals_wJcampus_goalStudents = let
   #"Removed duplicates" = Table.Distinct(#"Reordered columns", {"client_id"})
 in
   #"Removed duplicates";
+[BindToDefaultDestination = true]
 shared behavior_prog_monitor = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -345,6 +349,7 @@ shared behavior_prog_monitor = let
   #"Filtered rows" = Table.SelectRows(#"Navigation 2", each ([goal] = "Improve School Behavior"))
 in
   #"Filtered rows";
+[BindToDefaultDestination = true]
 shared attend_prog_monitor = let
   Source = raw_cisdm_progress_monitoring,
   #"Filtered rows" = Table.SelectRows(Source, each ([goal] = "Improve Attendance"))
@@ -370,3 +375,4 @@ shared caddo_attend_summary = let
   #"Navigation 2" = #"Navigation 1"{[Id = "caddo_attend_summary", ItemKind = "Table"]}[Data]
 in
   #"Navigation 2";
+shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data];

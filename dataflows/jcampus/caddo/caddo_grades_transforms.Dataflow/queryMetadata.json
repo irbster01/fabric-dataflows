@@ -5,14 +5,14 @@
   "queryGroups": [],
   "documentLocale": "en-US",
   "queriesMetadata": {
-    "raw_caddo_grades_export": {
+    "cleaned_caddo_grades": {
       "queryId": "4e5aca63-e504-4322-85f1-c60f2096f696",
-      "queryName": "raw_caddo_grades_export",
+      "queryName": "cleaned_caddo_grades",
       "loadEnabled": false
     },
-    "raw_caddo_grades_export_DataDestination": {
-      "queryId": "06f95d69-6f8f-456b-b3e3-58dcff3df0ee",
-      "queryName": "raw_caddo_grades_export_DataDestination",
+    "DefaultDestination": {
+      "queryId": "ac00b4a6-8e47-49dc-b31f-1d1948571281",
+      "queryName": "DefaultDestination",
       "isHidden": true,
       "loadEnabled": false
     }

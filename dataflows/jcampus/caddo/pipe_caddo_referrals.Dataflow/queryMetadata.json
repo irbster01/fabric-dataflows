@@ -15,9 +15,9 @@
   ],
   "documentLocale": "en-US",
   "queriesMetadata": {
-    "caddo_referrals": {
+    "raw_caddo_referrals": {
       "queryId": "01ce0cbc-953a-40e0-8730-45ebb64400af",
-      "queryName": "caddo_referrals",
+      "queryName": "raw_caddo_referrals",
       "loadEnabled": false
     },
     "Sample file": {
@@ -44,9 +44,9 @@
       "queryGroupId": "cb9cda15-758f-44e7-9f37-0ba414e50a97",
       "loadEnabled": false
     },
-    "caddo_referrals_DataDestination": {
-      "queryId": "4aa39363-2262-422e-9ab1-54fbd60631bf",
-      "queryName": "caddo_referrals_DataDestination",
+    "raw_caddo_referrals_DataDestination": {
+      "queryId": "950e1f40-3e9b-4e9e-85e0-c5fbc3ac3482",
+      "queryName": "raw_caddo_referrals_DataDestination",
       "isHidden": true,
       "loadEnabled": false
     }

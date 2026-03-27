@@ -291,12 +291,12 @@ shared Parameter = let
 in
   Parameter;
 shared #"Transform Sample file" = let
-  Source = Csv.Document(Parameter, [Delimiter = ",", Columns = 112, QuoteStyle = QuoteStyle.None])
+  Source = Csv.Document(Parameter, [Delimiter = ",", Columns = 112, QuoteStyle = QuoteStyle.Csv])
 in
   Source;
-[FunctionQueryBinding = "{""exemplarFormulaName"":""Transform Sample file""}"]
+[FunctionQueryBinding = "{\"exemplarFormulaName\":\"Transform Sample file\"}"]
 shared #"Transform file" = (Parameter as binary) => let
-  Source = Csv.Document(Parameter, [Delimiter = ",", Columns = 112, QuoteStyle = QuoteStyle.None])
+  Source = Csv.Document(Parameter, [Delimiter = ",", Columns = 112, QuoteStyle = QuoteStyle.Csv])
 in
   Source;
 shared raw_caddo_referrals_DataDestination = let

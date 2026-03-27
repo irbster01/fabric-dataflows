@@ -97,7 +97,17 @@ shared raw_caddo_referrals = let
         }
     ),
 
-    #"Renamed columns 1" = SafeRename(#"Changed column type 1", {{"SIS Incident", "sis_incident"}}),
+    #"Replaced date errors" = Table.ReplaceErrorValues(#"Changed column type 1", {
+        {"Ref Date", null}, {"Adm Date", null}, {"Adm2 Date", null}, {"Adm3 Date", null},
+        {"Adm4 Date", null}, {"Adm5 Date", null}, {"On Date", null}, {"CNF Date", null},
+        {"ISS Start", null}, {"ISS Return", null}, {"OSS Start", null}, {"OSS Return", null},
+        {"Exp Start", null}, {"Exp Return", null}, {"Bus Start", null}, {"Bus End", null},
+        {"Det Start", null}, {"Det Return", null}, {"Man Date", null},
+        {"Mon Det Start", null}, {"Mon Det End", null}, {"Thu Det Start", null},
+        {"Thu Det End", null}, {"Fri Det Start", null}, {"Fri Det End", null}
+    }),
+
+    #"Renamed columns 1" = SafeRename(#"Replaced date errors", {{"SIS Incident", "sis_incident"}}),
 
     #"Renamed columns" = SafeRename(
         #"Renamed columns 1",

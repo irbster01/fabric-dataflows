@@ -43,10 +43,12 @@ shared raw_caddo_referrals = let
     #"Invoke custom function" = Table.AddColumn(#"Filtered files only", "Transform file", each #"Transform file"([Content])),
     #"Removed other columns" = Table.SelectColumns(#"Invoke custom function", {"Transform file"}),
     #"Expanded table column" = Table.ExpandTableColumn(#"Removed other columns", "Transform file", Table.ColumnNames(#"Transform file"(#"Sample file"))),
-    #"Promoted headers" = Table.PromoteHeaders(#"Expanded table column", [PromoteAllScalars = true]),
+
+    // Filter out header rows from subsequent CSVs (they still appear as data rows)
+    #"Filtered header rows" = Table.SelectRows(#"Expanded table column", each [SIDNO] <> "SIDNO"),
 
     // Step 1: Remove columns we don't need
-    #"Removed columns" = SafeRemove(#"Promoted headers", {
+    #"Removed columns" = SafeRemove(#"Filtered header rows", {
         "RSch", "ESch", "Eth", "Ref Time", "Loc", "ICD", "ICD2", "ICD3", "ICD4",
         "Refer ID", "T Eth", "T Gen", "TCD", "TCD2", "TCD3", "TCD4",
         "ACD", "ACD2", "ACD3", "ACD4", "ACD5", "ACD6", "ACD7",
@@ -63,7 +65,8 @@ shared raw_caddo_referrals = let
         "Oth Det Start", "Oth Det End",
         "Detention Room", "Detention Room 2", "Det Start", "Det Return",
         "Bus Start", "Bus End", "Exp Start", "Exp Return",
-        "TR", "RT", "Lunch", "504", "Ethnic Description"
+        "TR", "RT", "Lunch", "504", "Ethnic Description",
+        "H Days"
     }),
 
     // Step 2: Rename to clean names
@@ -181,14 +184,16 @@ shared Parameter = let
 in
   Parameter;
 shared #"Transform Sample file" = let
-  Source = Csv.Document(Parameter, [Delimiter = ",", QuoteStyle = QuoteStyle.Csv])
+  Source = Csv.Document(Parameter, [Delimiter = ",", QuoteStyle = QuoteStyle.Csv]),
+  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true])
 in
-  Source;
+  #"Promoted headers";
 [FunctionQueryBinding = "{""exemplarFormulaName"":""Transform Sample file""}"]
 shared #"Transform file" = (Parameter as binary) => let
-  Source = Csv.Document(Parameter, [Delimiter = ",", QuoteStyle = QuoteStyle.Csv])
+  Source = Csv.Document(Parameter, [Delimiter = ",", QuoteStyle = QuoteStyle.Csv]),
+  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true])
 in
-  Source;
+  #"Promoted headers";
 shared raw_caddo_referrals_DataDestination = let
   Pattern = Lakehouse.Contents([CreateNavigationProperties = false, EnableFolding = false, HierarchicalNavigation = null]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

@@ -1,6 +1,9 @@
 # Local scratch folder
 scratch/
 
+# Local CSV test files
+referrals/
+
 # Backup files
 *.backup
 *.bak

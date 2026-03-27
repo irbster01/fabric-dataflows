@@ -80,10 +80,10 @@ in
 shared #"Sample file" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
+  #"Navigation 1" = Navigation{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[Id = "Files", ItemKind = "Folder"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Name = "JCAMPUS"]}[Content],
-  #"Navigation 4" = #"Navigation 3"{[Name = "caddo_grades_export"]}[Content],
+  #"Navigation 3" = #"Navigation 2"{[Name = "caddo_jcampus"]}[Content],
+  #"Navigation 4" = #"Navigation 3"{[Name = "grades_export"]}[Content],
   #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
   #"Filtered hidden files" = Table.SelectRows(#"Expanded Attributes", each [Attributes]?[Hidden]? <> true),
   #"Navigation 5" = #"Filtered hidden files"{0}[Content]

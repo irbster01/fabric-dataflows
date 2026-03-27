@@ -143,12 +143,13 @@ in
 [BindToDefaultDestination = true]
 shared raw_caddo_referrals = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "raw_caddo_referrals", ItemKind = "Table"]}[Data],
-  #"Grouped rows" = Table.Group(#"Navigation 2", {"sidno", "sasid", "student_name"}, {{"referrals", each Table.RowCount(Table.Distinct(_)), Int64.Type}})
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "raw_caddo_referrals", ItemKind = "Table"]}[Data],
+  #"Grouped rows 1" = Table.Group(#"Navigation 3", {"sidno", "student_name", "sasid"}, {{"Count", each Table.RowCount(_), Int64.Type}}),
+  #"Renamed columns" = Table.RenameColumns(#"Grouped rows 1", {{"Count", "referrals"}})
 in
-  #"Grouped rows";
+  #"Renamed columns";
 [BindToDefaultDestination = true]
 shared cis_referrals_wJcampus = let
   Source = Lakehouse.Contents(null),
@@ -203,11 +204,11 @@ in
 [BindToDefaultDestination = true]
 shared lighthouse_dates = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "529f0d5c-c0bc-4f97-abf5-3fd2babe9910"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "lighthouse_dates", ItemKind = "Table"]}[Data]
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "lighthouse_dates", ItemKind = "Table"]}[Data]
 in
-  #"Navigation 2";
+  #"Navigation 3";
 [DataDestinations = {[Definition = [Kind = "Reference", QueryName = "cis_grades_wJcampus_goalStudents_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
 shared cis_grades_wJcampus_goalStudents = let
   Source = Lakehouse.Contents(null),

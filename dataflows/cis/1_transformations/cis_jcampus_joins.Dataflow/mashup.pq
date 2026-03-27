@@ -28,17 +28,19 @@ shared cis_grades_wJcampus = let
     "caddo_jcampus cleaned_caddo_grades",
     {
       "grade", "gender", "dob", "school_name", "course",
-      "1st_9_weeks", "1st_9_GPA", "2nd_9_weeks", "2nd_9_GPA",
-      "3rd_9_weeks", "3rd_9_gpa", "4th_9_weeks",
-      "iep_status", "504_status", "lep_status", "short_name_academics",
-      "1st_9_grade_value", "2nd_9_grade_value", "1st_9_letter_grade"
+      "1st_9_weeks", "1st_9_letter_grade", "1st_9_grade_value", "1st_9_GPA",
+      "2nd_9_weeks", "2nd_9_letter_grade", "2nd_9_grade_value", "2nd_9_GPA",
+      "3rd_9_weeks", "3rd_9_letter_grade", "3rd_9_grade_value", "3rd_9_GPA",
+      "4th_9_weeks", "4th_9_letter_grade", "4th_9_grade_value", "4th_9_GPA",
+      "iep_status", "504_status", "lep_status", "short_name_academics"
     },
     {
       "grade", "gender", "dob", "school_name.1", "course",
-      "1st_9_weeks", "1st_9_GPA", "2nd_9_weeks", "2nd_9_GPA",
-      "3rd_9_weeks", "3rd_9_gpa", "4th_9_weeks",
-      "iep_status", "504_status", "lep_status", "short_name_academics",
-      "1st_9_grade_value", "2nd_9_grade_value", "1st_9_letter_grade"
+      "1st_9_weeks", "1st_9_letter_grade", "1st_9_grade_value", "1st_9_GPA",
+      "2nd_9_weeks", "2nd_9_letter_grade", "2nd_9_grade_value", "2nd_9_GPA",
+      "3rd_9_weeks", "3rd_9_letter_grade", "3rd_9_grade_value", "3rd_9_GPA",
+      "4th_9_weeks", "4th_9_letter_grade", "4th_9_grade_value", "4th_9_GPA",
+      "iep_status", "504_status", "lep_status", "short_name_academics"
     }
   ),
 
@@ -230,17 +232,19 @@ shared cis_grades_wJcampus_goalStudents = let
     "caddo_jcampus cleaned_caddo_grades",
     {
       "grade", "gender", "dob", "school_name", "course",
-      "1st_9_weeks", "1st_9_GPA", "2nd_9_weeks", "2nd_9_GPA",
-      "3rd_9_weeks", "3rd_9_gpa", "4th_9_weeks",
-      "iep_status", "504_status", "lep_status", "short_name_academics",
-      "1st_9_grade_value", "2nd_9_grade_value", "1st_9_letter_grade"
+      "1st_9_weeks", "1st_9_letter_grade", "1st_9_grade_value", "1st_9_GPA",
+      "2nd_9_weeks", "2nd_9_letter_grade", "2nd_9_grade_value", "2nd_9_GPA",
+      "3rd_9_weeks", "3rd_9_letter_grade", "3rd_9_grade_value", "3rd_9_GPA",
+      "4th_9_weeks", "4th_9_letter_grade", "4th_9_grade_value", "4th_9_GPA",
+      "iep_status", "504_status", "lep_status", "short_name_academics"
     },
     {
       "grade", "gender", "dob", "school_name.1", "course",
-      "1st_9_weeks", "1st_9_GPA", "2nd_9_weeks", "2nd_9_GPA",
-      "3rd_9_weeks", "3rd_9_gpa", "4th_9_weeks",
-      "iep_status", "504_status", "lep_status", "short_name_academics",
-      "1st_9_grade_value", "2nd_9_grade_value", "1st_9_letter_grade"
+      "1st_9_weeks", "1st_9_letter_grade", "1st_9_grade_value", "1st_9_GPA",
+      "2nd_9_weeks", "2nd_9_letter_grade", "2nd_9_grade_value", "2nd_9_GPA",
+      "3rd_9_weeks", "3rd_9_letter_grade", "3rd_9_grade_value", "3rd_9_GPA",
+      "4th_9_weeks", "4th_9_letter_grade", "4th_9_grade_value", "4th_9_GPA",
+      "iep_status", "504_status", "lep_status", "short_name_academics"
     }
   ),
 

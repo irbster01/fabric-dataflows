@@ -247,18 +247,28 @@ shared cleaned_caddo_grades = let
         each not List.Contains(ExcludedCourses, NormalizeText([course]))
     ),
 
+    // GPA columns for each 9 weeks
     #"Inserted conditional column 1" = Table.AddColumn(#"Filtered rows", "1st_9_GPA", each GradeToGPA([1st_9_weeks]), Int64.Type),
     #"Inserted conditional column 2" = Table.AddColumn(#"Inserted conditional column 1", "2nd_9_GPA", each GradeToGPA([2nd_9_weeks]), Int64.Type),
-    #"Inserted conditional column 3" = Table.AddColumn(#"Inserted conditional column 2", "3rd_9_gpa", each GradeToGPA([3rd_9_weeks]), Int64.Type),
+    #"Inserted conditional column 3" = Table.AddColumn(#"Inserted conditional column 2", "3rd_9_GPA", each GradeToGPA([3rd_9_weeks]), Int64.Type),
+    #"Inserted 4th GPA" = Table.AddColumn(#"Inserted conditional column 3", "4th_9_GPA", each GradeToGPA([4th_9_weeks]), Int64.Type),
 
-    #"Filtered rows 3" = Table.SelectRows(#"Inserted conditional column 3", each [1st_9_GPA] <> null),
+    #"Filtered rows 3" = Table.SelectRows(#"Inserted 4th GPA", each [1st_9_GPA] <> null),
 
+    // Numeric grade values for each 9 weeks
     #"Inserted 1st grade value" = Table.AddColumn(#"Filtered rows 3", "1st_9_grade_value", each FirstTokenNumber([1st_9_weeks]), type number),
     #"Inserted 2nd grade value" = Table.AddColumn(#"Inserted 1st grade value", "2nd_9_grade_value", each FirstTokenNumber([2nd_9_weeks]), type number),
-    #"Inserted 1st letter grade" = Table.AddColumn(#"Inserted 2nd grade value", "1st_9_letter_grade", each LastTokenText([1st_9_weeks]), type text),
+    #"Inserted 3rd grade value" = Table.AddColumn(#"Inserted 2nd grade value", "3rd_9_grade_value", each FirstTokenNumber([3rd_9_weeks]), type number),
+    #"Inserted 4th grade value" = Table.AddColumn(#"Inserted 3rd grade value", "4th_9_grade_value", each FirstTokenNumber([4th_9_weeks]), type number),
+
+    // Letter grades for each 9 weeks
+    #"Inserted 1st letter grade" = Table.AddColumn(#"Inserted 4th grade value", "1st_9_letter_grade", each LastTokenText([1st_9_weeks]), type text),
+    #"Inserted 2nd letter grade" = Table.AddColumn(#"Inserted 1st letter grade", "2nd_9_letter_grade", each LastTokenText([2nd_9_weeks]), type text),
+    #"Inserted 3rd letter grade" = Table.AddColumn(#"Inserted 2nd letter grade", "3rd_9_letter_grade", each LastTokenText([3rd_9_weeks]), type text),
+    #"Inserted 4th letter grade" = Table.AddColumn(#"Inserted 3rd letter grade", "4th_9_letter_grade", each LastTokenText([4th_9_weeks]), type text),
 
     #"Reordered columns" = Table.ReorderColumns(
-        #"Inserted 1st letter grade",
+        #"Inserted 4th letter grade",
         {
             "student_name",
             "sidno",
@@ -273,11 +283,17 @@ shared cleaned_caddo_grades = let
             "1st_9_grade_value",
             "1st_9_GPA",
             "2nd_9_weeks",
+            "2nd_9_letter_grade",
             "2nd_9_grade_value",
             "2nd_9_GPA",
             "3rd_9_weeks",
-            "3rd_9_gpa",
+            "3rd_9_letter_grade",
+            "3rd_9_grade_value",
+            "3rd_9_GPA",
             "4th_9_weeks",
+            "4th_9_letter_grade",
+            "4th_9_grade_value",
+            "4th_9_GPA",
             "iep_status",
             "504_status",
             "lep_status",

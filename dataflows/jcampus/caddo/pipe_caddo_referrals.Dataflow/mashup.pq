@@ -30,6 +30,14 @@ shared raw_caddo_referrals = let
         in
             Table.TransformColumnTypes(tbl, validTypes),
 
+    SafeReplaceErrors = (tbl as table, replacements as list) as table =>
+        let
+            cols = Table.ColumnNames(tbl),
+            validReplacements = List.Select(replacements, each List.Contains(cols, _{0}))
+        in
+            if List.IsEmpty(validReplacements) then tbl
+            else Table.ReplaceErrorValues(tbl, validReplacements),
+
     #"Filtered hidden files" = Table.SelectRows(#"Navigation 5", each [Attributes]?[Hidden]? <> true),
     #"Filtered files only" = Table.SelectRows(#"Filtered hidden files", each Value.Is([Content], type binary)),
     #"Invoke custom function" = Table.AddColumn(#"Filtered files only", "Transform file", each #"Transform file"([Content])),
@@ -97,7 +105,7 @@ shared raw_caddo_referrals = let
         }
     ),
 
-    #"Replaced date errors" = Table.ReplaceErrorValues(#"Changed column type 1", {
+    #"Replaced date errors" = SafeReplaceErrors(#"Changed column type 1", {
         {"Ref Date", null}, {"Adm Date", null}, {"Adm2 Date", null}, {"Adm3 Date", null},
         {"Adm4 Date", null}, {"Adm5 Date", null}, {"On Date", null}, {"CNF Date", null},
         {"ISS Start", null}, {"ISS Return", null}, {"OSS Start", null}, {"OSS Return", null},
@@ -271,7 +279,7 @@ shared raw_caddo_referrals = let
         if List.Contains(Table.ColumnNames(#"Changed column type 4"), "event_id")
         then Table.Distinct(#"Changed column type 4", {"event_id"})
         else #"Changed column type 4",
-  #"Changed column type 5" = Table.TransformColumnTypes(#"Removed duplicates", {{"det_days", type text}, {"expulsion", type text}})
+  #"Changed column type 5" = SafeTypes(#"Removed duplicates", {{"det_days", type text}, {"expulsion", type text}})
 in
     #"Changed column type 5";
 shared #"Sample file" = let

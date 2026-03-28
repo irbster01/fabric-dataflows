@@ -1,0 +1,46 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowModernEvaluationEngine": true
+  },
+  "name": "lighthouse_grades_midyear_wAttendance",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "raw_lighthouse_grades": {
+      "queryId": "527aa055-6c18-45bd-8ae2-29cadda6a314",
+      "queryName": "raw_lighthouse_grades"
+    },
+    "stage6_lighthouse_attendance_detail": {
+      "queryId": "9402cd76-18c6-4a26-a7d6-f2b182d43e20",
+      "queryName": "stage6_lighthouse_attendance_detail"
+    },
+    "grades_staging_table_wFlag": {
+      "queryId": "95527dbf-2211-4eff-b322-330227a0fb96",
+      "queryName": "grades_staging_table_wFlag"
+    },
+    "lighthouse_grant_aggregated_attendance_metric": {
+      "queryId": "8c0ef616-52df-48ea-8f5f-c1f505bfd76e",
+      "queryName": "lighthouse_grant_aggregated_attendance_metric",
+      "loadEnabled": false
+    },
+    "lighthouse_grant_aggregated_grades_metric": {
+      "queryId": "48b7faca-01c0-42ce-aa7b-c7347105f738",
+      "queryName": "lighthouse_grant_aggregated_grades_metric",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "9a6f00e6-13ef-4505-b368-447414882c2d",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"52fc424e-b687-47d4-9bcd-385321917170\",\"DatasourceId\":\"d576bbdd-8082-4cd7-b15d-ed15565ce388\"}"
+    }
+  ]
+}

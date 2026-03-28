@@ -18,9 +18,9 @@ shared raw_lighthouse_grades = let
   #"Changed column type 1" = Table.TransformColumnTypes(#"Promoted headers", {{"Client ID", type text}, {"1st Quarter GPA", type number}, {"2nd Quarter GPA", type number}, {"3rd Quarter GPA", type number}}, "en-US"),
   #"Parsed entry date" = Table.TransformColumns(#"Changed column type 1", {{"Entry Date", each try Date.FromText(_, [Culture = "en-US"]) otherwise null, type date}}),
   #"Renamed columns" = Table.RenameColumns(#"Parsed entry date", {{"Last Name", "last_name"}, {"First Name", "first_name"}, {"Client ID", "client_id"}, {"Entry Date", "entry_date"}, {"Provider", "program"}, {"Lighthouse Location Enrolling", "lighthouse_location_enrolling"}, {"School Year", "school_year"}, {"1st Quarter GPA", "1Q_grades"}, {"2nd Quarter GPA", "2Q_grades"}, {"3rd Quarter GPA", "3Q_grades"}}),
-  #"Sorted rows" = Table.Sort(#"Renamed columns", {{"entry_date", Order.Descending}})
+  #"Removed errors" = Table.RemoveRowsWithErrors(#"Renamed columns", {"1Q_grades", "2Q_grades", "3Q_grades"})
 in
-  #"Sorted rows";
+  #"Removed errors";
 shared #"Sample file" = let
   Source = Lakehouse.Contents(null),
   #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],

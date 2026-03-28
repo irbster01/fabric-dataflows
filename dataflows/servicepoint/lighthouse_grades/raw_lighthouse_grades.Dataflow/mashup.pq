@@ -8,7 +8,7 @@ shared raw_lighthouse_grades = let
   #"Navigation 3" = #"Navigation 2"{[Id = "Files", ItemKind = "Folder"]}[Data],
   #"Navigation 4" = #"Navigation 3"{[Name = "servicepoint"]}[Content],
   #"Navigation 5" = #"Navigation 4"{[Name = "lighthouse_grades"]}[Content],
-  #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
+  #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 5", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
   #"Filtered hidden files" = Table.SelectRows(#"Expanded Attributes", each [Attributes]?[Hidden]? <> true),
   #"Invoke custom function" = Table.AddColumn(#"Filtered hidden files", "Transform file", each #"Transform file"([Content])),
   #"Removed other columns" = Table.SelectColumns(#"Invoke custom function", {"Transform file"}),
@@ -23,16 +23,16 @@ in
   #"Sorted rows";
 shared #"Sample file" = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "Files", ItemKind = "Folder"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Name = "ServicePoint"]}[Content],
-  #"Navigation 4" = #"Navigation 3"{[Name = "Lighthouse Grades"]}[Content],
-  #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "Files", ItemKind = "Folder"]}[Data],
+  #"Navigation 4" = #"Navigation 3"{[Name = "servicepoint"]}[Content],
+  #"Navigation 5" = #"Navigation 4"{[Name = "lighthouse_grades"]}[Content],
+  #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 5", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
   #"Filtered hidden files" = Table.SelectRows(#"Expanded Attributes", each [Attributes]?[Hidden]? <> true),
-  #"Navigation 5" = #"Filtered hidden files"{0}[Content]
+  #"Navigation 6" = #"Filtered hidden files"{0}[Content]
 in
-  #"Navigation 5";
+  #"Navigation 6";
 shared Parameter = let
   Parameter = #"Sample file" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type binary, BinaryIdentifier = #"Sample file"]
 in

@@ -28,7 +28,7 @@ graph TD
 
 ### Stage 1: raw_lighthouse_grades
 **Source**: OneLake Files → `ServicePoint/Lighthouse Grades/` folder  
-**Output**: `raw_ligthouse_grades` (lakehouse table)  
+**Output**: `raw_lighthouse_grades` (lakehouse table)  
 **Update Frequency**: Manual CSV upload  
 **Purpose**: Ingest quarterly GPA data for Lighthouse students
 
@@ -68,7 +68,7 @@ graph TD
 **Inputs**: 
 - `clean_lighthouse_entries` (from attendance pipeline)
 - `lighthouse_client_master` (from attendance pipeline)
-- `raw_ligthouse_grades` (from Stage 1)
+- `raw_lighthouse_grades` (from Stage 1)
 
 **Output**: Multiple tables for reporting
 - `1q_lh_grades` - 1st Quarter performance by location

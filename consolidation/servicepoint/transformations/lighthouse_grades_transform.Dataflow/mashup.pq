@@ -13,8 +13,8 @@ shared lighthouse_client_master = let
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
   #"Navigation 2" = #"Navigation 1"{[Id = "lighthouse_client_master", ItemKind = "Table"]}[Data],
-  #"Merged queries" = Table.NestedJoin(#"Navigation 2", {"client_id"}, raw_ligthouse_grades, {"client_id"}, "raw_ligthouse_grades", JoinKind.LeftOuter),
-  #"Expanded raw_ligthouse_grades" = Table.ExpandTableColumn(#"Merged queries", "raw_ligthouse_grades", {"1Q_grades", "2Q_grades", "3Q_grades"}, {"1Q_grades", "2Q_grades", "3Q_grades"}),
+  #"Merged queries" = Table.NestedJoin(#"Navigation 2", {"client_id"}, raw_lighthouse_grades, {"client_id"}, "raw_lighthouse_grades", JoinKind.LeftOuter),
+  #"Expanded raw_lighthouse_grades" = Table.ExpandTableColumn(#"Merged queries", "raw_lighthouse_grades", {"1Q_grades", "2Q_grades", "3Q_grades"}, {"1Q_grades", "2Q_grades", "3Q_grades"}),
   #"Inserted conditional column" = Table.AddColumn(#"Expanded raw_ligthouse_grades", "1Q_grade_check", each if [1Q_grades] >= 2.5 then "GOOD" else if [1Q_grades] = null then "NOGRADE" else "BAD"),
   #"Reordered columns" = Table.ReorderColumns(#"Inserted conditional column", {"client_id", "first_name", "last_name", "entry_date", "exit_date", "lighthouse_location_enrolling", "program", "1Q_grades", "1Q_grade_check", "2Q_grades", "3Q_grades"}),
   #"Inserted conditional column 1" = Table.AddColumn(#"Reordered columns", "1q_counter", each if [1Q_grade_check] = "GOOD" then 1 else if [1Q_grade_check] = "BAD" then 0 else 0),
@@ -24,11 +24,11 @@ shared lighthouse_client_master = let
   #"Changed column type" = Table.TransformColumnTypes(#"Filtered rows 2", {{"1Q_grade_check", type text}, {"1q_counter", type number}, {"control", type number}})
 in
   #"Changed column type";
-shared raw_ligthouse_grades = let
+shared raw_lighthouse_grades = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   #"Navigation 1" = Navigation{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "raw_ligthouse_grades", ItemKind = "Table"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[Id = "raw_lighthouse_grades", ItemKind = "Table"]}[Data],
   #"Filtered rows" = Table.SelectRows(#"Navigation 2", each ([school_year] = "2025-26"))
 in
   #"Filtered rows";

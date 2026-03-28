@@ -15,7 +15,7 @@ shared #"Lighthouse Grades" = let
   #"Expanded table column" = Table.ExpandTableColumn(#"Removed other columns", "Transform file", Table.ColumnNames(#"Transform file"(#"Sample file"))),
   #"Changed column type" = Table.TransformColumnTypes(#"Expanded table column", {{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}, {"Column7", type text}, {"Column8", type text}, {"Column9", type text}, {"Column10", type text}}),
   #"Promoted headers" = Table.PromoteHeaders(#"Changed column type", [PromoteAllScalars = true]),
-  #"Changed column type 1" = Table.TransformColumnTypes(#"Promoted headers", {{"Client ID", Int64.Type}, {"Entry Date", type date}, {"1st Quarter GPA", type number}, {"2nd Quarter GPA", type number}, {"3rd Quarter GPA", type number}}),
+  #"Changed column type 1" = Table.TransformColumnTypes(#"Promoted headers", {{"Client ID", type text}, {"Entry Date", type date}, {"1st Quarter GPA", type number}, {"2nd Quarter GPA", type number}, {"3rd Quarter GPA", type number}}, "en-US"),
   #"Renamed columns" = Table.RenameColumns(#"Changed column type 1", {{"Last Name", "last_name"}, {"First Name", "first_name"}, {"Client ID", "client_id"}, {"Entry Date", "entry_date"}, {"Provider", "program"}, {"Lighthouse Location Enrolling", "lighthouse_location_enrolling"}, {"School Year", "school_year"}, {"1st Quarter GPA", "1Q_grades"}, {"2nd Quarter GPA", "2Q_grades"}, {"3rd Quarter GPA", "3Q_grades"}})
 in
   #"Renamed columns";
@@ -48,6 +48,6 @@ shared #"Lighthouse Grades_DataDestination" = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
   Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
   Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  TableNavigation = Navigation_2{[Id = "raw_ligthouse_grades", ItemKind = "Table"]}?[Data]?
+  TableNavigation = Navigation_2{[Id = "raw_lighthouse_grades", ItemKind = "Table"]}?[Data]?
 in
   TableNavigation;

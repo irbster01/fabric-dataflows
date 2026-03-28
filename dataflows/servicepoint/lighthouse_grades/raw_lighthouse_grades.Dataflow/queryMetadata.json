@@ -15,9 +15,9 @@
   ],
   "documentLocale": "en-US",
   "queriesMetadata": {
-    "Lighthouse Grades": {
+    "raw_lighthouse_grades": {
       "queryId": "0e8124ac-5a7c-47a1-ba22-e2b5ebf1b3e0",
-      "queryName": "Lighthouse Grades",
+      "queryName": "raw_lighthouse_grades",
       "loadEnabled": false
     },
     "Sample file": {
@@ -44,9 +44,9 @@
       "queryGroupId": "18b55af2-81b5-4423-9b83-9b0be4119d0c",
       "loadEnabled": false
     },
-    "Lighthouse Grades_DataDestination": {
-      "queryId": "57ad50d0-3409-46be-a032-aaa9dda1d45f",
-      "queryName": "Lighthouse Grades_DataDestination",
+    "DefaultDestination": {
+      "queryId": "8bd9e02d-b333-4bdc-a809-7fb258ec805b",
+      "queryName": "DefaultDestination",
       "isHidden": true,
       "loadEnabled": false
     }

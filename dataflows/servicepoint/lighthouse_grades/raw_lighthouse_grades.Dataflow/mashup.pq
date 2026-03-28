@@ -1,13 +1,13 @@
-[StagingDefinition = [Kind = "FastCopy"]]
+[DefaultOutputDestinationSettings = [DestinationDefinition = [Kind = "Reference", QueryName = "DefaultDestination", IsNewTarget = true], UpdateMethod = [Kind = "Replace"], DestinationTypeSettings = [Kind = "Table"]], StagingDefinition = [Kind = "FastCopy"]]
 section Section1;
-[DataDestinations = {[Definition = [Kind = "Reference", QueryName = "Lighthouse Grades_DataDestination", IsNewTarget = true], Settings = [Kind = "Automatic", TypeSettings = [Kind = "Table"]]]}]
-shared #"Lighthouse Grades" = let
+[BindToDefaultDestination = true]
+shared raw_lighthouse_grades = let
   Source = Lakehouse.Contents(null),
-  Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  #"Navigation 1" = Navigation{[lakehouseId = "1b643108-97a2-432c-a0c0-391df26e0eea"]}[Data],
-  #"Navigation 2" = #"Navigation 1"{[Id = "Files", ItemKind = "Folder"]}[Data],
-  #"Navigation 3" = #"Navigation 2"{[Name = "ServicePoint"]}[Content],
-  #"Navigation 4" = #"Navigation 3"{[Name = "Lighthouse Grades"]}[Content],
+  #"Navigation 1" = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
+  #"Navigation 2" = #"Navigation 1"{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data],
+  #"Navigation 3" = #"Navigation 2"{[Id = "Files", ItemKind = "Folder"]}[Data],
+  #"Navigation 4" = #"Navigation 3"{[Name = "servicepoint"]}[Content],
+  #"Navigation 5" = #"Navigation 4"{[Name = "lighthouse_grades"]}[Content],
   #"Expanded Attributes" = Table.ExpandRecordColumn(#"Navigation 4", "Attributes", {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}, {"Content Type", "Kind", "Size", "Group", "Owner", "Permissions"}),
   #"Filtered hidden files" = Table.SelectRows(#"Expanded Attributes", each [Attributes]?[Hidden]? <> true),
   #"Invoke custom function" = Table.AddColumn(#"Filtered hidden files", "Transform file", each #"Transform file"([Content])),
@@ -17,9 +17,10 @@ shared #"Lighthouse Grades" = let
   #"Promoted headers" = Table.PromoteHeaders(#"Changed column type", [PromoteAllScalars = true]),
   #"Changed column type 1" = Table.TransformColumnTypes(#"Promoted headers", {{"Client ID", type text}, {"1st Quarter GPA", type number}, {"2nd Quarter GPA", type number}, {"3rd Quarter GPA", type number}}, "en-US"),
   #"Parsed entry date" = Table.TransformColumns(#"Changed column type 1", {{"Entry Date", each try Date.FromText(_, [Culture = "en-US"]) otherwise null, type date}}),
-  #"Renamed columns" = Table.RenameColumns(#"Parsed entry date", {{"Last Name", "last_name"}, {"First Name", "first_name"}, {"Client ID", "client_id"}, {"Entry Date", "entry_date"}, {"Provider", "program"}, {"Lighthouse Location Enrolling", "lighthouse_location_enrolling"}, {"School Year", "school_year"}, {"1st Quarter GPA", "1Q_grades"}, {"2nd Quarter GPA", "2Q_grades"}, {"3rd Quarter GPA", "3Q_grades"}})
+  #"Renamed columns" = Table.RenameColumns(#"Parsed entry date", {{"Last Name", "last_name"}, {"First Name", "first_name"}, {"Client ID", "client_id"}, {"Entry Date", "entry_date"}, {"Provider", "program"}, {"Lighthouse Location Enrolling", "lighthouse_location_enrolling"}, {"School Year", "school_year"}, {"1st Quarter GPA", "1Q_grades"}, {"2nd Quarter GPA", "2Q_grades"}, {"3rd Quarter GPA", "3Q_grades"}}),
+  #"Sorted rows" = Table.Sort(#"Renamed columns", {{"entry_date", Order.Descending}})
 in
-  #"Renamed columns";
+  #"Sorted rows";
 shared #"Sample file" = let
   Source = Lakehouse.Contents(null),
   Navigation = Source{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
@@ -45,10 +46,4 @@ shared #"Transform file" = (Parameter as binary) => let
   Source = Csv.Document(Parameter, [Delimiter = ",", Columns = 10, QuoteStyle = QuoteStyle.None])
 in
   Source;
-shared #"Lighthouse Grades_DataDestination" = let
-  Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "49b28ef6-6017-4b73-8e5a-61dab4008c9a"]}[Data],
-  TableNavigation = Navigation_2{[Id = "raw_lighthouse_grades", ItemKind = "Table"]}?[Data]?
-in
-  TableNavigation;
+shared DefaultDestination = Lakehouse.Contents([EnableFolding = false]){[workspaceId = "4241c9c7-5818-4c56-9220-faf632741770"]}[Data]{[lakehouseId = "7f6e42de-c8f2-4325-901e-72825da1a68c"]}[Data];
